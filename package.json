@@ -40,10 +40,11 @@
     "@ngrx/store-devtools": "4.0.0"
   },
   "devDependencies": {
+    "@angular-devkit/core": "0.0.28",
     "@angular/cli": "file:.angular_cli.tgz",
     "@angular/compiler-cli": "5.1.0",
-    "@nrwl/schematics": "0.6.18",
     "@angular/language-service": "5.1.0",
+    "@nrwl/schematics": "0.6.18",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
@@ -56,10 +57,10 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "prettier": "1.10.2",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "2.5.3",
-    "prettier": "1.10.2"
+    "typescript": "2.5.3"
   }
 }

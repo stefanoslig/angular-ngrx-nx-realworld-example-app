@@ -1,0 +1,14 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../dist/out-tsc/apps/conduit",
+    "module": "es2015"
+  },
+  "include": [
+    "**/*.ts"  
+    , "../../../libs/home/index.ts"
+],
+  "exclude": [
+    "**/*.spec.ts"
+  ]
+}
