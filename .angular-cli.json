@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
+  "project": {
+    "name": "angular-ngrx-nx-realworld-example-app",
+    "npmScope": "angular-ngrx-nx-realworld-example-app",
+    "latestMigration": "20180120-update-prettier"
+  },
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "./tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "schematics": {
+      "collection": "@nrwl/schematics",
+      "postGenerate": "npm run format",
+      "newProject": ["app", "lib"]
+    },
+    "styleExt": "css",
+    "component": {}
+  },
+  "warnings": {
+    "typescriptMismatch": false
+  }
+}
