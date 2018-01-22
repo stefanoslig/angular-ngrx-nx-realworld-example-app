@@ -11,6 +11,8 @@ import { AppEffects } from './+state/app.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { FooterComponent } from './layout/footer/footer.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
   EffectsModule.forRoot([AppEffects]),
   !environment.production ? StoreDevtoolsModule.instrument() : [],
   StoreRouterConnectingModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, FooterComponent, NavbarComponent],
   bootstrap: [AppComponent],
   providers: [AppEffects]
 })

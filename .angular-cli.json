@@ -71,6 +71,18 @@
       }
     },
     {
+      "name": "api",
+      "root": "libs/api/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "auth",
+      "root": "libs/auth/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "home",
       "root": "libs/home/src",
       "test": "../../../test.js",
