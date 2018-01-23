@@ -1,6 +1,5 @@
 export interface Auth {
   user: User;
-  token: string;
 }
 
 export interface AuthState {
@@ -9,6 +8,7 @@ export interface AuthState {
 
 export interface User {
   email: string;
+  token: string;
   username: string;
   bio: string;
   image: string;

@@ -1,12 +1,13 @@
-export interface LoadData {
-  type: 'LOAD_DATA';
-  payload: {};
+import { User } from './auth.interfaces';
+
+export interface GetUser {
+  type: 'GET_USER';
 }
 
-export interface DataLoaded {
-  type: 'DATA_LOADED';
-  payload: {};
+export interface SetUser {
+  type: 'SET_USER';
+  payload: User;
 }
 
-export type AuthAction = LoadData | DataLoaded;
+export type AuthAction = GetUser | SetUser;
 
