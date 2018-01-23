@@ -1,4 +1,5 @@
 export interface Auth {
+  loggedIn: boolean;
   user: User;
 }
 

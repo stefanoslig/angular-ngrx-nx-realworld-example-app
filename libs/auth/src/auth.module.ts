@@ -7,6 +7,7 @@ import { authInitialState } from './+state/auth.init';
 import { AuthEffects } from './+state/auth.effects';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { ApiModule } from '../../api';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { ApiModule } from '../../api';
     EffectsModule.forFeature([AuthEffects]),
     ApiModule
   ],
-  providers: [AuthEffects, LocalStorageJwtService]
+  providers: [AuthEffects, LocalStorageJwtService, AuthGuardService]
 })
 export class AuthModule {
 }

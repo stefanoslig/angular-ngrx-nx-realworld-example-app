@@ -13,9 +13,11 @@ import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { AuthModule } from '../../../../libs/auth';
 
 @NgModule({
   imports: [
+  AuthModule,
   BrowserModule,
   NxModule.forRoot(),
   RouterModule.forRoot([{path: 'home', loadChildren: '@angular-ngrx-nx-realworld-example-app/home#HomeModule'}], {initialNavigation: 'enabled'}),

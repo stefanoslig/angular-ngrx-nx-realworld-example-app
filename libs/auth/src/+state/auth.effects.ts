@@ -3,6 +3,7 @@ import {Effect, Actions} from '@ngrx/effects';
 import {DataPersistence} from '@nrwl/nx';
 import {of} from 'rxjs/observable/of';
 import {map} from 'rxjs/operators/map';
+import {tap} from 'rxjs/operators/tap';
 import {withLatestFrom} from 'rxjs/operators/withLatestFrom';
 import {filter} from 'rxjs/operators/filter';
 import {switchMap} from 'rxjs/operators/switchMap';
@@ -14,10 +15,11 @@ import { AuthAction } from './auth.actions';
 import { LocalStorageJwtService } from '../local-storage-jwt.service';
 import { ApiService } from '../../../api/src/api.service';
 import { User } from './auth.interfaces';
+import { authInitialState } from './auth.init';
 
 @Injectable()
 export class AuthEffects {
-  @Effect() getToken = this.actions
+  @Effect() getUser = this.actions
   .ofType<GetUser>('GET_USER')
   .pipe(
     withLatestFrom(this.localStorageJwtService.getItem()),
@@ -28,8 +30,17 @@ export class AuthEffects {
           type: 'SET_USER',
           payload: data.user
         })),
-        catchError(error => of(console.error('GET_USER:', error))
+        catchError(error => of({
+          type: 'SET_USER',
+          payload: authInitialState.user
+        })
       )))
+  );
+
+  @Effect() setUser = this.actions
+  .ofType<SetUser>('SET_USER')
+  .pipe(
+    tap(action => this.localStorageJwtService.setItem(action.payload))
   );
 
   constructor(
