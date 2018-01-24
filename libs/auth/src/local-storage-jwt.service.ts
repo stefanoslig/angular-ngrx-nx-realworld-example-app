@@ -5,13 +5,13 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class LocalStorageJwtService {
 
-	getItem<T> () : Observable<T> {
+	getItem () : Observable<string> {
 		let data: any = localStorage.getItem('jwtToken');
 		if(data) return of(JSON.parse(data));
 		return of(data);
 	}
 
-	setItem(data: any): Observable<any> {
+	setItem(data: string): Observable<string> {
 		localStorage.setItem('jwtToken', JSON.stringify(data));
 		return of(data);
 	}

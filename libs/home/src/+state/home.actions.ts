@@ -1,12 +1,9 @@
-export interface LoadData {
-  type: 'LOAD_DATA';
-  payload: {};
+import { ArticleListConfig } from './home.interfaces';
+
+export interface SetListConfig {
+  type: 'SET_LIST_CONFIG';
+  payload: ArticleListConfig;
 }
 
-export interface DataLoaded {
-  type: 'DATA_LOADED';
-  payload: {};
-}
-
-export type HomeAction = LoadData | DataLoaded;
+export type HomeAction = SetListConfig;
 

@@ -23,7 +23,7 @@ export class AuthEffects {
   .ofType<GetUser>('GET_USER')
   .pipe(
     withLatestFrom(this.localStorageJwtService.getItem()),
-    filter(token => !!token),
+    filter(([_, token]) => !!token),
     switchMap(item => this.apiService.get('/user')
       .pipe(
         map((data: any) => ({
@@ -32,7 +32,7 @@ export class AuthEffects {
         })),
         catchError(error => of({
           type: 'SET_USER',
-          payload: authInitialState.user
+          payload: ''
         })
       )))
   );
@@ -40,7 +40,7 @@ export class AuthEffects {
   @Effect() setUser = this.actions
   .ofType<SetUser>('SET_USER')
   .pipe(
-    tap(action => this.localStorageJwtService.setItem(action.payload))
+    tap(action => this.localStorageJwtService.setItem(action.payload.token))
   );
 
   constructor(

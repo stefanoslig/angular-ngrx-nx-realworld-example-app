@@ -20,7 +20,12 @@ import { AuthModule } from '../../../../libs/auth';
   AuthModule,
   BrowserModule,
   NxModule.forRoot(),
-  RouterModule.forRoot([{path: 'home', loadChildren: '@angular-ngrx-nx-realworld-example-app/home#HomeModule'}], {initialNavigation: 'enabled'}),
+  RouterModule.forRoot(
+    [
+      {path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule'}
+    ], {
+      initialNavigation: 'enabled'
+  }),
   StoreModule.forRoot({app: appReducer}, {initialState: {app: appInitialState}}),
   EffectsModule.forRoot([AppEffects]),
   !environment.production ? StoreDevtoolsModule.instrument() : [],
