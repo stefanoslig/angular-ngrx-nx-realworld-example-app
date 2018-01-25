@@ -10,4 +10,3 @@ export interface SetUser {
 }
 
 export type AuthAction = GetUser | SetUser;
-

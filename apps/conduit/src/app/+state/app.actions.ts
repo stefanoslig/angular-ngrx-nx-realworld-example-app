@@ -9,4 +9,3 @@ export interface DataLoaded {
 }
 
 export type AppAction = LoadData | DataLoaded;
-

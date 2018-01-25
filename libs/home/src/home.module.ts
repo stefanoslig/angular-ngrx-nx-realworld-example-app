@@ -8,14 +8,18 @@ import { homeReducer } from './+state/home.reducer';
 import { homeInitialState } from './+state/home.init';
 import { HomeEffects } from './+state/home.effects';
 import { HomeResolverService } from './home-resolver.service';
+import { ArticleComponent } from './article/article.component';
 
 @NgModule({
-  imports: [CommonModule, 
-        RouterModule.forChild([ 
-         {path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService }}
-       ]), StoreModule.forFeature('home', homeReducer, {initialState: homeInitialState}), EffectsModule.forFeature([HomeEffects]) ],
-  declarations: [HomeComponent],
-  providers: [HomeEffects, HomeResolverService] 
+  imports: [
+    CommonModule,
+    RouterModule.forChild([
+      { path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService } }
+    ]),
+    StoreModule.forFeature('home', homeReducer, { initialState: homeInitialState }),
+    EffectsModule.forFeature([HomeEffects])
+  ],
+  declarations: [HomeComponent, ArticleComponent],
+  providers: [HomeEffects, HomeResolverService]
 })
-export class HomeModule {
-}
+export class HomeModule {}

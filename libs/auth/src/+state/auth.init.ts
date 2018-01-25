@@ -1,4 +1,4 @@
-import {Auth} from './auth.interfaces';
+import { Auth } from './auth.interfaces';
 
 export const authInitialState: Auth = {
   loggedIn: false,

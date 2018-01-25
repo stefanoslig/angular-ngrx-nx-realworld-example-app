@@ -9,5 +9,4 @@ import { PagerComponent } from './pager/pager.component';
   declarations: [ArticleListComponent, TagListComponent, PagerComponent],
   exports: [ArticleListComponent, TagListComponent, PagerComponent]
 })
-export class SharedModule {
-}
+export class SharedModule {}

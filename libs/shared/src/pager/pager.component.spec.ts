@@ -6,12 +6,13 @@ describe('PagerComponent', () => {
   let component: PagerComponent;
   let fixture: ComponentFixture<PagerComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PagerComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [PagerComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PagerComponent);

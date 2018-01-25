@@ -1,4 +1,4 @@
-import {Home} from './home.interfaces';
+import { Home } from './home.interfaces';
 
 export const homeInitialState: Home = {
   listConfig: {

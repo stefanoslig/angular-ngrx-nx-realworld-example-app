@@ -6,4 +6,3 @@ export interface SetListConfig {
 }
 
 export type HomeAction = SetListConfig;
-

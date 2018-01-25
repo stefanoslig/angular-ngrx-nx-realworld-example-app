@@ -4,16 +4,16 @@ export interface ArticleListConfig {
   type: ListType;
 
   filters: {
-    tag?: string,
-    author?: string,
-    favorited?: string,
-    limit?: number,
-    offset?: number
+    tag?: string;
+    author?: string;
+    favorited?: string;
+    limit?: number;
+    offset?: number;
   };
 }
 
 export interface Home {
-  listConfig: ArticleListConfig 
+  listConfig: ArticleListConfig;
 }
 
 export interface HomeState {

@@ -6,7 +6,7 @@ import { DataLoaded } from './auth.actions';
 describe('authReducer', () => {
   it('should work', () => {
     const state: Auth = {};
-    const action: DataLoaded = {type: 'DATA_LOADED', payload: {}};
+    const action: DataLoaded = { type: 'DATA_LOADED', payload: {} };
     const actual = authReducer(state, action);
     expect(actual).toEqual({});
   });

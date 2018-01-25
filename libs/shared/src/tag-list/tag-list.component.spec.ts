@@ -6,12 +6,13 @@ describe('TagListComponent', () => {
   let component: TagListComponent;
   let fixture: ComponentFixture<TagListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TagListComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [TagListComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TagListComponent);

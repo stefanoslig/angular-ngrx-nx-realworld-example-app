@@ -1,5 +1,5 @@
-import {Auth} from './auth.interfaces';
-import {AuthAction} from './auth.actions';
+import { Auth } from './auth.interfaces';
+import { AuthAction } from './auth.actions';
 
 export function authReducer(state: Auth, action: AuthAction): Auth {
   switch (action.type) {

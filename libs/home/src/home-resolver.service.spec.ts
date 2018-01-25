@@ -9,7 +9,10 @@ describe('HomeResolverService', () => {
     });
   });
 
-  it('should be created', inject([HomeResolverService], (service: HomeResolverService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([HomeResolverService], (service: HomeResolverService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

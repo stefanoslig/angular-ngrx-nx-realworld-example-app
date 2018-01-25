@@ -12,11 +12,10 @@ import { AuthGuardService } from './auth-guard.service';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('auth', authReducer, {initialState: authInitialState}),
+    StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
     EffectsModule.forFeature([AuthEffects]),
     ApiModule
   ],
   providers: [AuthEffects, LocalStorageJwtService, AuthGuardService]
 })
-export class AuthModule {
-}
+export class AuthModule {}
