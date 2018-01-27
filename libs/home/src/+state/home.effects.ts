@@ -7,5 +7,5 @@ import { HomeState } from './home.interfaces';
 
 @Injectable()
 export class HomeEffects {
-  constructor(private actions: Actions) {}
+	constructor(private actions: Actions) { }
 }

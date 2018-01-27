@@ -1,21 +1,21 @@
 export type ListType = 'ALL' | 'FEED';
 
 export interface ArticleListConfig {
-  type: ListType;
+	type: ListType;
 
-  filters: {
-    tag?: string;
-    author?: string;
-    favorited?: string;
-    limit?: number;
-    offset?: number;
-  };
+	filters: {
+		tag?: string;
+		author?: string;
+		favorited?: string;
+		limit?: number;
+		offset?: number;
+	};
 }
 
 export interface Home {
-  listConfig: ArticleListConfig;
+	listConfig: ArticleListConfig;
 }
 
 export interface HomeState {
-  readonly home: Home;
+	readonly home: Home;
 }

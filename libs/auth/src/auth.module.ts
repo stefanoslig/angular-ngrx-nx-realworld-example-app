@@ -6,16 +6,16 @@ import { authReducer } from './+state/auth.reducer';
 import { authInitialState } from './+state/auth.init';
 import { AuthEffects } from './+state/auth.effects';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
-import { ApiModule } from '../../api';
+import { ApiModule } from '@angular-ngrx-nx/api';
 import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
-    EffectsModule.forFeature([AuthEffects]),
-    ApiModule
-  ],
-  providers: [AuthEffects, LocalStorageJwtService, AuthGuardService]
+	imports: [
+		CommonModule,
+		StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
+		EffectsModule.forFeature([AuthEffects]),
+		ApiModule
+	],
+	providers: [AuthEffects, LocalStorageJwtService, AuthGuardService]
 })
-export class AuthModule {}
+export class AuthModule { }

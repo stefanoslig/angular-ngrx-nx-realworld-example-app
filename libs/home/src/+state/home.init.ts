@@ -1,8 +1,8 @@
 import { Home } from './home.interfaces';
 
 export const homeInitialState: Home = {
-  listConfig: {
-    type: 'ALL',
-    filters: {}
-  }
+	listConfig: {
+		type: 'ALL',
+		filters: {}
+	}
 };

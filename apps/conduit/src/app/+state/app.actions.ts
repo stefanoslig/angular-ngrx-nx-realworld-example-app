@@ -1,11 +1,11 @@
 export interface LoadData {
-  type: 'LOAD_DATA';
-  payload: {};
+	type: 'LOAD_DATA';
+	payload: {};
 }
 
 export interface DataLoaded {
-  type: 'DATA_LOADED';
-  payload: {};
+	type: 'DATA_LOADED';
+	payload: {};
 }
 
 export type AppAction = LoadData | DataLoaded;
