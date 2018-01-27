@@ -15,7 +15,8 @@ import { ArticleListConfig, Home, HomeState, Article } from './+state/home.inter
 })
 export class HomeComponent implements OnInit {
 	listConfig$: Observable<ArticleListConfig>;
-	articles$: Observable<Article[]>
+	articles$: Observable<Article[]>;
+	tags$: Observable<string[]>;
 	isAuthenticated: boolean;
 
 	constructor(private store: Store<any>, private router: Router) { }
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
 		this.listConfig$ = this.store.select(fromHome.getListConfig);
 		this.store.select(fromAuth.getLoggedIn).subscribe(isLoggedIn => (this.isAuthenticated = isLoggedIn));
 		this.articles$ = this.store.select(fromHome.getArticles);
+		this.tags$ = this.store.select(fromHome.getTags);
 	}
 
 	setListTo(type: string) {

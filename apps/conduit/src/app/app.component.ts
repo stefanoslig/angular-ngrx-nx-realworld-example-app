@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { AuthState } from '../../../../libs/auth/src/+state/auth.interfaces';
+import { AuthState } from '@angular-ngrx-nx/auth/src/+state/auth.interfaces';
 
 @Component({
   selector: 'app-root',

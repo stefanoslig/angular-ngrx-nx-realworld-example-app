@@ -9,24 +9,28 @@ import { map } from 'rxjs/operators/map';
 export class ApiService {
 	constructor(private http: Http) { }
 
-	get(url: string, params: URLSearchParams = new URLSearchParams): Observable<Response> {
-		return this.http.get(`${environment.api_url}${url}`, { headers: this.headers, search: params })
+	get<R>(url: string, params: URLSearchParams = new URLSearchParams()): Observable<R> {
+		return this.http
+			.get(`${environment.api_url}${url}`, { headers: this.headers, search: params })
 			.pipe(map((res: Response) => res.json()));
 	}
 
 	post<D>(url: string, data?: D): Observable<Response> {
-		return this.http.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
+		return this.http
+			.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
 			.pipe(map((res: Response) => res.json()));
 	}
 
 	put<D>(url: string, data?: D): Observable<Response> {
-		return this.http.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
-			.pipe(map((res: Response) => res.json()));;
+		return this.http
+			.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
+			.pipe(map((res: Response) => res.json()));
 	}
 
 	delete(url: string): Observable<Response> {
-		return this.http.delete(`${environment.api_url}${url}`, { headers: this.headers })
-			.pipe(map((res: Response) => res.json()));;
+		return this.http
+			.delete(`${environment.api_url}${url}`, { headers: this.headers })
+			.pipe(map((res: Response) => res.json()));
 	}
 
 	get headers(): Headers {

@@ -12,5 +12,6 @@ export const homeInitialState: Home = {
 		entities: [],
 		loaded: false,
 		loading: false
-	}
+	},
+	tags: []
 };

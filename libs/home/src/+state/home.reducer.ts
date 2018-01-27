@@ -19,6 +19,12 @@ export function homeReducer(state: Home = homeInitialState, action: HomeAction):
 			const articles = { ...state.articles, entities: [], loading: false, loaded: true };
 			return { ...state, articles };
 		}
+		case '[home] LOAD_TAGS_SUCCESS': {
+			return { ...state, tags: action.payload };
+		}
+		case '[home] LOAD_TAGS_FAIL': {
+			return { ...state, tags: [] };
+		}
 		default: {
 			return state;
 		}
@@ -27,3 +33,5 @@ export function homeReducer(state: Home = homeInitialState, action: HomeAction):
 
 export const getListConfig = (state: HomeState) => state.home.listConfig;
 export const getArticles = (state: HomeState) => state.home.articles.entities;
+export const getTags = (state: HomeState) => state.home.tags;
+

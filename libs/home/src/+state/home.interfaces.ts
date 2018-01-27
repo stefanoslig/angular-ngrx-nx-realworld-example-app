@@ -8,7 +8,7 @@ export interface Filters {
 	favorited?: string;
 	limit?: number;
 	offset?: number;
-};
+}
 
 export interface ArticleListConfig {
 	type: ListType;
@@ -23,6 +23,7 @@ export interface Home {
 		loaded: boolean;
 		loading: boolean;
 	};
+	tags: string[];
 }
 
 export interface HomeState {
