@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromHome from './+state/home.reducer';
 import * as fromAuth from '@angular-ngrx-nx/auth/src/+state/auth.reducer';
-import { ArticleListConfig, Home, HomeState } from './+state/home.interfaces';
+import { ArticleListConfig, Home, HomeState, Article } from './+state/home.interfaces';
 
 @Component({
 	selector: 'home',
@@ -15,6 +15,7 @@ import { ArticleListConfig, Home, HomeState } from './+state/home.interfaces';
 })
 export class HomeComponent implements OnInit {
 	listConfig$: Observable<ArticleListConfig>;
+	articles$: Observable<Article[]>
 	isAuthenticated: boolean;
 
 	constructor(private store: Store<any>, private router: Router) { }
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 		this.listConfig$ = this.store.select(fromHome.getListConfig);
 		this.store.select(fromAuth.getLoggedIn).subscribe(isLoggedIn => (this.isAuthenticated = isLoggedIn));
+		this.articles$ = this.store.select(fromHome.getArticles);
 	}
 
 	setListTo(type: string) {
@@ -36,5 +38,18 @@ export class HomeComponent implements OnInit {
 				type: type
 			}
 		});
+	}
+
+	getArticles() {
+		// if (this.limit) {
+		//   this.query.filters.limit = this.limit;
+		//   this.query.filters.offset =  (this.limit * (this.currentPage - 1));
+		// }
+		// this.articlesService.query(this.query)
+		// .subscribe(data => {
+		//   this.loading = false;
+		//   this.results = data.articles;
+		//   // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
+		//   this.totalPages = Array.from(new Array(Math.ceil(data.articlesCount / this.limit)), (val, index) => index + 1);
 	}
 }

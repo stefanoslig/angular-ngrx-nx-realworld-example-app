@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Article } from '@angular-ngrx-nx/home/src/+state/home.interfaces';
 
 @Component({
-  selector: 'article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+	selector: 'article',
+	templateUrl: './article.component.html',
+	styleUrls: ['./article.component.css']
 })
-export class ArticleComponent implements OnInit {
-  constructor() {}
+export class ArticleComponent {
 
-  ngOnInit() {}
+	@Input() articles: Article[];
+
 }

@@ -7,19 +7,19 @@ import { AppState } from './app.interfaces';
 
 @Injectable()
 export class AppEffects {
-	@Effect()
-	loadData = this.dataPersistence.fetch('LOAD_DATA', {
-		run: (action: LoadData, state: AppState) => {
-			return {
-				type: 'DATA_LOADED',
-				payload: {}
-			};
-		},
+  @Effect()
+  loadData = this.dataPersistence.fetch('LOAD_DATA', {
+    run: (action: LoadData, state: AppState) => {
+      return {
+        type: 'DATA_LOADED',
+        payload: {}
+      };
+    },
 
-		onError: (action: LoadData, error) => {
-			console.error('Error', error);
-		}
-	});
+    onError: (action: LoadData, error) => {
+      console.error('Error', error);
+    }
+  });
 
-	constructor(private actions: Actions, private dataPersistence: DataPersistence<AppState>) { }
+  constructor(private actions: Actions, private dataPersistence: DataPersistence<AppState>) {}
 }

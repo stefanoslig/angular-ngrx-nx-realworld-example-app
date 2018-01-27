@@ -16,20 +16,20 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { AuthModule } from '@angular-ngrx-nx/auth';
 
 @NgModule({
-	imports: [
-		AuthModule,
-		BrowserModule,
-		NxModule.forRoot(),
-		RouterModule.forRoot([{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' }], {
-			initialNavigation: 'enabled'
-		}),
-		StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
-		EffectsModule.forRoot([AppEffects]),
-		!environment.production ? StoreDevtoolsModule.instrument() : [],
-		StoreRouterConnectingModule
-	],
-	declarations: [AppComponent, FooterComponent, NavbarComponent],
-	bootstrap: [AppComponent],
-	providers: [AppEffects]
+  imports: [
+    AuthModule,
+    BrowserModule,
+    NxModule.forRoot(),
+    RouterModule.forRoot([{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' }], {
+      initialNavigation: 'enabled'
+    }),
+    StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
+    EffectsModule.forRoot([AppEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule
+  ],
+  declarations: [AppComponent, FooterComponent, NavbarComponent],
+  bootstrap: [AppComponent],
+  providers: [AppEffects]
 })
-export class AppModule { }
+export class AppModule {}

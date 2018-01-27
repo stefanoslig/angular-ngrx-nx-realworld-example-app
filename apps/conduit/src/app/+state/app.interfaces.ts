@@ -1,7 +1,7 @@
 export interface App {
-	// define state here
+  // define state here
 }
 
 export interface AppState {
-	readonly app: App;
+  readonly app: App;
 }

@@ -5,8 +5,8 @@ import { TagListComponent } from './tag-list/tag-list.component';
 import { PagerComponent } from './pager/pager.component';
 
 @NgModule({
-	imports: [CommonModule],
-	declarations: [ArticleListComponent, TagListComponent, PagerComponent],
-	exports: [ArticleListComponent, TagListComponent, PagerComponent]
+  imports: [CommonModule],
+  declarations: [ArticleListComponent, TagListComponent, PagerComponent],
+  exports: [ArticleListComponent, TagListComponent, PagerComponent]
 })
-export class SharedModule { }
+export class SharedModule {}

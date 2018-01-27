@@ -1,36 +1,40 @@
+import { Http, Headers, URLSearchParams, Response } from '@angular/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
 import { environment } from '../../../apps/conduit/src/environments/environment';
+import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class ApiService {
-  constructor(private http: HttpClient) {}
+	constructor(private http: Http) { }
 
-  get<R>(url: string, params: HttpParams = new HttpParams()): Observable<R> {
-    return this.http.get<R>(`${environment.api_url}${url}`, { headers: this.headers, params });
-  }
+	get(url: string, params: URLSearchParams = new URLSearchParams): Observable<Response> {
+		return this.http.get(`${environment.api_url}${url}`, { headers: this.headers, search: params })
+			.pipe(map((res: Response) => res.json()));
+	}
 
-  post<R, D>(url: string, data?: D): Observable<R> {
-    return this.http.post<R>(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers });
-  }
+	post<D>(url: string, data?: D): Observable<Response> {
+		return this.http.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
+			.pipe(map((res: Response) => res.json()));
+	}
 
-  put<R, D>(url: string, data?: D): Observable<R> {
-    return this.http.post<R>(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers });
-  }
+	put<D>(url: string, data?: D): Observable<Response> {
+		return this.http.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
+			.pipe(map((res: Response) => res.json()));;
+	}
 
-  delete(url: string): Observable<any> {
-    return this.http.delete(`${environment.api_url}${url}`, { headers: this.headers });
-  }
+	delete(url: string): Observable<Response> {
+		return this.http.delete(`${environment.api_url}${url}`, { headers: this.headers })
+			.pipe(map((res: Response) => res.json()));;
+	}
 
-  get headers(): HttpHeaders {
-    const headersConfig = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    };
+	get headers(): Headers {
+		const headersConfig = {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		};
 
-    return new HttpHeaders(headersConfig);
-  }
+		return new Headers(headersConfig);
+	}
 }
