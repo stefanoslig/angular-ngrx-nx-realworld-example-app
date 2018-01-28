@@ -8,6 +8,8 @@ import { AuthEffects } from './+state/auth.effects';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { ApiModule } from '@angular-ngrx-nx/api';
 import { AuthGuardService } from './auth-guard.service';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
@@ -16,6 +18,7 @@ import { AuthGuardService } from './auth-guard.service';
     EffectsModule.forFeature([AuthEffects]),
     ApiModule
   ],
-  providers: [AuthEffects, LocalStorageJwtService, AuthGuardService]
+  providers: [AuthEffects, LocalStorageJwtService, AuthGuardService],
+  declarations: [LoginComponent, RegisterComponent]
 })
 export class AuthModule {}

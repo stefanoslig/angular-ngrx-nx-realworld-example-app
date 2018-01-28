@@ -7,19 +7,19 @@ import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class HomeService {
-	constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
-	query(config: ArticleListConfig): Observable<any> {
-		const params = new URLSearchParams();
+  query(config: ArticleListConfig): Observable<any> {
+    const params = new URLSearchParams();
 
-		Object.keys(config.filters).forEach(key => {
-			params.set(key, config.filters[key]);
-		});
+    Object.keys(config.filters).forEach(key => {
+      params.set(key, config.filters[key]);
+    });
 
-		return this.apiService.get('/articles' + (config.type === 'FEED' ? '/feed' : ''), params);
-	}
+    return this.apiService.get('/articles' + (config.type === 'FEED' ? '/feed' : ''), params);
+  }
 
-	getTags(): Observable<any> {
-		return this.apiService.get('/tags');
-	}
+  getTags(): Observable<any> {
+    return this.apiService.get('/tags');
+  }
 }

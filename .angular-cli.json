@@ -83,6 +83,12 @@
       "appRoot": ""
     },
     {
+      "name": "editor",
+      "root": "libs/editor/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "home",
       "root": "libs/home/src",
       "test": "../../../test.js",
