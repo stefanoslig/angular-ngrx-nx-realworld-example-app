@@ -77,6 +77,12 @@
       "appRoot": ""
     },
     {
+      "name": "article",
+      "root": "libs/article/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "auth",
       "root": "libs/auth/src",
       "test": "../../../test.js",

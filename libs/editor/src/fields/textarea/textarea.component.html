@@ -1,4 +1,4 @@
-<fieldset class="form-group">
-	<textarea class="form-control form-control-lg" rows="5" placeholder="field.placeholder" formControlName="field.name">
+<fieldset [formGroup]="group" class="form-group">
+	<textarea class="form-control form-control-lg" rows="5" [formControlName]="field?.name" [attr.placeholder]="field?.placeholder">
 	</textarea>
 </fieldset>

@@ -12,14 +12,15 @@ import { InputComponent } from './fields/input/input.component';
 import { TextareaComponent } from './fields/textarea/textarea.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		ReactiveFormsModule,
-		StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
-		EffectsModule.forFeature([EditorEffects])
-	],
-	providers: [EditorEffects],
-	declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent],
-	entryComponents: [InputComponent, TextareaComponent]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
+    EffectsModule.forFeature([EditorEffects])
+  ],
+  providers: [EditorEffects],
+  declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent],
+  entryComponents: [InputComponent, TextareaComponent],
+  exports: [DynamicFormComponent]
 })
-export class EditorModule { }
+export class EditorModule {}

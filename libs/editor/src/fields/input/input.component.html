@@ -1,3 +1,4 @@
-<fieldset class="form-group">
-	<input formControlName="field.name" placeholder="field.placeholder" class="form-control form-control-lg" type="text" />
+<fieldset [formGroup]="group" class="form-group">
+	<input [formControlName]="field?.name" [attr.placeholder]="field?.placeholder" class="form-control form-control-lg" type="text"
+	/>
 </fieldset>

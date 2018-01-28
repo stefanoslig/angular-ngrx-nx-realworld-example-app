@@ -3,11 +3,11 @@ import { Field } from '@angular-ngrx-nx/editor/src/+state/editor.interfaces';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-	selector: 'textarea',
-	templateUrl: './textarea.component.html',
-	styleUrls: ['./textarea.component.css']
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrls: ['./textarea.component.css']
 })
 export class TextareaComponent {
-	@Input() field: Field;
-	@Input() group: FormGroup;
+  @Input() field: Field;
+  @Input() group: FormGroup;
 }
