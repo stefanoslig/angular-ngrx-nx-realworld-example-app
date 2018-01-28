@@ -46,7 +46,7 @@ export class DynamicFormComponent implements OnChanges, OnDestroy {
 	}
 
 	private control = (field: Field): FormControl => {
-		return this.fb.control({}, field.validator);
+		return this.fb.control('', field.validator);
 	}
 
 	private patchValue = ([form, data]) => {
@@ -54,6 +54,7 @@ export class DynamicFormComponent implements OnChanges, OnDestroy {
 	}
 
 	private listenFormChanges(form: FormGroup) {
+		this.form = form;
 		//form.valueChanges.subscribe((changes: any) => this.updateForm.emit(changes))
 	}
 }
