@@ -5,10 +5,16 @@ import { articleInitialState } from '@angular-ngrx-nx/article/src/+state/article
 export function articleReducer(state: Article = articleInitialState, action: ArticleAction): Article {
 	switch (action.type) {
 		case '[article] LOAD_ARTICLE_SUCCESS': {
-			return action.payload;
+			return { ...state, data: action.payload };
 		}
 		case '[article] LOAD_ARTICLE_FAIL': {
-			return articleInitialState;
+			return { ...state, data: articleInitialState.data };
+		}
+		case '[article] LOAD_COMMENTS_SUCCESS': {
+			return { ...state, comments: action.payload };
+		}
+		case '[article] LOAD_ARTICLE_FAIL': {
+			return { ...state, comments: articleInitialState.comments };
 		}
 		default: {
 			return state;
@@ -16,4 +22,5 @@ export function articleReducer(state: Article = articleInitialState, action: Art
 	}
 }
 
-export const getArticle = (state: ArticleState) => state.article;
+export const getArticle = (state: ArticleState) => state.article.data;
+export const getComments = (state: ArticleState) => state.article.comments;

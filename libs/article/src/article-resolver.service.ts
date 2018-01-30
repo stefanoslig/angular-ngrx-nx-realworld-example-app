@@ -14,6 +14,10 @@ export class ArticleResolverService {
 			type: '[article] LOAD_ARTICLE',
 			payload: slug
 		});
+		this.store.dispatch({
+			type: '[article] LOAD_COMMENTS',
+			payload: slug
+		});
 		return of(true);
 	}
 }

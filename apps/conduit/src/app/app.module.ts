@@ -17,21 +17,21 @@ import { AuthModule } from '@angular-ngrx-nx/auth';
 import { ArticleModule } from '@angular-ngrx-nx/article';
 
 @NgModule({
-	imports: [
-		AuthModule,
-		BrowserModule,
-		NxModule.forRoot(),
-		RouterModule.forRoot([{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' }], {
-			initialNavigation: 'enabled'
-		}),
-		StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
-		EffectsModule.forRoot([AppEffects]),
-		!environment.production ? StoreDevtoolsModule.instrument() : [],
-		StoreRouterConnectingModule,
-		ArticleModule
-	],
-	declarations: [AppComponent, FooterComponent, NavbarComponent],
-	bootstrap: [AppComponent],
-	providers: [AppEffects]
+  imports: [
+    AuthModule,
+    BrowserModule,
+    NxModule.forRoot(),
+    RouterModule.forRoot([{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' }], {
+      initialNavigation: 'enabled'
+    }),
+    StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
+    EffectsModule.forRoot([AppEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule,
+    ArticleModule
+  ],
+  declarations: [AppComponent, FooterComponent, NavbarComponent],
+  bootstrap: [AppComponent],
+  providers: [AppEffects]
 })
-export class AppModule { }
+export class AppModule {}

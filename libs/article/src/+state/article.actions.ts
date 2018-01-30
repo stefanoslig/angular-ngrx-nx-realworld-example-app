@@ -1,4 +1,4 @@
-import { Article } from "@angular-ngrx-nx/article/src/+state/article.interfaces";
+import { ArticleData, ArticleComment } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 
 export interface LoadArticle {
 	type: '[article] LOAD_ARTICLE';
@@ -7,7 +7,7 @@ export interface LoadArticle {
 
 export interface LoadArticleSuccess {
 	type: '[article] LOAD_ARTICLE_SUCCESS';
-	payload: Article;
+	payload: ArticleData;
 }
 
 export interface LoadArticleFail {
@@ -15,4 +15,25 @@ export interface LoadArticleFail {
 	payload: Error;
 }
 
-export type ArticleAction = LoadArticle | LoadArticleSuccess | LoadArticleFail;
+export interface LoadComments {
+	type: '[article] LOAD_COMMENTS';
+	payload: string;
+}
+
+export interface LoadCommentsSuccess {
+	type: '[article] LOAD_COMMENTS_SUCCESS';
+	payload: ArticleComment[];
+}
+
+export interface LoadCommentsFail {
+	type: '[article] LOAD_COMMENTS_FAIL';
+	payload: Error;
+}
+
+export type ArticleAction =
+	| LoadArticle
+	| LoadArticleSuccess
+	| LoadArticleFail
+	| LoadComments
+	| LoadCommentsSuccess
+	| LoadCommentsFail;

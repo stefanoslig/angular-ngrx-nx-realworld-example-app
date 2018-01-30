@@ -4,7 +4,7 @@ import { DataPersistence } from '@nrwl/nx';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/switchMap';
 import { ArticleState } from './article.interfaces';
-import { LoadArticle, LoadArticleFail, LoadArticleSuccess } from './article.actions';
+import { LoadArticle, LoadArticleFail, LoadArticleSuccess, LoadComments } from './article.actions';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { ArticleService } from '@angular-ngrx-nx/article/src/article.service';
 import { map } from 'rxjs/operators/map';
@@ -30,5 +30,27 @@ export class ArticleEffects {
 		)
 	);
 
-	constructor(private actions: Actions, private dataPersistence: DataPersistence<ArticleState>, private articleService: ArticleService) { }
+	@Effect()
+	loadComments = this.actions.ofType<LoadComments>('[article] LOAD_COMMENTS').pipe(
+		switchMap(action =>
+			this.articleService.getComments(action.payload).pipe(
+				map(results => ({
+					type: '[article] LOAD_COMMENTS_SUCCESS',
+					payload: results
+				})),
+				catchError(error =>
+					of({
+						type: '[article] LOAD_COMMENTS_FAIL',
+						payload: error
+					})
+				)
+			)
+		)
+	);
+
+	constructor(
+		private actions: Actions,
+		private dataPersistence: DataPersistence<ArticleState>,
+		private articleService: ArticleService
+	) { }
 }
