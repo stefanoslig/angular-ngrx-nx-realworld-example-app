@@ -9,13 +9,13 @@ export function editorReducer(state: Editor, action: EditorAction): Editor {
     case '[editor] SET_STRUCTURE': {
       return { ...state, structure: action.payload };
     }
-    case '[editor] SAVE_DATA': {
-      return { ...state, data: action.payload, status: 'IN_PROGRESS' };
+    case '[editor] SAVE_FORM': {
+      return { ...state, status: 'IN_PROGRESS' };
     }
-    case '[editor] SAVE_DATA_SUCCESS': {
+    case '[editor] SAVE_FORM_SUCCESS': {
       return { ...state, status: 'INIT' };
     }
-    case '[editor] SAVE_DATA_FAIL': {
+    case '[editor] SAVE_FORM_FAIL': {
       return { ...state, status: 'INIT' };
     }
     default: {

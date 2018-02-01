@@ -19,6 +19,8 @@ export interface Field {
   label?: string;
   placeholder?: string;
   validator?: ValidatorFn[];
+  attrs?: any;
 }
 
 export type FieldType = 'INPUT' | 'TEXTAREA';
+export type Options = { [key: string]: any };

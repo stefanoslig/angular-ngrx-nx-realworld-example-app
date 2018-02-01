@@ -1,11 +1,11 @@
 import { User } from './auth.interfaces';
 
 export interface GetUser {
-  type: 'GET_USER';
+  type: '[auth] GET_USER';
 }
 
 export interface SetUser {
-  type: 'SET_USER';
+  type: '[auth] SET_USER';
   payload: User;
 }
 

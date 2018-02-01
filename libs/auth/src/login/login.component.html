@@ -12,8 +12,11 @@
 					<li>That email is already taken</li>
 				</ul> -->
 
-				<dynamic-form (submit)="submit($event)" [data$]="data$" [structure$]="structure$">
+				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
 				</dynamic-form>
+				<button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
+					Sign in
+				</button>
 			</div>
 
 		</div>

@@ -3,7 +3,7 @@ import { AuthAction } from './auth.actions';
 
 export function authReducer(state: Auth, action: AuthAction): Auth {
   switch (action.type) {
-    case 'SET_USER': {
+    case '[auth] SET_USER': {
       return {
         ...state,
         loggedIn: true,

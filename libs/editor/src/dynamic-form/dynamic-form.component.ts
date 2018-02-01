@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators/map';
 import { takeUntil } from 'rxjs/operators/takeUntil';
 import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators/tap';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 
 @Component({
   selector: 'dynamic-form',
@@ -16,7 +17,7 @@ import { tap } from 'rxjs/operators/tap';
 export class DynamicFormComponent implements OnChanges, OnDestroy {
   @Input() structure$: Observable<Field[]>;
   @Input() data$: Observable<any>;
-  @Output() updateForm = new EventEmitter();
+  @Output() updateForm: EventEmitter<any> = new EventEmitter();
   unsubscribe$: Subject<void> = new Subject();
   form: FormGroup;
 
@@ -27,7 +28,7 @@ export class DynamicFormComponent implements OnChanges, OnDestroy {
       .pipe(
         map(this.formBuilder),
         tap(f => (this.form = f)),
-        tap(this.listenFormChanges),
+        tap(f => this.listenFormChanges(f)),
         combineLatest(this.data$),
         takeUntil(this.unsubscribe$)
       )
@@ -50,10 +51,12 @@ export class DynamicFormComponent implements OnChanges, OnDestroy {
   };
 
   private patchValue = ([form, data]) => {
-    !!data ? form.patchValue(data) : form.patchValue({});
+    !!data ? form.patchValue(data, { emitEvent: false }) : form.patchValue({}, { emitEvent: false });
   };
 
   private listenFormChanges(form: FormGroup) {
-    if (this.form) form.valueChanges.subscribe((changes: any) => this.updateForm.emit(changes));
+    form.valueChanges
+      .pipe(debounceTime(100), takeUntil(this.unsubscribe$))
+      .subscribe((changes: any) => this.updateForm.emit(changes));
   }
 }

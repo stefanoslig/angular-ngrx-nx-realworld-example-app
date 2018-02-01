@@ -14,3 +14,5 @@ export interface User {
   bio: string;
   image: string;
 }
+
+export type FormType = 'LOGIN' | 'REGISTER';

@@ -5,13 +5,13 @@
 		<ul *ngIf="true" class="nav navbar-nav pull-xs-right">
 			<li class="nav-item">
 				<!-- Add "active" class when you're on that page" -->
-				<a class="nav-link active" href="">Home</a>
+				<a class="nav-link" routerLink="/">Home</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="">Sign in</a>
+				<a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="">Sign up</a>
+				<a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
 			</li>
 		</ul>
 
@@ -19,7 +19,7 @@
 		<ul *ngIf="false" class="nav navbar-nav pull-xs-right">
 			<li class="nav-item">
 				<!-- Add "active" class when you're on that page" -->
-				<a class="nav-link active" href="">Home</a>
+				<a class="nav-link active" routerLink="/">Home</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="">
@@ -31,9 +31,14 @@
 					<i class="ion-gear-a"></i>&nbsp;Settings
 				</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="">Sign up</a>
-			</li>
+			<!-- <li class="nav-item">
+				<a class="nav-link"
+				  [routerLink]="['/profile', currentUser.username]"
+				  routerLinkActive="active">
+				  <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" />
+				  {{ currentUser.username }}
+				</a>
+			  </li> -->
 		</ul>
 	</div>
 </nav>

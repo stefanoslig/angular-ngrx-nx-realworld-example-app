@@ -43,7 +43,5 @@ export class HomeComponent implements OnInit {
 		});
 	}
 
-	getArticles() {
-
-	}
+	getArticles() { }
 }

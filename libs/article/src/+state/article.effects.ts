@@ -1,14 +1,16 @@
+import 'rxjs/add/operator/switchMap';
+
+import { ArticleService } from '@angular-ngrx-nx/article/src/article.service';
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
+import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/switchMap';
-import { ArticleState } from './article.interfaces';
-import { LoadArticle, LoadArticleFail, LoadArticleSuccess, LoadComments } from './article.actions';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { ArticleService } from '@angular-ngrx-nx/article/src/article.service';
-import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
+import { map } from 'rxjs/operators/map';
+import { switchMap } from 'rxjs/operators/switchMap';
+
+import { LoadArticle, LoadComments } from './article.actions';
+import { ArticleState } from './article.interfaces';
 
 @Injectable()
 export class ArticleEffects {
