@@ -18,47 +18,44 @@ import { GetUser, Login } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-	@Effect()
-	getUser = this.actions.ofType<GetUser>('[auth] GET_USER').pipe(
-		withLatestFrom(this.localStorageJwtService.getItem()),
-		filter(([_, token]) => !!token),
-		switchMap(item =>
-			this.apiService.get('/user').pipe(
-				map((data: any) => ({
-					type: '[auth] SET_USER',
-					payload: data.user
-				})),
-				catchError(error =>
-					of({
-						type: '[auth] SET_USER',
-						payload: ''
-					})
-				)
-			)
-		)
-	);
+  @Effect()
+  getUser = this.actions.ofType<GetUser>('[auth] GET_USER').pipe(
+    withLatestFrom(this.localStorageJwtService.getItem()),
+    filter(([_, token]) => !!token),
+    switchMap(item =>
+      this.apiService.get('/user').pipe(
+        map((data: any) => ({
+          type: '[auth] SET_USER',
+          payload: data.user
+        })),
+        catchError(error =>
+          of({
+            type: '[auth] SET_USER',
+            payload: ''
+          })
+        )
+      )
+    )
+  );
 
-	@Effect()
-	saveForm = this.actions.ofType<Login>('[auth] LOGIN').pipe(
-		withLatestFrom(this.store.select(fromEditor.getData)),
-		switchMap(([action, data]) =>
-			this.authService.authUser('LOGIN', data).pipe(
-				mergeMap(result => {
-					this.localStorageJwtService.setItem(result.user.token)
-					return ([
-						{ type: '[auth] LOGIN_SUCCESS' },
-						{ type: '[Router] Go', payload: { path: ['/'] } }
-					])
-				})
-			)
-		)
-	);
+  @Effect()
+  saveForm = this.actions.ofType<Login>('[auth] LOGIN').pipe(
+    withLatestFrom(this.store.select(fromEditor.getData)),
+    switchMap(([action, data]) =>
+      this.authService.authUser('LOGIN', data).pipe(
+        mergeMap(result => {
+          this.localStorageJwtService.setItem(result.user.token);
+          return [{ type: '[auth] LOGIN_SUCCESS' }, { type: '[Router] Go', payload: { path: ['/'] } }];
+        })
+      )
+    )
+  );
 
-	constructor(
-		private actions: Actions,
-		private localStorageJwtService: LocalStorageJwtService,
-		private apiService: ApiService,
-		private store: Store<EditorState>,
-		private authService: AuthService,
-	) { }
+  constructor(
+    private actions: Actions,
+    private localStorageJwtService: LocalStorageJwtService,
+    private apiService: ApiService,
+    private store: Store<EditorState>,
+    private authService: AuthService
+  ) {}
 }

@@ -1,44 +1,39 @@
-import { Http, Headers, URLSearchParams, Response } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { environment } from 'apps/conduit/src/environments/environment';
 import { Observable } from 'rxjs/Observable';
-
-import { environment } from '../../../apps/conduit/src/environments/environment';
 import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class ApiService {
-  constructor(private http: Http) {}
+	constructor(private http: HttpClient) { }
 
-  get<R>(url: string, params: URLSearchParams = new URLSearchParams()): Observable<R> {
-    return this.http
-      .get(`${environment.api_url}${url}`, { headers: this.headers, search: params })
-      .pipe(map((res: Response) => res.json()));
-  }
+	get(url: string, params: HttpParams = new HttpParams()): Observable<any> {
+		return this.http
+			.get(`${environment.api_url}${url}`, { headers: this.headers, params })
+	}
 
-  post<D>(url: string, data?: D): Observable<Response> {
-    return this.http
-      .post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
-      .pipe(map((res: Response) => res.json()));
-  }
+	post(url: string, data: Object = {}): Observable<any> {
+		return this.http
+			.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
+	}
 
-  put<D>(url: string, data?: D): Observable<Response> {
-    return this.http
-      .post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
-      .pipe(map((res: Response) => res.json()));
-  }
+	put(url: string, data: Object = {}): Observable<any> {
+		return this.http
+			.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers })
+	}
 
-  delete(url: string): Observable<Response> {
-    return this.http
-      .delete(`${environment.api_url}${url}`, { headers: this.headers })
-      .pipe(map((res: Response) => res.json()));
-  }
+	delete(url: string): Observable<any> {
+		return this.http
+			.delete(`${environment.api_url}${url}`, { headers: this.headers })
+	}
 
-  get headers(): Headers {
-    const headersConfig = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    };
+	get headers(): HttpHeaders {
+		const headersConfig = {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		};
 
-    return new Headers(headersConfig);
-  }
+		return new HttpHeaders(headersConfig);
+	}
 }

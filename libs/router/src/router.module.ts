@@ -7,12 +7,12 @@ import { CustomSerializer, routerReducer } from '@angular-ngrx-nx/router/src/+st
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		StoreModule.forFeature('router', routerReducer),
-		EffectsModule.forFeature([RouterEffects]),
-		StoreRouterConnectingModule
-	],
-	providers: [RouterEffects, [{ provide: RouterStateSerializer, useClass: CustomSerializer }]]
+  imports: [
+    CommonModule,
+    StoreModule.forFeature('router', routerReducer),
+    EffectsModule.forFeature([RouterEffects]),
+    StoreRouterConnectingModule
+  ],
+  providers: [RouterEffects, [{ provide: RouterStateSerializer, useClass: CustomSerializer }]]
 })
-export class RouterNgrxModule { }
+export class RouterNgrxModule {}

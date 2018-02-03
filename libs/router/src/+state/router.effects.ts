@@ -10,23 +10,19 @@ import { tap } from 'rxjs/operators/tap';
 
 @Injectable()
 export class RouterEffects {
-	@Effect({ dispatch: false })
-	navigate$ = this.action$.ofType<Go>('[Router] Go')
-		.pipe(
-		map((action: Go) => action.payload),
-		tap(({ path, query: queryParams, extras }) => this.router.navigate(path, { queryParams, ...extras }))
-		);
+  @Effect({ dispatch: false })
+  navigate$ = this.action$
+    .ofType<Go>('[Router] Go')
+    .pipe(
+      map((action: Go) => action.payload),
+      tap(({ path, query: queryParams, extras }) => this.router.navigate(path, { queryParams, ...extras }))
+    );
 
-	@Effect({ dispatch: false })
-	navigateBack$ = this.action$.ofType<Back>('[Router] Back')
-		.pipe(tap(() => this.location.back()));
+  @Effect({ dispatch: false })
+  navigateBack$ = this.action$.ofType<Back>('[Router] Back').pipe(tap(() => this.location.back()));
 
-	@Effect({ dispatch: false })
-	navigateForward$ = this.action$.ofType<Forward>('[Router] Forward')
-		.pipe(tap(() => this.location.forward()));
+  @Effect({ dispatch: false })
+  navigateForward$ = this.action$.ofType<Forward>('[Router] Forward').pipe(tap(() => this.location.forward()));
 
-	constructor(
-		private action$: Actions,
-		private router: Router,
-		private location: Location) { }
+  constructor(private action$: Actions, private router: Router, private location: Location) {}
 }

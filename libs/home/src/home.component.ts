@@ -8,6 +8,7 @@ import * as fromHome from './+state/home.reducer';
 import * as fromAuth from '@angular-ngrx-nx/auth/src/+state/auth.reducer';
 import { ArticleListConfig, Home, HomeState } from './+state/home.interfaces';
 import { Article } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+import { homeInitialState } from '@angular-ngrx-nx/home/src/+state/home.init';
 
 @Component({
 	selector: 'home',
@@ -23,8 +24,11 @@ export class HomeComponent implements OnInit {
 	constructor(private store: Store<any>, private router: Router) { }
 
 	ngOnInit() {
+		this.store.select(fromAuth.getLoggedIn).subscribe(isLoggedIn => {
+			this.isAuthenticated = isLoggedIn;
+			this.getArticles();
+		});
 		this.listConfig$ = this.store.select(fromHome.getListConfig);
-		this.store.select(fromAuth.getLoggedIn).subscribe(isLoggedIn => (this.isAuthenticated = isLoggedIn));
 		this.articles$ = this.store.select(fromHome.getArticles);
 		this.tags$ = this.store.select(fromHome.getTags);
 	}
@@ -36,12 +40,16 @@ export class HomeComponent implements OnInit {
 		}
 
 		this.store.dispatch({
-			type: 'SET_LIST_CONFIG',
-			payload: {
-				type: type
-			}
+			type: '[home] SET_LIST_CONFIG',
+			payload: { type, currentPage: 1, filters: homeInitialState.listConfig.filters }
 		});
 	}
 
-	getArticles() { }
+	getArticles() {
+		if (this.isAuthenticated) {
+			this.setListTo('FEED');
+		} else {
+			this.setListTo('ALL');
+		}
+	}
 }

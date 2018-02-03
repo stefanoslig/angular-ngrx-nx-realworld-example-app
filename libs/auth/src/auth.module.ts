@@ -14,6 +14,7 @@ import { AuthService } from './auth.service';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const authRouting: ModuleWithProviders = RouterModule.forChild([
 	{

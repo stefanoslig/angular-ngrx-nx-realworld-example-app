@@ -1,19 +1,19 @@
 export interface Auth {
-	loggedIn: boolean;
-	user: User;
-	status: Status
+  loggedIn: boolean;
+  user: User;
+  status: Status;
 }
 
 export interface AuthState {
-	readonly auth: Auth;
+  readonly auth: Auth;
 }
 
 export interface User {
-	email: string;
-	token: string;
-	username: string;
-	bio: string;
-	image: string;
+  email: string;
+  token: string;
+  username: string;
+  bio: string;
+  image: string;
 }
 
 export type FormType = 'LOGIN' | 'REGISTER';

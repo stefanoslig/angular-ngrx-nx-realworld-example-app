@@ -1,4 +1,4 @@
-import { Auth } from './auth.interfaces';
+import { Auth, AuthState } from './auth.interfaces';
 import { AuthAction } from './auth.actions';
 
 export function authReducer(state: Auth, action: AuthAction): Auth {
@@ -25,5 +25,5 @@ export function authReducer(state: Auth, action: AuthAction): Auth {
 	}
 }
 
-export const getLoggedIn = (state: Auth) => state.loggedIn;
-export const getUser = (state: Auth) => state.user;
+export const getLoggedIn = (state: AuthState) => state.auth.loggedIn;
+export const getUser = (state: AuthState) => state.auth.user;
