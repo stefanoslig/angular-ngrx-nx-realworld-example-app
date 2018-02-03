@@ -1,22 +1,20 @@
 import { ApiService } from '@angular-ngrx-nx/api/src/api.service';
 import { AuthService } from '@angular-ngrx-nx/auth/src/auth.service';
-import { SaveForm } from '@angular-ngrx-nx/editor/src/+state/editor.actions';
 import { EditorState } from '@angular-ngrx-nx/editor/src/+state/editor.interfaces';
 import * as fromEditor from '@angular-ngrx-nx/editor/src/+state/editor.reducer';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators/catchError';
 import { filter } from 'rxjs/operators/filter';
 import { map } from 'rxjs/operators/map';
+import { mergeMap } from 'rxjs/operators/mergeMap';
 import { switchMap } from 'rxjs/operators/switchMap';
-import { tap } from 'rxjs/operators/tap';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
 import { LocalStorageJwtService } from '../local-storage-jwt.service';
-import { GetUser, SetUser } from './auth.actions';
+import { GetUser, Login } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -41,24 +39,20 @@ export class AuthEffects {
 	);
 
 	@Effect()
-	setUser = this.actions
-		.ofType<SetUser>('[auth] SET_USER')
-		.pipe(tap(action => this.localStorageJwtService.setItem(action.payload.token)));
-
-	@Effect()
-	saveForm = this.actions
-		.ofType<SaveForm>('[editor] SAVE_FORM')
-		.pipe(
-		withLatestFrom(this.store.select(fromEditor.getdata)),
+	saveForm = this.actions.ofType<Login>('[auth] LOGIN').pipe(
+		withLatestFrom(this.store.select(fromEditor.getData)),
 		switchMap(([action, data]) =>
-			this.authService
-				.authUser(action.payload.formType, data)
-				.pipe(
-				map(data => this.localStorageJwtService.setItem(data.user.token)),
-				catchError(err => of({ type: '[editor] SAVE_FORM_FAIL' }))
-				)
+			this.authService.authUser('LOGIN', data).pipe(
+				mergeMap(result => {
+					this.localStorageJwtService.setItem(result.user.token)
+					return ([
+						{ type: '[auth] LOGIN_SUCCESS' },
+						{ type: '[Router] Go', payload: { path: ['/'] } }
+					])
+				})
+			)
 		)
-		);
+	);
 
 	constructor(
 		private actions: Actions,
@@ -66,6 +60,5 @@ export class AuthEffects {
 		private apiService: ApiService,
 		private store: Store<EditorState>,
 		private authService: AuthService,
-		private router: Router
 	) { }
 }

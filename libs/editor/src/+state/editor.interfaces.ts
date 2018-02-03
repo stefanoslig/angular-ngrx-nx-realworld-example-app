@@ -1,26 +1,22 @@
 import { ValidatorFn } from '@angular/forms';
 
 export interface Editor {
-  data: any;
-  structure: Field[];
-  status: Status;
-  valid: boolean;
+	data: any;
+	structure: Field[];
+	valid: boolean;
 }
 
 export interface EditorState {
-  readonly editor: Editor;
+	readonly editor: Editor;
 }
 
-export type Status = 'INIT' | 'IN_PROGRESS';
-
 export interface Field {
-  type: FieldType;
-  name: string;
-  label?: string;
-  placeholder?: string;
-  validator?: ValidatorFn[];
-  attrs?: any;
+	type: FieldType;
+	name: string;
+	label?: string;
+	placeholder?: string;
+	validator?: ValidatorFn[];
+	attrs?: any;
 }
 
 export type FieldType = 'INPUT' | 'TEXTAREA';
-export type Options = { [key: string]: any };

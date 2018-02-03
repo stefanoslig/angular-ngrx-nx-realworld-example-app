@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 			type: '[editor] SET_STRUCTURE',
 			payload: structure
 		});
-		this.data$ = this.store.select(fromEditor.getdata);
+		this.data$ = this.store.select(fromEditor.getData);
 		this.structure$ = this.store.select(fromEditor.getStructure);
 	}
 
@@ -52,8 +52,7 @@ export class LoginComponent implements OnInit {
 
 	submit() {
 		this.store.dispatch({
-			type: '[editor] SAVE_FORM',
-			payload: { formType: 'LOGIN' }
+			type: '[auth] LOGIN'
 		});
 	}
 }

@@ -38,7 +38,7 @@ export class ArticleComponent implements OnInit {
 			type: '[editor] SET_STRUCTURE',
 			payload: structure
 		});
-		this.data$ = this.store.select(fromEditor.getdata);
+		this.data$ = this.store.select(fromEditor.getData);
 		this.structure$ = this.store.select(fromEditor.getStructure);
 	}
 }

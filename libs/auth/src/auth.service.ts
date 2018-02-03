@@ -7,10 +7,10 @@ import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private apiService: ApiService, private localStorageJwtService: LocalStorageJwtService) {}
+	constructor(private apiService: ApiService, private localStorageJwtService: LocalStorageJwtService) { }
 
-  authUser(type, credentials): Observable<any> {
-    const route = type === 'LOGIN' ? '/login' : '';
-    return this.apiService.post('/users' + route, { user: credentials });
-  }
+	authUser(type, credentials): Observable<any> {
+		const route = type === 'LOGIN' ? '/login' : '';
+		return this.apiService.post('/users' + route, { user: credentials });
+	}
 }
