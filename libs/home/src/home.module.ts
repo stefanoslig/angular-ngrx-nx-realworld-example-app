@@ -16,17 +16,17 @@ import { TagsListComponent } from './tags-list/tags-list.component';
 import { SharedModule } from '@angular-ngrx-nx/shared';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		SharedModule,
-		RouterModule.forChild([
-			{ path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService } }
-		]),
-		StoreModule.forFeature('home', homeReducer, { initialState: homeInitialState }),
-		EffectsModule.forFeature([HomeEffects]),
-		ApiModule
-	],
-	declarations: [HomeComponent, ArticlesListComponent, TagsListComponent],
-	providers: [HomeEffects, HomeResolverService, HomeService]
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild([
+      { path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService } }
+    ]),
+    StoreModule.forFeature('home', homeReducer, { initialState: homeInitialState }),
+    EffectsModule.forFeature([HomeEffects]),
+    ApiModule
+  ],
+  declarations: [HomeComponent, ArticlesListComponent, TagsListComponent],
+  providers: [HomeEffects, HomeResolverService, HomeService]
 })
-export class HomeModule { }
+export class HomeModule {}

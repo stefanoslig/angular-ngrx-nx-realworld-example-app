@@ -101,14 +101,32 @@
       "appRoot": ""
     },
     {
+      "name": "ngrx-forms",
+      "root": "libs/ngrx-forms/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "router",
       "root": "libs/router/src",
       "test": "../../../test.js",
       "appRoot": ""
     },
     {
+      "name": "settings",
+      "root": "libs/settings/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "shared",
       "root": "libs/shared/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "user",
+      "root": "libs/user/src",
       "test": "../../../test.js",
       "appRoot": ""
     }

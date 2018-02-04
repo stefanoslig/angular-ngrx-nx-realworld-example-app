@@ -4,20 +4,20 @@ import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { DataPersistence } from '@nrwl/nx';
 import { readAll, hot } from '@nrwl/nx/testing';
-import { EditorEffects } from './editor.effects';
+import { NgrxFormsEffects } from './ngrx-forms.effects';
 import { of } from 'rxjs/observable/of';
 
-describe('EditorEffects', () => {
+describe('NgrxFormsEffects', () => {
   let actions;
-  let effects: EditorEffects;
+  let effects: NgrxFormsEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
-      providers: [EditorEffects, DataPersistence, provideMockActions(() => actions)]
+      providers: [NgrxFormsEffects, DataPersistence, provideMockActions(() => actions)]
     });
 
-    effects = TestBed.get(EditorEffects);
+    effects = TestBed.get(NgrxFormsEffects);
   });
 
   describe('someEffect', () => {

@@ -1,4 +1,4 @@
-import { Field, FieldType } from '@angular-ngrx-nx/editor/src/+state/editor.interfaces';
+import { Field, FieldType } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
 import {
   Directive,
   Input,

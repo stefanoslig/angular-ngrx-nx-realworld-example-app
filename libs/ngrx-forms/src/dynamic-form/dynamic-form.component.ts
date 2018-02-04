@@ -1,4 +1,4 @@
-import { Field } from '@angular-ngrx-nx/editor/src/+state/editor.interfaces';
+import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
 import { Component, Input, OnChanges, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';

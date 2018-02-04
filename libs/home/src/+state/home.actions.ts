@@ -2,91 +2,91 @@ import { ArticleListConfig, Articles, ListType } from './home.interfaces';
 import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 
 export interface SetListType {
-	type: '[home] SET_LIST_TYPE';
-	payload: ListType;
+  type: '[home] SET_LIST_TYPE';
+  payload: ListType;
 }
 
 export interface SetListPage {
-	type: '[home] SET_LIST_PAGE';
-	payload: number;
+  type: '[home] SET_LIST_PAGE';
+  payload: number;
 }
 
 export interface SetListTag {
-	type: '[home] SET_LIST_TAG';
-	payload: string;
+  type: '[home] SET_LIST_TAG';
+  payload: string;
 }
 
 export interface LoadArticles {
-	type: '[home] LOAD_ARTICLES';
+  type: '[home] LOAD_ARTICLES';
 }
 
 export interface LoadArticlesSuccess {
-	type: '[home] LOAD_ARTICLES_SUCCESS';
-	payload: { articles: ArticleData[], articlesCount: number };
+  type: '[home] LOAD_ARTICLES_SUCCESS';
+  payload: { articles: ArticleData[]; articlesCount: number };
 }
 
 export interface LoadArticlesFail {
-	type: '[home] LOAD_ARTICLES_FAIL';
-	payload: Error;
+  type: '[home] LOAD_ARTICLES_FAIL';
+  payload: Error;
 }
 
 export interface LoadTags {
-	type: '[home] LOAD_TAGS';
+  type: '[home] LOAD_TAGS';
 }
 
 export interface LoadTagsSuccess {
-	type: '[home] LOAD_TAGS_SUCCESS';
-	payload: string[];
+  type: '[home] LOAD_TAGS_SUCCESS';
+  payload: string[];
 }
 
 export interface LoadTagsFail {
-	type: '[home] LOAD_TAGS_FAIL';
-	payload: Error;
+  type: '[home] LOAD_TAGS_FAIL';
+  payload: Error;
 }
 
 export interface Favorite {
-	type: '[home] FAVORITE';
-	payload: string;
+  type: '[home] FAVORITE';
+  payload: string;
 }
 
 export interface FavoriteSuccess {
-	type: '[home] FAVORITE_SUCCESS';
-	payload: ArticleData;
+  type: '[home] FAVORITE_SUCCESS';
+  payload: ArticleData;
 }
 
 export interface FavoriteFail {
-	type: '[home] FAVORITE_FAIL';
-	payload: Error;
+  type: '[home] FAVORITE_FAIL';
+  payload: Error;
 }
 
 export interface UnFavorite {
-	type: '[home] UNFAVORITE';
-	payload: string;
+  type: '[home] UNFAVORITE';
+  payload: string;
 }
 
 export interface UnFavoriteSuccess {
-	type: '[home] UNFAVORITE_SUCCESS';
-	payload: ArticleData;
+  type: '[home] UNFAVORITE_SUCCESS';
+  payload: ArticleData;
 }
 
 export interface UnFavoriteFail {
-	type: '[home] UNFAVORITE_FAIL';
-	payload: Error;
+  type: '[home] UNFAVORITE_FAIL';
+  payload: Error;
 }
 
 export type HomeAction =
-	| SetListType
-	| SetListPage
-	| SetListTag
-	| LoadArticles
-	| LoadArticlesSuccess
-	| LoadArticlesFail
-	| LoadTags
-	| LoadTagsSuccess
-	| LoadTagsFail
-	| Favorite
-	| FavoriteSuccess
-	| FavoriteFail
-	| UnFavorite
-	| UnFavoriteSuccess
-	| UnFavoriteFail;
+  | SetListType
+  | SetListPage
+  | SetListTag
+  | LoadArticles
+  | LoadArticlesSuccess
+  | LoadArticlesFail
+  | LoadTags
+  | LoadTagsSuccess
+  | LoadTagsFail
+  | Favorite
+  | FavoriteSuccess
+  | FavoriteFail
+  | UnFavorite
+  | UnFavoriteSuccess
+  | UnFavoriteFail;

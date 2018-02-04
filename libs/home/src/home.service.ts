@@ -10,26 +10,28 @@ import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfa
 
 @Injectable()
 export class HomeService {
-	constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
-	query(config: ArticleListConfig): Observable<any> {
-		return this.apiService.get('/articles' + (config.type === 'FEED' ? '/feed' : ''), this.toHttpParams(config.filters));
-	}
+  query(config: ArticleListConfig): Observable<any> {
+    return this.apiService.get(
+      '/articles' + (config.type === 'FEED' ? '/feed' : ''),
+      this.toHttpParams(config.filters)
+    );
+  }
 
-	getTags(): Observable<any> {
-		return this.apiService.get('/tags');
-	}
+  getTags(): Observable<any> {
+    return this.apiService.get('/tags');
+  }
 
-	favorite(slug): Observable<ArticleData> {
-		return this.apiService.post('/articles/' + slug + '/favorite').pipe((map(data => data.article)));
-	}
+  favorite(slug): Observable<ArticleData> {
+    return this.apiService.post('/articles/' + slug + '/favorite').pipe(map(data => data.article));
+  }
 
-	unfavorite(slug): Observable<ArticleData> {
-		return this.apiService.delete('/articles/' + slug + '/favorite').pipe((map(data => data.article)));
-	}
+  unfavorite(slug): Observable<ArticleData> {
+    return this.apiService.delete('/articles/' + slug + '/favorite').pipe(map(data => data.article));
+  }
 
-	toHttpParams(params) {
-		return Object.getOwnPropertyNames(params)
-			.reduce((p, key) => p.set(key, params[key]), new HttpParams());
-	}
+  toHttpParams(params) {
+    return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());
+  }
 }

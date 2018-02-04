@@ -1,5 +1,5 @@
-import { EditorState, Field } from '@angular-ngrx-nx/editor/src/+state/editor.interfaces';
-import * as fromEditor from '@angular-ngrx-nx/editor/src/+state/editor.reducer';
+import { NgrxFormsState, Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
+import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -32,20 +32,20 @@ export class LoginComponent implements OnInit {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private store: Store<EditorState>) {}
+  constructor(private store: Store<NgrxFormsState>) {}
 
   ngOnInit() {
     this.store.dispatch({
-      type: '[editor] SET_STRUCTURE',
+      type: '[ngrxForms] SET_STRUCTURE',
       payload: structure
     });
-    this.data$ = this.store.select(fromEditor.getData);
-    this.structure$ = this.store.select(fromEditor.getStructure);
+    this.data$ = this.store.select(fromNgrxForms.getData);
+    this.structure$ = this.store.select(fromNgrxForms.getStructure);
   }
 
   updateForm(changes: any) {
     this.store.dispatch({
-      type: '[editor] SET_DATA',
+      type: '[ngrxForms] SET_DATA',
       payload: changes
     });
   }

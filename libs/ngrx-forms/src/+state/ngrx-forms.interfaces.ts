@@ -1,13 +1,13 @@
 import { ValidatorFn } from '@angular/forms';
 
-export interface Editor {
+export interface NgrxForms {
   data: any;
   structure: Field[];
   valid: boolean;
 }
 
-export interface EditorState {
-  readonly editor: Editor;
+export interface NgrxFormsState {
+  readonly ngrxForms: NgrxForms;
 }
 
 export interface Field {

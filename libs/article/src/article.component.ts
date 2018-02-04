@@ -1,7 +1,7 @@
 import { ArticleData, ArticleComment } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 import * as fromAuth from '@angular-ngrx-nx/auth/src/+state/auth.reducer';
-import { Field } from '@angular-ngrx-nx/editor/src/+state/editor.interfaces';
-import * as fromEditor from '@angular-ngrx-nx/editor/src/+state/editor.reducer';
+import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
+import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -35,10 +35,10 @@ export class ArticleComponent implements OnInit {
     this.comments = this.store.select(fromArticle.getComments);
     this.isAuthenticated = this.store.select(fromAuth.getLoggedIn);
     this.store.dispatch({
-      type: '[editor] SET_STRUCTURE',
+      type: '[ngrxForms] SET_STRUCTURE',
       payload: structure
     });
-    this.data$ = this.store.select(fromEditor.getData);
-    this.structure$ = this.store.select(fromEditor.getStructure);
+    this.data$ = this.store.select(fromNgrxForms.getData);
+    this.structure$ = this.store.select(fromNgrxForms.getStructure);
   }
 }

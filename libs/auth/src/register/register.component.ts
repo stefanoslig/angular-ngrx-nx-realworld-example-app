@@ -1,64 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { Field, EditorState } from '@angular-ngrx-nx/editor/src/+state/editor.interfaces';
+import { Field, NgrxFormsState } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import * as fromEditor from '@angular-ngrx-nx/editor/src/+state/editor.reducer';
+import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
 import { Validators } from '@angular/forms';
 
 const structure: Field[] = [
-	{
-		type: 'INPUT',
-		name: 'username',
-		placeholder: 'Username',
-		validator: [Validators.required]
-	},
-	{
-		type: 'INPUT',
-		name: 'email',
-		placeholder: 'Email',
-		validator: [Validators.required]
-	},
-	{
-		type: 'INPUT',
-		name: 'password',
-		placeholder: 'Password',
-		validator: [Validators.required],
-		attrs: {
-			type: 'password'
-		}
-	}
+  {
+    type: 'INPUT',
+    name: 'username',
+    placeholder: 'Username',
+    validator: [Validators.required]
+  },
+  {
+    type: 'INPUT',
+    name: 'email',
+    placeholder: 'Email',
+    validator: [Validators.required]
+  },
+  {
+    type: 'INPUT',
+    name: 'password',
+    placeholder: 'Password',
+    validator: [Validators.required],
+    attrs: {
+      type: 'password'
+    }
+  }
 ];
 
 @Component({
-	selector: 'register',
-	templateUrl: './register.component.html',
-	styleUrls: ['./register.component.css']
+  selector: 'register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-	structure$: Observable<Field[]>;
-	data$: Observable<any>;
+  structure$: Observable<Field[]>;
+  data$: Observable<any>;
 
-	constructor(private store: Store<EditorState>) { }
+  constructor(private store: Store<NgrxFormsState>) {}
 
-	ngOnInit() {
-		this.store.dispatch({
-			type: '[editor] SET_STRUCTURE',
-			payload: structure
-		});
-		this.data$ = this.store.select(fromEditor.getData);
-		this.structure$ = this.store.select(fromEditor.getStructure);
-	}
+  ngOnInit() {
+    this.store.dispatch({
+      type: '[ngrxForms] SET_STRUCTURE',
+      payload: structure
+    });
+    this.data$ = this.store.select(fromNgrxForms.getData);
+    this.structure$ = this.store.select(fromNgrxForms.getStructure);
+  }
 
-	updateForm(changes: any) {
-		this.store.dispatch({
-			type: '[editor] SET_DATA',
-			payload: changes
-		});
-	}
+  updateForm(changes: any) {
+    this.store.dispatch({
+      type: '[ngrxForms] SET_DATA',
+      payload: changes
+    });
+  }
 
-	submit() {
-		this.store.dispatch({
-			type: '[auth] REGISTER'
-		});
-	}
+  submit() {
+    this.store.dispatch({
+      type: '[auth] REGISTER'
+    });
+  }
 }

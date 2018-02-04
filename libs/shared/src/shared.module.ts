@@ -4,8 +4,8 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { PagerComponent } from './pager/pager.component';
 
 @NgModule({
-	imports: [CommonModule],
-	declarations: [ArticleListComponent, PagerComponent],
-	exports: [ArticleListComponent, PagerComponent]
+  imports: [CommonModule],
+  declarations: [ArticleListComponent, PagerComponent],
+  exports: [ArticleListComponent, PagerComponent]
 })
-export class SharedModule { }
+export class SharedModule {}

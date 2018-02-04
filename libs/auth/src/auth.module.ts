@@ -1,5 +1,5 @@
 import { ApiModule } from '@angular-ngrx-nx/api';
-import { EditorModule } from '@angular-ngrx-nx/editor/src/editor.module';
+import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms/src/ngrx-forms.module';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -17,26 +17,26 @@ import { RegisterComponent } from './register/register.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const authRouting: ModuleWithProviders = RouterModule.forChild([
-	{
-		path: 'login',
-		component: LoginComponent
-	},
-	{
-		path: 'register',
-		component: RegisterComponent
-	}
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
 ]);
 
 @NgModule({
-	imports: [
-		CommonModule,
-		EditorModule,
-		authRouting,
-		StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
-		EffectsModule.forFeature([AuthEffects]),
-		ApiModule
-	],
-	providers: [AuthEffects, LocalStorageJwtService, AuthGuardService, AuthService],
-	declarations: [LoginComponent, RegisterComponent]
+  imports: [
+    CommonModule,
+    NgrxFormsModule,
+    authRouting,
+    StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
+    EffectsModule.forFeature([AuthEffects]),
+    ApiModule
+  ],
+  providers: [AuthEffects, LocalStorageJwtService, AuthGuardService, AuthService],
+  declarations: [LoginComponent, RegisterComponent]
 })
-export class AuthModule { }
+export class AuthModule {}

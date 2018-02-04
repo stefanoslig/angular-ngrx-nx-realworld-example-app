@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ArticleService } from '@angular-ngrx-nx/article/src/article.service';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
-import { EditorModule } from '@angular-ngrx-nx/editor';
+import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
 import { MarkdownPipe } from './markdown.pipe';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { MarkdownPipe } from './markdown.pipe';
     ]),
     StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
     EffectsModule.forFeature([ArticleEffects]),
-    EditorModule
+    NgrxFormsModule
   ],
   providers: [ArticleEffects, ArticleService, ArticleResolverService],
   declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe]

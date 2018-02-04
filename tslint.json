@@ -100,7 +100,11 @@
       true,
       {
         "lazyLoad": [
-          "home"
+          "home",
+          "user",
+          "article",
+          "settings",
+          "editor"
         ],
         "allow": []
       }
