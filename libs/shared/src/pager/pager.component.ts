@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
-  selector: 'pager',
-  templateUrl: './pager.component.html',
-  styleUrls: ['./pager.component.css']
+	selector: 'pager',
+	templateUrl: './pager.component.html',
+	styleUrls: ['./pager.component.css']
 })
-export class PagerComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+export class PagerComponent {
+	@Input() currentPage: number;
+	@Input() totalPages: number;
+	@Output() setPage: EventEmitter<number> = new EventEmitter();
 }

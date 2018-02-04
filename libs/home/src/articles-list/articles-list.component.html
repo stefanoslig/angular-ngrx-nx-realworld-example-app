@@ -1,22 +1,23 @@
 <div *ngFor="let article of articles" class="article-preview">
 	<div class="article-meta">
-		<a [routerLink]="['/profile', article.author.username]">
+		<a>
 			<img [src]="article.author.image" />
 		</a>
 		<div class="info">
-			<a class="author" [routerLink]="['/profile', article.author.username]">
+			<a class="author">
 				{{ article.author.username }}
 			</a>
 			<span class="date">
 				{{ article.createdAt | date: 'longDate' }}
 			</span>
 		</div>
-		<button class="btn btn-outline-primary btn-sm pull-xs-right">
+		<button [ngClass]="{'btn-outline-primary': !article.favorited, 'btn-primary': article.favorited }" class="btn btn-sm pull-xs-right"
+		 (click)="toggleFavorite(article)">
 			<i class="ion-heart"></i>
 			<div class="info">{{article.favoritesCount}}</div>
 		</button>
 	</div>
-	<a href="" class="preview-link">
+	<a (click)=navigateToArticle.emit(article.slug) class="preview-link">
 		<h1>{{article.title}}</h1>
 		<p>{{article.description}}</p>
 		<span>Read more...</span>

@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators/map';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
-import { LoadArticles, LoadTags, SetListConfig } from './home.actions';
+import { LoadArticles, LoadTags, SetListConfig, Favorite } from './home.actions';
 import * as fromHome from './home.reducer';
 
 
@@ -32,7 +32,7 @@ export class HomeEffects {
 			this.homeService.query(config).pipe(
 				map(results => ({
 					type: '[home] LOAD_ARTICLES_SUCCESS',
-					payload: results
+					payload: { articles: results.articles, articlesCount: results.articlesCount }
 				})),
 				catchError(error =>
 					of({
@@ -55,6 +55,44 @@ export class HomeEffects {
 				catchError(error =>
 					of({
 						type: '[home] LOAD_TAGS_FAIL',
+						payload: error
+					})
+				)
+			)
+		)
+	);
+
+	@Effect()
+	favorite = this.actions.ofType<Favorite>('[home] FAVORITE').pipe(
+		map(action => action.payload),
+		switchMap(slug =>
+			this.homeService.favorite(slug).pipe(
+				map(results => ({
+					type: '[home] FAVORITE_SUCCESS',
+					payload: results
+				})),
+				catchError(error =>
+					of({
+						type: '[home] FAVORITE_FAIL',
+						payload: error
+					})
+				)
+			)
+		)
+	);
+
+	@Effect()
+	unFavorite = this.actions.ofType<Favorite>('[home] UNFAVORITE').pipe(
+		map(action => action.payload),
+		switchMap(slug =>
+			this.homeService.unfavorite(slug).pipe(
+				map(results => ({
+					type: '[home] UNFAVORITE_SUCCESS',
+					payload: results
+				})),
+				catchError(error =>
+					of({
+						type: '[home] UNFAVORITE_FAIL',
 						payload: error
 					})
 				)

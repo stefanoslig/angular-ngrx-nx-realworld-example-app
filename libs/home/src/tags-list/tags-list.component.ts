@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'tags-list',
-  templateUrl: './tags-list.component.html',
-  styleUrls: ['./tags-list.component.css']
+	selector: 'tags-list',
+	templateUrl: './tags-list.component.html',
+	styleUrls: ['./tags-list.component.css']
 })
 export class TagsListComponent {
-  @Input() tags: string[];
+	@Input() tags: string[];
+	@Output() setListTo: EventEmitter<string> = new EventEmitter();
 }

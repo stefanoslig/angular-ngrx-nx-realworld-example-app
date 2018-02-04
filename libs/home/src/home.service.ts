@@ -4,22 +4,33 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { HttpParams } from '@angular/common/http';
+import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+
+//TODO: Should be removed to shared folder as articles.service.ts because I need some of these functions for the article lib
 
 @Injectable()
 export class HomeService {
-  constructor(private apiService: ApiService) {}
+	constructor(private apiService: ApiService) { }
 
-  query(config: ArticleListConfig): Observable<any> {
-    const params = {};
+	query(config: ArticleListConfig): Observable<any> {
+		const params = {};
 
-    Object.keys(config.filters).forEach(key => {
-      params[key] = config.filters[key];
-    });
+		Object.keys(config.filters).forEach(key => {
+			params[key] = config.filters[key];
+		});
 
-    return this.apiService.get('/articles' + (config.type === 'FEED' ? '/feed' : ''), new HttpParams(params));
-  }
+		return this.apiService.get('/articles' + (config.type === 'FEED' ? '/feed' : ''), new HttpParams(params));
+	}
 
-  getTags(): Observable<any> {
-    return this.apiService.get('/tags');
-  }
+	getTags(): Observable<any> {
+		return this.apiService.get('/tags');
+	}
+
+	favorite(slug): Observable<ArticleData> {
+		return this.apiService.post('/articles/' + slug + '/favorite').pipe((map(data => data.article)));
+	}
+
+	unfavorite(slug): Observable<ArticleData> {
+		return this.apiService.delete('/articles/' + slug + '/favorite').pipe((map(data => data.article)));
+	}
 }
