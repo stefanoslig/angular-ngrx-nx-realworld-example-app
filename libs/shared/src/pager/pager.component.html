@@ -1,5 +1,5 @@
 <ul class="pagination">
-	<li class="page-item" [ngClass]="{'active': pageNumber === currentPage}" *ngFor="let pageNumber of totalPages" (click)="setPageTo(pageNumber)">
+	<li class="page-item" [ngClass]="{'active': pageNumber === currentPage}" *ngFor="let pageNumber of totalPages" (click)="setPage.emit(pageNumber)">
 		<a class="page-link">{{ pageNumber }}</a>
 	</li>
 </ul>

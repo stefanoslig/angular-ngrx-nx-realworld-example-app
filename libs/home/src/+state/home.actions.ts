@@ -1,9 +1,19 @@
-import { ArticleListConfig, Articles } from './home.interfaces';
+import { ArticleListConfig, Articles, ListType } from './home.interfaces';
 import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 
-export interface SetListConfig {
-	type: '[home] SET_LIST_CONFIG';
-	payload: ArticleListConfig;
+export interface SetListType {
+	type: '[home] SET_LIST_TYPE';
+	payload: ListType;
+}
+
+export interface SetListPage {
+	type: '[home] SET_LIST_PAGE';
+	payload: number;
+}
+
+export interface SetListTag {
+	type: '[home] SET_LIST_TAG';
+	payload: string;
 }
 
 export interface LoadArticles {
@@ -65,7 +75,9 @@ export interface UnFavoriteFail {
 }
 
 export type HomeAction =
-	| SetListConfig
+	| SetListType
+	| SetListPage
+	| SetListTag
 	| LoadArticles
 	| LoadArticlesSuccess
 	| LoadArticlesFail

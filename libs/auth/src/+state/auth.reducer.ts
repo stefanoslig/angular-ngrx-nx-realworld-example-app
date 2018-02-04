@@ -19,6 +19,15 @@ export function authReducer(state: Auth, action: AuthAction): Auth {
 		case '[auth] LOGIN_FAIL': {
 			return { ...state, status: 'INIT' };
 		}
+		case '[auth] REGISTER': {
+			return { ...state, status: 'IN_PROGRESS' };
+		}
+		case '[auth] REGISTER_SUCCESS': {
+			return { ...state, status: 'INIT' };
+		}
+		case '[auth] REGISTER_FAIL': {
+			return { ...state, status: 'INIT' };
+		}
 		default: {
 			return state;
 		}

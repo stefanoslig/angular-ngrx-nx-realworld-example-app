@@ -17,11 +17,11 @@
 							<a [ngClass]="{'active': (listConfig$|async)?.type === 'FEED'}" class="nav-link" (click)="setListTo('FEED')">Your Feed</a>
 						</li>
 						<li class="nav-item">
-							<a [ngClass]="{'active': (listConfig$|async)?.type === 'ALL' && !(listConfig$|async)?.tag}" class="nav-link" (click)="setListTo('ALL')">Global Feed</a>
+							<a [ngClass]="{'active': (listConfig$|async)?.type === 'ALL' && !(listConfig$|async).filters?.tag}" class="nav-link" (click)="setListTo('ALL')">Global Feed</a>
 						</li>
-						<li class="nav-item" [hidden]="!(listConfig$|async)?.tag">
+						<li class="nav-item" [hidden]="!(listConfig$|async).filters?.tag">
 							<a class="nav-link active">
-								<i class="ion-pound"></i> {{ (listConfig$|async)?.tag }}
+								<i class="ion-pound"></i> {{ (listConfig$|async).filters?.tag }}
 							</a>
 						</li>
 					</ul>
@@ -29,12 +29,12 @@
 				<articles-list (navigateToArticle)="navigateToArticle($event)" (unFavorite)="unFavorite($event)" (favorite)="favorite($event)"
 				 [articles]="articles$ | async"></articles-list>
 
-				<pager [hidden]="totalPages.length <= 1" [currentPage]="(listConfig$ | async).currentPage" [totalPages]="totalPages"></pager>
+				<pager (setPage)="setPage($event)" [hidden]="totalPages.length <= 1" [currentPage]="(listConfig$ | async).currentPage" [totalPages]="totalPages"></pager>
 			</div>
 
 			<div class="col-md-3">
 				<div class="sidebar">
-					<tags-list (setListTo)="setListTo($event)" [tags]="(tags$ | async)"></tags-list>
+					<tags-list (setListTag)="setListTag($event)" [tags]="(tags$ | async)"></tags-list>
 				</div>
 			</div>
 

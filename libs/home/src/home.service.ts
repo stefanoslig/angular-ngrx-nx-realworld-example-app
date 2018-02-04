@@ -13,13 +13,7 @@ export class HomeService {
 	constructor(private apiService: ApiService) { }
 
 	query(config: ArticleListConfig): Observable<any> {
-		const params = {};
-
-		Object.keys(config.filters).forEach(key => {
-			params[key] = config.filters[key];
-		});
-
-		return this.apiService.get('/articles' + (config.type === 'FEED' ? '/feed' : ''), new HttpParams(params));
+		return this.apiService.get('/articles' + (config.type === 'FEED' ? '/feed' : ''), this.toHttpParams(config.filters));
 	}
 
 	getTags(): Observable<any> {
@@ -32,5 +26,10 @@ export class HomeService {
 
 	unfavorite(slug): Observable<ArticleData> {
 		return this.apiService.delete('/articles/' + slug + '/favorite').pipe((map(data => data.article)));
+	}
+
+	toHttpParams(params) {
+		return Object.getOwnPropertyNames(params)
+			.reduce((p, key) => p.set(key, params[key]), new HttpParams());
 	}
 }

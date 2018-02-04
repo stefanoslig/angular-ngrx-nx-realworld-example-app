@@ -1,12 +1,23 @@
 import { homeInitialState } from '../+state/home.init';
 import { HomeAction } from './home.actions';
-import { Home, HomeState, Articles } from './home.interfaces';
+import { Home, HomeState, Articles, ListType } from './home.interfaces';
 import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 
 export function homeReducer(state: Home = homeInitialState, action: HomeAction): Home {
 	switch (action.type) {
-		case '[home] SET_LIST_CONFIG': {
-			return { ...state, listConfig: action.payload };
+		case '[home] SET_LIST_TYPE': {
+			const listConfig = { ...state.listConfig, type: action.payload }
+			return { ...state, listConfig };
+		}
+		case '[home] SET_LIST_PAGE': {
+			const filters = { ...state.listConfig.filters, offset: state.listConfig.filters.limit * (action.payload - 1) };
+			const listConfig = { ...state.listConfig, currentPage: action.payload, filters }
+			return { ...state, listConfig };
+		}
+		case '[home] SET_LIST_TAG': {
+			const filters = { ...state.listConfig.filters, tag: action.payload };
+			const listConfig = { ...state.listConfig, type: 'ALL' as ListType, filters }
+			return { ...state, listConfig };
 		}
 		case '[home] LOAD_ARTICLES': {
 			const articles = { ...state.articles, loading: true };

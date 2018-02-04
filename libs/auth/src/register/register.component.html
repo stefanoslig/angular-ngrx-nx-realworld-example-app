@@ -1,3 +1,24 @@
-<p>
-  register works!
-</p>
+<div class="auth-page">
+	<div class="container page">
+		<div class="row">
+
+			<div class="col-md-6 offset-md-3 col-xs-12">
+				<h1 class="text-xs-center">Sign in</h1>
+				<p class="text-xs-center">
+					<a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
+				</p>
+
+				<!-- <ul class="error-messages">
+						<li>That email is already taken</li>
+					</ul> -->
+
+				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
+				</dynamic-form>
+				<button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
+					Sign up
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>

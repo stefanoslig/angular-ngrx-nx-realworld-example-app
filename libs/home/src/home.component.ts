@@ -37,15 +37,15 @@ export class HomeComponent implements OnInit {
 		this.tags$ = this.store.select(fromHome.getTags);
 	}
 
-	setListTo(type: string, filter?: Filters) {
+	setListTo(type: string = 'ALL') {
 		if (type === 'FEED' && !this.isAuthenticated) {
 			this.router.navigate([`/login`]);
 			return;
 		}
 
 		this.store.dispatch({
-			type: '[home] SET_LIST_CONFIG',
-			payload: { type, currentPage: 1, filters: homeInitialState.listConfig.filters }
+			type: '[home] SET_LIST_TYPE',
+			payload: type
 		});
 	}
 
@@ -81,5 +81,19 @@ export class HomeComponent implements OnInit {
 			.subscribe(([articlesCount, config]) => {
 				this.totalPages = Array.from(new Array(Math.ceil(articlesCount / config.filters.limit)), (val, index) => index + 1);
 			})
+	}
+
+	setPage(page: number) {
+		this.store.dispatch({
+			type: '[home] SET_LIST_PAGE',
+			payload: page
+		});
+	}
+
+	setListTag(tag: string) {
+		this.store.dispatch({
+			type: '[home] SET_LIST_TAG',
+			payload: tag
+		});
 	}
 }

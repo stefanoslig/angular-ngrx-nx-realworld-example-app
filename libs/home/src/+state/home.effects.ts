@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators/map';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
-import { LoadArticles, LoadTags, SetListConfig, Favorite } from './home.actions';
+import { LoadArticles, LoadTags, Favorite, SetListType, SetListPage, SetListTag } from './home.actions';
 import * as fromHome from './home.reducer';
 
 
@@ -17,18 +17,24 @@ import * as fromHome from './home.reducer';
 export class HomeEffects {
 
 	@Effect()
-	setListConfig = this.actions.ofType<SetListConfig>('[home] SET_LIST_CONFIG').pipe(
+	setListType = this.actions.ofType<SetListType>('[home] SET_LIST_TYPE').pipe(
+		map(() => ({ type: '[home] LOAD_ARTICLES' }))
+	);
+
+	@Effect()
+	setListPage = this.actions.ofType<SetListPage>('[home] SET_LIST_PAGE').pipe(
+		map(() => ({ type: '[home] LOAD_ARTICLES' }))
+	);
+
+	@Effect()
+	setListTag = this.actions.ofType<SetListTag>('[home] SET_LIST_TAG').pipe(
 		map(() => ({ type: '[home] LOAD_ARTICLES' }))
 	);
 
 	@Effect()
 	loadArticles = this.actions.ofType<LoadArticles>('[home] LOAD_ARTICLES').pipe(
 		withLatestFrom(this.store.select(fromHome.getListConfig)),
-		map(([_, config]) => {
-			const filters = { ...config.filters, offset: config.filters.limit * (config.currentPage - 1) };
-			return { ...config, filters };
-		}),
-		switchMap(config =>
+		switchMap(([_, config]) =>
 			this.homeService.query(config).pipe(
 				map(results => ({
 					type: '[home] LOAD_ARTICLES_SUCCESS',

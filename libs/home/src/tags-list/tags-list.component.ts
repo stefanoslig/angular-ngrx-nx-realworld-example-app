@@ -7,5 +7,5 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TagsListComponent {
 	@Input() tags: string[];
-	@Output() setListTo: EventEmitter<string> = new EventEmitter();
+	@Output() setListTag: EventEmitter<string> = new EventEmitter();
 }
