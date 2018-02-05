@@ -1,0 +1,25 @@
+<div class="settings-page">
+	<div class="container page">
+		<div class="row">
+
+			<div class="col-md-6 offset-md-3 col-xs-12">
+				<h1 class="text-xs-center">Your Settings</h1>
+
+				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
+				</dynamic-form>
+				<div class="edit-button-container">
+					<button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
+						Update Settings
+					</button>
+				</div>
+
+				<hr />
+
+				<button class="btn btn-outline-danger" (click)="logout()">
+					Or click here to logout.
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>

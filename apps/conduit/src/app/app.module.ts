@@ -16,23 +16,26 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { RouterNgrxModule } from '@angular-ngrx-nx/router/src/router.module';
+import { SettingsModule } from '@angular-ngrx-nx/settings/src/settings.module';
+
 
 @NgModule({
-  imports: [
-    AuthModule,
-    BrowserModule,
-    NxModule.forRoot(),
-    RouterNgrxModule,
-    RouterModule.forRoot([{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' }], {
-      initialNavigation: 'enabled'
-    }),
-    StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
-    EffectsModule.forRoot([AppEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    ArticleModule
-  ],
-  declarations: [AppComponent, FooterComponent, NavbarComponent],
-  bootstrap: [AppComponent],
-  providers: [AppEffects]
+	imports: [
+		AuthModule,
+		BrowserModule,
+		NxModule.forRoot(),
+		RouterNgrxModule,
+		SettingsModule,
+		RouterModule.forRoot([{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' }], {
+			initialNavigation: 'enabled'
+		}),
+		StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
+		EffectsModule.forRoot([AppEffects]),
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
+		ArticleModule
+	],
+	declarations: [AppComponent, FooterComponent, NavbarComponent],
+	bootstrap: [AppComponent],
+	providers: [AppEffects]
 })
-export class AppModule {}
+export class AppModule { }
