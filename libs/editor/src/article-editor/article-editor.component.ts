@@ -1,4 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
+import { Store } from '@ngrx/store';
+import { LocalStorageJwtService } from '@angular-ngrx-nx/auth/src/local-storage-jwt.service';
+import { Router } from '@angular/router';
+import { Validators } from '@angular/forms';
+import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
+
+const structure: Field[] = [
+  {
+    type: 'INPUT',
+    name: 'title',
+    placeholder: 'Article Title',
+    validator: [Validators.required]
+  },
+  {
+    type: 'INPUT',
+    name: 'description',
+    placeholder: "What's this article about?",
+    validator: [Validators.required]
+  },
+  {
+    type: 'TEXTAREA',
+    name: 'body',
+    placeholder: 'Write your article (in markdown)',
+    validator: [Validators.required]
+  },
+  {
+    type: 'INPUT',
+    name: 'tagList',
+    placeholder: 'Enter Tags',
+    validator: []
+  }
+];
 
 @Component({
   selector: 'article-editor',
@@ -6,7 +40,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article-editor.component.css']
 })
 export class ArticleEditorComponent implements OnInit {
-  constructor() {}
+  structure$: Observable<Field[]>;
+  data$: Observable<any>;
 
-  ngOnInit() {}
+  constructor(private store: Store<any>, private localStorageSevice: LocalStorageJwtService, private router: Router) {}
+
+  ngOnInit() {
+    this.store.dispatch({
+      type: '[ngrxForms] SET_STRUCTURE',
+      payload: structure
+    });
+    this.data$ = this.store.select(fromNgrxForms.getData);
+    this.structure$ = this.store.select(fromNgrxForms.getStructure);
+  }
+
+  updateForm(changes: any) {
+    this.store.dispatch({
+      type: '[ngrxForms] SET_DATA',
+      payload: changes
+    });
+  }
+
+  submit() {
+    this.store.dispatch({
+      type: '[editor] PUBLISH_ARTICLE'
+    });
+  }
 }

@@ -17,7 +17,7 @@ export class ApiService {
   }
 
   put(url: string, data: Object = {}): Observable<any> {
-    return this.http.post(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers });
+    return this.http.put(`${environment.api_url}${url}`, JSON.stringify(data), { headers: this.headers });
   }
 
   delete(url: string): Observable<any> {

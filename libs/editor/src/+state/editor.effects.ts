@@ -1,26 +1,28 @@
-import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
-import { DataPersistence } from '@nrwl/nx';
-import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/switchMap';
-import { EditorState } from './editor.interfaces';
-import { LoadData, DataLoaded } from './editor.actions';
+
+import { EditorService } from '@angular-ngrx-nx/editor/src/editor.service';
+import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
+import { Injectable } from '@angular/core';
+import { Actions, Effect } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators/map';
+import { switchMap } from 'rxjs/operators/switchMap';
+import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
+
+import { PublishArticle } from './editor.actions';
 
 @Injectable()
 export class EditorEffects {
   @Effect()
-  loadData = this.dataPersistence.fetch('LOAD_DATA', {
-    run: (action: LoadData, state: EditorState) => {
-      return {
-        type: 'DATA_LOADED',
-        payload: {}
-      };
-    },
-
-    onError: (action: LoadData, error) => {
-      console.error('Error', error);
-    }
-  });
-
-  constructor(private actions: Actions, private dataPersistence: DataPersistence<EditorState>) {}
+  editor = this.actions.ofType<PublishArticle>('[editor] PUBLISH_ARTICLE').pipe(
+    withLatestFrom(this.store.select(fromNgrxForms.getData)),
+    switchMap(([_, data]) =>
+      this.editorService.publishArticle(data).pipe(
+        map(result => {
+          return { type: '[Router] Go', payload: { path: ['/'] } };
+        })
+      )
+    )
+  );
+  constructor(private actions: Actions, private store: Store<any>, private editorService: EditorService) {}
 }

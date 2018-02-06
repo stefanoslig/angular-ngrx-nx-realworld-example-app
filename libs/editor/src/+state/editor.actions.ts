@@ -1,11 +1,8 @@
-export interface LoadData {
-  type: 'LOAD_DATA';
-  payload: {};
+import { Article } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+
+export interface PublishArticle {
+  type: '[editor] PUBLISH_ARTICLE';
+  payload: Article;
 }
 
-export interface DataLoaded {
-  type: 'DATA_LOADED';
-  payload: {};
-}
-
-export type EditorAction = LoadData | DataLoaded;
+export type EditorAction = PublishArticle;

@@ -1,3 +1,16 @@
-<p>
-  article-editor works!
-</p>
+<div class="editor-page">
+	<div class="container page">
+		<div class="row">
+
+			<div class="col-md-10 offset-md-1 col-xs-12">
+				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
+				</dynamic-form>
+
+				<button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submit()">
+					Publish Article
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -17,9 +17,7 @@ import { MarkdownPipe } from './markdown.pipe';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      { path: 'article/:slug', component: ArticleComponent, resolve: { ArticleResolverService } }
-    ]),
+    RouterModule.forChild([{ path: '', component: ArticleComponent, resolve: { ArticleResolverService } }]),
     StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
     EffectsModule.forFeature([ArticleEffects]),
     NgrxFormsModule

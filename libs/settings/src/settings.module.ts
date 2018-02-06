@@ -11,16 +11,14 @@ import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
 import { SettingsService } from '@angular-ngrx-nx/settings/src/settings.service';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		NgrxFormsModule,
-		RouterModule.forChild([
-			{ path: 'settings', pathMatch: 'full', component: SettingsComponent }
-		]),
-		StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
-		EffectsModule.forFeature([SettingsEffects])
-	],
-	declarations: [SettingsComponent],
-	providers: [SettingsEffects, SettingsService]
+  imports: [
+    CommonModule,
+    NgrxFormsModule,
+    RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent }]),
+    StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
+    EffectsModule.forFeature([SettingsEffects])
+  ],
+  declarations: [SettingsComponent],
+  providers: [SettingsEffects, SettingsService]
 })
-export class SettingsModule { }
+export class SettingsModule {}

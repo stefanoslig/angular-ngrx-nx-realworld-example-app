@@ -31,7 +31,7 @@ export class HomeService {
     return this.apiService.delete('/articles/' + slug + '/favorite').pipe(map(data => data.article));
   }
 
-  toHttpParams(params) {
+  private toHttpParams(params) {
     return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());
   }
 }

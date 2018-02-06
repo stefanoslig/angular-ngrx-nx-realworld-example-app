@@ -18,18 +18,25 @@ import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class SettingsEffects {
-	@Effect()
-	editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
-		withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromAuth.getUser)),
-		map(([_, data, user]) => ({ ...user, image: data.image, username: data.username, bio: data.bio, pass: data.pass, email: data.email })),
-		switchMap(data =>
-			this.settingsService.update(data).pipe(
-				mergeMap(result => {
-					return [{ type: '[auth] SET_USER' }, { type: '[Router] Go', payload: { path: ['/'] } }];
-				})
-			)
-		)
-	);
+  @Effect()
+  editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
+    withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromAuth.getUser)),
+    map(([_, data, user]) => ({
+      ...user,
+      image: data.image,
+      username: data.username,
+      bio: data.bio,
+      pass: data.pass,
+      email: data.email
+    })),
+    switchMap(data =>
+      this.settingsService.update(data).pipe(
+        map(result => {
+          return { type: '[Router] Go', payload: { path: ['/'] } };
+        })
+      )
+    )
+  );
 
-	constructor(private actions: Actions, private store: Store<any>, private settingsService: SettingsService) { }
+  constructor(private actions: Actions, private store: Store<any>, private settingsService: SettingsService) {}
 }
