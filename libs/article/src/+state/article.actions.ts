@@ -30,10 +30,82 @@ export interface LoadCommentsFail {
   payload: Error;
 }
 
+export interface Favorite {
+  type: '[article] FAVORITE';
+  payload: string;
+}
+
+export interface FavoriteSuccess {
+  type: '[article] FAVORITE_SUCCESS';
+  payload: ArticleData;
+}
+
+export interface FavoriteFail {
+  type: '[article] FAVORITE_FAIL';
+  payload: Error;
+}
+
+export interface UnFavorite {
+  type: '[article] UNFAVORITE';
+  payload: string;
+}
+
+export interface UnFavoriteSuccess {
+  type: '[article] UNFAVORITE_SUCCESS';
+  payload: ArticleData;
+}
+
+export interface UnFavoriteFail {
+  type: '[article] UNFAVORITE_FAIL';
+  payload: Error;
+}
+
+export interface Follow {
+  type: '[article] FOLLOW';
+  payload: string;
+}
+
+export interface FollowSuccess {
+  type: '[article] FOLLOW_SUCCESS';
+  payload: ArticleData;
+}
+
+export interface FollowFail {
+  type: '[article] FOLLOW_FAIL';
+  payload: Error;
+}
+
+export interface UnFollow {
+  type: '[article] UNFOLLOW';
+  payload: string;
+}
+
+export interface UnFollowSuccess {
+  type: '[article] UNFOLLOW_SUCCESS';
+  payload: ArticleData;
+}
+
+export interface UnFollowFail {
+  type: '[article] UNFOLLOW_FAIL';
+  payload: Error;
+}
+
 export type ArticleAction =
   | LoadArticle
   | LoadArticleSuccess
   | LoadArticleFail
   | LoadComments
   | LoadCommentsSuccess
-  | LoadCommentsFail;
+  | LoadCommentsFail
+  | Favorite
+  | FavoriteSuccess
+  | FavoriteFail
+  | UnFavorite
+  | UnFavoriteSuccess
+  | UnFavoriteFail
+  | Follow
+  | FollowSuccess
+  | FollowFail
+  | UnFollow
+  | UnFollowSuccess
+  | UnFollowFail;

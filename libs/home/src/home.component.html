@@ -26,10 +26,9 @@
 						</li>
 					</ul>
 				</div>
-				<articles-list (navigateToArticle)="navigateToArticle($event)" (unFavorite)="unFavorite($event)" (favorite)="favorite($event)"
-				 [articles]="articles$ | async"></articles-list>
 
-				<pager (setPage)="setPage($event)" [hidden]="totalPages.length <= 1" [currentPage]="(listConfig$ | async).currentPage" [totalPages]="totalPages"></pager>
+				<article-list></article-list>
+
 			</div>
 
 			<div class="col-md-3">
