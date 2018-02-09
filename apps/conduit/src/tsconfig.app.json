@@ -9,7 +9,8 @@
 		"../../../libs/home/index.ts",
 		"../../../libs/editor/index.ts",
 		"../../../libs/settings/index.ts",
-		"../../../libs/article/index.ts"
+		"../../../libs/article/index.ts",
+		"../../../libs/profile/index.ts"
 	],
 	"exclude": [
 		"**/*.spec.ts"

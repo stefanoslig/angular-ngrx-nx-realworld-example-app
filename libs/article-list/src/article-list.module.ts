@@ -11,14 +11,14 @@ import { ArticleListItemComponent } from './article-list-item/article-list-item.
 import { SharedModule } from '@angular-ngrx-nx/shared';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		SharedModule,
-		StoreModule.forFeature('articleList', articleListReducer, { initialState: articleListInitialState }),
-		EffectsModule.forFeature([ArticleListEffects])
-	],
-	declarations: [ArticleListComponent, ArticleListItemComponent],
-	providers: [ArticleListService, ArticleListEffects],
-	exports: [ArticleListComponent]
+  imports: [
+    CommonModule,
+    SharedModule,
+    StoreModule.forFeature('articleList', articleListReducer, { initialState: articleListInitialState }),
+    EffectsModule.forFeature([ArticleListEffects])
+  ],
+  declarations: [ArticleListComponent, ArticleListItemComponent],
+  providers: [ArticleListService, ArticleListEffects],
+  exports: [ArticleListComponent]
 })
-export class ArticleListModule { }
+export class ArticleListModule {}

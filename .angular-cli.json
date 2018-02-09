@@ -113,6 +113,12 @@
       "appRoot": ""
     },
     {
+      "name": "profile",
+      "root": "libs/profile/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "router",
       "root": "libs/router/src",
       "test": "../../../test.js",

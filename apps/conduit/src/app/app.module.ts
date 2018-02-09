@@ -28,7 +28,8 @@ import { RouterNgrxModule } from '@angular-ngrx-nx/router/src/router.module';
         { path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' },
         { path: 'article/:slug', loadChildren: '@angular-ngrx-nx/article#ArticleModule' },
         { path: 'settings', loadChildren: '@angular-ngrx-nx/settings#SettingsModule' },
-        { path: 'editor', loadChildren: '@angular-ngrx-nx/editor#EditorModule' }
+        { path: 'editor', loadChildren: '@angular-ngrx-nx/editor#EditorModule' },
+        { path: 'profile/:username', loadChildren: '@angular-ngrx-nx/profile#ProfileModule' }
       ],
       {
         initialNavigation: 'enabled'

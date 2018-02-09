@@ -4,20 +4,20 @@ import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { DataPersistence } from '@nrwl/nx';
 import { readAll, hot } from '@nrwl/nx/testing';
-import { UserEffects } from './user.effects';
+import { ProfileEffects } from './profile.effects';
 import { of } from 'rxjs/observable/of';
 
-describe('UserEffects', () => {
+describe('ProfileEffects', () => {
   let actions;
-  let effects: UserEffects;
+  let effects: ProfileEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
-      providers: [UserEffects, DataPersistence, provideMockActions(() => actions)]
+      providers: [ProfileEffects, DataPersistence, provideMockActions(() => actions)]
     });
 
-    effects = TestBed.get(UserEffects);
+    effects = TestBed.get(ProfileEffects);
   });
 
   describe('someEffect', () => {

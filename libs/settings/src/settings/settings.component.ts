@@ -84,6 +84,7 @@ export class SettingsComponent implements OnInit {
   }
 
   //TODO: Add removeItem to an action and replace router.navigateByUrl with go(...)
+  //TODO: After logout dispatch type: '[auth] GET_USER'
   logout() {
     this.localStorageSevice.removeItem();
     this.router.navigateByUrl('/');
