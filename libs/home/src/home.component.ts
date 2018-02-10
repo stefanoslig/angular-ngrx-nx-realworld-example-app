@@ -13,52 +13,60 @@ import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 import { tap } from 'rxjs/operators/tap';
 import * as fromArticleList from '@angular-ngrx-nx/article-list/src/+state/article-list.reducer';
 import { ArticleListConfig } from '@angular-ngrx-nx/article-list/src/+state/article-list.interfaces';
+import { articleListInitialState } from '@angular-ngrx-nx/article-list/src/+state/article-list.init';
+import { articleInitialState } from '@angular-ngrx-nx/article/src/+state/article.init';
 
 @Component({
-  selector: 'home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+	selector: 'home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  listConfig$: Observable<ArticleListConfig>;
-  tags$: Observable<string[]>;
-  isAuthenticated: boolean;
+	listConfig$: Observable<ArticleListConfig>;
+	tags$: Observable<string[]>;
+	isAuthenticated: boolean;
 
-  constructor(private store: Store<any>, private router: Router) {}
+	constructor(private store: Store<any>, private router: Router) { }
 
-  ngOnInit() {
-    this.store.select(fromAuth.getLoggedIn).subscribe(isLoggedIn => {
-      this.isAuthenticated = isLoggedIn;
-      this.getArticles();
-    });
-    this.listConfig$ = this.store.select(fromArticleList.getListConfig);
-    this.tags$ = this.store.select(fromHome.getTags);
-  }
+	ngOnInit() {
+		this.store.select(fromAuth.getLoggedIn).subscribe(isLoggedIn => {
+			this.isAuthenticated = isLoggedIn;
+			this.getArticles();
+		});
+		this.listConfig$ = this.store.select(fromArticleList.getListConfig);
+		this.tags$ = this.store.select(fromHome.getTags);
+	}
 
-  setListTo(type: string = 'ALL') {
-    if (type === 'FEED' && !this.isAuthenticated) {
-      this.router.navigate([`/login`]);
-      return;
-    }
+	setListTo(type: string = 'ALL') {
+		if (type === 'FEED' && !this.isAuthenticated) {
+			this.router.navigate([`/login`]);
+			return;
+		}
 
-    this.store.dispatch({
-      type: '[article-list] SET_LIST_TYPE',
-      payload: type
-    });
-  }
+		this.store.dispatch({
+			type: '[article-list] SET_LIST_TYPE',
+			payload: type
+		});
+	}
 
-  getArticles() {
-    if (this.isAuthenticated) {
-      this.setListTo('FEED');
-    } else {
-      this.setListTo('ALL');
-    }
-  }
+	getArticles() {
+		if (this.isAuthenticated) {
+			this.setListTo('FEED');
+		} else {
+			this.setListTo('ALL');
+		}
+	}
 
-  setListTag(tag: string) {
-    this.store.dispatch({
-      type: '[article-list] SET_LIST_TAG',
-      payload: tag
-    });
-  }
+	setListTag(tag: string) {
+		this.store.dispatch({
+			type: '[article-list] SET_LIST_CONFIG',
+			payload: <ArticleListConfig>{
+				...articleListInitialState.listConfig,
+				filters: {
+					...articleListInitialState.listConfig.filters,
+					tag
+				}
+			}
+		});
+	}
 }

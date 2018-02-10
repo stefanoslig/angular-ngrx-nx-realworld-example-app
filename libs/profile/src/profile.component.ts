@@ -6,16 +6,16 @@ import { Profile, ProfileState } from '@angular-ngrx-nx/profile/src/+state/profi
 import * as fromProfile from './+state/profile.reducer';
 
 @Component({
-	selector: 'profile',
-	templateUrl: './profile.component.html',
-	styleUrls: ['./profile.component.css']
+  selector: 'profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-	private profile$: Observable<Profile>;
+  private profile$: Observable<Profile>;
 
-	constructor(private store: Store<ProfileState>) { }
+  constructor(private store: Store<ProfileState>) {}
 
-	ngOnInit() {
-		this.profile$ = this.store.select(fromProfile.getProfile);
-	}
+  ngOnInit() {
+    this.profile$ = this.store.select(fromProfile.getProfile);
+  }
 }
