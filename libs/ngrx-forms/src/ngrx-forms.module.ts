@@ -10,17 +10,18 @@ import { DynamicFieldDirective } from './dynamic-form/dynamic-field.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputComponent } from './fields/input/input.component';
 import { TextareaComponent } from './fields/textarea/textarea.component';
+import { ListErrorsComponent } from './list-errors/list-errors.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('ngrxForms', ngrxFormsReducer, { initialState: ngrxFormsInitialState }),
-    EffectsModule.forFeature([NgrxFormsEffects])
-  ],
-  providers: [NgrxFormsEffects],
-  declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent],
-  entryComponents: [InputComponent, TextareaComponent],
-  exports: [DynamicFormComponent]
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		StoreModule.forFeature('ngrxForms', ngrxFormsReducer, { initialState: ngrxFormsInitialState }),
+		EffectsModule.forFeature([NgrxFormsEffects])
+	],
+	providers: [NgrxFormsEffects],
+	declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent, ListErrorsComponent],
+	entryComponents: [InputComponent, TextareaComponent],
+	exports: [DynamicFormComponent, ListErrorsComponent]
 })
-export class NgrxFormsModule {}
+export class NgrxFormsModule { }

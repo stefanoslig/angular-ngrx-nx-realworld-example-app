@@ -15,28 +15,34 @@ import { switchMap } from 'rxjs/operators/switchMap';
 import { SettingsService } from '@angular-ngrx-nx/settings/src/settings.service';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
+import { catchError } from 'rxjs/operators/catchError';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class SettingsEffects {
-  @Effect()
-  editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
-    withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromAuth.getUser)),
-    map(([_, data, user]) => ({
-      ...user,
-      image: data.image,
-      username: data.username,
-      bio: data.bio,
-      pass: data.pass,
-      email: data.email
-    })),
-    switchMap(data =>
-      this.settingsService.update(data).pipe(
-        map(result => {
-          return { type: '[Router] Go', payload: { path: ['/'] } };
-        })
-      )
-    )
-  );
+	@Effect()
+	editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
+		withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromAuth.getUser)),
+		map(([_, data, user]) => ({
+			...user,
+			image: data.image,
+			username: data.username,
+			bio: data.bio,
+			pass: data.pass,
+			email: data.email
+		})),
+		switchMap(data =>
+			this.settingsService.update(data).pipe(
+				map(result => {
+					return { type: '[Router] Go', payload: { path: ['/'] } };
+				}),
+				catchError(result => of({
+					type: '[ngrxForms] SET_ERRORS',
+					payload: result.error.errors
+				}))
+			)
+		)
+	);
 
-  constructor(private actions: Actions, private store: Store<any>, private settingsService: SettingsService) {}
+	constructor(private actions: Actions, private store: Store<any>, private settingsService: SettingsService) { }
 }

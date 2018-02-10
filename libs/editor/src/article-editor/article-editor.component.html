@@ -3,6 +3,9 @@
 		<div class="row">
 
 			<div class="col-md-10 offset-md-1 col-xs-12">
+
+				<list-errors></list-errors>
+
 				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
 				</dynamic-form>
 

@@ -8,9 +8,7 @@
 					<a [routerLink]="['/register']">Need an account?</a>
 				</p>
 
-				<!-- <ul class="error-messages">
-					<li>That email is already taken</li>
-				</ul> -->
+				<list-errors></list-errors>
 
 				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
 				</dynamic-form>

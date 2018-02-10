@@ -18,59 +18,66 @@ import { GetUser, Login, Register } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-  @Effect()
-  getUser = this.actions.ofType<GetUser>('[auth] GET_USER').pipe(
-    withLatestFrom(this.localStorageJwtService.getItem()),
-    filter(([_, token]) => !!token),
-    switchMap(item =>
-      this.apiService.get('/user').pipe(
-        map((data: any) => ({
-          type: '[auth] SET_USER',
-          payload: data.user
-        })),
-        catchError(error =>
-          of({
-            type: '[auth] SET_USER',
-            payload: ''
-          })
-        )
-      )
-    )
-  );
+	@Effect()
+	getUser = this.actions.ofType<GetUser>('[auth] GET_USER').pipe(
+		withLatestFrom(this.localStorageJwtService.getItem()),
+		filter(([_, token]) => !!token),
+		switchMap(item =>
+			this.apiService.get('/user').pipe(
+				map((data: any) => ({
+					type: '[auth] SET_USER',
+					payload: data.user
+				})),
+				catchError(error =>
+					of({
+						type: '[auth] SET_USER',
+						payload: ''
+					})
+				)
+			)
+		)
+	);
 
-  //TODO: ERROR HANDLERS
-  //TODO: Generic Error handler for 401 errors (should be navigated to home page automatically)
-  @Effect()
-  login = this.actions.ofType<Login>('[auth] LOGIN').pipe(
-    withLatestFrom(this.store.select(fromNgrxForms.getData)),
-    switchMap(([action, data]) =>
-      this.authService.authUser('LOGIN', data).pipe(
-        mergeMap(result => {
-          this.localStorageJwtService.setItem(result.user.token);
-          return [{ type: '[auth] LOGIN_SUCCESS' }, { type: '[Router] Go', payload: { path: ['/'] } }];
-        })
-      )
-    )
-  );
+	//TODO: Generic Error handler for 401 errors (should be navigated to home page automatically)
+	@Effect()
+	login = this.actions.ofType<Login>('[auth] LOGIN').pipe(
+		withLatestFrom(this.store.select(fromNgrxForms.getData)),
+		switchMap(([action, data]) =>
+			this.authService.authUser('LOGIN', data).pipe(
+				mergeMap(result => {
+					this.localStorageJwtService.setItem(result.user.token);
+					return [{ type: '[auth] LOGIN_SUCCESS' }, { type: '[Router] Go', payload: { path: ['/'] } }];
+				}),
+				catchError(result => of({
+					type: '[ngrxForms] SET_ERRORS',
+					payload: result.error.errors
+				}))
+			)
+		)
+	);
 
-  @Effect()
-  register = this.actions.ofType<Register>('[auth] REGISTER').pipe(
-    withLatestFrom(this.store.select(fromNgrxForms.getData)),
-    switchMap(([action, data]) =>
-      this.authService.authUser('REGISTER', data).pipe(
-        mergeMap(result => {
-          this.localStorageJwtService.setItem(result.user.token); //TODO: Add an action instead of direct access of localStorage
-          return [{ type: '[auth] REGISTER_SUCCESS' }, { type: '[Router] Go', payload: { path: ['/'] } }];
-        })
-      )
-    )
-  );
+	@Effect()
+	register = this.actions.ofType<Register>('[auth] REGISTER').pipe(
+		withLatestFrom(this.store.select(fromNgrxForms.getData)),
+		switchMap(([action, data]) =>
+			this.authService.authUser('REGISTER', data).pipe(
+				mergeMap(result => {
+					this.localStorageJwtService.setItem(result.user.token); //TODO: Add an action instead of direct access of localStorage
+					return [{ type: '[auth] REGISTER_SUCCESS' }, { type: '[Router] Go', payload: { path: ['/'] } }];
+				}),
+				catchError(result => of({
+					type: '[ngrxForms] SET_ERRORS',
+					payload: result.error.errors
+				}))
+			)
+		)
+	);
 
-  constructor(
-    private actions: Actions,
-    private localStorageJwtService: LocalStorageJwtService,
-    private apiService: ApiService,
-    private store: Store<NgrxFormsState>,
-    private authService: AuthService
-  ) {}
+	constructor(
+		private actions: Actions,
+		private localStorageJwtService: LocalStorageJwtService,
+		private apiService: ApiService,
+		private store: Store<NgrxFormsState>,
+		private authService: AuthService
+	) { }
 }
