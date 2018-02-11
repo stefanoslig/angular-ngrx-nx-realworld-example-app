@@ -10,7 +10,6 @@ import { homeReducer } from './+state/home.reducer';
 import { HomeResolverService } from './home-resolver.service';
 import { HomeComponent } from './home.component';
 import { HomeService } from './home.service';
-import { ApiModule } from '@angular-ngrx-nx/api';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListModule } from '@angular-ngrx-nx/article-list';
 import { CoreModule } from '@angular-ngrx-nx/core';
@@ -18,13 +17,13 @@ import { CoreModule } from '@angular-ngrx-nx/core';
 @NgModule({
 	imports: [
 		CommonModule,
+		CoreModule,
 		ArticleListModule,
 		RouterModule.forChild([
 			{ path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService } }
 		]),
 		StoreModule.forFeature('home', homeReducer, { initialState: homeInitialState }),
-		EffectsModule.forFeature([HomeEffects]),
-		ApiModule
+		EffectsModule.forFeature([HomeEffects])
 	],
 	declarations: [HomeComponent, TagsListComponent],
 	providers: [HomeEffects, HomeResolverService, HomeService]

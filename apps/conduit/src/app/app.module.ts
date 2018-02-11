@@ -17,9 +17,11 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { RouterNgrxModule } from '@angular-ngrx-nx/router/src/router.module';
 import { NgrxErrorModule } from '@angular-ngrx-nx/ngrx-error';
+import { ApiModule } from '@angular-ngrx-nx/api';
 
 @NgModule({
 	imports: [
+		ApiModule,
 		AuthModule,
 		BrowserModule,
 		NxModule.forRoot(),
@@ -43,6 +45,6 @@ import { NgrxErrorModule } from '@angular-ngrx-nx/ngrx-error';
 	],
 	declarations: [AppComponent, FooterComponent, NavbarComponent],
 	bootstrap: [AppComponent],
-	providers: [AppEffects],
+	providers: [AppEffects]
 })
 export class AppModule { }

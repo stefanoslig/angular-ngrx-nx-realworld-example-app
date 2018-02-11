@@ -10,16 +10,18 @@ import { EditorEffects } from './+state/editor.effects';
 import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
 import { EditorService } from '@angular-ngrx-nx/editor/src/editor.service';
 import { EditorResolverService } from '@angular-ngrx-nx/editor/src/editor-resolver.service';
+import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    NgrxFormsModule,
-    RouterModule.forChild([{ path: '', pathMatch: 'full', component: ArticleEditorComponent }]),
-    StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
-    EffectsModule.forFeature([EditorEffects])
-  ],
-  declarations: [ArticleEditorComponent],
-  providers: [EditorEffects, EditorService, EditorResolverService]
+	imports: [
+		CommonModule,
+		CoreModule,
+		NgrxFormsModule,
+		RouterModule.forChild([{ path: '', pathMatch: 'full', component: ArticleEditorComponent }]),
+		StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
+		EffectsModule.forFeature([EditorEffects])
+	],
+	declarations: [ArticleEditorComponent],
+	providers: [EditorEffects, EditorService, EditorResolverService]
 })
-export class EditorModule {}
+export class EditorModule { }

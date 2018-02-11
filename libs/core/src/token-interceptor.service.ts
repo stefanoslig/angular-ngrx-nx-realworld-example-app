@@ -3,9 +3,9 @@ import { HttpInterceptor } from '@angular/common/http/src/interceptor';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { LocalStorageJwtService } from '@angular-ngrx-nx/auth/src/local-storage-jwt.service';
 import { catchError } from 'rxjs/operators/catchError';
 import { Store } from '@ngrx/store';
+import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
@@ -22,8 +22,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 			});
 		}
 
-		return next.handle(request)
-			.pipe(
+		return next.handle(request).pipe(
 			catchError((error, caught) => {
 				if (error instanceof HttpErrorResponse) {
 					switch (error.status) {
@@ -34,11 +33,12 @@ export class TokenInterceptorService implements HttpInterceptor {
 							});
 							break;
 						default:
-							of(error)
+							of(error);
 							break;
 					}
 				}
 				return of(error);
-			}))
+			})
+		);
 	}
 }
