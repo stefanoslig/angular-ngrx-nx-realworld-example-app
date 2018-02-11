@@ -1,25 +1,27 @@
 import { ValidatorFn } from '@angular/forms';
 
 export interface NgrxForms {
-	data: any;
-	structure: Field[];
-	valid: boolean;
-	errors: Errors;
+  data: any;
+  structure: Field[];
+  valid: boolean;
+  errors: Errors;
 }
 
 export interface NgrxFormsState {
-	readonly ngrxForms: NgrxForms;
+  readonly ngrxForms: NgrxForms;
 }
 
 export interface Field {
-	type: FieldType;
-	name: string;
-	label?: string;
-	placeholder?: string;
-	validator?: ValidatorFn[];
-	attrs?: any;
+  type: FieldType;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  validator?: ValidatorFn[];
+  attrs?: any;
 }
 
 export type FieldType = 'INPUT' | 'TEXTAREA';
 
-export interface Errors { [key: string]: string };
+export interface Errors {
+  [key: string]: string;
+}

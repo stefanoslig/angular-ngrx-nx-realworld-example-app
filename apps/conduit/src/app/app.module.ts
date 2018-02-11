@@ -16,31 +16,33 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { RouterNgrxModule } from '@angular-ngrx-nx/router/src/router.module';
+import { NgrxErrorModule } from '@angular-ngrx-nx/ngrx-error';
 
 @NgModule({
-  imports: [
-    AuthModule,
-    BrowserModule,
-    NxModule.forRoot(),
-    RouterNgrxModule,
-    RouterModule.forRoot(
-      [
-        { path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' },
-        { path: 'article/:slug', loadChildren: '@angular-ngrx-nx/article#ArticleModule' },
-        { path: 'settings', loadChildren: '@angular-ngrx-nx/settings#SettingsModule' },
-        { path: 'editor', loadChildren: '@angular-ngrx-nx/editor#EditorModule' },
-        { path: 'profile/:username', loadChildren: '@angular-ngrx-nx/profile#ProfileModule' }
-      ],
-      {
-        initialNavigation: 'enabled'
-      }
-    ),
-    StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
-    EffectsModule.forRoot([AppEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
-  ],
-  declarations: [AppComponent, FooterComponent, NavbarComponent],
-  bootstrap: [AppComponent],
-  providers: [AppEffects]
+	imports: [
+		AuthModule,
+		BrowserModule,
+		NxModule.forRoot(),
+		RouterNgrxModule,
+		RouterModule.forRoot(
+			[
+				{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' },
+				{ path: 'article/:slug', loadChildren: '@angular-ngrx-nx/article#ArticleModule' },
+				{ path: 'settings', loadChildren: '@angular-ngrx-nx/settings#SettingsModule' },
+				{ path: 'editor', loadChildren: '@angular-ngrx-nx/editor#EditorModule' },
+				{ path: 'profile/:username', loadChildren: '@angular-ngrx-nx/profile#ProfileModule' }
+			],
+			{
+				initialNavigation: 'enabled'
+			}
+		),
+		StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
+		EffectsModule.forRoot([AppEffects]),
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
+		NgrxErrorModule
+	],
+	declarations: [AppComponent, FooterComponent, NavbarComponent],
+	bootstrap: [AppComponent],
+	providers: [AppEffects],
 })
-export class AppModule {}
+export class AppModule { }

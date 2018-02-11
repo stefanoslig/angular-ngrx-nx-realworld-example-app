@@ -2,18 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { ApiService } from './api.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptorService } from '@angular-ngrx-nx/api/src/token-interceptor.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule],
-  providers: [
-    ApiService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorService,
-      multi: true
-    }
-  ]
+	imports: [CommonModule, HttpClientModule, CoreModule],
+	providers: [ApiService],
+	exports: [CoreModule]
 })
-export class ApiModule {}
+export class ApiModule { }

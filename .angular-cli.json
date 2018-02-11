@@ -95,6 +95,12 @@
       "appRoot": ""
     },
     {
+      "name": "core",
+      "root": "libs/core/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "editor",
       "root": "libs/editor/src",
       "test": "../../../test.js",
@@ -103,6 +109,12 @@
     {
       "name": "home",
       "root": "libs/home/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "ngrx-error",
+      "root": "libs/ngrx-error/src",
       "test": "../../../test.js",
       "appRoot": ""
     },

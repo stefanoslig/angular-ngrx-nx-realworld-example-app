@@ -15,20 +15,22 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class EditorEffects {
-	@Effect()
-	editor = this.actions.ofType<PublishArticle>('[editor] PUBLISH_ARTICLE').pipe(
-		withLatestFrom(this.store.select(fromNgrxForms.getData)),
-		switchMap(([_, data]) =>
-			this.editorService.publishArticle(data).pipe(
-				map(result => {
-					return { type: '[Router] Go', payload: { path: ['/'] } };
-				}),
-				catchError(result => of({
-					type: '[ngrxForms] SET_ERRORS',
-					payload: result.error.errors
-				}))
-			)
-		)
-	);
-	constructor(private actions: Actions, private store: Store<any>, private editorService: EditorService) { }
+  @Effect()
+  editor = this.actions.ofType<PublishArticle>('[editor] PUBLISH_ARTICLE').pipe(
+    withLatestFrom(this.store.select(fromNgrxForms.getData)),
+    switchMap(([_, data]) =>
+      this.editorService.publishArticle(data).pipe(
+        map(result => {
+          return { type: '[Router] Go', payload: { path: ['/'] } };
+        }),
+        catchError(result =>
+          of({
+            type: '[ngrxForms] SET_ERRORS',
+            payload: result.error.errors
+          })
+        )
+      )
+    )
+  );
+  constructor(private actions: Actions, private store: Store<any>, private editorService: EditorService) {}
 }

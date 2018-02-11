@@ -12,6 +12,9 @@
 						<i class="ion-plus-round"></i>
 						&nbsp; Follow Eric Simons
 					</button> -->
+					<a [routerLink]="['/settings']" [hidden]="!(isUser$ | async)" class="btn btn-sm btn-outline-secondary action-btn">
+						<i class="ion-gear-a"></i> Edit Profile Settings
+					</a>
 				</div>
 
 			</div>
