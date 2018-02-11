@@ -18,6 +18,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { RouterNgrxModule } from '@angular-ngrx-nx/router/src/router.module';
 import { NgrxErrorModule } from '@angular-ngrx-nx/ngrx-error';
 import { ApiModule } from '@angular-ngrx-nx/api';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
 	imports: [
@@ -45,6 +46,6 @@ import { ApiModule } from '@angular-ngrx-nx/api';
 	],
 	declarations: [AppComponent, FooterComponent, NavbarComponent],
 	bootstrap: [AppComponent],
-	providers: [AppEffects]
+	providers: [AppEffects, { provide: LocationStrategy, useClass: HashLocationStrategy }]
 })
 export class AppModule { }
