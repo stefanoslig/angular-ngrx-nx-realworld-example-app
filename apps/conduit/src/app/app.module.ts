@@ -36,7 +36,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 				{ path: 'profile/:username', loadChildren: '@angular-ngrx-nx/profile#ProfileModule' }
 			],
 			{
-				initialNavigation: 'enabled'
+				initialNavigation: 'enabled',
+				useHash: true
 			}
 		),
 		StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
@@ -46,6 +47,6 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 	],
 	declarations: [AppComponent, FooterComponent, NavbarComponent],
 	bootstrap: [AppComponent],
-	providers: [AppEffects, { provide: LocationStrategy, useClass: HashLocationStrategy }]
+	providers: [AppEffects]
 })
 export class AppModule { }
