@@ -15,17 +15,17 @@ import { ArticleListModule } from '@angular-ngrx-nx/article-list';
 import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		CoreModule,
-		ArticleListModule,
-		RouterModule.forChild([
-			{ path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService } }
-		]),
-		StoreModule.forFeature('home', homeReducer, { initialState: homeInitialState }),
-		EffectsModule.forFeature([HomeEffects])
-	],
-	declarations: [HomeComponent, TagsListComponent],
-	providers: [HomeEffects, HomeResolverService, HomeService]
+  imports: [
+    CommonModule,
+    CoreModule,
+    ArticleListModule,
+    RouterModule.forChild([
+      { path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService } }
+    ]),
+    StoreModule.forFeature('home', homeReducer, { initialState: homeInitialState }),
+    EffectsModule.forFeature([HomeEffects])
+  ],
+  declarations: [HomeComponent, TagsListComponent],
+  providers: [HomeEffects, HomeResolverService, HomeService]
 })
-export class HomeModule { }
+export class HomeModule {}

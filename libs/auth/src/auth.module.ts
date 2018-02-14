@@ -15,26 +15,26 @@ import { RegisterComponent } from './register/register.component';
 import { CoreModule } from '@angular-ngrx-nx/core';
 
 const authRouting: ModuleWithProviders = RouterModule.forChild([
-	{
-		path: 'login',
-		component: LoginComponent
-	},
-	{
-		path: 'register',
-		component: RegisterComponent
-	}
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
 ]);
 
 @NgModule({
-	imports: [
-		CoreModule,
-		CommonModule,
-		NgrxFormsModule,
-		authRouting,
-		StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
-		EffectsModule.forFeature([AuthEffects])
-	],
-	providers: [AuthEffects, AuthGuardService, AuthService],
-	declarations: [LoginComponent, RegisterComponent]
+  imports: [
+    CoreModule,
+    CommonModule,
+    NgrxFormsModule,
+    authRouting,
+    StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
+    EffectsModule.forFeature([AuthEffects])
+  ],
+  providers: [AuthEffects, AuthGuardService, AuthService],
+  declarations: [LoginComponent, RegisterComponent]
 })
-export class AuthModule { }
+export class AuthModule {}

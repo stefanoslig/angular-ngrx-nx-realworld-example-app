@@ -1,5 +1,6 @@
-<article-list-item (navigateToArticle)="navigateToArticle($event)" (unFavorite)="unFavorite($event)" (favorite)="favorite($event)"
+<app-article-list-item (navigateToArticle)="navigateToArticle($event)" (unFavorite)="unFavorite($event)" (favorite)="favorite($event)"
  *ngFor="let article of articles$ | async" [article]="article">
-</article-list-item>
+</app-article-list-item>
 
-<pager (setPage)="setPage($event)" [hidden]="totalPages.length <= 1" [currentPage]="(listConfig$ | async).currentPage" [totalPages]="totalPages"></pager>
+<app-pager (setPage)="setPage($event)" [hidden]="totalPages.length <= 1" [currentPage]="(listConfig$ | async).currentPage"
+ [totalPages]="totalPages"></app-pager>

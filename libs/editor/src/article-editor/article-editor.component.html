@@ -4,10 +4,10 @@
 
 			<div class="col-md-10 offset-md-1 col-xs-12">
 
-				<list-errors></list-errors>
+				<app-list-errors></app-list-errors>
 
-				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
-				</dynamic-form>
+				<app-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
+				</app-dynamic-form>
 
 				<button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submit()">
 					Publish Article

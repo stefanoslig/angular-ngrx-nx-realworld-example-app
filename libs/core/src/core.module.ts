@@ -6,16 +6,16 @@ import { ActionsService } from './actions.service';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 @NgModule({
-	imports: [CommonModule],
-	providers: [
-		TokenInterceptorService,
-		LocalStorageJwtService,
-		ActionsService,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: TokenInterceptorService,
-			multi: true
-		}
-	]
+  imports: [CommonModule],
+  providers: [
+    TokenInterceptorService,
+    LocalStorageJwtService,
+    ActionsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ]
 })
-export class CoreModule { }
+export class CoreModule {}

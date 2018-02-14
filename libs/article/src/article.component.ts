@@ -9,36 +9,36 @@ import { Observable } from 'rxjs/Observable';
 import * as fromArticle from './+state/article.reducer';
 
 const structure: Field[] = [
-	{
-		type: 'TEXTAREA',
-		name: 'comment',
-		placeholder: 'Password'
-	}
+  {
+    type: 'TEXTAREA',
+    name: 'comment',
+    placeholder: 'Password'
+  }
 ];
 
 @Component({
-	selector: 'article',
-	templateUrl: './article.component.html',
-	styleUrls: ['./article.component.css']
+  selector: 'app-article',
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-	article$: Observable<ArticleData>;
-	comments$: Observable<ArticleComment[]>;
-	isAuthenticated$: Observable<boolean>;
-	structure$: Observable<Field[]>;
-	data$: Observable<any>;
+  article$: Observable<ArticleData>;
+  comments$: Observable<ArticleComment[]>;
+  isAuthenticated$: Observable<boolean>;
+  structure$: Observable<Field[]>;
+  data$: Observable<any>;
 
-	constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {}
 
-	ngOnInit() {
-		this.article$ = this.store.select(fromArticle.getArticle);
-		this.comments$ = this.store.select(fromArticle.getComments);
-		this.isAuthenticated$ = this.store.select(fromAuth.getLoggedIn);
-		this.store.dispatch({
-			type: '[ngrxForms] SET_STRUCTURE',
-			payload: structure
-		});
-		this.data$ = this.store.select(fromNgrxForms.getData);
-		this.structure$ = this.store.select(fromNgrxForms.getStructure);
-	}
+  ngOnInit() {
+    this.article$ = this.store.select(fromArticle.getArticle);
+    this.comments$ = this.store.select(fromArticle.getComments);
+    this.isAuthenticated$ = this.store.select(fromAuth.getLoggedIn);
+    this.store.dispatch({
+      type: '[ngrxForms] SET_STRUCTURE',
+      payload: structure
+    });
+    this.data$ = this.store.select(fromNgrxForms.getData);
+    this.structure$ = this.store.select(fromNgrxForms.getStructure);
+  }
 }

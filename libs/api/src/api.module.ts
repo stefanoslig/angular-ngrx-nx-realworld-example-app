@@ -5,7 +5,7 @@ import { ApiService } from './api.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-	imports: [CommonModule, HttpClientModule],
-	providers: [ApiService],
+  imports: [CommonModule, HttpClientModule],
+  providers: [ApiService]
 })
-export class ApiModule { }
+export class ApiModule {}

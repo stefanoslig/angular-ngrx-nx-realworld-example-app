@@ -21,32 +21,32 @@ import { ApiModule } from '@angular-ngrx-nx/api';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
-	imports: [
-		ApiModule,
-		AuthModule,
-		BrowserModule,
-		NxModule.forRoot(),
-		RouterNgrxModule,
-		RouterModule.forRoot(
-			[
-				{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' },
-				{ path: 'article/:slug', loadChildren: '@angular-ngrx-nx/article#ArticleModule' },
-				{ path: 'settings', loadChildren: '@angular-ngrx-nx/settings#SettingsModule' },
-				{ path: 'editor', loadChildren: '@angular-ngrx-nx/editor#EditorModule' },
-				{ path: 'profile/:username', loadChildren: '@angular-ngrx-nx/profile#ProfileModule' }
-			],
-			{
-				initialNavigation: 'enabled',
-				useHash: true
-			}
-		),
-		StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
-		EffectsModule.forRoot([AppEffects]),
-		!environment.production ? StoreDevtoolsModule.instrument() : [],
-		NgrxErrorModule
-	],
-	declarations: [AppComponent, FooterComponent, NavbarComponent],
-	bootstrap: [AppComponent],
-	providers: [AppEffects]
+  imports: [
+    ApiModule,
+    AuthModule,
+    BrowserModule,
+    NxModule.forRoot(),
+    RouterNgrxModule,
+    RouterModule.forRoot(
+      [
+        { path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' },
+        { path: 'article/:slug', loadChildren: '@angular-ngrx-nx/article#ArticleModule' },
+        { path: 'settings', loadChildren: '@angular-ngrx-nx/settings#SettingsModule' },
+        { path: 'editor', loadChildren: '@angular-ngrx-nx/editor#EditorModule' },
+        { path: 'profile/:username', loadChildren: '@angular-ngrx-nx/profile#ProfileModule' }
+      ],
+      {
+        initialNavigation: 'enabled',
+        useHash: true
+      }
+    ),
+    StoreModule.forRoot({ app: appReducer }, { initialState: { app: appInitialState } }),
+    EffectsModule.forRoot([AppEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    NgrxErrorModule
+  ],
+  declarations: [AppComponent, FooterComponent, NavbarComponent],
+  bootstrap: [AppComponent],
+  providers: [AppEffects]
 })
-export class AppModule { }
+export class AppModule {}

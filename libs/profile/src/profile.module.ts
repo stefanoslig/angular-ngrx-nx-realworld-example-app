@@ -10,48 +10,48 @@ import { profileInitialState } from './+state/profile.init';
 import { profileReducer } from './+state/profile.reducer';
 import { ProfileArticlesComponent } from './profile-articles.component';
 import {
-	ProfileArticlesResolverService,
-	ProfileFavoritesResolverService,
-	ProfileResolverService
+  ProfileArticlesResolverService,
+  ProfileFavoritesResolverService,
+  ProfileResolverService
 } from './profile-resolver.service';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
 import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-	imports: [
-		CoreModule,
-		CommonModule,
-		ArticleListModule,
-		RouterModule.forChild([
-			{
-				path: '',
-				component: ProfileComponent,
-				resolve: { ProfileResolverService },
-				children: [
-					{
-						path: '',
-						component: ProfileArticlesComponent,
-						resolve: { ProfileArticlesResolverService }
-					},
-					{
-						path: 'favorites',
-						component: ProfileArticlesComponent,
-						resolve: { ProfileFavoritesResolverService }
-					}
-				]
-			}
-		]),
-		StoreModule.forFeature('profile', profileReducer, { initialState: profileInitialState }),
-		EffectsModule.forFeature([ProfileEffects])
-	],
-	providers: [
-		ProfileEffects,
-		ProfileService,
-		ProfileResolverService,
-		ProfileArticlesResolverService,
-		ProfileFavoritesResolverService
-	],
-	declarations: [ProfileComponent, ProfileArticlesComponent]
+  imports: [
+    CoreModule,
+    CommonModule,
+    ArticleListModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ProfileComponent,
+        resolve: { ProfileResolverService },
+        children: [
+          {
+            path: '',
+            component: ProfileArticlesComponent,
+            resolve: { ProfileArticlesResolverService }
+          },
+          {
+            path: 'favorites',
+            component: ProfileArticlesComponent,
+            resolve: { ProfileFavoritesResolverService }
+          }
+        ]
+      }
+    ]),
+    StoreModule.forFeature('profile', profileReducer, { initialState: profileInitialState }),
+    EffectsModule.forFeature([ProfileEffects])
+  ],
+  providers: [
+    ProfileEffects,
+    ProfileService,
+    ProfileResolverService,
+    ProfileArticlesResolverService,
+    ProfileFavoritesResolverService
+  ],
+  declarations: [ProfileComponent, ProfileArticlesComponent]
 })
-export class ProfileModule { }
+export class ProfileModule {}

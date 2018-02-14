@@ -7,21 +7,21 @@ import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class ActionsService {
-	constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
-	followUser(username: string): Observable<Profile> {
-		return this.apiService.post('/profiles/' + username + '/follow').pipe(map(data => data.profile));
-	}
+  followUser(username: string): Observable<Profile> {
+    return this.apiService.post('/profiles/' + username + '/follow').pipe(map(data => data.profile));
+  }
 
-	unfollowUser(username: string): Observable<Profile> {
-		return this.apiService.delete('/profiles/' + username + '/follow').pipe(map(data => data.profile));
-	}
+  unfollowUser(username: string): Observable<Profile> {
+    return this.apiService.delete('/profiles/' + username + '/follow').pipe(map(data => data.profile));
+  }
 
-	favorite(slug): Observable<ArticleData> {
-		return this.apiService.post('/articles/' + slug + '/favorite').pipe(map(data => data.article));
-	}
+  favorite(slug): Observable<ArticleData> {
+    return this.apiService.post('/articles/' + slug + '/favorite').pipe(map(data => data.article));
+  }
 
-	unfavorite(slug): Observable<ArticleData> {
-		return this.apiService.delete('/articles/' + slug + '/favorite').pipe(map(data => data.article));
-	}
+  unfavorite(slug): Observable<ArticleData> {
+    return this.apiService.delete('/articles/' + slug + '/favorite').pipe(map(data => data.article));
+  }
 }

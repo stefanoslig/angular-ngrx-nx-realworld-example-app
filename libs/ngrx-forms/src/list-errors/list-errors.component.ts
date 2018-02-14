@@ -6,7 +6,7 @@ import * as fromNgrxForms from '../+state/ngrx-forms.reducer';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
-  selector: 'list-errors',
+  selector: 'app-list-errors',
   templateUrl: './list-errors.component.html',
   styleUrls: ['./list-errors.component.css']
 })

@@ -2,7 +2,7 @@
 	<div class="banner">
 		<div class="container">
 			<h1>{{ (article$|async).title }}</h1>
-			<article-meta [article]="article$ | async" [isAuthenticated]="isAuthenticated$ | async"></article-meta>
+			<app-article-meta [article]="article$ | async" [isAuthenticated]="isAuthenticated$ | async"></app-article-meta>
 		</div>
 	</div>
 
@@ -14,15 +14,15 @@
 		</div>
 		<hr />
 		<div class="article-actions">
-			<article-meta [article]="article$ | async" [isAuthenticated]="isAuthenticated$ | async"></article-meta>
+			<app-article-meta [article]="article$ | async" [isAuthenticated]="isAuthenticated$ | async"></app-article-meta>
 		</div>
 
 		<div class="row">
 			<div class="col-xs-12 col-md-8 offset-md-2">
 				<div *ngIf="isAuthenticated$ | async">
 					<div class="card comment-form">
-						<dynamic-form (submit)="submit($event)" [data$]="data$" [structure$]="structure$">
-						</dynamic-form>
+						<app-dynamic-form (submit)="submit($event)" [data$]="data$" [structure$]="structure$">
+						</app-dynamic-form>
 						<div class="card-footer">
 							<!-- <img [src]="currentUser.image" class="comment-author-img" /> -->
 							<button class="btn btn-sm btn-primary" type="submit">
@@ -51,7 +51,7 @@
 					<a [routerLink]="['/register']">sign up</a> to add comments on this article.
 				</div>
 
-				<article-comment *ngFor="let comment of (comments$ | async)" [comment]="comment"></article-comment>
+				<app-article-comment *ngFor="let comment of (comments$ | async)" [comment]="comment"></app-article-comment>
 			</div>
 		</div>
 	</div>

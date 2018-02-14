@@ -16,15 +16,15 @@ import { MarkdownPipe } from './markdown.pipe';
 import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		CoreModule,
-		RouterModule.forChild([{ path: '', component: ArticleComponent, resolve: { ArticleResolverService } }]),
-		StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
-		EffectsModule.forFeature([ArticleEffects]),
-		NgrxFormsModule
-	],
-	providers: [ArticleEffects, ArticleService, ArticleResolverService],
-	declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe]
+  imports: [
+    CommonModule,
+    CoreModule,
+    RouterModule.forChild([{ path: '', component: ArticleComponent, resolve: { ArticleResolverService } }]),
+    StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
+    EffectsModule.forFeature([ArticleEffects]),
+    NgrxFormsModule
+  ],
+  providers: [ArticleEffects, ArticleService, ArticleResolverService],
+  declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe]
 })
-export class ArticleModule { }
+export class ArticleModule {}

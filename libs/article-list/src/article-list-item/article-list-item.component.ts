@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 
 @Component({
-  selector: 'article-list-item',
+  selector: 'app-article-list-item',
   templateUrl: './article-list-item.component.html',
   styleUrls: ['./article-list-item.component.css']
 })

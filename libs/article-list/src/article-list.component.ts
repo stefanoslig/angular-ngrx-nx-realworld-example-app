@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 
 @Component({
-  selector: 'article-list',
+  selector: 'app-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css']
 })

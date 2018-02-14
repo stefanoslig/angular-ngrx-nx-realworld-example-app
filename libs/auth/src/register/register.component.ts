@@ -30,7 +30,7 @@ const structure: Field[] = [
 ];
 
 @Component({
-  selector: 'register',
+  selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })

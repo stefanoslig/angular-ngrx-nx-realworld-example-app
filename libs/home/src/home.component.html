@@ -27,13 +27,13 @@
 					</ul>
 				</div>
 
-				<article-list></article-list>
+				<app-article-list></app-article-list>
 
 			</div>
 
 			<div class="col-md-3">
 				<div class="sidebar">
-					<tags-list (setListTag)="setListTag($event)" [tags]="(tags$ | async)"></tags-list>
+					<app-tags-list (setListTag)="setListTag($event)" [tags]="(tags$ | async)"></app-tags-list>
 				</div>
 			</div>
 

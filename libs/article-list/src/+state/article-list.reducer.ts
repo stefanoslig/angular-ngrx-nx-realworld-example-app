@@ -44,7 +44,7 @@ export function articleListReducer(state: ArticleList, action: ArticleListAction
   }
 }
 
-const replaceArticle = (articles: Articles, payload: ArticleData): Articles => {
+function replaceArticle(articles: Articles, payload: ArticleData): Articles {
   const articleIndex = articles.entities.findIndex(a => a.slug === payload.slug);
   const entities = [
     ...articles.entities.slice(0, articleIndex),
@@ -52,7 +52,7 @@ const replaceArticle = (articles: Articles, payload: ArticleData): Articles => {
     ...articles.entities.slice(articleIndex + 1)
   ];
   return { ...articles, entities, loading: false, loaded: true };
-};
+}
 
 export const getListConfig = (state: ArticleListState) => state.articleList.listConfig;
 export const getArticles = (state: ArticleListState) => state.articleList.articles.entities;

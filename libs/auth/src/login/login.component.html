@@ -8,10 +8,10 @@
 					<a [routerLink]="['/register']">Need an account?</a>
 				</p>
 
-				<list-errors></list-errors>
+				<app-list-errors></app-list-errors>
 
-				<dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
-				</dynamic-form>
+				<app-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
+				</app-dynamic-form>
 				<button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
 					Sign in
 				</button>

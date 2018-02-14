@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators/tap';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 
 @Component({
-  selector: 'dynamic-form',
+  selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css']
 })

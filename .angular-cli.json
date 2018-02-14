@@ -3,7 +3,7 @@
   "project": {
     "name": "angular-ngrx-nx-realworld-example-app",
     "npmScope": "angular-ngrx-nx-realworld-example-app",
-    "latestMigration": "20180120-update-prettier"
+    "latestMigration": "20180130-angular-devkit-schematics"
   },
   "e2e": {
     "protractor": {

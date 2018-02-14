@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'tags-list',
+  selector: 'app-tags-list',
   templateUrl: './tags-list.component.html',
   styleUrls: ['./tags-list.component.css']
 })

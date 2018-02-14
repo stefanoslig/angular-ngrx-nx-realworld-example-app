@@ -13,15 +13,15 @@ import { EditorResolverService } from '@angular-ngrx-nx/editor/src/editor-resolv
 import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		CoreModule,
-		NgrxFormsModule,
-		RouterModule.forChild([{ path: '', pathMatch: 'full', component: ArticleEditorComponent }]),
-		StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
-		EffectsModule.forFeature([EditorEffects])
-	],
-	declarations: [ArticleEditorComponent],
-	providers: [EditorEffects, EditorService, EditorResolverService]
+  imports: [
+    CommonModule,
+    CoreModule,
+    NgrxFormsModule,
+    RouterModule.forChild([{ path: '', pathMatch: 'full', component: ArticleEditorComponent }]),
+    StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
+    EffectsModule.forFeature([EditorEffects])
+  ],
+  declarations: [ArticleEditorComponent],
+  providers: [EditorEffects, EditorService, EditorResolverService]
 })
-export class EditorModule { }
+export class EditorModule {}

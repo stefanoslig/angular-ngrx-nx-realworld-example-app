@@ -17,7 +17,7 @@ import { articleListInitialState } from '@angular-ngrx-nx/article-list/src/+stat
 import { articleInitialState } from '@angular-ngrx-nx/article/src/+state/article.init';
 
 @Component({
-  selector: 'home',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

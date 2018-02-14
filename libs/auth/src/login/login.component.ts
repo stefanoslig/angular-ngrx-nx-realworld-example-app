@@ -24,7 +24,7 @@ const structure: Field[] = [
 ];
 
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
