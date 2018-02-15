@@ -7,10 +7,10 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class HomeResolverService implements Resolve<Home> {
-  constructor(private store: Store<any>) {}
+	constructor(private store: Store<any>) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    this.store.dispatch({ type: '[home] LOAD_TAGS' });
-    return of(true);
-  }
+	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+		this.store.dispatch({ type: '[home] LOAD_TAGS' });
+		return of(true);
+	}
 }

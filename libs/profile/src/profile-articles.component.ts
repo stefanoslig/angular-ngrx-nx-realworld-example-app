@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-profile-articles',
-  templateUrl: './profile-articles.component.html',
-  styleUrls: ['./profile-articles.component.css']
+	selector: 'app-profile-articles',
+	templateUrl: './profile-articles.component.html',
+	styleUrls: ['./profile-articles.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileArticlesComponent implements OnInit {
-  constructor() {}
+	constructor() { }
 
-  ngOnInit() {}
+	ngOnInit() { }
 }

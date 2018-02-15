@@ -1,22 +1,26 @@
 import { Errors } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
 
 export interface SetData {
-  type: '[ngrxForms] SET_DATA';
-  payload: any;
+	type: '[ngrxForms] SET_DATA';
+	payload: any;
 }
 
 export interface SetStructure {
-  type: '[ngrxForms] SET_STRUCTURE';
-  payload: any;
+	type: '[ngrxForms] SET_STRUCTURE';
+	payload: any;
 }
 
 export interface SetErrors {
-  type: '[ngrxForms] SET_ERRORS';
-  payload: Errors;
+	type: '[ngrxForms] SET_ERRORS';
+	payload: Errors;
 }
 
 export interface InitializeErrors {
-  type: '[ngrxForms] INITIALIZE_ERRORS';
+	type: '[ngrxForms] INITIALIZE_ERRORS';
 }
 
-export type NgrxFormsAction = SetData | SetStructure | SetErrors | InitializeErrors;
+export interface InitializeForm {
+	type: '[ngrxForms] INITIALIZE_FORM';
+}
+
+export type NgrxFormsAction = SetData | SetStructure | SetErrors | InitializeErrors | InitializeForm;
