@@ -28,8 +28,8 @@ export class AuthEffects {
 				})),
 				catchError(error =>
 					of({
-						type: '[auth] SET_USER',
-						payload: ''
+						type: '[auth] GET_USER_ERROR',
+						payload: error
 					})
 				)
 			)
@@ -86,6 +86,17 @@ export class AuthEffects {
 			mergeMap(_ => ([
 				{ type: '[auth] GET_USER' },
 				{ type: '[Router] Go', payload: { path: ['/'] } }
+			]))
+		))
+	);
+
+	@Effect()
+	removeocalStorage = this.actions.ofType<SetLocalStorage>('[auth] REMOVE_LOCAL_STORAGE').pipe(
+		map(action => action.payload),
+		switchMap(token => this.localStorageJwtService.removeItem().pipe(
+			mergeMap(_ => ([
+				{ type: '[auth] GET_USER' },
+				{ type: '[Router] Go', payload: { path: ['login'] } }
 			]))
 		))
 	);

@@ -1,18 +1,25 @@
-import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { ngrxErrorReducer } from './+state/ngrx-error.reducer';
-import { ngrxErrorInitialState } from './+state/ngrx-error.init';
+import { StoreModule } from '@ngrx/store';
+
 import { NgrxErrorEffects } from './+state/ngrx-error.effects';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ngrxErrorInitialState } from './+state/ngrx-error.init';
+import { ngrxErrorReducer } from './+state/ngrx-error.reducer';
+import { NgrxErrorHandler } from './ngrx-error.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StoreModule.forFeature('ngrxError', ngrxErrorReducer, { initialState: ngrxErrorInitialState }),
-    EffectsModule.forFeature([NgrxErrorEffects])
-  ],
-  providers: [NgrxErrorEffects]
+	imports: [
+		CommonModule,
+		StoreModule.forFeature('ngrxError', ngrxErrorReducer, { initialState: ngrxErrorInitialState }),
+		EffectsModule.forFeature([NgrxErrorEffects])
+	],
+	providers: [
+		NgrxErrorEffects,
+		{
+			provide: ErrorHandler,
+			useClass: NgrxErrorHandler
+		}
+	]
 })
-export class NgrxErrorModule {}
+export class NgrxErrorModule { }

@@ -9,6 +9,11 @@ export interface SetUser {
 	payload: User;
 }
 
+export interface GetUserError {
+	type: '[auth] GET_USER_ERROR';
+	payload: Error;
+}
+
 export interface Login {
 	type: '[auth] LOGIN';
 }
@@ -38,8 +43,13 @@ export interface SetLocalStorage {
 	payload: string
 }
 
+export interface RemoveLocalStorage {
+	type: '[auth] REMOVE_LOCAL_STORAGE';
+}
+
 export type AuthAction =
 	| GetUser
+	| GetUserError
 	| SetUser
 	| Login
 	| LoginSuccess
@@ -47,4 +57,5 @@ export type AuthAction =
 	| Register
 	| RegisterSuccess
 	| RegisterFail
-	| SetLocalStorage;
+	| SetLocalStorage
+	| RemoveLocalStorage;

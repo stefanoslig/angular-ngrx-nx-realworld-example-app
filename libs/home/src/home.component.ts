@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -15,6 +15,8 @@ import * as fromArticleList from '@angular-ngrx-nx/article-list/src/+state/artic
 import { ArticleListConfig } from '@angular-ngrx-nx/article-list/src/+state/article-list.interfaces';
 import { articleListInitialState } from '@angular-ngrx-nx/article-list/src/+state/article-list.init';
 import { articleInitialState } from '@angular-ngrx-nx/article/src/+state/article.init';
+import { Subject } from 'rxjs/Subject';
+import { takeUntil } from 'rxjs/operators/takeUntil';
 
 @Component({
 	selector: 'app-home',
@@ -22,15 +24,16 @@ import { articleInitialState } from '@angular-ngrx-nx/article/src/+state/article
 	styleUrls: ['./home.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 	listConfig$: Observable<ArticleListConfig>;
 	tags$: Observable<string[]>;
 	isAuthenticated: boolean;
+	unsubscribe$: Subject<void> = new Subject();
 
 	constructor(private store: Store<any>, private router: Router) { }
 
 	ngOnInit() {
-		this.store.select(fromAuth.getLoggedIn).subscribe(isLoggedIn => {
+		this.store.select(fromAuth.getLoggedIn).pipe(takeUntil(this.unsubscribe$)).subscribe(isLoggedIn => {
 			this.isAuthenticated = isLoggedIn;
 			this.getArticles();
 		});
@@ -67,5 +70,10 @@ export class HomeComponent implements OnInit {
 				}
 			}
 		});
+	}
+
+	ngOnDestroy() {
+		this.unsubscribe$.next();
+		this.unsubscribe$.complete();
 	}
 }

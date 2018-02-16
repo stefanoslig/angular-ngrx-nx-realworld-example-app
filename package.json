@@ -37,9 +37,9 @@
 		"rxjs": "^5.5.6",
 		"zone.js": "^0.8.19",
 		"@nrwl/nx": "0.7.3",
-		"@ngrx/effects": "4.1.1",
-		"@ngrx/router-store": "4.1.1",
-		"@ngrx/store": "4.1.1",
+		"@ngrx/effects": "5.1.0",
+		"@ngrx/router-store": "5.0.1",
+		"@ngrx/store": "5.1.0",
 		"@ngrx/store-devtools": "4.0.0",
 		"marked": "^0.3.9"
 	},
