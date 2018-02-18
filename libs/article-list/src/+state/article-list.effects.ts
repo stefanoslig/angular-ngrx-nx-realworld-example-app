@@ -1,19 +1,19 @@
 import 'rxjs/add/operator/switchMap';
 
 import { ArticleListService } from '@angular-ngrx-nx/article-list/src/article-list.service';
+import { ActionsService } from '@angular-ngrx-nx/core/src/actions.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators/catchError';
+import { concatMap } from 'rxjs/operators/concatMap';
 import { map } from 'rxjs/operators/map';
-import { switchMap } from 'rxjs/operators/switchMap';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
 import { Favorite, LoadArticles, SetListConfig, SetListPage } from './article-list.actions';
 import { ArticleListState } from './article-list.interfaces';
 import * as fromArticleList from './article-list.reducer';
-import { ActionsService } from '@angular-ngrx-nx/core/src/actions.service';
 
 @Injectable()
 export class ArticleListEffects {
@@ -31,7 +31,7 @@ export class ArticleListEffects {
 	@Effect()
 	loadArticles = this.actions.ofType<LoadArticles>('[article-list] LOAD_ARTICLES').pipe(
 		withLatestFrom(this.store.select(fromArticleList.getListConfig)),
-		switchMap(([_, config]) =>
+		concatMap(([_, config]) =>
 			this.articleListService.query(config).pipe(
 				map(results => ({
 					type: '[article-list] LOAD_ARTICLES_SUCCESS',
@@ -50,7 +50,7 @@ export class ArticleListEffects {
 	@Effect()
 	favorite = this.actions.ofType<Favorite>('[article-list] FAVORITE').pipe(
 		map(action => action.payload),
-		switchMap(slug =>
+		concatMap(slug =>
 			this.actionsService.favorite(slug).pipe(
 				map(results => ({
 					type: '[article-list] FAVORITE_SUCCESS',
@@ -69,7 +69,7 @@ export class ArticleListEffects {
 	@Effect()
 	unFavorite = this.actions.ofType<Favorite>('[article-list] UNFAVORITE').pipe(
 		map(action => action.payload),
-		switchMap(slug =>
+		concatMap(slug =>
 			this.actionsService.unfavorite(slug).pipe(
 				map(results => ({
 					type: '[article-list] UNFAVORITE_SUCCESS',
