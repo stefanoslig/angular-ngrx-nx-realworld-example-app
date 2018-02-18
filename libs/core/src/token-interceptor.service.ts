@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { HttpInterceptor } from '@angular/common/http/src/interceptor';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { HttpHandler, HttpRequest, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators/catchError';
-import { Store } from '@ngrx/store';
+
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 @Injectable()
@@ -21,6 +22,24 @@ export class TokenInterceptorService implements HttpInterceptor {
 				}
 			});
 		}
-		return next.handle(request);
+		return next.handle(request)
+			.pipe(
+			catchError((error, caught) => {
+				if (error instanceof HttpErrorResponse) {
+					switch (error.status) {
+						case 401:
+							this.store.dispatch({
+								type: '[ngrx-error] THROW_401_ERROR',
+								payload: error
+							});
+							break;
+						default:
+							of(error);
+							break;
+					}
+				}
+				return of(error);
+			})
+			);
 	}
 }

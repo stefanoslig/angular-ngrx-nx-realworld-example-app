@@ -4,13 +4,17 @@ export interface GetUser {
 	type: '[auth] GET_USER';
 }
 
+export interface InializeUser {
+	type: '[auth] INITIALIZE_USER';
+}
+
 export interface SetUser {
 	type: '[auth] SET_USER';
 	payload: User;
 }
 
-export interface GetUserError {
-	type: '[auth] GET_USER_ERROR';
+export interface GetUserFail {
+	type: '[auth] GET_USER_FAIL';
 	payload: Error;
 }
 
@@ -49,7 +53,8 @@ export interface RemoveLocalStorage {
 
 export type AuthAction =
 	| GetUser
-	| GetUserError
+	| InializeUser
+	| GetUserFail
 	| SetUser
 	| Login
 	| LoginSuccess

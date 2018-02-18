@@ -15,6 +15,16 @@ import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
 import { GetUser, Login, Register, SetLocalStorage } from './auth.actions';
 import { LocalStorageJwtService } from '@angular-ngrx-nx/core/src/local-storage-jwt.service';
+import { tap } from 'rxjs/operators/tap';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+
+class MyError implements Error {
+	name: string;
+	message: string;
+	constructor(private initialError: Response) {
+		this.name = initialError.statusText;
+	}
+}
 
 @Injectable()
 export class AuthEffects {
@@ -28,7 +38,7 @@ export class AuthEffects {
 				})),
 				catchError(error =>
 					of({
-						type: '[auth] GET_USER_ERROR',
+						type: '[auth] GET_USER_FAIL',
 						payload: error
 					})
 				)
@@ -36,7 +46,6 @@ export class AuthEffects {
 		)
 	);
 
-	//TODO: Generic Error handler for 401 errors (should be navigated to home page automatically)
 	@Effect()
 	login = this.actions.ofType<Login>('[auth] LOGIN').pipe(
 		withLatestFrom(this.store.select(fromNgrxForms.getData)),
@@ -91,11 +100,11 @@ export class AuthEffects {
 	);
 
 	@Effect()
-	removeocalStorage = this.actions.ofType<SetLocalStorage>('[auth] REMOVE_LOCAL_STORAGE').pipe(
+	removeoLcalStorage = this.actions.ofType<SetLocalStorage>('[auth] REMOVE_LOCAL_STORAGE').pipe(
 		map(action => action.payload),
 		switchMap(token => this.localStorageJwtService.removeItem().pipe(
 			mergeMap(_ => ([
-				{ type: '[auth] GET_USER' },
+				{ type: '[auth] INITIALIZE_USER' },
 				{ type: '[Router] Go', payload: { path: ['login'] } }
 			]))
 		))

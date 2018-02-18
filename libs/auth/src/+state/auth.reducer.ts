@@ -11,7 +11,8 @@ export function authReducer(state: Auth, action: AuthAction): Auth {
 				user: action.payload
 			};
 		}
-		case '[auth] GET_USER_ERROR': {
+		case '[auth] INITIALIZE_USER':
+		case '[auth] GET_USER_FAIL': {
 			return authInitialState;
 		}
 		case '[auth] LOGIN': {
