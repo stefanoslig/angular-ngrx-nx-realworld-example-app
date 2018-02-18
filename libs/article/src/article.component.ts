@@ -7,12 +7,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromArticle from './+state/article.reducer';
+import { Subject } from 'rxjs/Subject';
 
 const structure: Field[] = [
 	{
 		type: 'TEXTAREA',
 		name: 'comment',
-		placeholder: 'Password'
+		placeholder: 'Write a comment...'
 	}
 ];
 
@@ -25,6 +26,7 @@ const structure: Field[] = [
 export class ArticleComponent implements OnInit {
 	article$: Observable<ArticleData>;
 	comments$: Observable<ArticleComment[]>;
+	canModify$: Subject<boolean>;
 	isAuthenticated$: Observable<boolean>;
 	structure$: Observable<Field[]>;
 	data$: Observable<any>;
@@ -35,6 +37,7 @@ export class ArticleComponent implements OnInit {
 		this.article$ = this.store.select(fromArticle.getArticle);
 		this.comments$ = this.store.select(fromArticle.getComments);
 		this.isAuthenticated$ = this.store.select(fromAuth.getLoggedIn);
+
 		this.store.dispatch({
 			type: '[ngrxForms] SET_STRUCTURE',
 			payload: structure

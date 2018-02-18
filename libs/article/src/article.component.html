@@ -2,7 +2,7 @@
 	<div class="banner">
 		<div class="container">
 			<h1>{{ (article$|async).title }}</h1>
-			<app-article-meta [article]="article$ | async" [isAuthenticated]="isAuthenticated$ | async"></app-article-meta>
+			<app-article-meta [article]="article$ | async" [canModify]="canModify$ | async"></app-article-meta>
 		</div>
 	</div>
 
@@ -14,7 +14,7 @@
 		</div>
 		<hr />
 		<div class="article-actions">
-			<app-article-meta [article]="article$ | async" [isAuthenticated]="isAuthenticated$ | async"></app-article-meta>
+			<app-article-meta [article]="article$ | async" [canModify]="canModify$ | async"></app-article-meta>
 		</div>
 
 		<div class="row">

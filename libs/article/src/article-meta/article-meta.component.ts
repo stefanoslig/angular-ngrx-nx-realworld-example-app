@@ -10,4 +10,5 @@ import { ArticleData } from '../+state/article.interfaces';
 export class ArticleMetaComponent {
 	@Input() article: ArticleData;
 	@Input() isAuthenticated: boolean;
+	@Input() canModify: boolean;
 }
