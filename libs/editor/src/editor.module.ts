@@ -19,8 +19,8 @@ import { AuthGuardService } from '@angular-ngrx-nx/auth/src/auth-guard.service';
 		CoreModule,
 		NgrxFormsModule,
 		RouterModule.forChild([
-			{ path: '', pathMatch: 'full', component: ArticleEditorComponent, canActivate: [AuthGuardService], resolve: { EditorResolverService } },
-			{ path: ':slug', component: ArticleEditorComponent, canActivate: [AuthGuardService], resolve: { EditorResolverService } }
+			{ path: '', pathMatch: 'full', component: ArticleEditorComponent, resolve: { EditorResolverService } },
+			{ path: ':slug', component: ArticleEditorComponent, resolve: { EditorResolverService } }
 		]),
 		StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
 		EffectsModule.forFeature([EditorEffects])

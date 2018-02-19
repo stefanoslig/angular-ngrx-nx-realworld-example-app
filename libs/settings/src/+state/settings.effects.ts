@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators/map';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
 import { EditSettings } from './settings.actions';
+import { mergeMap } from 'rxjs/operators/mergeMap';
 
 @Injectable()
 export class SettingsEffects {
@@ -29,9 +30,10 @@ export class SettingsEffects {
 		})),
 		concatMap(data =>
 			this.settingsService.update(data).pipe(
-				map(result => {
-					return { type: '[Router] Go', payload: { path: ['/'] } };
-				}),
+				mergeMap(result => [
+					{ type: '[auth] GET_USER' },
+					{ type: '[Router] Go', payload: { path: ['profile', result.username] } }
+				]),
 				catchError(result =>
 					of({
 						type: '[ngrxForms] SET_ERRORS',

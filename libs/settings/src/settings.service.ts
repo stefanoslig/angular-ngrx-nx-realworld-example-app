@@ -6,9 +6,9 @@ import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class SettingsService {
-  constructor(private apiService: ApiService) {}
+	constructor(private apiService: ApiService) { }
 
-  update(user): Observable<User> {
-    return this.apiService.put('/user', { user });
-  }
+	update(user): Observable<User> {
+		return this.apiService.put('/user', { user }).pipe(map(result => result.user));
+	}
 }

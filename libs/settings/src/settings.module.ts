@@ -17,7 +17,7 @@ import { AuthGuardService } from '@angular-ngrx-nx/auth/src/auth-guard.service';
 		CommonModule,
 		CoreModule,
 		NgrxFormsModule,
-		RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent, canActivate: [AuthGuardService] }]),
+		RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent }]),
 		StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
 		EffectsModule.forFeature([SettingsEffects])
 	],

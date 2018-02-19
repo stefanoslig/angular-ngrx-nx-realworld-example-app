@@ -29,10 +29,10 @@
 				<div class="articles-toggle">
 					<ul class="nav nav-pills outline-active">
 						<li class="nav-item">
-							<a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/profile', (profile$ | async)?.username]">My Articles</a>
+							<a class="nav-link" [routerLink]="['/profile', (profile$ | async).username]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Articles</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/profile', (profile$ | async)?.username, 'favorites']">Favorited Articles</a>
+							<a class="nav-link" [routerLink]="['/profile', (profile$ | async).username, 'favorites']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Favorited Articles</a>
 						</li>
 					</ul>
 				</div>
