@@ -11,17 +11,21 @@ import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
 import { EditorService } from '@angular-ngrx-nx/editor/src/editor.service';
 import { EditorResolverService } from '@angular-ngrx-nx/editor/src/editor-resolver.service';
 import { CoreModule } from '@angular-ngrx-nx/core';
+import { AuthGuardService } from '@angular-ngrx-nx/auth/src/auth-guard.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    NgrxFormsModule,
-    RouterModule.forChild([{ path: '', pathMatch: 'full', component: ArticleEditorComponent }]),
-    StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
-    EffectsModule.forFeature([EditorEffects])
-  ],
-  declarations: [ArticleEditorComponent],
-  providers: [EditorEffects, EditorService, EditorResolverService]
+	imports: [
+		CommonModule,
+		CoreModule,
+		NgrxFormsModule,
+		RouterModule.forChild([
+			{ path: '', pathMatch: 'full', component: ArticleEditorComponent, canActivate: [AuthGuardService], resolve: { EditorResolverService } },
+			{ path: ':slug', component: ArticleEditorComponent, canActivate: [AuthGuardService], resolve: { EditorResolverService } }
+		]),
+		StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
+		EffectsModule.forFeature([EditorEffects])
+	],
+	declarations: [ArticleEditorComponent],
+	providers: [EditorEffects, EditorService, EditorResolverService]
 })
-export class EditorModule {}
+export class EditorModule { }

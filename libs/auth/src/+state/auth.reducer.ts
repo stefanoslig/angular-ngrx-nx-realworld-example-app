@@ -39,5 +39,6 @@ export function authReducer(state: Auth, action: AuthAction): Auth {
 	}
 }
 
+export const getAuth = (state: AuthState) => state.auth;
 export const getLoggedIn = (state: AuthState) => state.auth.loggedIn;
 export const getUser = (state: AuthState) => state.auth.user;

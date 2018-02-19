@@ -4,6 +4,8 @@ import { Profile } from "@angular-ngrx-nx/profile/src/+state/profile.interfaces"
 export interface Article {
 	data: ArticleData;
 	comments: ArticleComment[];
+	loading: boolean;
+	loaded: boolean;
 }
 
 export interface ArticleState {

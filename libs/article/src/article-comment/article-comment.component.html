@@ -13,9 +13,8 @@
 		<span class="date-posted">
 			{{ comment.createdAt | date: 'longDate' }}
 		</span>
-		<span class="mod-options">
-			<i class="ion-edit"></i>
-			<i class="ion-trash-a"></i>
+		<span class="mod-options" [hidden]="!canModify">
+			<i class="ion-trash-a" (click)="delete.emit({commentId: comment.id, slug: article.slug})"></i>
 		</span>
 	</div>
 </div>

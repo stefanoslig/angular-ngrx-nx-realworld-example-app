@@ -11,20 +11,39 @@ import { concatMap } from 'rxjs/operators/concatMap';
 import { map } from 'rxjs/operators/map';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
-import { PublishArticle } from './editor.actions';
+import { PublishArticle, LoadArticle } from './editor.actions';
 
 @Injectable()
 export class EditorEffects {
 	@Effect()
 	editor = this.actions.ofType<PublishArticle>('[editor] PUBLISH_ARTICLE').pipe(
+		map(action => action.payload),
 		withLatestFrom(this.store.select(fromNgrxForms.getData)),
-		concatMap(([_, data]) =>
+		concatMap(([article, data]) =>
 			this.editorService.publishArticle(data).pipe(
 				map(result => ({ type: '[Router] Go', payload: { path: ['/'] } })),
 				catchError(result =>
 					of({
 						type: '[ngrxForms] SET_ERRORS',
 						payload: result.error.errors
+					})
+				)
+			)
+		)
+	);
+
+	@Effect()
+	loadArticle = this.actions.ofType<LoadArticle>('[editor] LOAD_ARTICLE').pipe(
+		concatMap(action =>
+			this.editorService.get(action.payload).pipe(
+				map(results => ({
+					type: '[editor] LOAD_ARTICLE_SUCCESS',
+					payload: results
+				})),
+				catchError(error =>
+					of({
+						type: '[editor] LOAD_ARTICLE_FAIL',
+						payload: error
 					})
 				)
 			)

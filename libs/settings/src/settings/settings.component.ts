@@ -73,7 +73,7 @@ export class SettingsComponent implements OnInit {
 
 	updateForm(changes: any) {
 		this.store.dispatch({
-			type: '[ngrxForms] SET_DATA',
+			type: '[ngrxForms] UPDATE_DATA',
 			payload: changes
 		});
 	}

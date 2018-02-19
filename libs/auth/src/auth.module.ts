@@ -18,11 +18,13 @@ import { RegisterComponent } from './register/register.component';
 const authRouting: ModuleWithProviders = RouterModule.forChild([
 	{
 		path: 'login',
-		component: LoginComponent
+		component: LoginComponent,
+		canActivate: [NoAuthGuardService]
 	},
 	{
 		path: 'register',
-		component: RegisterComponent
+		component: RegisterComponent,
+		canActivate: [NoAuthGuardService]
 	}
 ]);
 

@@ -7,6 +7,10 @@ export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): Ngr
 		case '[ngrxForms] SET_DATA': {
 			return { ...state, data: action.payload };
 		}
+		case '[ngrxForms] UPDATE_DATA': {
+			const data = { ...state.data, ...action.payload };
+			return { ...state, data };
+		}
 		case '[ngrxForms] SET_STRUCTURE': {
 			return { ...state, structure: action.payload };
 		}

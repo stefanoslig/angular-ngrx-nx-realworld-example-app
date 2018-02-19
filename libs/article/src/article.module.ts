@@ -6,7 +6,7 @@ import { articleReducer } from './+state/article.reducer';
 import { articleInitialState } from './+state/article.init';
 import { ArticleEffects } from './+state/article.effects';
 import { ArticleComponent } from './article.component';
-import { ArticleResolverService } from '@angular-ngrx-nx/article/src/article-resolver.service';
+import { ArticleGuardService } from '@angular-ngrx-nx/article/src/article-guard.service';
 import { RouterModule } from '@angular/router';
 import { ArticleService } from '@angular-ngrx-nx/article/src/article.service';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
@@ -16,15 +16,15 @@ import { MarkdownPipe } from './markdown.pipe';
 import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    RouterModule.forChild([{ path: '', component: ArticleComponent, resolve: { ArticleResolverService } }]),
-    StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
-    EffectsModule.forFeature([ArticleEffects]),
-    NgrxFormsModule
-  ],
-  providers: [ArticleEffects, ArticleService, ArticleResolverService],
-  declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe]
+	imports: [
+		CommonModule,
+		CoreModule,
+		RouterModule.forChild([{ path: '', component: ArticleComponent, canActivate: [ArticleGuardService] }]),
+		StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
+		EffectsModule.forFeature([ArticleEffects]),
+		NgrxFormsModule
+	],
+	providers: [ArticleEffects, ArticleService, ArticleGuardService],
+	declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe]
 })
-export class ArticleModule {}
+export class ArticleModule { }

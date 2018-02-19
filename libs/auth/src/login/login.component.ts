@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	updateForm(changes: any) {
 		this.store.dispatch({
-			type: '[ngrxForms] SET_DATA',
+			type: '[ngrxForms] UPDATE_DATA',
 			payload: changes
 		});
 	}

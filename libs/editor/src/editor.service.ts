@@ -6,12 +6,16 @@ import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class EditorService {
-  constructor(private apiService: ApiService) {}
+	constructor(private apiService: ApiService) { }
 
-  publishArticle(article): Observable<Article> {
-    if (article.slug) {
-      return this.apiService.put('/articles/' + article.slug, { article: article }).pipe(map(data => data.article));
-    }
-    return this.apiService.post('/articles/', { article: article }).pipe(map(data => data.article));
-  }
+	publishArticle(article): Observable<Article> {
+		if (article.slug) {
+			return this.apiService.put('/articles/' + article.slug, { article: article }).pipe(map(data => data.article));
+		}
+		return this.apiService.post('/articles/', { article: article }).pipe(map(data => data.article));
+	}
+
+	get(slug: string): Observable<Article> {
+		return this.apiService.get('/articles/' + slug).pipe(map((data: any) => data.article));
+	}
 }

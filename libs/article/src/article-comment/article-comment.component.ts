@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { ArticleComment } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { ArticleComment, ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 
 @Component({
 	selector: 'app-article-comment',
@@ -9,4 +9,8 @@ import { ArticleComment } from '@angular-ngrx-nx/article/src/+state/article.inte
 })
 export class ArticleCommentComponent {
 	@Input() comment: ArticleComment;
+	@Input() article: ArticleData;
+	@Input() canModify: boolean;
+	@Output() delete: EventEmitter<{ commentId: number, slug: string }> = new EventEmitter();
+
 }

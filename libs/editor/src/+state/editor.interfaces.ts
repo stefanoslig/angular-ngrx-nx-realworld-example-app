@@ -1,8 +1,10 @@
+import { ArticleData } from "@angular-ngrx-nx/article/src/+state/article.interfaces";
+
 // tslint:disable-next-line
 export interface Editor {
-  // define state here
+	article: ArticleData
 }
 
 export interface EditorState {
-  readonly editor: Editor;
+	readonly editor: Editor;
 }

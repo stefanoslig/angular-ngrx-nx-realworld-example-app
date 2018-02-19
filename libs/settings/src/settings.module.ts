@@ -10,17 +10,18 @@ import { SettingsEffects } from './+state/settings.effects';
 import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
 import { SettingsService } from '@angular-ngrx-nx/settings/src/settings.service';
 import { CoreModule } from '@angular-ngrx-nx/core';
+import { AuthGuardService } from '@angular-ngrx-nx/auth/src/auth-guard.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    NgrxFormsModule,
-    RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent }]),
-    StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
-    EffectsModule.forFeature([SettingsEffects])
-  ],
-  declarations: [SettingsComponent],
-  providers: [SettingsEffects, SettingsService]
+	imports: [
+		CommonModule,
+		CoreModule,
+		NgrxFormsModule,
+		RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent, canActivate: [AuthGuardService] }]),
+		StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
+		EffectsModule.forFeature([SettingsEffects])
+	],
+	declarations: [SettingsComponent],
+	providers: [SettingsEffects, SettingsService]
 })
-export class SettingsModule {}
+export class SettingsModule { }

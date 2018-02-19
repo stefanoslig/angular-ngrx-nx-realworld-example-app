@@ -6,13 +6,22 @@ import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class ArticleService {
-  constructor(private apiService: ApiService) {}
+	constructor(private apiService: ApiService) { }
 
-  get(slug): Observable<Article> {
-    return this.apiService.get('/articles/' + slug).pipe(map((data: any) => data.article));
-  }
+	get(slug: string): Observable<Article> {
+		return this.apiService.get('/articles/' + slug).pipe(map((data: any) => data.article));
+	}
 
-  getComments(slug): Observable<ArticleComment[]> {
-    return this.apiService.get(`/articles/${slug}/comments`).pipe(map((data: any) => data.comments));
-  }
+	getComments(slug: string): Observable<ArticleComment[]> {
+		return this.apiService.get(`/articles/${slug}/comments`).pipe(map((data: any) => data.comments));
+	}
+
+	deleteArticle(slug: string) {
+		return this.apiService.delete('/articles/' + slug);
+	}
+
+	deleteComment(commentId: number, slug: string) {
+		return this.apiService
+			.delete(`/articles/${slug}/comments/${commentId}`);
+	}
 }

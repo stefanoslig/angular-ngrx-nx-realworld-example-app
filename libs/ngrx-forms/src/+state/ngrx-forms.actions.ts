@@ -5,6 +5,11 @@ export interface SetData {
 	payload: any;
 }
 
+export interface UpdateData {
+	type: '[ngrxForms] UPDATE_DATA';
+	payload: any;
+}
+
 export interface SetStructure {
 	type: '[ngrxForms] SET_STRUCTURE';
 	payload: any;
@@ -23,4 +28,4 @@ export interface InitializeForm {
 	type: '[ngrxForms] INITIALIZE_FORM';
 }
 
-export type NgrxFormsAction = SetData | SetStructure | SetErrors | InitializeErrors | InitializeForm;
+export type NgrxFormsAction = SetData | UpdateData | SetStructure | SetErrors | InitializeErrors | InitializeForm;

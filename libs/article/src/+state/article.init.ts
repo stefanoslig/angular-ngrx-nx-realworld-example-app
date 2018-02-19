@@ -18,5 +18,7 @@ export const articleInitialState: Article = {
 			following: false
 		}
 	},
-	comments: []
+	comments: [],
+	loaded: false,
+	loading: false
 };

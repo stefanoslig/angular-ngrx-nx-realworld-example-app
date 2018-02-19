@@ -1,5 +1,5 @@
 import { Errors, NgrxFormsState } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromNgrxForms from '../+state/ngrx-forms.reducer';
@@ -15,11 +15,12 @@ export class ListErrorsComponent implements OnInit, OnDestroy {
 	errors: string[];
 	unsubscribe$: Subject<void> = new Subject();
 
-	constructor(private store: Store<NgrxFormsState>) { }
+	constructor(private store: Store<NgrxFormsState>, private changeDetectorRef: ChangeDetectorRef) { }
 
 	ngOnInit() {
 		this.store.select(fromNgrxForms.getErrors).subscribe(e => {
 			this.errors = Object.keys(e || {}).map(key => `${key} ${e[key]}`);
+			this.changeDetectorRef.markForCheck();
 		});
 	}
 

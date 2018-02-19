@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators/catchError';
+import { _throw } from 'rxjs/observable/throw';
 
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 
@@ -33,12 +34,18 @@ export class TokenInterceptorService implements HttpInterceptor {
 								payload: error
 							});
 							break;
+						case 404:
+							this.store.dispatch({
+								type: '[ngrx-error] THROW_404_ERROR',
+								payload: error
+							});
+							break;
 						default:
 							of(error);
 							break;
 					}
 				}
-				return of(error);
+				return _throw(error);
 			})
 			);
 	}
