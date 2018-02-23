@@ -15,7 +15,8 @@ export const articleInitialState: Article = {
 			username: '',
 			bio: '',
 			image: '',
-			following: false
+			following: false,
+			loading: false
 		}
 	},
 	comments: [],

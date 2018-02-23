@@ -54,3 +54,4 @@ function replaceArticle(articles: Articles, payload: ArticleData): Articles {
 export const getListConfig = (state: ArticleListState) => state.articleList.listConfig;
 export const getArticles = (state: ArticleListState) => state.articleList.articles.entities;
 export const getArticlesCount = (state: ArticleListState) => state.articleList.articles.articlesCount;
+export const isLoading = (state: ArticleListState) => state.articleList.articles.loading;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Article } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+import { Article, ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 import { ApiService } from '@angular-ngrx-nx/api/src/api.service';
 import { map } from 'rxjs/operators/map';
 
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators/map';
 export class EditorService {
 	constructor(private apiService: ApiService) { }
 
-	publishArticle(article): Observable<Article> {
+	publishArticle(article): Observable<ArticleData> {
 		if (article.slug) {
 			return this.apiService.put('/articles/' + article.slug, { article: article }).pipe(map(data => data.article));
 		}

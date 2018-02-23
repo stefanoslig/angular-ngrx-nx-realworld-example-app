@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ArticleListState, ArticleListConfig } from '@angular-ngrx-nx/article-list/src/+state/article-list.interfaces';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as fromArticleList from './+state/article-list.reducer';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 import { Observable } from 'rxjs/Observable';
@@ -16,13 +16,15 @@ export class ArticleListComponent implements OnInit {
 	totalPages: Array<number> = [1];
 	articles$: Observable<ArticleData[]>;
 	listConfig$: Observable<ArticleListConfig>;
+	isLoading$: Observable<boolean>;
 
 	constructor(private store: Store<ArticleListState>) { }
 
 	ngOnInit() {
 		this.getTotalPages();
-		this.articles$ = this.store.select(fromArticleList.getArticles);
-		this.listConfig$ = this.store.select(fromArticleList.getListConfig);
+		this.articles$ = this.store.pipe(select(fromArticleList.getArticles));
+		this.listConfig$ = this.store.pipe(select(fromArticleList.getListConfig));
+		this.isLoading$ = this.store.pipe(select(fromArticleList.isLoading));
 	}
 
 	favorite(slug: string) {

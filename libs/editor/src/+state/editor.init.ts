@@ -16,7 +16,8 @@ export const editorInitialState: Editor = {
 			username: '',
 			bio: '',
 			image: '',
-			following: false
+			following: false,
+			loading: false
 		}
 	}
 };
