@@ -1,7 +1,7 @@
 import { ApiModule } from '@angular-ngrx-nx/api';
 import { AuthModule } from '@angular-ngrx-nx/auth';
 import { NgrxErrorModule } from '@angular-ngrx-nx/ngrx-error';
-import { RouterNgrxModule } from '@angular-ngrx-nx/router/src/router.module';
+import { NgrxRouterModule } from '@angular-ngrx-nx/ngrx-router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -24,7 +24,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 		AuthModule,
 		BrowserModule,
 		NxModule.forRoot(),
-		RouterNgrxModule,
+		NgrxRouterModule,
 		RouterModule.forRoot(
 			[
 				{ path: '', loadChildren: '@angular-ngrx-nx/home#HomeModule' },

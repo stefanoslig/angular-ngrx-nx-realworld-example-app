@@ -1,158 +1,158 @@
 {
-  "$schema": "./node_modules/@nrwl/schematics/src/schema.json",
-  "project": {
-    "name": "angular-ngrx-nx-realworld-example-app",
-    "npmScope": "angular-ngrx-nx-realworld-example-app",
-    "latestMigration": "20180130-angular-devkit-schematics"
-  },
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "lint": [
-    {
-      "project": "./tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "apps/conduit/src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "apps/conduit/e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
-    }
-  ],
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "schematics": {
-      "collection": "@nrwl/schematics",
-      "postGenerate": "npm run format",
-      "newProject": [
-        "app",
-        "lib"
-      ]
-    },
-    "styleExt": "css",
-    "component": {}
-  },
-  "warnings": {
-    "typescriptMismatch": false
-  },
-  "apps": [
-    {
-      "name": "conduit",
-      "root": "apps/conduit/src",
-      "outDir": "dist/apps/conduit",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "../../../test.js",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "../../../tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "styles.css"
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
-    },
-    {
-      "name": "api",
-      "root": "libs/api/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "article",
-      "root": "libs/article/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "article-list",
-      "root": "libs/article-list/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "auth",
-      "root": "libs/auth/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "core",
-      "root": "libs/core/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "editor",
-      "root": "libs/editor/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "home",
-      "root": "libs/home/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "ngrx-error",
-      "root": "libs/ngrx-error/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "ngrx-forms",
-      "root": "libs/ngrx-forms/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "profile",
-      "root": "libs/profile/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "router",
-      "root": "libs/router/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "settings",
-      "root": "libs/settings/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "shared",
-      "root": "libs/shared/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    },
-    {
-      "name": "user",
-      "root": "libs/user/src",
-      "test": "../../../test.js",
-      "appRoot": ""
-    }
-  ]
+	"$schema": "./node_modules/@nrwl/schematics/src/schema.json",
+	"project": {
+		"name": "angular-ngrx-nx-realworld-example-app",
+		"npmScope": "angular-ngrx-nx-realworld-example-app",
+		"latestMigration": "20180130-angular-devkit-schematics"
+	},
+	"e2e": {
+		"protractor": {
+			"config": "./protractor.conf.js"
+		}
+	},
+	"lint": [
+		{
+			"project": "./tsconfig.spec.json",
+			"exclude": "**/node_modules/**"
+		},
+		{
+			"project": "apps/conduit/src/tsconfig.app.json",
+			"exclude": "**/node_modules/**"
+		},
+		{
+			"project": "apps/conduit/e2e/tsconfig.e2e.json",
+			"exclude": "**/node_modules/**"
+		}
+	],
+	"test": {
+		"karma": {
+			"config": "./karma.conf.js"
+		}
+	},
+	"defaults": {
+		"schematics": {
+			"collection": "@nrwl/schematics",
+			"postGenerate": "npm run format",
+			"newProject": [
+				"app",
+				"lib"
+			]
+		},
+		"styleExt": "css",
+		"component": {}
+	},
+	"warnings": {
+		"typescriptMismatch": false
+	},
+	"apps": [
+		{
+			"name": "conduit",
+			"root": "apps/conduit/src",
+			"outDir": "dist/apps/conduit",
+			"assets": [
+				"assets",
+				"favicon.ico"
+			],
+			"index": "index.html",
+			"main": "main.ts",
+			"polyfills": "polyfills.ts",
+			"test": "../../../test.js",
+			"tsconfig": "tsconfig.app.json",
+			"testTsconfig": "../../../tsconfig.spec.json",
+			"prefix": "app",
+			"styles": [
+				"styles.css"
+			],
+			"scripts": [],
+			"environmentSource": "environments/environment.ts",
+			"environments": {
+				"dev": "environments/environment.ts",
+				"prod": "environments/environment.prod.ts"
+			}
+		},
+		{
+			"name": "api",
+			"root": "libs/api/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "article",
+			"root": "libs/article/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "article-list",
+			"root": "libs/article-list/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "auth",
+			"root": "libs/auth/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "core",
+			"root": "libs/core/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "editor",
+			"root": "libs/editor/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "home",
+			"root": "libs/home/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "ngrx-error",
+			"root": "libs/ngrx-error/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "ngrx-forms",
+			"root": "libs/ngrx-forms/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "profile",
+			"root": "libs/profile/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "ngrx-router",
+			"root": "libs/ngrx-router/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "settings",
+			"root": "libs/settings/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "shared",
+			"root": "libs/shared/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		},
+		{
+			"name": "user",
+			"root": "libs/user/src",
+			"test": "../../../test.js",
+			"appRoot": ""
+		}
+	]
 }

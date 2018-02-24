@@ -8,13 +8,11 @@ import { ngrxErrorInitialState } from './+state/ngrx-error.init';
 import { ngrxErrorReducer } from './+state/ngrx-error.reducer';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		StoreModule.forFeature('ngrxError', ngrxErrorReducer, { initialState: ngrxErrorInitialState }),
-		EffectsModule.forFeature([NgrxErrorEffects])
-	],
-	providers: [
-		NgrxErrorEffects
-	]
+  imports: [
+    CommonModule,
+    StoreModule.forFeature('ngrxError', ngrxErrorReducer, { initialState: ngrxErrorInitialState }),
+    EffectsModule.forFeature([NgrxErrorEffects])
+  ],
+  providers: [NgrxErrorEffects]
 })
-export class NgrxErrorModule { }
+export class NgrxErrorModule {}

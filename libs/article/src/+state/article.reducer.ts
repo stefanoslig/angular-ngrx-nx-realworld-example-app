@@ -10,8 +10,12 @@ export function articleReducer(state: Article = articleInitialState, action: Art
 		case '[article] LOAD_ARTICLE_FAIL': {
 			return { ...state, data: articleInitialState.data, loaded: false, loading: false };
 		}
+		case '[article] ADD_COMMENT_SUCCESS': {
+			const comments: ArticleComment[] = [action.payload, ...state.comments];
+			return { ...state, comments };
+		}
 		case '[article] DELETE_COMMENT_SUCCESS': {
-			const comments: ArticleComment[] = state.comments.filter(item => item.id !== action.payload)
+			const comments: ArticleComment[] = state.comments.filter(item => item.id !== action.payload);
 			return { ...state, comments };
 		}
 		case '[article] INITIALIZE_ARTICLE': {
@@ -28,7 +32,7 @@ export function articleReducer(state: Article = articleInitialState, action: Art
 		}
 		case '[article] FOLLOW_SUCCESS':
 		case '[article] UNFOLLOW_SUCCESS': {
-			const data: ArticleData = { ...state.data, author: action.payload }
+			const data: ArticleData = { ...state.data, author: action.payload };
 			return { ...state, data };
 		}
 		case '[article] FAVORITE_SUCCESS':

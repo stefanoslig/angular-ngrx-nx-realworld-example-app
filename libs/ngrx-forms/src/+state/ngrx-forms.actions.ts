@@ -28,4 +28,8 @@ export interface InitializeForm {
 	type: '[ngrxForms] INITIALIZE_FORM';
 }
 
-export type NgrxFormsAction = SetData | UpdateData | SetStructure | SetErrors | InitializeErrors | InitializeForm;
+export interface ResetForm {
+	type: '[ngrxForms] RESET_FORM';
+}
+
+export type NgrxFormsAction = SetData | UpdateData | SetStructure | SetErrors | InitializeErrors | InitializeForm | ResetForm;

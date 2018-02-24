@@ -19,7 +19,7 @@
 		<ul *ngIf="isLoggedIn" class="nav navbar-nav pull-xs-right">
 			<li class="nav-item">
 				<!-- Add "active" class when you're on that page" -->
-				<a class="nav-link active" routerLink="/">Home</a>
+				<a class="nav-link active" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" routerLink="/editor" routerLinkActive="active">

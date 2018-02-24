@@ -17,32 +17,32 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 
 @Injectable()
 export class SettingsEffects {
-	@Effect()
-	editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
-		withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromAuth.getUser)),
-		map(([_, data, user]) => ({
-			...user,
-			image: data.image,
-			username: data.username,
-			bio: data.bio,
-			pass: data.pass,
-			email: data.email
-		})),
-		concatMap(data =>
-			this.settingsService.update(data).pipe(
-				mergeMap(result => [
-					{ type: '[auth] GET_USER' },
-					{ type: '[Router] Go', payload: { path: ['profile', result.username] } }
-				]),
-				catchError(result =>
-					of({
-						type: '[ngrxForms] SET_ERRORS',
-						payload: result.error.errors
-					})
-				)
-			)
-		)
-	);
+  @Effect()
+  editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
+    withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromAuth.getUser)),
+    map(([_, data, user]) => ({
+      ...user,
+      image: data.image,
+      username: data.username,
+      bio: data.bio,
+      pass: data.pass,
+      email: data.email
+    })),
+    concatMap(data =>
+      this.settingsService.update(data).pipe(
+        mergeMap(result => [
+          { type: '[auth] GET_USER' },
+          { type: '[Router] Go', payload: { path: ['profile', result.username] } }
+        ]),
+        catchError(result =>
+          of({
+            type: '[ngrxForms] SET_ERRORS',
+            payload: result.error.errors
+          })
+        )
+      )
+    )
+  );
 
-	constructor(private actions: Actions, private store: Store<any>, private settingsService: SettingsService) { }
+  constructor(private actions: Actions, private store: Store<any>, private settingsService: SettingsService) {}
 }

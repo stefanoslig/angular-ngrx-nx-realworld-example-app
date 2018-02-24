@@ -9,9 +9,9 @@ import { AuthState } from './+state/auth.interfaces';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-	constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>) {}
 
-	canActivate(): Observable<boolean> {
-		return this.store.select('auth').pipe(map(auth => !!auth.loggedIn), take(1));
-	}
+  canActivate(): Observable<boolean> {
+    return this.store.select('auth').pipe(map(auth => !!auth.loggedIn), take(1));
+  }
 }

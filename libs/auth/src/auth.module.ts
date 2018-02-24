@@ -16,28 +16,28 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 const authRouting: ModuleWithProviders = RouterModule.forChild([
-	{
-		path: 'login',
-		component: LoginComponent,
-		canActivate: [NoAuthGuardService]
-	},
-	{
-		path: 'register',
-		component: RegisterComponent,
-		canActivate: [NoAuthGuardService]
-	}
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [NoAuthGuardService]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [NoAuthGuardService]
+  }
 ]);
 
 @NgModule({
-	imports: [
-		CoreModule,
-		CommonModule,
-		NgrxFormsModule,
-		authRouting,
-		StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
-		EffectsModule.forFeature([AuthEffects])
-	],
-	providers: [AuthEffects, AuthGuardService, AuthService, NoAuthGuardService],
-	declarations: [LoginComponent, RegisterComponent]
+  imports: [
+    CoreModule,
+    CommonModule,
+    NgrxFormsModule,
+    authRouting,
+    StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
+    EffectsModule.forFeature([AuthEffects])
+  ],
+  providers: [AuthEffects, AuthGuardService, AuthService, NoAuthGuardService],
+  declarations: [LoginComponent, RegisterComponent]
 })
-export class AuthModule { }
+export class AuthModule {}

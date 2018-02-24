@@ -22,27 +22,19 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-md-8 offset-md-2">
-				<!-- <div *ngIf="isAuthenticated$ | async">
-					<div class="card comment-form">
-						<app-dynamic-form (submit)="submit($event)" [data$]="data$" [structure$]="structure$">
-						</app-dynamic-form>
-						<div class="card-footer">
-							<img [src]="currentUser.image" class="comment-author-img" />
-							<button class="btn btn-sm btn-primary" type="submit">
-								Post Comment
-							</button>
-						</div>
-					</div>
-				</div> -->
+
+				<app-add-comment *ngIf="(isAuthenticated$ | async)" [article]="article$ | async" [data$]="data$" [structure$]="structure$"
+				 [currentUser]="currentUser$ | async" [touchedForm$]="touchedForm$" (submit)="submit($event)" (updateForm)="updateForm($event)">
+				</app-add-comment>
 
 				<div *ngIf="!(isAuthenticated$ | async)">
 					<a [routerLink]="['/login']">Sign in</a> or
 					<a [routerLink]="['/register']">sign up</a> to add comments on this article.
 				</div>
 
-				<app-article-comment *ngFor="let comment of (comments$ | async)" [canModify]="canModify" (delete)="deleteComment($event)"
+				<app-article-comment *ngFor="let comment of (comments$ | async)" [currentUser]="currentUser$|async" (delete)="deleteComment($event)"
 				 [article]="article$ | async" [comment]="comment"></app-article-comment>
+
 			</div>
 		</div>
 	</div>
-</div>

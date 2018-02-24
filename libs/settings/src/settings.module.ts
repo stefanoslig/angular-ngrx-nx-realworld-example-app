@@ -13,15 +13,15 @@ import { CoreModule } from '@angular-ngrx-nx/core';
 import { AuthGuardService } from '@angular-ngrx-nx/auth/src/auth-guard.service';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		CoreModule,
-		NgrxFormsModule,
-		RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent }]),
-		StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
-		EffectsModule.forFeature([SettingsEffects])
-	],
-	declarations: [SettingsComponent],
-	providers: [SettingsEffects, SettingsService]
+  imports: [
+    CommonModule,
+    CoreModule,
+    NgrxFormsModule,
+    RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent }]),
+    StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
+    EffectsModule.forFeature([SettingsEffects])
+  ],
+  declarations: [SettingsComponent],
+  providers: [SettingsEffects, SettingsService]
 })
-export class SettingsModule { }
+export class SettingsModule {}

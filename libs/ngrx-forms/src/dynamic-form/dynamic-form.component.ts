@@ -1,13 +1,14 @@
 import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
-import { Component, Input, OnChanges, OnDestroy, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/operators/combineLatest';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 import { map } from 'rxjs/operators/map';
 import { takeUntil } from 'rxjs/operators/takeUntil';
-import { Subject } from 'rxjs/Subject';
 import { tap } from 'rxjs/operators/tap';
-import { debounceTime } from 'rxjs/operators/debounceTime';
+import { Subject } from 'rxjs/Subject';
+import { filter } from 'rxjs/operators/filter';
 
 @Component({
 	selector: 'app-dynamic-form',
@@ -15,16 +16,17 @@ import { debounceTime } from 'rxjs/operators/debounceTime';
 	styleUrls: ['./dynamic-form.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicFormComponent implements OnChanges, OnDestroy {
+export class DynamicFormComponent implements OnInit, OnDestroy {
 	@Input() structure$: Observable<Field[]>;
 	@Input() data$: Observable<any>;
+	@Input() touchedForm$: Observable<boolean>;
 	@Output() updateForm: EventEmitter<any> = new EventEmitter();
 	unsubscribe$: Subject<void> = new Subject();
 	form: FormGroup;
 
 	constructor(private fb: FormBuilder) { }
 
-	ngOnChanges() {
+	ngOnInit() {
 		this.structure$
 			.pipe(
 			map(this.formBuilder),
@@ -34,6 +36,11 @@ export class DynamicFormComponent implements OnChanges, OnDestroy {
 			takeUntil(this.unsubscribe$)
 			)
 			.subscribe(this.patchValue);
+
+		this.touchedForm$.pipe(
+			filter(t => !t && !!this.form),
+			takeUntil(this.unsubscribe$))
+			.subscribe(_ => this.form.reset());
 	}
 
 	ngOnDestroy() {

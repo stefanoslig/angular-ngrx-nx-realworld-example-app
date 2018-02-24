@@ -9,10 +9,11 @@ export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): Ngr
 		}
 		case '[ngrxForms] UPDATE_DATA': {
 			const data = { ...state.data, ...action.payload };
-			return { ...state, data };
+			return { ...state, data, touched: true };
 		}
 		case '[ngrxForms] SET_STRUCTURE': {
-			return { ...state, structure: action.payload };
+			const structure = action.payload.slice(0);
+			return { ...state, structure };
 		}
 		case '[ngrxForms] SET_ERRORS': {
 			return { ...state, errors: action.payload };
@@ -22,6 +23,9 @@ export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): Ngr
 		}
 		case '[ngrxForms] INITIALIZE_FORM': {
 			return ngrxFormsInitialState;
+		}
+		case '[ngrxForms] RESET_FORM': {
+			return { ...state, touched: false };
 		}
 		default: {
 			return state;
@@ -33,3 +37,4 @@ export const getStructure = (state: NgrxFormsState) => state.ngrxForms.structure
 export const getData = (state: NgrxFormsState) => state.ngrxForms.data;
 export const isValid = (state: NgrxFormsState) => state.ngrxForms.valid;
 export const getErrors = (state: NgrxFormsState) => state.ngrxForms.errors;
+export const getTouchedForm = (state: NgrxFormsState) => state.ngrxForms.touched;

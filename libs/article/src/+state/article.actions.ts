@@ -105,9 +105,24 @@ export interface UnFollowFail {
 	payload: Error;
 }
 
+export interface AddComment {
+	type: '[article] ADD_COMMENT';
+	payload: string;
+}
+
+export interface AddCommentFail {
+	type: '[article] ADD_COMMENT_FAIL';
+	payload: Error;
+}
+
+export interface AddCommentSuccess {
+	type: '[article] ADD_COMMENT_SUCCESS';
+	payload: ArticleComment
+}
+
 export interface DeleteComment {
 	type: '[article] DELETE_COMMENT';
-	payload: { commentId: number, slug: string };
+	payload: { commentId: number; slug: string };
 }
 
 export interface DeleteCommentFail {
@@ -117,7 +132,7 @@ export interface DeleteCommentFail {
 
 export interface DeleteCommentSuccess {
 	type: '[article] DELETE_COMMENT_SUCCESS';
-	payload: number
+	payload: number;
 }
 
 export type ArticleAction =
@@ -144,4 +159,7 @@ export type ArticleAction =
 	| FollowFail
 	| UnFollow
 	| UnFollowSuccess
-	| UnFollowFail;
+	| UnFollowFail
+	| AddComment
+	| AddCommentFail
+	| AddCommentSuccess;

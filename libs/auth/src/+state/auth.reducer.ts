@@ -3,40 +3,40 @@ import { AuthAction } from './auth.actions';
 import { authInitialState } from '@angular-ngrx-nx/auth/src/+state/auth.init';
 
 export function authReducer(state: Auth, action: AuthAction): Auth {
-	switch (action.type) {
-		case '[auth] SET_USER': {
-			return {
-				...state,
-				loggedIn: true,
-				user: action.payload
-			};
-		}
-		case '[auth] INITIALIZE_USER':
-		case '[auth] GET_USER_FAIL': {
-			return authInitialState;
-		}
-		case '[auth] LOGIN': {
-			return { ...state, status: 'IN_PROGRESS' };
-		}
-		case '[auth] LOGIN_SUCCESS': {
-			return { ...state, status: 'INIT' };
-		}
-		case '[auth] LOGIN_FAIL': {
-			return { ...state, status: 'INIT' };
-		}
-		case '[auth] REGISTER': {
-			return { ...state, status: 'IN_PROGRESS' };
-		}
-		case '[auth] REGISTER_SUCCESS': {
-			return { ...state, status: 'INIT' };
-		}
-		case '[auth] REGISTER_FAIL': {
-			return { ...state, status: 'INIT' };
-		}
-		default: {
-			return state;
-		}
-	}
+  switch (action.type) {
+    case '[auth] SET_USER': {
+      return {
+        ...state,
+        loggedIn: true,
+        user: action.payload
+      };
+    }
+    case '[auth] INITIALIZE_USER':
+    case '[auth] GET_USER_FAIL': {
+      return authInitialState;
+    }
+    case '[auth] LOGIN': {
+      return { ...state, status: 'IN_PROGRESS' };
+    }
+    case '[auth] LOGIN_SUCCESS': {
+      return { ...state, status: 'INIT' };
+    }
+    case '[auth] LOGIN_FAIL': {
+      return { ...state, status: 'INIT' };
+    }
+    case '[auth] REGISTER': {
+      return { ...state, status: 'IN_PROGRESS' };
+    }
+    case '[auth] REGISTER_SUCCESS': {
+      return { ...state, status: 'INIT' };
+    }
+    case '[auth] REGISTER_FAIL': {
+      return { ...state, status: 'INIT' };
+    }
+    default: {
+      return state;
+    }
+  }
 }
 
 export const getAuth = (state: AuthState) => state.auth;

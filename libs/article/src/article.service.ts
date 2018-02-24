@@ -21,7 +21,12 @@ export class ArticleService {
 	}
 
 	deleteComment(commentId: number, slug: string) {
+		return this.apiService.delete(`/articles/${slug}/comments/${commentId}`);
+	}
+
+	addComment(slug, payload = ''): Observable<Comment> {
 		return this.apiService
-			.delete(`/articles/${slug}/comments/${commentId}`);
+			.post(`/articles/${slug}/comments`, { comment: { body: payload } })
+			.pipe(map(data => data.comment));
 	}
 }

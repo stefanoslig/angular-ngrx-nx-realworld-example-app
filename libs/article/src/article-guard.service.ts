@@ -11,28 +11,26 @@ import { tap } from 'rxjs/operators/tap';
 
 @Injectable()
 export class ArticleGuardService implements CanActivate {
-	constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {}
 
-	waitForArticleToLoad(): Observable<boolean> {
-		return this.store.pipe(
-			select(fromArticle.getArticleLoaded),
-			filter(loaded => loaded),
-			take(1)
-		);
-	}
+  waitForArticleToLoad(): Observable<boolean> {
+    return this.store.pipe(select(fromArticle.getArticleLoaded), filter(loaded => loaded), take(1));
+  }
 
-	canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-		const slug = route.params['slug'];
-		this.store.dispatch({
-			type: '[article] LOAD_ARTICLE',
-			payload: slug
-		});
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
+    const slug = route.params['slug'];
+    this.store.dispatch({
+      type: '[article] LOAD_ARTICLE',
+      payload: slug
+    });
 
-		return this.waitForArticleToLoad().pipe(
-			tap(() => (this.store.dispatch({
-				type: '[article] LOAD_COMMENTS',
-				payload: slug
-			})))
-		);
-	}
+    return this.waitForArticleToLoad().pipe(
+      tap(() =>
+        this.store.dispatch({
+          type: '[article] LOAD_COMMENTS',
+          payload: slug
+        })
+      )
+    );
+  }
 }

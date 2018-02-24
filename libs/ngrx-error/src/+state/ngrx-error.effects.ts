@@ -11,15 +11,15 @@ import { switchMap } from 'rxjs/operators/switchMap';
 
 @Injectable()
 export class NgrxErrorEffects {
-	@Effect()
-	error401 = this.actions
-		.ofType<Throw401Error>('[ngrx-error] THROW_401_ERROR')
-		.pipe(map(_ => ({ type: '[Router] Go', payload: { path: ['/login'] } })));
+  @Effect()
+  error401 = this.actions
+    .ofType<Throw401Error>('[ngrx-error] THROW_401_ERROR')
+    .pipe(map(_ => ({ type: '[Router] Go', payload: { path: ['/login'] } })));
 
-	@Effect()
-	error404 = this.actions
-		.ofType<Throw404Error>('[ngrx-error] THROW_404_ERROR')
-		.pipe(map(_ => ({ type: '[Router] Go', payload: { path: ['/'] } })));
+  @Effect()
+  error404 = this.actions
+    .ofType<Throw404Error>('[ngrx-error] THROW_404_ERROR')
+    .pipe(map(_ => ({ type: '[Router] Go', payload: { path: ['/'] } })));
 
-	constructor(private actions: Actions, private store: Store<any>) { }
+  constructor(private actions: Actions, private store: Store<any>) {}
 }

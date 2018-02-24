@@ -1,17 +1,32 @@
 import 'rxjs/add/operator/switchMap';
 
 import { ArticleService } from '@angular-ngrx-nx/article/src/article.service';
+import { ActionsService } from '@angular-ngrx-nx/core/src/actions.service';
+import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/nx';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators/catchError';
 import { concatMap } from 'rxjs/operators/concatMap';
+import { exhaustMap } from 'rxjs/operators/exhaustMap';
 import { map } from 'rxjs/operators/map';
+import { mergeMap } from 'rxjs/operators/mergeMap';
+import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
-import { LoadArticle, LoadComments, UnFollow, Follow, Favorite, UnFavorite, DeleteArticle, DeleteComment } from './article.actions';
+import {
+	AddComment,
+	DeleteArticle,
+	DeleteComment,
+	Favorite,
+	Follow,
+	LoadArticle,
+	LoadComments,
+	UnFavorite,
+	UnFollow,
+} from './article.actions';
 import { ArticleState } from './article.interfaces';
-import { ActionsService } from '@angular-ngrx-nx/core/src/actions.service';
 
 @Injectable()
 export class ArticleEffects {
@@ -60,6 +75,31 @@ export class ArticleEffects {
 					of({
 						type: '[article] DELETE_ARTICLE_FAIL',
 						payload: error
+					})
+				)
+			)
+		)
+	);
+
+	@Effect()
+	addComment = this.actions.ofType<AddComment>('[article] ADD_COMMENT').pipe(
+		map(action => action.payload),
+		withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromNgrxForms.getStructure)),
+		exhaustMap(([slug, data, structure]) =>
+			this.articleService.addComment(slug, data.comment).pipe(
+				mergeMap(comment => ([
+					{
+						type: '[article] ADD_COMMENT_SUCCESS',
+						payload: comment
+					},
+					{
+						type: '[ngrxForms] RESET_FORM'
+					}
+				])),
+				catchError(result =>
+					of({
+						type: '[ngrxForms] SET_ERRORS',
+						payload: result.error.errors
 					})
 				)
 			)
@@ -165,6 +205,7 @@ export class ArticleEffects {
 		private actions: Actions,
 		private dataPersistence: DataPersistence<ArticleState>,
 		private articleService: ArticleService,
-		private actionsService: ActionsService
+		private actionsService: ActionsService,
+		private store: Store<any>
 	) { }
 }
