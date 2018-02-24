@@ -37,10 +37,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 			)
 			.subscribe(this.patchValue);
 
-		this.touchedForm$.pipe(
-			filter(t => !t && !!this.form),
-			takeUntil(this.unsubscribe$))
-			.subscribe(_ => this.form.reset());
+		if(this.touchedForm$) {
+			this.touchedForm$.pipe(
+				filter(t => !t && !!this.form),
+				takeUntil(this.unsubscribe$))
+				.subscribe(_ => this.form.reset());
+		}
 	}
 
 	ngOnDestroy() {
