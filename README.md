@@ -18,7 +18,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Nrwl Extensions for Angular (Nx)
 
-<a href="https://nrwl.io/nx"><img src="https://preview.ibb.co/mW6sdw/nx_logo.png" width="200"></a>
+<a href="https://nrwl.io/nx"><img src="https://preview.ibb.co/mW6sdw/nx_logo.png" width="180"></a>
 
 Nx is an open source toolkit for enterprise Angular applications.
 
@@ -26,7 +26,7 @@ Nx is designed to help you create and build enterprise grade Angular application
 
 ## Quick Start & Documentation
 
-# Requirements
+### Requirements
 Install the Angular CLI globally
 ```console
 npm install -g @angular/cli
@@ -36,7 +36,7 @@ or
 yarn global add @angular/cli
 ```
 
-# Initial setup
+### Initial setup
 cd into the local repo directory and run:
 ```console
 npm install
@@ -46,7 +46,7 @@ or
 yarn
 ```
 
-# Running the application
+### Running the application
 ```console
 ng serve
 ```
