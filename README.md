@@ -26,6 +26,31 @@ Nx is designed to help you create and build enterprise grade Angular application
 
 ## Quick Start & Documentation
 
+# Requirements
+Install the Angular CLI globally
+```console
+npm install -g @angular/cli
+```
+or
+```console
+yarn global add @angular/cli
+```
+
+# Initial setup
+cd into the local repo directory and run:
+```console
+npm install
+```
+or
+```console
+yarn
+```
+
+# Running the application
+```console
+ng serve
+```
+
 [Watch a 5-minute video on how to get started with Nx.](http://nrwl.io/nx)
 
 ## Functionality overview
