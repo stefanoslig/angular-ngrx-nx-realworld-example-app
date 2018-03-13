@@ -17,11 +17,13 @@ import { appReducer } from './+state/app.reducer';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
 	imports: [
 		ApiModule,
 		AuthModule,
+		CoreModule,
 		BrowserModule,
 		NxModule.forRoot(),
 		NgrxRouterModule,

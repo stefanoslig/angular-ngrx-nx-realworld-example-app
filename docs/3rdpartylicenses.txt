@@ -24,7 +24,7 @@ THE SOFTWARE.
 MIT
 MIT
 
-@ngrx/router-store@5.0.1
+@ngrx/router-store@5.2.0
 MIT
 The MIT License (MIT)
 
@@ -52,7 +52,7 @@ SOFTWARE.
 MIT
 MIT
 
-@ngrx/store@5.1.0
+@ngrx/store@5.2.0
 MIT
 The MIT License (MIT)
 
@@ -80,7 +80,7 @@ SOFTWARE.
 MIT
 MIT
 
-@nrwl/nx@0.7.3
+@nrwl/nx@0.8.0
 MIT
 (The MIT License)
 
@@ -109,7 +109,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 MIT
 MIT
 
-@ngrx/effects@5.1.0
+@ngrx/effects@5.2.0
 MIT
 The MIT License (MIT)
 

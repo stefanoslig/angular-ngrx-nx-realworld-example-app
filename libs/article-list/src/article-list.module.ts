@@ -10,19 +10,17 @@ import { ArticleListEffects } from './+state/article-list.effects';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 import { SharedModule } from '@angular-ngrx-nx/shared';
 import { RouterModule } from '@angular/router';
-import { CoreModule } from '@angular-ngrx-nx/core';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    SharedModule,
-    RouterModule,
-    StoreModule.forFeature('articleList', articleListReducer, { initialState: articleListInitialState }),
-    EffectsModule.forFeature([ArticleListEffects])
-  ],
-  declarations: [ArticleListComponent, ArticleListItemComponent],
-  providers: [ArticleListService, ArticleListEffects],
-  exports: [ArticleListComponent]
+	imports: [
+		CommonModule,
+		SharedModule,
+		RouterModule,
+		StoreModule.forFeature('articleList', articleListReducer, { initialState: articleListInitialState }),
+		EffectsModule.forFeature([ArticleListEffects])
+	],
+	declarations: [ArticleListComponent, ArticleListItemComponent],
+	providers: [ArticleListService, ArticleListEffects],
+	exports: [ArticleListComponent]
 })
-export class ArticleListModule {}
+export class ArticleListModule { }

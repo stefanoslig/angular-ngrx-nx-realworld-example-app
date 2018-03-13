@@ -12,6 +12,7 @@ import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 import { Subject } from 'rxjs/Subject';
 
 import * as fromArticle from './+state/article.reducer';
+import * as fromActions from './+state/article.actions';
 
 const structure: Field[] = [
 	{
@@ -62,36 +63,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	follow(username: string) {
-		this.store.dispatch({ type: '[article] FOLLOW', payload: username });
-	}
-	unfollow(username: string) {
-		this.store.dispatch({ type: '[article] UNFOLLOW', payload: username });
-	}
-	favorite(slug: string) {
-		this.store.dispatch({ type: '[article] FAVORITE', payload: slug });
-	}
-	unfavorite(slug: string) {
-		this.store.dispatch({ type: '[article] UNFAVORITE', payload: slug });
-	}
-	delete(slug: string) {
-		this.store.dispatch({ type: '[article] DELETE_ARTICLE', payload: slug });
-	}
-	deleteComment(data: { commentId: number; slug: string }) {
-		this.store.dispatch({ type: '[article] DELETE_COMMENT', payload: data });
-	}
-	updateForm(changes: any) {
-		this.store.dispatch({ type: '[ngrxForms] UPDATE_DATA', payload: changes });
-	}
-	submit(slug: string) {
-		this.store.dispatch({ type: '[article] ADD_COMMENT', payload: slug });
-	}
+	follow(username: string) { this.store.dispatch(new fromActions.Follow(username)) }
+	unfollow(username: string) { this.store.dispatch(new fromActions.UnFollow(username)) }
+	favorite(slug: string) { this.store.dispatch(new fromActions.Favorite(slug)) }
+	unfavorite(slug: string) { this.store.dispatch(new fromActions.UnFavorite(slug)) }
+	delete(slug: string) { this.store.dispatch(new fromActions.DeleteArticle(slug)) }
+	deleteComment(data: { commentId: number; slug: string }) { this.store.dispatch(new fromActions.DeleteComment(data)) }
+	updateForm(changes: any) { this.store.dispatch({ type: '[ngrxForms] UPDATE_DATA', payload: changes }) }
+	submit(slug: string) { this.store.dispatch(new fromActions.AddComment(slug)) }
 
 	ngOnDestroy() {
 		this.unsubscribe$.next();
 		this.unsubscribe$.complete();
-		this.store.dispatch({
-			type: '[article] INITIALIZE_ARTICLE'
-		});
+		this.store.dispatch(new fromActions.InitializeArticle());
 	}
 }

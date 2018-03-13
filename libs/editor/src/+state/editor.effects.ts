@@ -11,44 +11,37 @@ import { concatMap } from 'rxjs/operators/concatMap';
 import { map } from 'rxjs/operators/map';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
-import { PublishArticle, LoadArticle } from './editor.actions';
+import { PublishArticle, LoadArticle, EditorActionsType } from './editor.actions';
+import * as fromActions from './editor.actions';
 
 @Injectable()
 export class EditorEffects {
-  @Effect()
-  editor = this.actions.ofType<PublishArticle>('[editor] PUBLISH_ARTICLE').pipe(
-    map(action => action.payload),
-    withLatestFrom(this.store.select(fromNgrxForms.getData)),
-    concatMap(([article, data]) =>
-      this.editorService.publishArticle(data).pipe(
-        map(result => ({ type: '[Router] Go', payload: { path: ['article', result.slug] } })),
-        catchError(result =>
-          of({
-            type: '[ngrxForms] SET_ERRORS',
-            payload: result.error.errors
-          })
-        )
-      )
-    )
-  );
+	@Effect()
+	editor = this.actions.ofType<PublishArticle>(EditorActionsType.PUBLISH_ARTICLE).pipe(
+		map(action => action.payload),
+		withLatestFrom(this.store.select(fromNgrxForms.getData)),
+		concatMap(([article, data]) =>
+			this.editorService.publishArticle(data).pipe(
+				map(result => ({ type: '[Router] Go', payload: { path: ['article', result.slug] } })),
+				catchError(result =>
+					of({
+						type: '[ngrxForms] SET_ERRORS',
+						payload: result.error.errors
+					})
+				)
+			)
+		)
+	);
 
-  @Effect()
-  loadArticle = this.actions.ofType<LoadArticle>('[editor] LOAD_ARTICLE').pipe(
-    concatMap(action =>
-      this.editorService.get(action.payload).pipe(
-        map(results => ({
-          type: '[editor] LOAD_ARTICLE_SUCCESS',
-          payload: results
-        })),
-        catchError(error =>
-          of({
-            type: '[editor] LOAD_ARTICLE_FAIL',
-            payload: error
-          })
-        )
-      )
-    )
-  );
+	@Effect()
+	loadArticle = this.actions.ofType<LoadArticle>(EditorActionsType.LOAD_ARTICLE).pipe(
+		concatMap(action =>
+			this.editorService.get(action.payload).pipe(
+				map(results => new fromActions.LoadArticleSuccess(results)),
+				catchError(error => of(new fromActions.LoadArticleFail(error)))
+			)
+		)
+	);
 
-  constructor(private actions: Actions, private store: Store<any>, private editorService: EditorService) {}
+	constructor(private actions: Actions, private store: Store<any>, private editorService: EditorService) { }
 }

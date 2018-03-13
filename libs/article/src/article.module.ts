@@ -13,19 +13,17 @@ import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
 import { MarkdownPipe } from './markdown.pipe';
-import { CoreModule } from '@angular-ngrx-nx/core';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    RouterModule.forChild([{ path: '', component: ArticleComponent, canActivate: [ArticleGuardService] }]),
-    StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
-    EffectsModule.forFeature([ArticleEffects]),
-    NgrxFormsModule
-  ],
-  providers: [ArticleEffects, ArticleService, ArticleGuardService],
-  declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent]
+	imports: [
+		CommonModule,
+		RouterModule.forChild([{ path: '', component: ArticleComponent, canActivate: [ArticleGuardService] }]),
+		StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
+		EffectsModule.forFeature([ArticleEffects]),
+		NgrxFormsModule
+	],
+	providers: [ArticleEffects, ArticleService, ArticleGuardService],
+	declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent]
 })
-export class ArticleModule {}
+export class ArticleModule { }

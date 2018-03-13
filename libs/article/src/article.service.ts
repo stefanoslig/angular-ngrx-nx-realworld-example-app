@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ApiService } from '@angular-ngrx-nx/api/src/api.service';
-import { Article, ArticleComment } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+import { Article, ArticleComment, ArticleData } from './+state/article.interfaces';
 import { map } from 'rxjs/operators/map';
 
 @Injectable()
 export class ArticleService {
 	constructor(private apiService: ApiService) { }
 
-	get(slug: string): Observable<Article> {
+	get(slug: string): Observable<ArticleData> {
 		return this.apiService.get('/articles/' + slug).pipe(map((data: any) => data.article));
 	}
 
@@ -24,7 +24,7 @@ export class ArticleService {
 		return this.apiService.delete(`/articles/${slug}/comments/${commentId}`);
 	}
 
-	addComment(slug, payload = ''): Observable<Comment> {
+	addComment(slug, payload = ''): Observable<ArticleComment> {
 		return this.apiService
 			.post(`/articles/${slug}/comments`, { comment: { body: payload } })
 			.pipe(map(data => data.comment));

@@ -14,6 +14,7 @@ import { exhaustMap } from 'rxjs/operators/exhaustMap';
 import { map } from 'rxjs/operators/map';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
+import * as fromActions from './article.actions';
 
 import {
 	AddComment,
@@ -25,73 +26,50 @@ import {
 	LoadComments,
 	UnFavorite,
 	UnFollow,
+	ArticleActionTypes,
 } from './article.actions';
 import { ArticleState } from './article.interfaces';
 
 @Injectable()
 export class ArticleEffects {
 	@Effect()
-	loadArticle = this.actions.ofType<LoadArticle>('[article] LOAD_ARTICLE').pipe(
+	loadArticle = this.actions.ofType<LoadArticle>(ArticleActionTypes.LOAD_ARTICLE).pipe(
 		concatMap(action =>
 			this.articleService.get(action.payload).pipe(
-				map(results => ({
-					type: '[article] LOAD_ARTICLE_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article] LOAD_ARTICLE_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.LoadArticleSuccess(results)),
+				catchError(error => of(new fromActions.LoadArticleFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	loadComments = this.actions.ofType<LoadComments>('[article] LOAD_COMMENTS').pipe(
+	loadComments = this.actions.ofType<LoadComments>(ArticleActionTypes.LOAD_COMMENTS).pipe(
 		concatMap(action =>
 			this.articleService.getComments(action.payload).pipe(
-				map(results => ({
-					type: '[article] LOAD_COMMENTS_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article] LOAD_COMMENTS_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.LoadCommentsSuccess(results)),
+				catchError(error => of(new fromActions.LoadCommentsFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	deleteArticle = this.actions.ofType<DeleteArticle>('[article] DELETE_ARTICLE').pipe(
+	deleteArticle = this.actions.ofType<DeleteArticle>(ArticleActionTypes.DELETE_ARTICLE).pipe(
 		concatMap(action =>
 			this.articleService.deleteArticle(action.payload).pipe(
 				map(_ => ({ type: '[Router] Go', payload: { path: ['/'] } })),
-				catchError(error =>
-					of({
-						type: '[article] DELETE_ARTICLE_FAIL',
-						payload: error
-					})
-				)
+				catchError(error => of(new fromActions.DeleteArticleFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	addComment = this.actions.ofType<AddComment>('[article] ADD_COMMENT').pipe(
+	addComment = this.actions.ofType<AddComment>(ArticleActionTypes.ADD_COMMENT).pipe(
 		map(action => action.payload),
 		withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromNgrxForms.getStructure)),
 		exhaustMap(([slug, data, structure]) =>
 			this.articleService.addComment(slug, data.comment).pipe(
 				mergeMap(comment => ([
-					{
-						type: '[article] ADD_COMMENT_SUCCESS',
-						payload: comment
-					},
+					new fromActions.AddCommentSuccess(comment),
 					{
 						type: '[ngrxForms] RESET_FORM'
 					}
@@ -107,96 +85,56 @@ export class ArticleEffects {
 	);
 
 	@Effect()
-	deleteComment = this.actions.ofType<DeleteComment>('[article] DELETE_COMMENT').pipe(
+	deleteComment = this.actions.ofType<DeleteComment>(ArticleActionTypes.DELETE_COMMENT).pipe(
 		map(action => action.payload),
 		concatMap(data =>
 			this.articleService.deleteComment(data.commentId, data.slug).pipe(
-				map(_ => ({
-					type: '[article] DELETE_COMMENT_SUCCESS',
-					payload: data.commentId
-				})),
-				catchError(error =>
-					of({
-						type: '[article] DELETE_COMMENT_FAIL',
-						payload: error
-					})
-				)
+				map(_ => new fromActions.DeleteCommentSuccess(data.commentId)),
+				catchError(error => of(new fromActions.DeleteCommentFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	follow = this.actions.ofType<Follow>('[article] FOLLOW').pipe(
+	follow = this.actions.ofType<Follow>(ArticleActionTypes.FOLLOW).pipe(
 		map(action => action.payload),
 		concatMap(slug =>
 			this.actionsService.followUser(slug).pipe(
-				map(results => ({
-					type: '[article] FOLLOW_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article] FOLLOW_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.FollowSuccess(results)),
+				catchError(error => of(new fromActions.FollowFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	unFollow = this.actions.ofType<UnFollow>('[article] UNFOLLOW').pipe(
+	unFollow = this.actions.ofType<UnFollow>(ArticleActionTypes.UNFOLLOW).pipe(
 		map(action => action.payload),
 		concatMap(slug =>
 			this.actionsService.unfollowUser(slug).pipe(
-				map(results => ({
-					type: '[article] UNFOLLOW_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article] UNFOLLOW_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.UnFollowSuccess(results)),
+				catchError(error => of(new fromActions.UnFollowFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	favorite = this.actions.ofType<Favorite>('[article] FAVORITE').pipe(
+	favorite = this.actions.ofType<Favorite>(ArticleActionTypes.FAVORITE).pipe(
 		map(action => action.payload),
 		concatMap(slug =>
 			this.actionsService.favorite(slug).pipe(
-				map(results => ({
-					type: '[article] FAVORITE_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article] FAVORITE_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.FavoriteSuccess(results)),
+				catchError(error => of(new fromActions.FavoriteFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	unFavorite = this.actions.ofType<UnFavorite>('[article] UNFAVORITE').pipe(
+	unFavorite = this.actions.ofType<UnFavorite>(ArticleActionTypes.UNFAVORITE).pipe(
 		map(action => action.payload),
 		concatMap(slug =>
 			this.actionsService.unfavorite(slug).pipe(
-				map(results => ({
-					type: '[article] UNFAVORITE_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article] UNFAVORITE_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.UnFavoriteSuccess(results)),
+				catchError(error => of(new fromActions.UnFavoriteFail(error)))
 			)
 		)
 	);

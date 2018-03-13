@@ -1,27 +1,36 @@
 import { Article, ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+import { Action } from '@ngrx/store';
 
-export interface PublishArticle {
-  type: '[editor] PUBLISH_ARTICLE';
-  payload: Article;
+export enum EditorActionsType {
+	PUBLISH_ARTICLE = '[editor] PUBLISH_ARTICLE',
+	LOAD_ARTICLE = '[editor] LOAD_ARTICLE',
+	INITIALIZE_ARTICLE = '[editor] INITIALIZE_ARTICLE',
+	LOAD_ARTICLE_SUCCESS = '[editor] LOAD_ARTICLE_SUCCESS',
+	LOAD_ARTICLE_FAIL = '[editor] LOAD_ARTICLE_FAIL'
 }
 
-export interface LoadArticle {
-  type: '[editor] LOAD_ARTICLE';
-  payload: string;
+export class PublishArticle implements Action {
+	readonly type = EditorActionsType.PUBLISH_ARTICLE;
+	constructor(public payload: Article) { };
 }
 
-export interface InitializeArticle {
-  type: '[editor] INITIALIZE_ARTICLE';
+export class LoadArticle implements Action {
+	readonly type = EditorActionsType.LOAD_ARTICLE;
+	constructor(public payload: string) { };
 }
 
-export interface LoadArticleSuccess {
-  type: '[editor] LOAD_ARTICLE_SUCCESS';
-  payload: ArticleData;
+export class InitializeArticle implements Action {
+	readonly type = EditorActionsType.INITIALIZE_ARTICLE;
 }
 
-export interface LoadArticleFail {
-  type: '[editor] LOAD_ARTICLE_FAIL';
-  payload: Error;
+export class LoadArticleSuccess implements Action {
+	readonly type = EditorActionsType.LOAD_ARTICLE_SUCCESS;
+	constructor(public payload: ArticleData) { };
+}
+
+export class LoadArticleFail implements Action {
+	readonly type = EditorActionsType.LOAD_ARTICLE_FAIL;
+	constructor(public payload: Error) { };
 }
 
 export type EditorAction = PublishArticle | LoadArticle | InitializeArticle | LoadArticleSuccess | LoadArticleFail;

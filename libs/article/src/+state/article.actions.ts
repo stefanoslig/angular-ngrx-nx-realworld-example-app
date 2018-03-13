@@ -1,138 +1,169 @@
-import { ArticleData, ArticleComment } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+import { ArticleData, ArticleComment, Article } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
 import { Profile } from '@angular-ngrx-nx/profile/src/+state/profile.interfaces';
+import { Action } from '@ngrx/store';
 
-export interface LoadArticle {
-	type: '[article] LOAD_ARTICLE';
-	payload: string;
+export enum ArticleActionTypes {
+	LOAD_ARTICLE = '[article] LOAD_ARTICLE',
+	LOAD_ARTICLE_SUCCESS = '[article] LOAD_ARTICLE_SUCCESS',
+	LOAD_ARTICLE_FAIL = '[article] LOAD_ARTICLE_FAIL',
+	DELETE_ARTICLE = '[article] DELETE_ARTICLE',
+	DELETE_ARTICLE_FAIL = '[article] DELETE_ARTICLE_FAIL',
+	INITIALIZE_ARTICLE = '[article] INITIALIZE_ARTICLE',
+	LOAD_COMMENTS = '[article] LOAD_COMMENTS',
+	LOAD_COMMENTS_SUCCESS = '[article] LOAD_COMMENTS_SUCCESS',
+	LOAD_COMMENTS_FAIL = '[article] LOAD_COMMENTS_FAIL',
+	FAVORITE = '[article] FAVORITE',
+	FAVORITE_SUCCESS = '[article] FAVORITE_SUCCESS',
+	FAVORITE_FAIL = '[article] FAVORITE_FAIL',
+	UNFAVORITE = '[article] UNFAVORITE',
+	UNFAVORITE_SUCCESS = '[article] UNFAVORITE_SUCCESS',
+	UNFAVORITE_FAIL = '[article] UNFAVORITE_FAIL',
+	FOLLOW = '[article] FOLLOW',
+	FOLLOW_SUCCESS = '[article] FOLLOW_SUCCESS',
+	FOLLOW_FAIL = '[article] FOLLOW_FAIL',
+	UNFOLLOW = '[article] UNFOLLOW',
+	UNFOLLOW_SUCCESS = '[article] UNFOLLOW_SUCCESS',
+	UNFOLLOW_FAIL = '[article] UNFOLLOW_FAIL',
+	ADD_COMMENT = '[article] ADD_COMMENT',
+	ADD_COMMENT_FAIL = '[article] ADD_COMMENT_FAIL',
+	ADD_COMMENT_SUCCESS = '[article] ADD_COMMENT_SUCCESS',
+	DELETE_COMMENT = '[article] DELETE_COMMENT',
+	DELETE_COMMENT_FAIL = '[article] DELETE_COMMENT_FAIL',
+	DELETE_COMMENT_SUCCESS = '[article] DELETE_COMMENT_SUCCESS',
 }
 
-export interface LoadArticleSuccess {
-	type: '[article] LOAD_ARTICLE_SUCCESS';
-	payload: ArticleData;
+export class LoadArticle implements Action {
+	readonly type = ArticleActionTypes.LOAD_ARTICLE;
+	constructor(public payload: string) { };
 }
 
-export interface LoadArticleFail {
-	type: '[article] LOAD_ARTICLE_FAIL';
-	payload: Error;
+export class LoadArticleSuccess implements Action {
+	readonly type = ArticleActionTypes.LOAD_ARTICLE_SUCCESS;
+	constructor(public payload: ArticleData) { };
 }
 
-export interface DeleteArticle {
-	type: '[article] DELETE_ARTICLE';
-	payload: string;
+export class LoadArticleFail implements Action {
+	readonly type = ArticleActionTypes.LOAD_ARTICLE_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface DeleteArticleFail {
-	type: '[article] DELETE_ARTICLE_FAIL';
-	payload: Error;
+export class DeleteArticle implements Action {
+	readonly type = ArticleActionTypes.DELETE_ARTICLE;
+	constructor(public payload: string) { };
 }
 
-export interface InitializeArticle {
-	type: '[article] INITIALIZE_ARTICLE';
+export class DeleteArticleFail implements Action {
+	readonly type = ArticleActionTypes.DELETE_ARTICLE_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface LoadComments {
-	type: '[article] LOAD_COMMENTS';
-	payload: string;
+export class InitializeArticle implements Action {
+	readonly type = ArticleActionTypes.INITIALIZE_ARTICLE;
 }
 
-export interface LoadCommentsSuccess {
-	type: '[article] LOAD_COMMENTS_SUCCESS';
-	payload: ArticleComment[];
+export class LoadComments implements Action {
+	readonly type = ArticleActionTypes.LOAD_COMMENTS;
+	constructor(public payload: string) { };
 }
 
-export interface LoadCommentsFail {
-	type: '[article] LOAD_COMMENTS_FAIL';
-	payload: Error;
+export class LoadCommentsSuccess implements Action {
+	readonly type = ArticleActionTypes.LOAD_COMMENTS_SUCCESS;
+	constructor(public payload: ArticleComment[]) { };
 }
 
-export interface Favorite {
-	type: '[article] FAVORITE';
-	payload: string;
+export class LoadCommentsFail implements Action {
+	readonly type = ArticleActionTypes.LOAD_COMMENTS_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface FavoriteSuccess {
-	type: '[article] FAVORITE_SUCCESS';
-	payload: ArticleData;
+export class Favorite implements Action {
+	readonly type = ArticleActionTypes.FAVORITE;
+	constructor(public payload: string) { };
 }
 
-export interface FavoriteFail {
-	type: '[article] FAVORITE_FAIL';
-	payload: Error;
+export class FavoriteSuccess implements Action {
+	readonly type = ArticleActionTypes.FAVORITE_SUCCESS;
+	constructor(public payload: ArticleData) { };
 }
 
-export interface UnFavorite {
-	type: '[article] UNFAVORITE';
-	payload: string;
+export class FavoriteFail implements Action {
+	readonly type = ArticleActionTypes.FAVORITE_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface UnFavoriteSuccess {
-	type: '[article] UNFAVORITE_SUCCESS';
-	payload: ArticleData;
+export class UnFavorite implements Action {
+	readonly type = ArticleActionTypes.UNFAVORITE;
+	constructor(public payload: string) { };
 }
 
-export interface UnFavoriteFail {
-	type: '[article] UNFAVORITE_FAIL';
-	payload: Error;
+export class UnFavoriteSuccess implements Action {
+	readonly type = ArticleActionTypes.UNFAVORITE_SUCCESS;
+	constructor(public payload: ArticleData) { };
 }
 
-export interface Follow {
-	type: '[article] FOLLOW';
-	payload: string;
+export class UnFavoriteFail implements Action {
+	readonly type = ArticleActionTypes.UNFAVORITE_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface FollowSuccess {
-	type: '[article] FOLLOW_SUCCESS';
-	payload: Profile;
+export class Follow implements Action {
+	readonly type = ArticleActionTypes.FOLLOW;
+	constructor(public payload: string) { };
 }
 
-export interface FollowFail {
-	type: '[article] FOLLOW_FAIL';
-	payload: Error;
+export class FollowSuccess implements Action {
+	readonly type = ArticleActionTypes.FOLLOW_SUCCESS;
+	constructor(public payload: Profile) { };
 }
 
-export interface UnFollow {
-	type: '[article] UNFOLLOW';
-	payload: string;
+export class FollowFail implements Action {
+	readonly type = ArticleActionTypes.FOLLOW_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface UnFollowSuccess {
-	type: '[article] UNFOLLOW_SUCCESS';
-	payload: Profile;
+export class UnFollow implements Action {
+	readonly type = ArticleActionTypes.UNFOLLOW;
+	constructor(public payload: string) { };
 }
 
-export interface UnFollowFail {
-	type: '[article] UNFOLLOW_FAIL';
-	payload: Error;
+export class UnFollowSuccess implements Action {
+	readonly type = ArticleActionTypes.UNFOLLOW_SUCCESS;
+	constructor(public payload: Profile) { };
 }
 
-export interface AddComment {
-	type: '[article] ADD_COMMENT';
-	payload: string;
+export class UnFollowFail implements Action {
+	readonly type = ArticleActionTypes.UNFOLLOW_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface AddCommentFail {
-	type: '[article] ADD_COMMENT_FAIL';
-	payload: Error;
+export class AddComment implements Action {
+	readonly type = ArticleActionTypes.ADD_COMMENT;
+	constructor(public payload: string) { };
 }
 
-export interface AddCommentSuccess {
-	type: '[article] ADD_COMMENT_SUCCESS';
-	payload: ArticleComment
+export class AddCommentFail implements Action {
+	readonly type = ArticleActionTypes.ADD_COMMENT_FAIL;
+	constructor(public payload: Error) { };
 }
 
-export interface DeleteComment {
-	type: '[article] DELETE_COMMENT';
-	payload: { commentId: number; slug: string };
+export class AddCommentSuccess implements Action {
+	readonly type = ArticleActionTypes.ADD_COMMENT_SUCCESS;
+	constructor(public payload: ArticleComment) { }
 }
 
-export interface DeleteCommentFail {
-	type: '[article] DELETE_COMMENT_FAIL';
-	payload: Error;
+export class DeleteComment implements Action {
+	readonly type = ArticleActionTypes.DELETE_COMMENT;
+	constructor(public payload: { commentId: number; slug: string }) { };
 }
 
-export interface DeleteCommentSuccess {
-	type: '[article] DELETE_COMMENT_SUCCESS';
-	payload: number;
+export class DeleteCommentFail implements Action {
+	readonly type = ArticleActionTypes.DELETE_COMMENT_FAIL;
+	constructor(public payload: Error) { };
+}
+
+export class DeleteCommentSuccess implements Action {
+	readonly type = ArticleActionTypes.DELETE_COMMENT_SUCCESS;
+	constructor(public payload: number) { };
 }
 
 export type ArticleAction =
