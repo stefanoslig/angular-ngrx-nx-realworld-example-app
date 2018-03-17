@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
 
-import { EditorService } from '@angular-ngrx-nx/editor/src/editor.service';
-import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
+import { EditorService } from '../editor.service';
+import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';

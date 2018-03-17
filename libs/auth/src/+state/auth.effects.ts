@@ -1,8 +1,8 @@
-import { ApiService } from '@angular-ngrx-nx/api/src/api.service';
-import { AuthService } from '@angular-ngrx-nx/auth/src/auth.service';
-import { LocalStorageJwtService } from '@angular-ngrx-nx/core/src/local-storage-jwt.service';
-import { NgrxFormsState } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
-import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
+import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { AuthService } from '@angular-ngrx-nx-realworld-example-app/auth/src/auth.service';
+import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
+import { NgrxFormsState } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -81,18 +81,18 @@ export class AuthEffects {
 	setLocalStorage = this.actions
 		.ofType<SetLocalStorage>(AuthActionTypes.SET_LOCAL_STORAGE)
 		.pipe(
-		map(action => action.payload),
-		tap(token => this.localStorageJwtService.setItem(token)),
-		concatMap(_ => [new fromActions.GetUser(), { type: '[Router] Go', payload: { path: ['/'] } }])
+			map(action => action.payload),
+			tap(token => this.localStorageJwtService.setItem(token)),
+			concatMap(_ => [new fromActions.GetUser(), { type: '[Router] Go', payload: { path: ['/'] } }])
 		);
 
 	@Effect()
 	removeoLcalStorage = this.actions
 		.ofType<SetLocalStorage>(AuthActionTypes.REMOVE_LOCAL_STORAGE)
 		.pipe(
-		map(action => action.payload),
-		tap(token => this.localStorageJwtService.removeItem()),
-		concatMap(_ => [new fromActions.InializeUser(), { type: '[Router] Go', payload: { path: ['/'] } }])
+			map(action => action.payload),
+			tap(token => this.localStorageJwtService.removeItem()),
+			concatMap(_ => [new fromActions.InializeUser(), { type: '[Router] Go', payload: { path: ['/'] } }])
 		);
 
 	constructor(

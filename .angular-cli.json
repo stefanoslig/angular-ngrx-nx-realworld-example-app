@@ -3,7 +3,7 @@
 	"project": {
 		"name": "angular-ngrx-nx-realworld-example-app",
 		"npmScope": "angular-ngrx-nx-realworld-example-app",
-		"latestMigration": "20180130-angular-devkit-schematics"
+		"latestMigration": "20180313-add-tags"
 	},
 	"e2e": {
 		"protractor": {
@@ -68,91 +68,127 @@
 			"environments": {
 				"dev": "environments/environment.ts",
 				"prod": "environments/environment.prod.ts"
-			}
+			},
+			"tags": [
+				"conduit"
+			]
 		},
 		{
 			"name": "api",
 			"root": "libs/api/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"api"
+			]
 		},
 		{
 			"name": "article",
 			"root": "libs/article/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"article"
+			]
 		},
 		{
 			"name": "article-list",
 			"root": "libs/article-list/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"article-list"
+			]
 		},
 		{
 			"name": "auth",
 			"root": "libs/auth/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"auth"
+			]
 		},
 		{
 			"name": "core",
 			"root": "libs/core/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"core"
+			]
 		},
 		{
 			"name": "editor",
 			"root": "libs/editor/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"editor"
+			]
 		},
 		{
 			"name": "home",
 			"root": "libs/home/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"home"
+			]
 		},
 		{
 			"name": "ngrx-error",
 			"root": "libs/ngrx-error/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"ngrx-error"
+			]
 		},
 		{
 			"name": "ngrx-forms",
 			"root": "libs/ngrx-forms/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"ngrx-forms"
+			]
 		},
 		{
 			"name": "profile",
 			"root": "libs/profile/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"profile"
+			]
 		},
 		{
 			"name": "ngrx-router",
 			"root": "libs/ngrx-router/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"ngrx-router"
+			]
 		},
 		{
 			"name": "settings",
 			"root": "libs/settings/src",
 			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"settings"
+			]
 		},
 		{
 			"name": "shared",
 			"root": "libs/shared/src",
 			"test": "../../../test.js",
-			"appRoot": ""
-		},
-		{
-			"name": "user",
-			"root": "libs/user/src",
-			"test": "../../../test.js",
-			"appRoot": ""
+			"appRoot": "",
+			"tags": [
+				"shared"
+			]
 		}
 	]
 }

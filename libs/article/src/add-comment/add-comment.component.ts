@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
-import { ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
-import { User } from '@angular-ngrx-nx/auth/src/+state/auth.interfaces';
-import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article/src/+state/article.interfaces';
+import { User } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

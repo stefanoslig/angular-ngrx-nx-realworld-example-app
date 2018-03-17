@@ -1,4 +1,5 @@
-import { ArticleListModule } from '@angular-ngrx-nx/article-list/src/article-list.module';
+import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { SharedModule } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -12,7 +13,7 @@ import { ProfileArticlesComponent } from './profile-articles.component';
 import {
 	ProfileArticlesResolverService,
 	ProfileFavoritesResolverService,
-	ProfileResolverService
+	ProfileResolverService,
 } from './profile-resolver.service';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
@@ -21,6 +22,7 @@ import { ProfileService } from './profile.service';
 	imports: [
 		CommonModule,
 		ArticleListModule,
+		SharedModule,
 		RouterModule.forChild([
 			{
 				path: '',

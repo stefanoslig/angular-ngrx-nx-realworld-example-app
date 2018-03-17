@@ -8,7 +8,7 @@ import { articleListReducer } from './+state/article-list.reducer';
 import { articleListInitialState } from './+state/article-list.init';
 import { ArticleListEffects } from './+state/article-list.effects';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
-import { SharedModule } from '@angular-ngrx-nx/shared';
+import { SharedModule } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { RouterModule } from '@angular/router';
 
 @NgModule({

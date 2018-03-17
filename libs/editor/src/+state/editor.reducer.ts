@@ -1,6 +1,6 @@
 import { Editor, EditorState } from './editor.interfaces';
 import { EditorAction, EditorActionsType } from './editor.actions';
-import { editorInitialState } from '@angular-ngrx-nx/editor/src/+state/editor.init';
+import { editorInitialState } from './editor.init';
 
 export function editorReducer(state: Editor, action: EditorAction): Editor {
 	switch (action.type) {

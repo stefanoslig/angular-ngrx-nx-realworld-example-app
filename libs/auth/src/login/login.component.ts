@@ -1,10 +1,10 @@
-import { NgrxFormsState, Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
-import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
+import { NgrxFormsState, Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import * as fromActions from '@angular-ngrx-nx/auth/src/+state/auth.actions';
+import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth/src/+state/auth.actions';
 
 const structure: Field[] = [
 	{

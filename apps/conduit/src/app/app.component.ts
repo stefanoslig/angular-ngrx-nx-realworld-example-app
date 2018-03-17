@@ -1,14 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { AuthState, User } from '@angular-ngrx-nx-realworld-example-app/auth';
+import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
+import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth';
+import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { AuthState, User } from '@angular-ngrx-nx/auth/src/+state/auth.interfaces';
 import { Observable } from 'rxjs/Observable';
-import * as fromAuth from '@angular-ngrx-nx/auth/src/+state/auth.reducer';
-import { LocalStorageJwtService } from '@angular-ngrx-nx/core/src/local-storage-jwt.service';
-import { take } from 'rxjs/operators/take';
 import { filter } from 'rxjs/operators/filter';
-import * as fromActions from '@angular-ngrx-nx/auth/src/+state/auth.actions'
+import { take } from 'rxjs/operators/take';
 
 @Component({
 	selector: 'app-root',

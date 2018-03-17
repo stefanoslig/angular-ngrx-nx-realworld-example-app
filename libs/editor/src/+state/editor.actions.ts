@@ -1,4 +1,4 @@
-import { Article, ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
+import { Article, ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
 import { Action } from '@ngrx/store';
 
 export enum EditorActionsType {

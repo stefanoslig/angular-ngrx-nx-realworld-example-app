@@ -1,40 +1,40 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { ArticleData } from '../+state/article.interfaces';
-import { Profile } from '@angular-ngrx-nx/profile/src/+state/profile.interfaces';
+import { Profile } from '@angular-ngrx-nx-realworld-example-app/profile';
 
 @Component({
-  selector: 'app-article-meta',
-  templateUrl: './article-meta.component.html',
-  styleUrls: ['./article-meta.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+	selector: 'app-article-meta',
+	templateUrl: './article-meta.component.html',
+	styleUrls: ['./article-meta.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleMetaComponent {
-  @Input() article: ArticleData;
-  @Input() isAuthenticated: boolean;
-  @Input() canModify: boolean;
-  @Output() follow: EventEmitter<string> = new EventEmitter<string>();
-  @Output() unfollow: EventEmitter<string> = new EventEmitter<string>();
-  @Output() unfavorite: EventEmitter<string> = new EventEmitter();
-  @Output() favorite: EventEmitter<string> = new EventEmitter();
-  @Output() delete: EventEmitter<string> = new EventEmitter();
+	@Input() article: ArticleData;
+	@Input() isAuthenticated: boolean;
+	@Input() canModify: boolean;
+	@Output() follow: EventEmitter<string> = new EventEmitter<string>();
+	@Output() unfollow: EventEmitter<string> = new EventEmitter<string>();
+	@Output() unfavorite: EventEmitter<string> = new EventEmitter();
+	@Output() favorite: EventEmitter<string> = new EventEmitter();
+	@Output() delete: EventEmitter<string> = new EventEmitter();
 
-  toggleFavorite() {
-    if (this.article.favorited) {
-      this.unfavorite.emit(this.article.slug);
-    } else {
-      this.favorite.emit(this.article.slug);
-    }
-  }
+	toggleFavorite() {
+		if (this.article.favorited) {
+			this.unfavorite.emit(this.article.slug);
+		} else {
+			this.favorite.emit(this.article.slug);
+		}
+	}
 
-  toggleFollow() {
-    if (this.article.author.following) {
-      this.unfollow.emit(this.article.author.username);
-    } else {
-      this.follow.emit(this.article.author.username);
-    }
-  }
+	toggleFollow() {
+		if (this.article.author.following) {
+			this.unfollow.emit(this.article.author.username);
+		} else {
+			this.follow.emit(this.article.author.username);
+		}
+	}
 
-  deleteArticle() {
-    this.delete.emit(this.article.slug);
-  }
+	deleteArticle() {
+		this.delete.emit(this.article.slug);
+	}
 }

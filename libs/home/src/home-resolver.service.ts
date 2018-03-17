@@ -1,4 +1,4 @@
-import { Home } from '@angular-ngrx-nx/home/src/+state/home.interfaces';
+import { Home } from './+state/home.interfaces';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,10 +7,10 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class HomeResolverService implements Resolve<Home> {
-  constructor(private store: Store<any>) {}
+	constructor(private store: Store<any>) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    this.store.dispatch({ type: '[home] LOAD_TAGS' });
-    return of(true);
-  }
+	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+		this.store.dispatch({ type: '[home] LOAD_TAGS' });
+		return of(true);
+	}
 }

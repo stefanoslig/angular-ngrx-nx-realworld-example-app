@@ -1,6 +1,6 @@
 import { Article, ArticleState, ArticleData, ArticleComment } from './article.interfaces';
 import { ArticleAction, ArticleActionTypes } from './article.actions';
-import { articleInitialState } from '@angular-ngrx-nx/article/src/+state/article.init';
+import { articleInitialState } from './article.init';
 
 export function articleReducer(state: Article = articleInitialState, action: ArticleAction): Article {
 	switch (action.type) {

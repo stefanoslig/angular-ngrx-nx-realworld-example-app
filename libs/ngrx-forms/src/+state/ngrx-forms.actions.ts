@@ -1,4 +1,4 @@
-import { Errors } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
+import { Errors } from './ngrx-forms.interfaces';
 
 export interface SetData {
 	type: '[ngrxForms] SET_DATA';

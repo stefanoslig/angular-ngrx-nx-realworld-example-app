@@ -1,6 +1,6 @@
 import { Auth, AuthState } from './auth.interfaces';
 import { AuthAction, AuthActionTypes } from './auth.actions';
-import { authInitialState } from '@angular-ngrx-nx/auth/src/+state/auth.init';
+import { authInitialState } from './auth.init';
 
 export function authReducer(state: Auth, action: AuthAction): Auth {
 	switch (action.type) {

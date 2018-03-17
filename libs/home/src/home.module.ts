@@ -11,7 +11,7 @@ import { HomeResolverService } from './home-resolver.service';
 import { HomeComponent } from './home.component';
 import { HomeService } from './home.service';
 import { TagsListComponent } from './tags-list/tags-list.component';
-import { ArticleListModule } from '@angular-ngrx-nx/article-list';
+import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
 
 @NgModule({
 	imports: [

@@ -1,4 +1,4 @@
-import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
+import { Field } from '../+state/ngrx-forms.interfaces';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -29,15 +29,15 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.structure$
 			.pipe(
-			map(this.formBuilder),
-			tap(f => (this.form = f)),
-			tap(f => this.listenFormChanges(f)),
-			combineLatest(this.data$),
-			takeUntil(this.unsubscribe$)
+				map(this.formBuilder),
+				tap(f => (this.form = f)),
+				tap(f => this.listenFormChanges(f)),
+				combineLatest(this.data$),
+				takeUntil(this.unsubscribe$)
 			)
 			.subscribe(this.patchValue);
 
-		if(this.touchedForm$) {
+		if (this.touchedForm$) {
 			this.touchedForm$.pipe(
 				filter(t => !t && !!this.form),
 				takeUntil(this.unsubscribe$))

@@ -1,8 +1,8 @@
-import { ArticleComment, ArticleData } from '@angular-ngrx-nx/article/src/+state/article.interfaces';
-import { User } from '@angular-ngrx-nx/auth/src/+state/auth.interfaces';
-import * as fromAuth from '@angular-ngrx-nx/auth/src/+state/auth.reducer';
-import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
-import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
+import { ArticleComment, ArticleData } from '@angular-ngrx-nx-realworld-example-app/article/src/+state/article.interfaces';
+import { User } from '@angular-ngrx-nx-realworld-example-app/auth';
+import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
+import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';

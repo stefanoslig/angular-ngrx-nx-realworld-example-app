@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ApiService } from '@angular-ngrx-nx/api/src/api.service';
+import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Article, ArticleComment, ArticleData } from './+state/article.interfaces';
 import { map } from 'rxjs/operators/map';
 

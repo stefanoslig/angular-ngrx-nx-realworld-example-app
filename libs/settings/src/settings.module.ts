@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
+import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { SettingsService } from '@angular-ngrx-nx-realworld-example-app/settings/src/settings.service';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SettingsComponent } from './settings/settings.component';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { settingsReducer } from './+state/settings.reducer';
-import { settingsInitialState } from './+state/settings.init';
+import { StoreModule } from '@ngrx/store';
+
 import { SettingsEffects } from './+state/settings.effects';
-import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
-import { SettingsService } from '@angular-ngrx-nx/settings/src/settings.service';
-import { AuthGuardService } from '@angular-ngrx-nx/auth/src/auth-guard.service';
+import { settingsInitialState } from './+state/settings.init';
+import { settingsReducer } from './+state/settings.reducer';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
 	imports: [

@@ -7,10 +7,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { editorReducer } from './+state/editor.reducer';
 import { editorInitialState } from './+state/editor.init';
 import { EditorEffects } from './+state/editor.effects';
-import { NgrxFormsModule } from '@angular-ngrx-nx/ngrx-forms';
-import { EditorService } from '@angular-ngrx-nx/editor/src/editor.service';
-import { EditorResolverService } from '@angular-ngrx-nx/editor/src/editor-resolver.service';
-import { AuthGuardService } from '@angular-ngrx-nx/auth/src/auth-guard.service';
+import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { EditorService } from './editor.service';
+import { EditorResolverService } from './editor-resolver.service';
+import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 
 @NgModule({
 	imports: [

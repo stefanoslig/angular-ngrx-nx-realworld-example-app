@@ -1,13 +1,13 @@
-import * as fromAuth from '@angular-ngrx-nx/auth/src/+state/auth.reducer';
-import { LocalStorageJwtService } from '@angular-ngrx-nx/core/src/local-storage-jwt.service';
-import { Field } from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.interfaces';
-import * as fromNgrxForms from '@angular-ngrx-nx/ngrx-forms/src/+state/ngrx-forms.reducer';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
+import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth';
+import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
+import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import * as fromActions from '@angular-ngrx-nx/auth/src/+state/auth.actions';
 
 const structure: Field[] = [
 	{
