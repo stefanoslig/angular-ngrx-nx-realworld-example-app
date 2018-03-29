@@ -45,13 +45,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	setListTo(type: string = 'ALL') {
-		this.store.dispatch({
-			type: '[article-list] SET_LIST_CONFIG',
-			payload: <ArticleListConfig>{
-				...articleListInitialState.listConfig,
-				type
-			}
-		});
+		this.store.dispatch(new fromArticleList.SetListConfig(<ArticleListConfig>{
+			...articleListInitialState.listConfig,
+			type
+		}));
 	}
 
 	getArticles() {
@@ -63,16 +60,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	setListTag(tag: string) {
-		this.store.dispatch({
-			type: '[article-list] SET_LIST_CONFIG',
-			payload: <ArticleListConfig>{
+		this.store.dispatch(new fromArticleList.SetListConfig(
+			<ArticleListConfig>{
 				...articleListInitialState.listConfig,
 				filters: {
 					...articleListInitialState.listConfig.filters,
 					tag
 				}
 			}
-		});
+		));
 	}
 
 	ngOnDestroy() {

@@ -1,58 +1,74 @@
 import { ListType, Filters, ArticleListConfig } from './article-list.interfaces';
 import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import { Action } from '@ngrx/store';
 
-export interface SetListPage {
-	type: '[article-list] SET_LIST_PAGE';
-	payload: number;
+export enum ArticleListActionTypes {
+	SET_LIST_PAGE = '[article-list] SET_LIST_PAGE',
+	SET_LIST_CONFIG = '[article-list] SET_LIST_CONFIG',
+	LOAD_ARTICLES = '[article-list] LOAD_ARTICLES',
+	LOAD_ARTICLES_SUCCESS = '[article-list] LOAD_ARTICLES_SUCCESS',
+	LOAD_ARTICLES_FAIL = '[article-list] LOAD_ARTICLES_FAIL',
+	FAVORITE = '[article-list] FAVORITE',
+	FAVORITE_SUCCESS = '[article-list] FAVORITE_SUCCESS',
+	FAVORITE_FAIL = '[article-list] FAVORITE_FAIL',
+	UNFAVORITE = '[article-list] UNFAVORITE',
+	UNFAVORITE_SUCCESS = '[article-list] UNFAVORITE_SUCCESS',
+	UNFAVORITE_FAIL = '[article-list] UNFAVORITE_FAIL',
 }
 
-export interface SetListConfig {
-	type: '[article-list] SET_LIST_CONFIG';
-	payload: ArticleListConfig;
+export class SetListPage implements Action {
+	readonly type = '[article-list] SET_LIST_PAGE';
+	constructor(public payload: number) { };
 }
 
-export interface LoadArticles {
-	type: '[article-list] LOAD_ARTICLES';
+export class SetListConfig implements Action {
+	readonly type = '[article-list] SET_LIST_CONFIG';
+	constructor(public payload: ArticleListConfig) { };
 }
 
-export interface LoadArticlesSuccess {
-	type: '[article-list] LOAD_ARTICLES_SUCCESS';
-	payload: { articles: ArticleData[]; articlesCount: number };
+export class LoadArticles implements Action {
+	readonly type = '[article-list] LOAD_ARTICLES';
+	constructor() { };
 }
 
-export interface LoadArticlesFail {
-	type: '[article-list] LOAD_ARTICLES_FAIL';
-	payload: Error;
+export class LoadArticlesSuccess implements Action {
+	readonly type = '[article-list] LOAD_ARTICLES_SUCCESS';
+	constructor(public payload: { articles: ArticleData[]; articlesCount: number }) { };
 }
 
-export interface Favorite {
-	type: '[article-list] FAVORITE';
-	payload: string;
+export class LoadArticlesFail implements Action {
+	readonly type = '[article-list] LOAD_ARTICLES_FAIL';
+	constructor(public payload: Error) { };
 }
 
-export interface FavoriteSuccess {
-	type: '[article-list] FAVORITE_SUCCESS';
-	payload: ArticleData;
+export class Favorite implements Action {
+	readonly type = '[article-list] FAVORITE';
+	constructor(public payload: string) { };
 }
 
-export interface FavoriteFail {
-	type: '[article-list] FAVORITE_FAIL';
-	payload: Error;
+export class FavoriteSuccess implements Action {
+	readonly type = '[article-list] FAVORITE_SUCCESS';
+	constructor(public payload: ArticleData) { };
 }
 
-export interface UnFavorite {
-	type: '[article-list] UNFAVORITE';
-	payload: string;
+export class FavoriteFail implements Action {
+	readonly type = '[article-list] FAVORITE_FAIL';
+	constructor(public payload: Error) { };
 }
 
-export interface UnFavoriteSuccess {
-	type: '[article-list] UNFAVORITE_SUCCESS';
-	payload: ArticleData;
+export class UnFavorite implements Action {
+	readonly type = '[article-list] UNFAVORITE';
+	constructor(public payload: string) { };
 }
 
-export interface UnFavoriteFail {
-	type: '[article-list] UNFAVORITE_FAIL';
-	payload: Error;
+export class UnFavoriteSuccess implements Action {
+	readonly type = '[article-list] UNFAVORITE_SUCCESS';
+	constructor(public payload: ArticleData) { };
+}
+
+export class UnFavoriteFail implements Action {
+	readonly type = '[article-list] UNFAVORITE_FAIL';
+	constructor(public payload: Error) { };
 }
 
 export type ArticleListAction =

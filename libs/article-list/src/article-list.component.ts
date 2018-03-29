@@ -5,6 +5,7 @@ import * as fromArticleList from './+state/article-list.reducer';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 import { Observable } from 'rxjs/Observable';
 import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import * as fromArticleListActions from './+state/article-list.actions';
 
 @Component({
 	selector: 'app-article-list',
@@ -28,17 +29,11 @@ export class ArticleListComponent implements OnInit {
 	}
 
 	favorite(slug: string) {
-		this.store.dispatch({
-			type: '[article-list] FAVORITE',
-			payload: slug
-		});
+		this.store.dispatch(new fromArticleListActions.Favorite(slug));
 	}
 
 	unFavorite(slug: string) {
-		this.store.dispatch({
-			type: '[article-list] UNFAVORITE',
-			payload: slug
-		});
+		this.store.dispatch(new fromArticleListActions.UnFavorite(slug));
 	}
 
 	navigateToArticle(slug: string) {
@@ -58,9 +53,6 @@ export class ArticleListComponent implements OnInit {
 	}
 
 	setPage(page: number) {
-		this.store.dispatch({
-			type: '[article-list] SET_LIST_PAGE',
-			payload: page
-		});
+		this.store.dispatch(new fromArticleListActions.SetListPage(page));
 	}
 }

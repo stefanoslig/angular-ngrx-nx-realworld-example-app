@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import * as fromArticleList from '@angular-ngrx-nx-realworld-example-app/article-list';
 
 @Injectable()
 export class ProfileResolverService implements Resolve<Profile> {
@@ -24,16 +25,13 @@ export class ProfileArticlesResolverService implements Resolve<Profile> {
 
 	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
 		const username = route.params['username'];
-		this.store.dispatch({
-			type: '[article-list] SET_LIST_CONFIG',
-			payload: <ArticleListConfig>{
-				...articleListInitialState.listConfig,
-				filters: {
-					...articleListInitialState.listConfig.filters,
-					author: username
-				}
+		this.store.dispatch(new fromArticleList.SetListConfig(<ArticleListConfig>{
+			...articleListInitialState.listConfig,
+			filters: {
+				...articleListInitialState.listConfig.filters,
+				author: username
 			}
-		});
+		}));
 	}
 }
 
@@ -43,15 +41,12 @@ export class ProfileFavoritesResolverService implements Resolve<Profile> {
 
 	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
 		const username = route.parent.params['username'];
-		this.store.dispatch({
-			type: '[article-list] SET_LIST_CONFIG',
-			payload: <ArticleListConfig>{
-				...articleListInitialState.listConfig,
-				filters: {
-					...articleListInitialState.listConfig.filters,
-					favorited: username
-				}
+		this.store.dispatch(new fromArticleList.SetListConfig(<ArticleListConfig>{
+			...articleListInitialState.listConfig,
+			filters: {
+				...articleListInitialState.listConfig.filters,
+				favorited: username
 			}
-		});
+		}));
 	}
 }

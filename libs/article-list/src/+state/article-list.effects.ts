@@ -11,75 +11,52 @@ import { concatMap } from 'rxjs/operators/concatMap';
 import { map } from 'rxjs/operators/map';
 import { withLatestFrom } from 'rxjs/operators/withLatestFrom';
 
-import { Favorite, LoadArticles, SetListConfig, SetListPage } from './article-list.actions';
+import { Favorite, LoadArticles, SetListConfig, SetListPage, ArticleListActionTypes } from './article-list.actions';
 import { ArticleListState } from './article-list.interfaces';
 import * as fromArticleList from './article-list.reducer';
+import * as fromActions from './article-list.actions';
 
 @Injectable()
 export class ArticleListEffects {
 	@Effect()
 	setListPage = this.actions
-		.ofType<SetListPage>('[article-list] SET_LIST_PAGE')
-		.pipe(map(() => ({ type: '[article-list] LOAD_ARTICLES' })));
+		.ofType<SetListPage>(ArticleListActionTypes.SET_LIST_PAGE)
+		.pipe(map(() => ({ type: ArticleListActionTypes.LOAD_ARTICLES })));
 
 	@Effect()
 	setListTag = this.actions
-		.ofType<SetListConfig>('[article-list] SET_LIST_CONFIG')
-		.pipe(map(() => ({ type: '[article-list] LOAD_ARTICLES' })));
+		.ofType<SetListConfig>(ArticleListActionTypes.SET_LIST_CONFIG)
+		.pipe(map(() => (new fromActions.LoadArticles())));
 
 	@Effect()
-	loadArticles = this.actions.ofType<LoadArticles>('[article-list] LOAD_ARTICLES').pipe(
+	loadArticles = this.actions.ofType<LoadArticles>(ArticleListActionTypes.LOAD_ARTICLES).pipe(
 		withLatestFrom(this.store.select(fromArticleList.getListConfig)),
 		concatMap(([_, config]) =>
 			this.articleListService.query(config).pipe(
-				map(results => ({
-					type: '[article-list] LOAD_ARTICLES_SUCCESS',
-					payload: { articles: results.articles, articlesCount: results.articlesCount }
-				})),
-				catchError(error =>
-					of({
-						type: '[article-list] LOAD_ARTICLES_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.LoadArticlesSuccess({ articles: results.articles, articlesCount: results.articlesCount })),
+				catchError(error => of(new fromActions.LoadArticlesFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	favorite = this.actions.ofType<Favorite>('[article-list] FAVORITE').pipe(
+	favorite = this.actions.ofType<Favorite>(ArticleListActionTypes.FAVORITE).pipe(
 		map(action => action.payload),
 		concatMap(slug =>
 			this.actionsService.favorite(slug).pipe(
-				map(results => ({
-					type: '[article-list] FAVORITE_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article-list] FAVORITE_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.FavoriteSuccess(results)),
+				catchError(error => of(new fromActions.FavoriteFail(error)))
 			)
 		)
 	);
 
 	@Effect()
-	unFavorite = this.actions.ofType<Favorite>('[article-list] UNFAVORITE').pipe(
+	unFavorite = this.actions.ofType<Favorite>(ArticleListActionTypes.UNFAVORITE).pipe(
 		map(action => action.payload),
 		concatMap(slug =>
 			this.actionsService.unfavorite(slug).pipe(
-				map(results => ({
-					type: '[article-list] UNFAVORITE_SUCCESS',
-					payload: results
-				})),
-				catchError(error =>
-					of({
-						type: '[article-list] UNFAVORITE_FAIL',
-						payload: error
-					})
-				)
+				map(results => new fromActions.UnFavoriteSuccess(results)),
+				catchError(error => of(new fromActions.UnFavoriteFail(error)))
 			)
 		)
 	);
