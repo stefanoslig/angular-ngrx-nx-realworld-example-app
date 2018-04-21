@@ -72,6 +72,7 @@ export class AuthEffects {
 	@Effect({ dispatch: false })
 	logout = this.actions.ofType<Logout>(AuthActionTypes.LOGOUT).pipe(
 		tap(action => {
+			this.localStorageJwtService.removeItem();
 			this.router.navigateByUrl('/login');
 		})
 	);
