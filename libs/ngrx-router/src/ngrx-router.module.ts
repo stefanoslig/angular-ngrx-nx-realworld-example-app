@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
+import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
+import { routerReducer, RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+
+import { CustomSerializer } from './+state/custom-serializer';
 import { RouterEffects } from './+state/router.effects';
-import { CustomSerializer, routerReducer } from './+state/router.reducer';
-import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		StoreModule.forFeature('router', routerReducer),
 		EffectsModule.forFeature([RouterEffects]),
-		StoreRouterConnectingModule
+		StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
 	],
 	providers: [RouterEffects, [{ provide: RouterStateSerializer, useClass: CustomSerializer }]]
 })

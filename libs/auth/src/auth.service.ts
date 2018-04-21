@@ -1,9 +1,7 @@
+import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { User } from './+state/auth.interfaces';
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
-import { map } from 'rxjs/operators/map';
-import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
 
 @Injectable()
 export class AuthService {

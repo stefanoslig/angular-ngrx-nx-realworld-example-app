@@ -13,11 +13,10 @@ import { NxModule } from '@nrwl/nx';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '../environments/environment';
-import { AppEffects } from './+state/app.effects';
-import { appReducer } from './+state/app.reducer';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+
 
 @NgModule({
 	imports: [
@@ -26,7 +25,6 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 		CoreModule,
 		BrowserModule,
 		NxModule.forRoot(),
-		NgrxRouterModule,
 		RouterModule.forRoot(
 			[
 				{ path: '', loadChildren: '@angular-ngrx-nx-realworld-example-app/home#HomeModule' },
@@ -40,14 +38,13 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 				useHash: true
 			}
 		),
-		StoreModule.forRoot({ app: appReducer },
-			{ metaReducers: !environment.production ? [storeFreeze] : [] }),
-		EffectsModule.forRoot([AppEffects]),
+		StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze] : [] }),
+		EffectsModule.forRoot([]),
 		!environment.production ? StoreDevtoolsModule.instrument() : [],
+		NgrxRouterModule,
 		NgrxErrorModule
 	],
 	declarations: [AppComponent, FooterComponent, NavbarComponent],
 	bootstrap: [AppComponent],
-	providers: [AppEffects]
 })
 export class AppModule { }

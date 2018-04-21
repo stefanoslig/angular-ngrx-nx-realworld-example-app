@@ -86,6 +86,6 @@ export class SettingsComponent implements OnInit {
 	}
 
 	logout() {
-		this.store.dispatch(new fromActions.RemoveLocalStorage());
+		this.store.dispatch(new fromActions.Logout());
 	}
 }

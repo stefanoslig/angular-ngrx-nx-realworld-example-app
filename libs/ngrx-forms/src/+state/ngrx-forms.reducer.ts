@@ -1,30 +1,30 @@
 import { NgrxForms, NgrxFormsState } from './ngrx-forms.interfaces';
-import { NgrxFormsAction } from './ngrx-forms.actions';
+import { NgrxFormsAction, NgrxFormsActionTypes } from './ngrx-forms.actions';
 import { ngrxFormsInitialState } from './ngrx-forms.init';
 
 export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): NgrxForms {
 	switch (action.type) {
-		case '[ngrxForms] SET_DATA': {
+		case NgrxFormsActionTypes.SET_DATA: {
 			return { ...state, data: action.payload };
 		}
-		case '[ngrxForms] UPDATE_DATA': {
+		case NgrxFormsActionTypes.UPDATE_DATA: {
 			const data = { ...state.data, ...action.payload };
 			return { ...state, data, touched: true };
 		}
-		case '[ngrxForms] SET_STRUCTURE': {
+		case NgrxFormsActionTypes.SET_STRUCTURE: {
 			const structure = action.payload.slice(0);
 			return { ...state, structure };
 		}
-		case '[ngrxForms] SET_ERRORS': {
+		case NgrxFormsActionTypes.SET_ERRORS: {
 			return { ...state, errors: action.payload };
 		}
-		case '[ngrxForms] INITIALIZE_ERRORS': {
+		case NgrxFormsActionTypes.INITIALIZE_ERRORS: {
 			return { ...state, errors: {} };
 		}
-		case '[ngrxForms] INITIALIZE_FORM': {
+		case NgrxFormsActionTypes.INITIALIZE_FORM: {
 			return ngrxFormsInitialState;
 		}
-		case '[ngrxForms] RESET_FORM': {
+		case NgrxFormsActionTypes.RESET_FORM: {
 			return { ...state, touched: false };
 		}
 		default: {

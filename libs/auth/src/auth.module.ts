@@ -9,7 +9,6 @@ import { AuthEffects } from './+state/auth.effects';
 import { authInitialState } from './+state/auth.init';
 import { authReducer } from './+state/auth.reducer';
 import { AuthGuardService } from './auth-guard.service';
-import { NoAuthGuardService } from './no-auth-guard.service';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -17,13 +16,11 @@ import { RegisterComponent } from './register/register.component';
 const authRouting: ModuleWithProviders = RouterModule.forChild([
 	{
 		path: 'login',
-		component: LoginComponent,
-		canActivate: [NoAuthGuardService]
+		component: LoginComponent
 	},
 	{
 		path: 'register',
-		component: RegisterComponent,
-		canActivate: [NoAuthGuardService]
+		component: RegisterComponent
 	}
 ]);
 
@@ -35,7 +32,7 @@ const authRouting: ModuleWithProviders = RouterModule.forChild([
 		StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
 		EffectsModule.forFeature([AuthEffects])
 	],
-	providers: [AuthEffects, AuthGuardService, AuthService, NoAuthGuardService],
+	providers: [AuthEffects, AuthGuardService, AuthService],
 	declarations: [LoginComponent, RegisterComponent]
 })
 export class AuthModule { }

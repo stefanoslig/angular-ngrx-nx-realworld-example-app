@@ -33,7 +33,7 @@ export class SettingsEffects {
 			this.settingsService.update(data).pipe(
 				mergeMap(result => [
 					new fromActions.GetUser(),
-					{ type: '[Router] Go', payload: { path: ['profile', result.username] } }
+					{ type: '[router] Go', payload: { path: ['profile', result.username] } }
 				]),
 				catchError(result =>
 					of({

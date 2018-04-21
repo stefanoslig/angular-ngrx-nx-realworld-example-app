@@ -56,7 +56,7 @@ export class ArticleEffects {
 	deleteArticle = this.actions.ofType<DeleteArticle>(ArticleActionTypes.DELETE_ARTICLE).pipe(
 		concatMap(action =>
 			this.articleService.deleteArticle(action.payload).pipe(
-				map(_ => ({ type: '[Router] Go', payload: { path: ['/'] } })),
+				map(_ => ({ type: '[router] Go', payload: { path: ['/'] } })),
 				catchError(error => of(new fromActions.DeleteArticleFail(error)))
 			)
 		)

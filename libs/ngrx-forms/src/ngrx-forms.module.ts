@@ -13,15 +13,15 @@ import { TextareaComponent } from './fields/textarea/textarea.component';
 import { ListErrorsComponent } from './list-errors/list-errors.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('ngrxForms', ngrxFormsReducer, { initialState: ngrxFormsInitialState }),
-    EffectsModule.forFeature([NgrxFormsEffects])
-  ],
-  providers: [NgrxFormsEffects],
-  declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent, ListErrorsComponent],
-  entryComponents: [InputComponent, TextareaComponent],
-  exports: [DynamicFormComponent, ListErrorsComponent]
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		StoreModule.forFeature('ngrxForms', ngrxFormsReducer, { initialState: ngrxFormsInitialState }),
+		EffectsModule.forFeature([NgrxFormsEffects])
+	],
+	providers: [NgrxFormsEffects],
+	declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent, ListErrorsComponent],
+	entryComponents: [InputComponent, TextareaComponent],
+	exports: [DynamicFormComponent, ListErrorsComponent]
 })
-export class NgrxFormsModule {}
+export class NgrxFormsModule { }

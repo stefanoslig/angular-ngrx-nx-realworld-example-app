@@ -1,3 +1,4 @@
+import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { SettingsService } from '@angular-ngrx-nx-realworld-example-app/settings/src/settings.service';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,7 @@ import { SettingsComponent } from './settings/settings.component';
 	imports: [
 		CommonModule,
 		NgrxFormsModule,
-		RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent }]),
+		RouterModule.forChild([{ path: '', pathMatch: 'full', component: SettingsComponent, canActivate: [AuthGuardService] }]),
 		StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
 		EffectsModule.forFeature([SettingsEffects])
 	],

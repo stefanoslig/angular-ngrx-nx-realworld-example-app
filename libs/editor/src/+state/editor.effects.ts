@@ -22,7 +22,7 @@ export class EditorEffects {
 		withLatestFrom(this.store.select(fromNgrxForms.getData)),
 		concatMap(([article, data]) =>
 			this.editorService.publishArticle(data).pipe(
-				map(result => ({ type: '[Router] Go', payload: { path: ['article', result.slug] } })),
+				map(result => ({ type: '[router] Go', payload: { path: ['article', result.slug] } })),
 				catchError(result =>
 					of({
 						type: '[ngrxForms] SET_ERRORS',

@@ -37,7 +37,7 @@ export class ArticleListComponent implements OnInit {
 	}
 
 	navigateToArticle(slug: string) {
-		this.store.dispatch({ type: '[Router] Go', payload: { path: ['/article', slug] } });
+		this.store.dispatch({ type: '[router] Go', payload: { path: ['/article', slug] } });
 	}
 
 	getTotalPages() {

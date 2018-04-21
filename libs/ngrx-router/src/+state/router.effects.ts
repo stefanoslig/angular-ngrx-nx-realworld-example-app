@@ -12,17 +12,17 @@ import { tap } from 'rxjs/operators/tap';
 export class RouterEffects {
 	@Effect({ dispatch: false })
 	navigate$ = this.action$
-		.ofType<Go>('[Router] Go')
+		.ofType<Go>('[router] Go')
 		.pipe(
-		map((action: Go) => action.payload),
-		tap(({ path, query: queryParams, extras }) => this.router.navigate(path, { queryParams, ...extras }))
+			map((action: Go) => action.payload),
+			tap(({ path, query: queryParams, extras }) => this.router.navigate(path, { queryParams, ...extras }))
 		);
 
 	@Effect({ dispatch: false })
-	navigateBack$ = this.action$.ofType<Back>('[Router] Back').pipe(tap(() => this.location.back()));
+	navigateBack$ = this.action$.ofType<Back>('[router] Back').pipe(tap(() => this.location.back()));
 
 	@Effect({ dispatch: false })
-	navigateForward$ = this.action$.ofType<Forward>('[Router] Forward').pipe(tap(() => this.location.forward()));
+	navigateForward$ = this.action$.ofType<Forward>('[router] Forward').pipe(tap(() => this.location.forward()));
 
 	constructor(private action$: Actions, private router: Router, private location: Location) { }
 }
