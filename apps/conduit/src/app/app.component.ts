@@ -4,9 +4,8 @@ import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth';
 import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { filter } from 'rxjs/operators/filter';
-import { take } from 'rxjs/operators/take';
+import { Observable } from 'rxjs';
+import { filter ,  take } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-root',
