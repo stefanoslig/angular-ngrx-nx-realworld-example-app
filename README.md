@@ -51,6 +51,11 @@ yarn
 ng serve
 ```
 
+### Running tests for the application
+```console
+ng test
+```
+
 [Watch a 5-minute video on how to get started with Nx.](http://nrwl.io/nx)
 
 ## Functionality overview
