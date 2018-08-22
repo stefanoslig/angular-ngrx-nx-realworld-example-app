@@ -8,16 +8,16 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ArticleListService {
-	constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
-	query(config: ArticleListConfig): Observable<any> {
-		return this.apiService.get(
-			'/articles' + (config.type === 'FEED' ? '/feed' : ''),
-			this.toHttpParams(config.filters)
-		);
-	}
+  query(config: ArticleListConfig): Observable<any> {
+    return this.apiService.get(
+      '/articles' + (config.type === 'FEED' ? '/feed' : ''),
+      this.toHttpParams(config.filters)
+    );
+  }
 
-	private toHttpParams(params) {
-		return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());
-	}
+  private toHttpParams(params) {
+    return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());
+  }
 }

@@ -10,26 +10,26 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
-	let component: AppComponent;
-	let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
 
-	beforeEach(
-		async(() => {
-			TestBed.configureTestingModule({
-				imports: [RouterTestingModule, CoreModule, StoreModule.forRoot({})],
-				declarations: [AppComponent, FooterComponent, NavbarComponent],
-				providers: [LocalStorageJwtService]
-			}).compileComponents();
-		})
-	);
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, CoreModule, StoreModule.forRoot({})],
+        declarations: [AppComponent, FooterComponent, NavbarComponent],
+        providers: [LocalStorageJwtService]
+      }).compileComponents();
+    })
+  );
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(AppComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

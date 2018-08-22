@@ -1,5 +1,3 @@
-
-
 import { ArticleService } from '../article.service';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
@@ -8,7 +6,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/nx';
 import { of } from 'rxjs';
-import { catchError ,  concatMap ,  exhaustMap ,  map ,  mergeMap ,  withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import * as fromActions from './article.actions';
 
 import {
@@ -168,7 +166,6 @@ export class ArticleEffects {
 
   constructor(
     private actions: Actions,
-    private dataPersistence: DataPersistence<ArticleState>,
     private articleService: ArticleService,
     private actionsService: ActionsService,
     private store: Store<any>

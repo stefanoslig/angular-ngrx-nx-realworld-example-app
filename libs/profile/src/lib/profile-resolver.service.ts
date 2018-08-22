@@ -8,49 +8,49 @@ import * as fromArticleList from '@angular-ngrx-nx-realworld-example-app/article
 
 @Injectable()
 export class ProfileResolverService implements Resolve<Profile> {
-	constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {}
 
-	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-		const username = route.params['username'];
-		this.store.dispatch({
-			type: '[profile] GET_PROFILE',
-			payload: username
-		});
-	}
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+    const username = route.params['username'];
+    this.store.dispatch({
+      type: '[profile] GET_PROFILE',
+      payload: username
+    });
+  }
 }
 
 @Injectable()
 export class ProfileArticlesResolverService implements Resolve<Profile> {
-	constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {}
 
-	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-		const username = route.params['username'];
-		this.store.dispatch(
-			new fromArticleList.SetListConfig(<ArticleListConfig>{
-				...articleListInitialState.listConfig,
-				filters: {
-					...articleListInitialState.listConfig.filters,
-					author: username
-				}
-			})
-		);
-	}
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+    const username = route.params['username'];
+    this.store.dispatch(
+      new fromArticleList.SetListConfig(<ArticleListConfig>{
+        ...articleListInitialState.listConfig,
+        filters: {
+          ...articleListInitialState.listConfig.filters,
+          author: username
+        }
+      })
+    );
+  }
 }
 
 @Injectable()
 export class ProfileFavoritesResolverService implements Resolve<Profile> {
-	constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {}
 
-	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-		const username = route.parent.params['username'];
-		this.store.dispatch(
-			new fromArticleList.SetListConfig(<ArticleListConfig>{
-				...articleListInitialState.listConfig,
-				filters: {
-					...articleListInitialState.listConfig.filters,
-					favorited: username
-				}
-			})
-		);
-	}
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+    const username = route.parent.params['username'];
+    this.store.dispatch(
+      new fromArticleList.SetListConfig(<ArticleListConfig>{
+        ...articleListInitialState.listConfig,
+        filters: {
+          ...articleListInitialState.listConfig.filters,
+          favorited: username
+        }
+      })
+    );
+  }
 }

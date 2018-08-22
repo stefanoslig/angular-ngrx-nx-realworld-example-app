@@ -1,11 +1,14 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { inject, TestBed } from '@angular/core/testing';
 
 import { ArticleListService } from './article-list.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ArticleListService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ArticleListService]
+      imports: [HttpClientTestingModule],
+      providers: [ArticleListService, ApiService]
     });
   });
 

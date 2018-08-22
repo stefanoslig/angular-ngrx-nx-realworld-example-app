@@ -13,16 +13,16 @@ import { settingsReducer } from './+state/settings.reducer';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		NgrxFormsModule,
-		RouterModule.forChild([
-			{ path: '', pathMatch: 'full', component: SettingsComponent, canActivate: [AuthGuardService] }
-		]),
-		StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
-		EffectsModule.forFeature([SettingsEffects])
-	],
-	declarations: [SettingsComponent],
-	providers: [SettingsEffects, SettingsService]
+  imports: [
+    CommonModule,
+    NgrxFormsModule,
+    RouterModule.forChild([
+      { path: '', pathMatch: 'full', component: SettingsComponent, canActivate: [AuthGuardService] }
+    ]),
+    StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
+    EffectsModule.forFeature([SettingsEffects])
+  ],
+  declarations: [SettingsComponent],
+  providers: [SettingsEffects, SettingsService]
 })
-export class SettingsModule { }
+export class SettingsModule {}

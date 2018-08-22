@@ -1,12 +1,10 @@
-
-
 import { EditorService } from '../editor.service';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError ,  concatMap ,  map ,  withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
 
 import { PublishArticle, LoadArticle, EditorActionsType } from './editor.actions';
 import * as fromActions from './editor.actions';

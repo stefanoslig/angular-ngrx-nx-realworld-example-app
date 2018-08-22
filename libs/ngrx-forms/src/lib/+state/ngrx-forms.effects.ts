@@ -1,9 +1,7 @@
-
-
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { SetData, UpdateData, NgrxFormsActionTypes } from './ngrx-forms.actions';
-import { map ,  switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class NgrxFormsEffects {

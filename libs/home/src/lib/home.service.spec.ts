@@ -1,11 +1,14 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
 import { HomeService } from './home.service';
 
 describe('HomeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HomeService]
+      imports: [HttpClientTestingModule],
+      providers: [HomeService, ApiService]
     });
   });
 

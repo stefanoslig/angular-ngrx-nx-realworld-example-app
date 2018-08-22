@@ -1,12 +1,10 @@
-
-
 import { ArticleListService } from '../article-list.service';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError ,  concatMap ,  map ,  withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
 
 import { Favorite, LoadArticles, SetListConfig, SetListPage, ArticleListActionTypes } from './article-list.actions';
 import { ArticleListState } from './article-list.interfaces';
@@ -26,25 +24,21 @@ export class ArticleListEffects {
     .pipe(map(() => new fromActions.LoadArticles()));
 
   @Effect()
-  loadArticles = this.actions
-    .ofType<LoadArticles>(ArticleListActionTypes.LOAD_ARTICLES)
-    .pipe(
-      withLatestFrom(this.store.select(fromArticleList.getListConfig)),
-      concatMap(([_, config]) =>
-        this.articleListService
-          .query(config)
-          .pipe(
-            map(
-              results =>
-                new fromActions.LoadArticlesSuccess({
-                  articles: results.articles,
-                  articlesCount: results.articlesCount
-                })
-            ),
-            catchError(error => of(new fromActions.LoadArticlesFail(error)))
-          )
+  loadArticles = this.actions.ofType<LoadArticles>(ArticleListActionTypes.LOAD_ARTICLES).pipe(
+    withLatestFrom(this.store.select(fromArticleList.getListConfig)),
+    concatMap(([_, config]) =>
+      this.articleListService.query(config).pipe(
+        map(
+          results =>
+            new fromActions.LoadArticlesSuccess({
+              articles: results.articles,
+              articlesCount: results.articlesCount
+            })
+        ),
+        catchError(error => of(new fromActions.LoadArticlesFail(error)))
       )
-    );
+    )
+  );
 
   @Effect()
   favorite = this.actions

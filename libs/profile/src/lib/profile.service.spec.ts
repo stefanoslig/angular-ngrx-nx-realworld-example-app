@@ -1,11 +1,14 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
 import { ProfileService } from './profile.service';
 
 describe('ProfileService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ProfileService]
+      imports: [HttpClientTestingModule],
+      providers: [ProfileService, ApiService]
     });
   });
 

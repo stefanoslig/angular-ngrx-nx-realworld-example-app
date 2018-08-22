@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { AuthState, User } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Store } from '@ngrx/store';
-import { Observable ,  Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Profile, ProfileState } from './+state/profile.interfaces';
 import * as fromProfile from './+state/profile.reducer';
 import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
-import { combineLatest ,  map ,  takeUntil ,  tap } from 'rxjs/operators';
+import { combineLatest, map, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',

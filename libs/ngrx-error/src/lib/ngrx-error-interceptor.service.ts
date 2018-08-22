@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest } from '@angular
 import { HttpInterceptor } from '@angular/common/http/src/interceptor';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable ,  of ,  throwError as _throw } from 'rxjs';
+import { Observable, of, throwError as _throw } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import * as fromActions from './+state/ngrx-error.actions';
 
