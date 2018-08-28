@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Component({
   selector: 'app-article-list-item',

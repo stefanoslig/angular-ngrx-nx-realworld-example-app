@@ -5,19 +5,20 @@ import { Observable, of } from 'rxjs';
 import * as fromArticle from './+state/article.reducer';
 import { filter, take, switchMap, tap } from 'rxjs/operators';
 import * as fromActions from './+state/article.actions';
+import { ArticleFacade } from './+state/article.facade';
 
 @Injectable()
 export class ArticleGuardService implements CanActivate {
-  constructor(private store: Store<any>) {}
+  constructor(private facade: ArticleFacade) {}
 
   waitForArticleToLoad(): Observable<boolean> {
-    return this.store.pipe(select(fromArticle.getArticleLoaded), filter(loaded => loaded), take(1));
+    return this.facade.articleLoaded$.pipe(filter(loaded => loaded), take(1));
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     const slug = route.params['slug'];
-    this.store.dispatch(new fromActions.LoadArticle(slug));
+    this.facade.loadArticle(slug);
 
-    return this.waitForArticleToLoad().pipe(tap(() => this.store.dispatch(new fromActions.LoadComments(slug))));
+    return this.waitForArticleToLoad().pipe(tap(() => this.facade.loadComments(slug)));
   }
 }

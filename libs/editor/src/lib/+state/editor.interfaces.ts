@@ -1,6 +1,5 @@
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 
-// tslint:disable-next-line
 export interface Editor {
   article: ArticleData;
 }

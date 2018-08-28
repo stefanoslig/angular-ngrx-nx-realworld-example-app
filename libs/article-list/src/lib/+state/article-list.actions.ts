@@ -1,6 +1,7 @@
-import { ListType, Filters, ArticleListConfig } from './article-list.interfaces';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action } from '@ngrx/store';
+
+import { ArticleListConfig } from './article-list.interfaces';
 
 export enum ArticleListActionTypes {
   SET_LIST_PAGE = '[article-list] SET_LIST_PAGE',

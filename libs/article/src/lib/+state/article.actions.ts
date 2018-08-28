@@ -1,6 +1,5 @@
-import { ArticleComment, ArticleData } from './article.interfaces';
-import { Profile } from '@angular-ngrx-nx-realworld-example-app/profile';
 import { Action } from '@ngrx/store';
+import { ArticleData, ArticleComment, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 
 export enum ArticleActionTypes {
   LOAD_ARTICLE = '[article] LOAD_ARTICLE',

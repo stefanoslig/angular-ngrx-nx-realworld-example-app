@@ -1,6 +1,4 @@
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
-import { Profile } from '@angular-ngrx-nx-realworld-example-app/profile';
+import { ApiService, Profile, ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

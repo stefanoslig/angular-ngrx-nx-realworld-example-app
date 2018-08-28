@@ -1,6 +1,40 @@
-import { Article, ArticleState, ArticleData, ArticleComment } from './article.interfaces';
 import { ArticleAction, ArticleActionTypes } from './article.actions';
-import { articleInitialState } from './article.init';
+import { Profile, ArticleComment, ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+
+export interface Article {
+  data: ArticleData;
+  comments: ArticleComment[];
+  loading: boolean;
+  loaded: boolean;
+}
+
+export interface ArticleState {
+  readonly article: Article;
+}
+
+export const articleInitialState: Article = {
+  data: {
+    slug: '',
+    title: '',
+    description: '',
+    body: '',
+    tagList: [],
+    createdAt: '',
+    updatedAt: '',
+    favorited: false,
+    favoritesCount: 0,
+    author: {
+      username: '',
+      bio: '',
+      image: '',
+      following: false,
+      loading: false
+    }
+  },
+  comments: [],
+  loaded: false,
+  loading: false
+};
 
 export function articleReducer(state: Article = articleInitialState, action: ArticleAction): Article {
   switch (action.type) {
@@ -44,7 +78,3 @@ export function articleReducer(state: Article = articleInitialState, action: Art
     }
   }
 }
-
-export const getArticle = (state: ArticleState) => state.article.data;
-export const getComments = (state: ArticleState) => state.article.comments;
-export const getArticleLoaded = (state: ArticleState) => state.article.loaded;
