@@ -7,13 +7,11 @@ import { Store } from '@ngrx/store';
 import * as fromHome from './+state/home.reducer';
 import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Home, HomeState } from './+state/home.interfaces';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
 import { homeInitialState } from './+state/home.init';
 import { withLatestFrom, tap, takeUntil } from 'rxjs/operators';
 import * as fromArticleList from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { ArticleListConfig } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { articleListInitialState } from '@angular-ngrx-nx-realworld-example-app/article-list';
-import { articleInitialState } from '@angular-ngrx-nx-realworld-example-app/article';
 
 @Component({
   selector: 'app-home',

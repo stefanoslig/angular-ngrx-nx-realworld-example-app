@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, EventEmitter, Output } from '@angular/core';
-import { ArticleData } from '../+state/article.interfaces';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 import { User } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({

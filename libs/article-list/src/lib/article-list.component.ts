@@ -1,11 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ArticleListState, ArticleListConfig } from './+state/article-list.interfaces';
-import { Store, select } from '@ngrx/store';
-import * as fromArticleList from './+state/article-list.reducer';
-import { withLatestFrom } from 'rxjs/operators';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import { withLatestFrom } from 'rxjs/operators';
+
 import * as fromArticleListActions from './+state/article-list.actions';
+import { ArticleListConfig, ArticleListState } from './+state/article-list.interfaces';
+import * as fromArticleList from './+state/article-list.reducer';
 
 @Component({
   selector: 'app-article-list',

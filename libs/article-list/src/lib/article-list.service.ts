@@ -1,10 +1,9 @@
 import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
-import { ArticleListConfig } from './+state/article-list.interfaces';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
+import { ArticleListConfig } from './+state/article-list.interfaces';
 
 @Injectable()
 export class ArticleListService {

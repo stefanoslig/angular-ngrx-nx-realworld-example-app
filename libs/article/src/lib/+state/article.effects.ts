@@ -21,7 +21,6 @@ import {
   UnFollow,
   ArticleActionTypes
 } from './article.actions';
-import { ArticleState } from './article.interfaces';
 
 @Injectable()
 export class ArticleEffects {

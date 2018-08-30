@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { ArticleData } from '../+state/article.interfaces';
-import { Profile } from '@angular-ngrx-nx-realworld-example-app/profile';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Component({
   selector: 'app-article-meta',

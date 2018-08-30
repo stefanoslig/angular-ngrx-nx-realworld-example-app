@@ -1,14 +1,9 @@
-import { Profile } from '@angular-ngrx-nx-realworld-example-app/profile';
-
-export interface Article {
-  data: ArticleData;
-  comments: ArticleComment[];
+export interface Profile {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
   loading: boolean;
-  loaded: boolean;
-}
-
-export interface ArticleState {
-  readonly article: Article;
 }
 
 export interface ArticleComment {

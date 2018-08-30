@@ -1,4 +1,4 @@
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 
 export interface ArticleList {
   listConfig: ArticleListConfig;

@@ -1,6 +1,6 @@
 import { ArticleList, ListType, Articles, ArticleListState } from './article-list.interfaces';
 import { ArticleListAction, ArticleListActionTypes } from './article-list.actions';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 
 export function articleListReducer(state: ArticleList, action: ArticleListAction): ArticleList {
   switch (action.type) {

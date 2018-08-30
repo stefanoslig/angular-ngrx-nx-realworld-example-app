@@ -1,5 +1,5 @@
-import { Article, ArticleData } from '@angular-ngrx-nx-realworld-example-app/article';
 import { Action } from '@ngrx/store';
+import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 
 export enum EditorActionsType {
   PUBLISH_ARTICLE = '[editor] PUBLISH_ARTICLE',
@@ -11,7 +11,7 @@ export enum EditorActionsType {
 
 export class PublishArticle implements Action {
   readonly type = EditorActionsType.PUBLISH_ARTICLE;
-  constructor(public payload: Article) {}
+  constructor(public payload: ArticleData) {}
 }
 
 export class LoadArticle implements Action {
