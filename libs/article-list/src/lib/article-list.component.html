@@ -10,5 +10,5 @@
  (favorite)="favorite($event)" *ngFor="let article of articles$ | async" [article]="article">
 </app-article-list-item>
 
-<app-pager (setPage)="setPage($event)" [hidden]="totalPages.length <= 1 || (isLoading$ | async)" [currentPage]="(listConfig$ | async).currentPage"
- [totalPages]="totalPages"></app-pager>
+<app-pager (setPage)="setPage($event)" [hidden]="(totalPages$|async)?.length <= 1 || (isLoading$ | async)" [currentPage]="(listConfig$ | async).currentPage"
+ [totalPages]="totalPages$|async"></app-pager>

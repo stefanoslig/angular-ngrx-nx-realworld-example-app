@@ -11,7 +11,7 @@ import { homeInitialState } from './+state/home.init';
 import { withLatestFrom, tap, takeUntil } from 'rxjs/operators';
 import * as fromArticleList from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { ArticleListConfig } from '@angular-ngrx-nx-realworld-example-app/article-list';
-import { articleListInitialState } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { articleListInitialState, ArticleListFacade } from '@angular-ngrx-nx-realworld-example-app/article-list';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean;
   unsubscribe$: Subject<void> = new Subject();
 
-  constructor(private store: Store<any>, private router: Router) {}
+  constructor(private store: Store<any>, private router: Router, private articleListFacade: ArticleListFacade) {}
 
   ngOnInit() {
     this.store
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.isAuthenticated = isLoggedIn;
         this.getArticles();
       });
-    this.listConfig$ = this.store.select(fromArticleList.getListConfig);
+    this.listConfig$ = this.articleListFacade.listConfig$;
     this.tags$ = this.store.select(fromHome.getTags);
   }
 

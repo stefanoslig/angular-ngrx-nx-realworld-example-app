@@ -1,12 +1,10 @@
 import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
 
-import * as fromArticleListActions from './+state/article-list.actions';
-import { ArticleListConfig, ArticleListState } from './+state/article-list.interfaces';
-import * as fromArticleList from './+state/article-list.reducer';
+import { ArticleListFacade } from './+state/article-list.facade';
+import { ArticleListConfig } from './+state/article-list.reducer';
 
 @Component({
   selector: 'app-article-list',
@@ -15,45 +13,33 @@ import * as fromArticleList from './+state/article-list.reducer';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleListComponent implements OnInit {
-  totalPages: Array<number> = [1];
+  totalPages$: Observable<number[]>;
   articles$: Observable<ArticleData[]>;
   listConfig$: Observable<ArticleListConfig>;
   isLoading$: Observable<boolean>;
 
-  constructor(private store: Store<ArticleListState>) {}
+  constructor(private facade: ArticleListFacade) {}
 
   ngOnInit() {
-    this.getTotalPages();
-    this.articles$ = this.store.pipe(select(fromArticleList.getArticles));
-    this.listConfig$ = this.store.pipe(select(fromArticleList.getListConfig));
-    this.isLoading$ = this.store.pipe(select(fromArticleList.isLoading));
+    this.totalPages$ = this.facade.totalPages$;
+    this.articles$ = this.facade.articles$;
+    this.listConfig$ = this.facade.listConfig$;
+    this.isLoading$ = this.facade.isLoading$;
   }
 
   favorite(slug: string) {
-    this.store.dispatch(new fromArticleListActions.Favorite(slug));
+    this.facade.favorite(slug);
   }
 
   unFavorite(slug: string) {
-    this.store.dispatch(new fromArticleListActions.UnFavorite(slug));
+    this.facade.unFavorite(slug);
   }
 
   navigateToArticle(slug: string) {
-    this.store.dispatch({ type: '[router] Go', payload: { path: ['/article', slug] } });
-  }
-
-  getTotalPages() {
-    this.store
-      .select(fromArticleList.getArticlesCount)
-      .pipe(withLatestFrom(this.store.select(fromArticleList.getListConfig)))
-      .subscribe(([articlesCount, config]) => {
-        this.totalPages = Array.from(
-          new Array(Math.ceil(articlesCount / config.filters.limit)),
-          (val, index) => index + 1
-        );
-      });
+    this.facade.navigateToArticle(slug);
   }
 
   setPage(page: number) {
-    this.store.dispatch(new fromArticleListActions.SetListPage(page));
+    this.facade.setPage(page);
   }
 }

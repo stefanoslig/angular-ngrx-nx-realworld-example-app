@@ -1,15 +1,13 @@
-import { ArticleListService } from '../article-list.service';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
 
-import { Favorite, LoadArticles, SetListConfig, SetListPage, ArticleListActionTypes } from './article-list.actions';
-import { ArticleListState } from './article-list.interfaces';
-import * as fromArticleList from './article-list.reducer';
+import { ArticleListService } from '../article-list.service';
+import { ArticleListActionTypes, Favorite, LoadArticles, SetListConfig, SetListPage } from './article-list.actions';
 import * as fromActions from './article-list.actions';
+import { ArticleListFacade } from './article-list.facade';
 
 @Injectable()
 export class ArticleListEffects {
@@ -25,7 +23,7 @@ export class ArticleListEffects {
 
   @Effect()
   loadArticles = this.actions.ofType<LoadArticles>(ArticleListActionTypes.LOAD_ARTICLES).pipe(
-    withLatestFrom(this.store.select(fromArticleList.getListConfig)),
+    withLatestFrom(this.facade.listConfig$),
     concatMap(([_, config]) =>
       this.articleListService.query(config).pipe(
         map(
@@ -74,6 +72,6 @@ export class ArticleListEffects {
     private actions: Actions,
     private articleListService: ArticleListService,
     private actionsService: ActionsService,
-    private store: Store<ArticleListState>
+    private facade: ArticleListFacade
   ) {}
 }

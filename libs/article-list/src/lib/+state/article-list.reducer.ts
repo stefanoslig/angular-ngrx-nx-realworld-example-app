@@ -1,6 +1,54 @@
-import { ArticleList, ListType, Articles, ArticleListState } from './article-list.interfaces';
-import { ArticleListAction, ArticleListActionTypes } from './article-list.actions';
 import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+
+import { ArticleListAction, ArticleListActionTypes } from './article-list.actions';
+
+export interface ArticleList {
+  listConfig: ArticleListConfig;
+  articles: Articles;
+}
+
+export interface ArticleListState {
+  readonly articleList: ArticleList;
+}
+
+export interface ArticleListConfig {
+  type: ListType;
+  currentPage: number;
+  filters: Filters;
+}
+
+export interface Filters {
+  tag?: string;
+  author?: string;
+  favorited?: string;
+  limit?: number;
+  offset?: number;
+}
+
+export type ListType = 'ALL' | 'FEED';
+
+export interface Articles {
+  entities: ArticleData[];
+  articlesCount: number;
+  loaded: boolean;
+  loading: boolean;
+}
+
+export const articleListInitialState: ArticleList = {
+  listConfig: {
+    type: 'ALL',
+    currentPage: 1,
+    filters: {
+      limit: 10
+    }
+  },
+  articles: {
+    entities: [],
+    articlesCount: 0,
+    loaded: false,
+    loading: false
+  }
+};
 
 export function articleListReducer(state: ArticleList, action: ArticleListAction): ArticleList {
   switch (action.type) {
@@ -49,8 +97,3 @@ function replaceArticle(articles: Articles, payload: ArticleData): Articles {
   ];
   return { ...articles, entities, loading: false, loaded: true };
 }
-
-export const getListConfig = (state: ArticleListState) => state.articleList.listConfig;
-export const getArticles = (state: ArticleListState) => state.articleList.articles.entities;
-export const getArticlesCount = (state: ArticleListState) => state.articleList.articles.articlesCount;
-export const isLoading = (state: ArticleListState) => state.articleList.articles.loading;

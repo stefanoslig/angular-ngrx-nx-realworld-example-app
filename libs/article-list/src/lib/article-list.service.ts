@@ -3,7 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ArticleListConfig } from './+state/article-list.interfaces';
+import { ArticleListConfig } from './+state/article-list.reducer';
 
 @Injectable()
 export class ArticleListService {
