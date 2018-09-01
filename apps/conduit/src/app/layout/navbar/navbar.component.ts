@@ -1,5 +1,5 @@
-import { User } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { User } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Component({
   selector: 'app-navbar',

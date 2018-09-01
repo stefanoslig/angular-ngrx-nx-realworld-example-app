@@ -1,5 +1,5 @@
-import { ArticleData, ArticleComment } from '@angular-ngrx-nx-realworld-example-app/api';
-import { User } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { ArticleData, ArticleComment, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
@@ -38,21 +38,20 @@ export class ArticleComponent implements OnInit, OnDestroy {
   currentUser$: Observable<User>;
   touchedForm$: Observable<boolean>;
 
-  constructor(private store: Store<any>, private facade: ArticleFacade) {}
+  constructor(private store: Store<any>, private facade: ArticleFacade, private auhtFacade: AuthFacade) {}
 
   ngOnInit() {
     this.article$ = this.facade.article$;
     this.comments$ = this.facade.comments$;
-    this.isAuthenticated$ = this.store.select(fromAuth.getLoggedIn);
-    this.currentUser$ = this.store.select(fromAuth.getUser);
+    this.isAuthenticated$ = this.auhtFacade.isLoggedIn$;
+    this.currentUser$ = this.auhtFacade.user$;
     this.data$ = this.store.select(fromNgrxForms.getData);
     this.structure$ = this.store.select(fromNgrxForms.getStructure);
     this.touchedForm$ = this.store.select(fromNgrxForms.getTouchedForm);
 
     this.store.dispatch({ type: '[ngrxForms] SET_STRUCTURE', payload: structure });
     this.store.dispatch({ type: '[ngrxForms] SET_DATA', payload: '' });
-    this.store
-      .pipe(select(fromAuth.getAuth))
+    this.auhtFacade.auht$
       .pipe(filter(auth => auth.loggedIn), combineLatest(this.facade.authorUsername$), takeUntil(this.unsubscribe$))
       .subscribe(([auth, username]) => {
         this.canModify = auth.user.username === username;

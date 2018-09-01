@@ -1,4 +1,4 @@
-import { User } from './auth.interfaces';
+import { User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action } from '@ngrx/store';
 
 export const enum AuthActionTypes {

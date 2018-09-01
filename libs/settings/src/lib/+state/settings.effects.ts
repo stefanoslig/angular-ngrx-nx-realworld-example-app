@@ -1,20 +1,21 @@
 import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
 import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { SettingsService } from '../settings.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
+import { SettingsService } from '../settings.service';
 import { EditSettings } from './settings.actions';
+import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 
 @Injectable()
 export class SettingsEffects {
   @Effect()
   editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
-    withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromAuth.getUser)),
+    withLatestFrom(this.store.select(fromNgrxForms.getData), this.authFacade.user$),
     map(([_, data, user]) => ({
       ...user,
       image: data.image,
@@ -39,5 +40,10 @@ export class SettingsEffects {
     )
   );
 
-  constructor(private actions: Actions, private store: Store<any>, private settingsService: SettingsService) {}
+  constructor(
+    private actions: Actions,
+    private store: Store<any>,
+    private settingsService: SettingsService,
+    private authFacade: AuthFacade
+  ) {}
 }

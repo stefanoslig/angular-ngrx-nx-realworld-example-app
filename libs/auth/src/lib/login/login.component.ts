@@ -1,10 +1,11 @@
-import { NgrxFormsState, Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { Field, NgrxFormsState } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as fromActions from '../+state/auth.actions';
+
+import { AuthFacade } from '../+state/auth.facade';
 
 const structure: Field[] = [
   {
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private store: Store<NgrxFormsState>) {}
+  constructor(private store: Store<NgrxFormsState>, private facade: AuthFacade) {}
 
   ngOnInit() {
     this.store.dispatch({
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.store.dispatch(new fromActions.Login());
+    this.facade.login();
   }
 
   ngOnDestroy() {

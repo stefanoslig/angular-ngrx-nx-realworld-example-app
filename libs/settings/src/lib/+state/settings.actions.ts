@@ -1,4 +1,4 @@
-import { User } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { User } from '@angular-ngrx-nx-realworld-example-app/api';
 
 export interface EditSettings {
   type: '[settings] EDIT_SETTINGS';

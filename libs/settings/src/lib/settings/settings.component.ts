@@ -8,6 +8,7 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 
 const structure: Field[] = [
   {
@@ -55,14 +56,19 @@ export class SettingsComponent implements OnInit {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private store: Store<any>, private localStorageSevice: LocalStorageJwtService, private router: Router) {}
+  constructor(
+    private store: Store<any>,
+    private localStorageSevice: LocalStorageJwtService,
+    private router: Router,
+    private authFacade: AuthFacade
+  ) {}
 
   ngOnInit() {
     this.store.dispatch({
       type: '[ngrxForms] SET_STRUCTURE',
       payload: structure
     });
-    this.store.select(fromAuth.getUser).subscribe(user => {
+    this.authFacade.user$.subscribe(user => {
       this.store.dispatch({
         type: '[ngrxForms] SET_DATA',
         payload: user

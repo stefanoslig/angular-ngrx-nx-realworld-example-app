@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Validators } from '@angular/forms';
-import * as fromActions from '../+state/auth.actions';
+import { AuthFacade } from '../+state/auth.facade';
 
 const structure: Field[] = [
   {
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private store: Store<NgrxFormsState>) {}
+  constructor(private store: Store<NgrxFormsState>, private facade: AuthFacade) {}
 
   ngOnInit() {
     this.store.dispatch({
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.store.dispatch(new fromActions.Register());
+    this.facade.register();
   }
 
   ngOnDestroy() {

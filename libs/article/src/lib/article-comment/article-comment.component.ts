@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { User } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { ArticleComment, ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ArticleComment, ArticleData, User } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Component({
   selector: 'app-article-comment',

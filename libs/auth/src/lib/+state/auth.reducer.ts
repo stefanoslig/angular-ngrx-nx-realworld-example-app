@@ -1,7 +1,30 @@
-import { Auth, AuthState } from './auth.interfaces';
+import { User } from '@angular-ngrx-nx-realworld-example-app/api';
+
 import { AuthAction, AuthActionTypes } from './auth.actions';
-import { authInitialState } from './auth.init';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+
+export interface Auth {
+  loggedIn: boolean;
+  user: User;
+  status: Status;
+}
+
+export interface AuthState {
+  readonly auth: Auth;
+}
+
+export type Status = 'INIT' | 'IN_PROGRESS';
+
+export const authInitialState: Auth = {
+  loggedIn: false,
+  status: 'INIT',
+  user: {
+    email: '',
+    token: '',
+    username: '',
+    bio: '',
+    image: ''
+  }
+};
 
 export function authReducer(state: Auth, action: AuthAction): Auth {
   switch (action.type) {
@@ -40,7 +63,3 @@ export function authReducer(state: Auth, action: AuthAction): Auth {
     }
   }
 }
-
-export const getAuth = createFeatureSelector<Auth>('auth');
-export const getLoggedIn = createSelector(getAuth, (auth: Auth) => auth.loggedIn);
-export const getUser = createSelector(getAuth, (auth: Auth) => auth.user);

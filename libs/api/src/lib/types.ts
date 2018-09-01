@@ -25,3 +25,11 @@ export interface ArticleData {
   favoritesCount: number;
   author: Profile;
 }
+
+export interface User {
+  email: string;
+  token: string;
+  username: string;
+  bio: string;
+  image: string;
+}

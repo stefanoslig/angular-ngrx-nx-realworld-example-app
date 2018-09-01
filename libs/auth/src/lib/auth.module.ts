@@ -6,12 +6,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { AuthEffects } from './+state/auth.effects';
-import { authInitialState } from './+state/auth.init';
-import { authReducer } from './+state/auth.reducer';
+import { authReducer, authInitialState } from './+state/auth.reducer';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthFacade } from './+state/auth.facade';
 
 const authRouting: ModuleWithProviders = RouterModule.forChild([
   {
@@ -32,7 +32,7 @@ const authRouting: ModuleWithProviders = RouterModule.forChild([
     StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
     EffectsModule.forFeature([AuthEffects])
   ],
-  providers: [AuthEffects, AuthGuardService, AuthService],
+  providers: [AuthEffects, AuthGuardService, AuthService, AuthFacade],
   declarations: [LoginComponent, RegisterComponent]
 })
 export class AuthModule {}

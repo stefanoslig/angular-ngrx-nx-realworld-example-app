@@ -1,9 +1,7 @@
-import { AuthState, User } from '@angular-ngrx-nx-realworld-example-app/auth';
-import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
-import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth';
+import { User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -17,16 +15,14 @@ export class AppComponent implements OnInit {
   user$: Observable<User>;
   isLoggedIn$: Observable<boolean>;
 
-  constructor(private store: Store<AuthState>, private localStorageJwtService: LocalStorageJwtService) {}
+  constructor(private authFacade: AuthFacade, private localStorageJwtService: LocalStorageJwtService) {}
 
   ngOnInit() {
-    this.user$ = this.store.select(fromAuth.getUser);
-    this.isLoggedIn$ = this.store.select(fromAuth.getLoggedIn);
+    this.user$ = this.authFacade.user$;
+    this.isLoggedIn$ = this.authFacade.isLoggedIn$;
     this.localStorageJwtService
       .getItem()
       .pipe(take(1), filter(token => !!token))
-      .subscribe(token => {
-        this.store.dispatch(new fromActions.GetUser());
-      });
+      .subscribe(token => this.authFacade.user());
   }
 }
