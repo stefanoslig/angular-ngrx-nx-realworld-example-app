@@ -1,13 +1,23 @@
-import { homeInitialState } from '../+state/home.init';
-import { HomeAction } from './home.actions';
-import { Home, HomeState } from './home.interfaces';
+import { HomeAction, HomeActionsType } from './home.actions';
+
+export interface Home {
+  tags: string[];
+}
+
+export interface HomeState {
+  readonly home: Home;
+}
+
+export const homeInitialState: Home = {
+  tags: []
+};
 
 export function homeReducer(state: Home = homeInitialState, action: HomeAction): Home {
   switch (action.type) {
-    case '[home] LOAD_TAGS_SUCCESS': {
+    case HomeActionsType.LOAD_TAGS_SUCCESS: {
       return { ...state, tags: action.payload };
     }
-    case '[home] LOAD_TAGS_FAIL': {
+    case HomeActionsType.LOAD_TAGS_FAIL: {
       return { ...state, tags: [] };
     }
     default: {
@@ -15,6 +25,3 @@ export function homeReducer(state: Home = homeInitialState, action: HomeAction):
     }
   }
 }
-
-export const getTags = (state: HomeState) => state.home.tags;
-export const getHome = (state: HomeState) => state.home;

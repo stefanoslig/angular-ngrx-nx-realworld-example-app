@@ -1,15 +1,23 @@
-export interface LoadTags {
-  type: '[home] LOAD_TAGS';
+import { Action } from '@ngrx/store';
+
+export enum HomeActionsType {
+  LOAD_TAGS = '[home] LOAD_TAGS',
+  LOAD_TAGS_SUCCESS = '[home] LOAD_TAGS_SUCCESS',
+  LOAD_TAGS_FAIL = '[home] LOAD_TAGS_FAIL'
 }
 
-export interface LoadTagsSuccess {
-  type: '[home] LOAD_TAGS_SUCCESS';
-  payload: string[];
+export class LoadTags implements Action {
+  readonly type = HomeActionsType.LOAD_TAGS;
 }
 
-export interface LoadTagsFail {
-  type: '[home] LOAD_TAGS_FAIL';
-  payload: Error;
+export class LoadTagsSuccess implements Action {
+  readonly type = HomeActionsType.LOAD_TAGS_SUCCESS;
+  constructor(public payload: string[]) {}
+}
+
+export class LoadTagsFail implements Action {
+  readonly type = HomeActionsType.LOAD_TAGS_FAIL;
+  constructor(public payload: Error) {}
 }
 
 export type HomeAction = LoadTags | LoadTagsSuccess | LoadTagsFail;

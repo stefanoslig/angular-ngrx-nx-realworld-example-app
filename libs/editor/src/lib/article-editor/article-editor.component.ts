@@ -5,9 +5,9 @@ import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import * as fromEditor from '../+state/editor.reducer';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { filter } from 'rxjs/operators';
+import { EditorFacade } from '../+state/editor.facade';
 
 const structure: Field[] = [
   {
@@ -46,7 +46,7 @@ export class ArticleEditorComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private store: Store<any>, private router: Router) {}
+  constructor(private store: Store<any>, private router: Router, private facade: EditorFacade) {}
 
   ngOnInit() {
     this.store.dispatch({
@@ -55,7 +55,7 @@ export class ArticleEditorComponent implements OnInit, OnDestroy {
     });
     this.data$ = this.store.select(fromNgrxForms.getData);
     this.structure$ = this.store.select(fromNgrxForms.getStructure);
-    this.store.pipe(select(fromEditor.getArticle)).subscribe(article => {
+    this.facade.article$.subscribe(article => {
       this.store.dispatch({
         type: '[ngrxForms] SET_DATA',
         payload: article

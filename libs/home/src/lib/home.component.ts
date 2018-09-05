@@ -6,13 +6,12 @@ import { Store } from '@ngrx/store';
 
 import * as fromHome from './+state/home.reducer';
 import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
-import { Home, HomeState } from './+state/home.interfaces';
-import { homeInitialState } from './+state/home.init';
 import { withLatestFrom, tap, takeUntil } from 'rxjs/operators';
 import * as fromArticleList from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { ArticleListConfig } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { articleListInitialState, ArticleListFacade } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { HomeFacade } from './+state/home.facade';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<void> = new Subject();
 
   constructor(
-    private store: Store<any>,
+    private facade: HomeFacade,
     private router: Router,
     private articleListFacade: ArticleListFacade,
     private authFacade: AuthFacade
@@ -39,16 +38,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.getArticles();
     });
     this.listConfig$ = this.articleListFacade.listConfig$;
-    this.tags$ = this.store.select(fromHome.getTags);
+    this.tags$ = this.facade.tags$;
   }
 
   setListTo(type: string = 'ALL') {
-    this.store.dispatch(
-      new fromArticleList.SetListConfig(<ArticleListConfig>{
-        ...articleListInitialState.listConfig,
-        type
-      })
-    );
+    this.articleListFacade.setListConfig(<ArticleListConfig>{
+      ...articleListInitialState.listConfig,
+      type
+    });
   }
 
   getArticles() {
@@ -60,15 +57,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   setListTag(tag: string) {
-    this.store.dispatch(
-      new fromArticleList.SetListConfig(<ArticleListConfig>{
-        ...articleListInitialState.listConfig,
-        filters: {
-          ...articleListInitialState.listConfig.filters,
-          tag
-        }
-      })
-    );
+    this.articleListFacade.setListConfig(<ArticleListConfig>{
+      ...articleListInitialState.listConfig,
+      filters: {
+        ...articleListInitialState.listConfig.filters,
+        tag
+      }
+    });
   }
 
   ngOnDestroy() {

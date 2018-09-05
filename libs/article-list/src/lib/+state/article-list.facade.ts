@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { ArticleListState } from './article-list.reducer';
+import { ArticleListState, ArticleListConfig } from './article-list.reducer';
 import { articleListQuery } from './article-list.selectors';
-import { Favorite, UnFavorite, SetListPage } from './article-list.actions';
+import { Favorite, UnFavorite, SetListPage, SetListConfig } from './article-list.actions';
 import { withLatestFrom, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -36,5 +36,9 @@ export class ArticleListFacade {
 
   setPage(page: number) {
     this.store.dispatch(new SetListPage(page));
+  }
+
+  setListConfig(config: ArticleListConfig) {
+    this.store.dispatch(new SetListConfig(config));
   }
 }

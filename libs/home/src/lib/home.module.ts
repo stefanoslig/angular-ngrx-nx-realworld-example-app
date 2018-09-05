@@ -1,3 +1,4 @@
+import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -5,13 +6,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { HomeEffects } from './+state/home.effects';
-import { homeInitialState } from './+state/home.init';
-import { homeReducer } from './+state/home.reducer';
+import { HomeFacade } from './+state/home.facade';
+import { homeInitialState, homeReducer } from './+state/home.reducer';
 import { HomeResolverService } from './home-resolver.service';
 import { HomeComponent } from './home.component';
 import { HomeService } from './home.service';
 import { TagsListComponent } from './tags-list/tags-list.component';
-import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
 
 @NgModule({
   imports: [
@@ -24,6 +24,6 @@ import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/articl
     EffectsModule.forFeature([HomeEffects])
   ],
   declarations: [HomeComponent, TagsListComponent],
-  providers: [HomeEffects, HomeResolverService, HomeService]
+  providers: [HomeEffects, HomeResolverService, HomeService, HomeFacade]
 })
 export class HomeModule {}
