@@ -1,5 +1,17 @@
-import { NgrxError } from './ngrx-error.interfaces';
 import { NgrxErrorAction, NgrxErrorActionTypes } from './ngrx-error.actions';
+
+export interface NgrxError {
+  code: number;
+  message?: string;
+}
+
+export interface NgrxErrorState {
+  readonly ngrxError: NgrxError;
+}
+
+export const ngrxErrorInitialState: NgrxError = {
+  code: -1
+};
 
 export function ngrxErrorReducer(state: NgrxError, action: NgrxErrorAction): NgrxError {
   switch (action.type) {

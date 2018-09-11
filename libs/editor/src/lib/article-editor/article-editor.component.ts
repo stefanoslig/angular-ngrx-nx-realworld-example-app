@@ -1,12 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { Store, select } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { Validators } from '@angular/forms';
-import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { filter } from 'rxjs/operators';
+import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { EditorFacade } from '../+state/editor.facade';
 
 const structure: Field[] = [
@@ -46,42 +44,25 @@ export class ArticleEditorComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private store: Store<any>, private router: Router, private facade: EditorFacade) {}
+  constructor(private ngrxFormsFacade: NgrxFormsFacade, private router: Router, private facade: EditorFacade) {}
 
   ngOnInit() {
-    this.store.dispatch({
-      type: '[ngrxForms] SET_STRUCTURE',
-      payload: structure
-    });
-    this.data$ = this.store.select(fromNgrxForms.getData);
-    this.structure$ = this.store.select(fromNgrxForms.getStructure);
-    this.facade.article$.subscribe(article => {
-      this.store.dispatch({
-        type: '[ngrxForms] SET_DATA',
-        payload: article
-      });
-    });
+    this.ngrxFormsFacade.setStructure(structure);
+    this.data$ = this.ngrxFormsFacade.data$;
+    this.structure$ = this.ngrxFormsFacade.structure$;
+    this.facade.article$.subscribe(article => this.ngrxFormsFacade.setData(article));
   }
 
   updateForm(changes: any) {
-    this.store.dispatch({
-      type: '[ngrxForms] UPDATE_DATA',
-      payload: changes
-    });
+    this.ngrxFormsFacade.updateData(changes);
   }
 
   submit() {
-    this.store.dispatch({
-      type: '[editor] PUBLISH_ARTICLE'
-    });
+    this.facade.publishArticle();
   }
 
   ngOnDestroy() {
-    this.store.dispatch({
-      type: '[ngrxForms] INITIALIZE_FORM'
-    });
-    this.store.dispatch({
-      type: '[editor] INITIALIZE_ARTICLE'
-    });
+    this.ngrxFormsFacade.initializeForm();
+    this.facade.initializeArticle();
   }
 }

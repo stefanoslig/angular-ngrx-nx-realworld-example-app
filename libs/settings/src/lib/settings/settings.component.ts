@@ -1,5 +1,4 @@
 import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
-import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth';
 import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
 import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
@@ -9,6 +8,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { EditSettings } from '../+state/settings.actions';
 
 const structure: Field[] = [
   {
@@ -60,38 +61,26 @@ export class SettingsComponent implements OnInit {
     private store: Store<any>,
     private localStorageSevice: LocalStorageJwtService,
     private router: Router,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private ngrxFormsFacade: NgrxFormsFacade
   ) {}
 
   ngOnInit() {
-    this.store.dispatch({
-      type: '[ngrxForms] SET_STRUCTURE',
-      payload: structure
-    });
-    this.authFacade.user$.subscribe(user => {
-      this.store.dispatch({
-        type: '[ngrxForms] SET_DATA',
-        payload: user
-      });
-    });
-    this.data$ = this.store.select(fromNgrxForms.getData);
-    this.structure$ = this.store.select(fromNgrxForms.getStructure);
+    this.ngrxFormsFacade.setStructure(structure);
+    this.authFacade.user$.subscribe(user => this.ngrxFormsFacade.setData(user));
+    this.data$ = this.ngrxFormsFacade.data$;
+    this.structure$ = this.ngrxFormsFacade.structure$;
   }
 
   updateForm(changes: any) {
-    this.store.dispatch({
-      type: '[ngrxForms] UPDATE_DATA',
-      payload: changes
-    });
+    this.ngrxFormsFacade.updateData(changes);
   }
 
   submit() {
-    this.store.dispatch({
-      type: '[settings] EDIT_SETTINGS'
-    });
+    this.store.dispatch(new EditSettings());
   }
 
   logout() {
-    this.store.dispatch(new fromActions.Logout());
+    this.authFacade.logout();
   }
 }

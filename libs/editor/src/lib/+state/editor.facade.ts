@@ -2,7 +2,7 @@ import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { LoadArticle, LoadArticleSuccess, LoadArticleFail } from './editor.actions';
+import { InitializeArticle, LoadArticle, LoadArticleFail, LoadArticleSuccess, PublishArticle } from './editor.actions';
 import { EditorState } from './editor.reducer';
 import { editorQuery } from './editor.selectors';
 
@@ -22,5 +22,13 @@ export class EditorFacade {
 
   loadArticleFail(error: Error) {
     this.store.dispatch(new LoadArticleFail(error));
+  }
+
+  publishArticle() {
+    this.store.dispatch(new PublishArticle());
+  }
+
+  initializeArticle() {
+    this.store.dispatch(new InitializeArticle());
   }
 }

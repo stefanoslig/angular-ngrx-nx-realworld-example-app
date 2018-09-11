@@ -1,7 +1,7 @@
 import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthService } from '../auth.service';
 import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
-import { NgrxFormsState } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsState, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -41,7 +41,7 @@ export class AuthEffects {
   login = this.actions
     .ofType<Login>(AuthActionTypes.LOGIN)
     .pipe(
-      withLatestFrom(this.store.select(fromNgrxForms.getData)),
+      withLatestFrom(this.ngrxFormsFacade.data$),
       exhaustMap(([action, data]) =>
         this.authService
           .authUser('LOGIN', data)
@@ -66,7 +66,7 @@ export class AuthEffects {
   register = this.actions
     .ofType<Register>(AuthActionTypes.REGISTER)
     .pipe(
-      withLatestFrom(this.store.select(fromNgrxForms.getData)),
+      withLatestFrom(this.ngrxFormsFacade.data$),
       exhaustMap(([action, data]) =>
         this.authService
           .authUser('REGISTER', data)
@@ -89,7 +89,7 @@ export class AuthEffects {
     private actions: Actions,
     private localStorageJwtService: LocalStorageJwtService,
     private apiService: ApiService,
-    private store: Store<NgrxFormsState>,
+    private ngrxFormsFacade: NgrxFormsFacade,
     private authService: AuthService,
     private router: Router
   ) {}

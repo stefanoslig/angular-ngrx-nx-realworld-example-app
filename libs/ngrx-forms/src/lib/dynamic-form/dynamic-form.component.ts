@@ -1,4 +1,4 @@
-import { Field } from '../+state/ngrx-forms.interfaces';
+import { Field } from '../+state/ngrx-forms.reducer';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';

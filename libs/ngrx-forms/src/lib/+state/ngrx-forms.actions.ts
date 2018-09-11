@@ -1,4 +1,4 @@
-import { Errors } from './ngrx-forms.interfaces';
+import { Errors } from './ngrx-forms.reducer';
 import { Action } from '@ngrx/store';
 
 export enum NgrxFormsActionTypes {

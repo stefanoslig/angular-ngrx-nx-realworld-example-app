@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Field, NgrxFormsState } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+
 import { AuthFacade } from '../+state/auth.facade';
 
 const structure: Field[] = [
@@ -40,22 +39,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private store: Store<NgrxFormsState>, private facade: AuthFacade) {}
+  constructor(private ngrxFormsFacade: NgrxFormsFacade, private facade: AuthFacade) {}
 
   ngOnInit() {
-    this.store.dispatch({
-      type: '[ngrxForms] SET_STRUCTURE',
-      payload: structure
-    });
-    this.data$ = this.store.select(fromNgrxForms.getData);
-    this.structure$ = this.store.select(fromNgrxForms.getStructure);
+    this.ngrxFormsFacade.setStructure(structure);
+    this.data$ = this.ngrxFormsFacade.data$;
+    this.structure$ = this.ngrxFormsFacade.structure$;
   }
 
   updateForm(changes: any) {
-    this.store.dispatch({
-      type: '[ngrxForms] UPDATE_DATA',
-      payload: changes
-    });
+    this.ngrxFormsFacade.updateData(changes);
   }
 
   submit() {
@@ -63,8 +56,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.store.dispatch({
-      type: '[ngrxForms] INITIALIZE_FORM'
-    });
+    this.ngrxFormsFacade.initializeForm();
   }
 }

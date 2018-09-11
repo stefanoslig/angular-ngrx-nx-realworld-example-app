@@ -1,9 +1,7 @@
-import { Errors, NgrxFormsState } from '../+state/ngrx-forms.interfaces';
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import * as fromNgrxForms from '../+state/ngrx-forms.reducer';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+
+import { NgrxFormsFacade } from '../+state/ngrx-forms.facade';
 
 @Component({
   selector: 'app-list-errors',
@@ -15,10 +13,10 @@ export class ListErrorsComponent implements OnInit, OnDestroy {
   errors: string[];
   unsubscribe$: Subject<void> = new Subject();
 
-  constructor(private store: Store<NgrxFormsState>, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private ngrxFormsFacade: NgrxFormsFacade, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.store.select(fromNgrxForms.getErrors).subscribe(e => {
+    this.ngrxFormsFacade.errors$.subscribe(e => {
       this.errors = Object.keys(e || {}).map(key => `${key} ${e[key]}`);
       this.changeDetectorRef.markForCheck();
     });
@@ -27,8 +25,6 @@ export class ListErrorsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-    this.store.dispatch({
-      type: '[ngrxForms] INITIALIZE_ERRORS'
-    });
+    this.ngrxFormsFacade.initializeErrors();
   }
 }

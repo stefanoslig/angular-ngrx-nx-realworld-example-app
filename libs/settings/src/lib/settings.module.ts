@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SettingsEffects } from './+state/settings.effects';
-import { settingsInitialState } from './+state/settings.init';
 import { settingsReducer } from './+state/settings.reducer';
 import { SettingsComponent } from './settings/settings.component';
 
@@ -19,7 +18,7 @@ import { SettingsComponent } from './settings/settings.component';
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: SettingsComponent, canActivate: [AuthGuardService] }
     ]),
-    StoreModule.forFeature('settings', settingsReducer, { initialState: settingsInitialState }),
+    StoreModule.forFeature('settings', settingsReducer, { initialState: {} }),
     EffectsModule.forFeature([SettingsEffects])
   ],
   declarations: [SettingsComponent],

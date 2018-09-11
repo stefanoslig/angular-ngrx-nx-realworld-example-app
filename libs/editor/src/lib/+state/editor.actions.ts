@@ -11,7 +11,6 @@ export enum EditorActionsType {
 
 export class PublishArticle implements Action {
   readonly type = EditorActionsType.PUBLISH_ARTICLE;
-  constructor(public payload: ArticleData) {}
 }
 
 export class LoadArticle implements Action {

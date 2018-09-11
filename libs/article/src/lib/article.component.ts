@@ -1,12 +1,9 @@
-import { ArticleData, ArticleComment, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ArticleComment, ArticleData, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
-import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
-import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { filter, takeUntil, combineLatest } from 'rxjs/operators';
+import { combineLatest, filter, takeUntil } from 'rxjs/operators';
 
 import { ArticleFacade } from './+state/article.facade';
 
@@ -38,19 +35,23 @@ export class ArticleComponent implements OnInit, OnDestroy {
   currentUser$: Observable<User>;
   touchedForm$: Observable<boolean>;
 
-  constructor(private store: Store<any>, private facade: ArticleFacade, private auhtFacade: AuthFacade) {}
+  constructor(
+    private ngrxFormsFacade: NgrxFormsFacade,
+    private facade: ArticleFacade,
+    private auhtFacade: AuthFacade
+  ) {}
 
   ngOnInit() {
     this.article$ = this.facade.article$;
     this.comments$ = this.facade.comments$;
     this.isAuthenticated$ = this.auhtFacade.isLoggedIn$;
     this.currentUser$ = this.auhtFacade.user$;
-    this.data$ = this.store.select(fromNgrxForms.getData);
-    this.structure$ = this.store.select(fromNgrxForms.getStructure);
-    this.touchedForm$ = this.store.select(fromNgrxForms.getTouchedForm);
+    this.data$ = this.ngrxFormsFacade.data$;
+    this.structure$ = this.ngrxFormsFacade.structure$;
+    this.touchedForm$ = this.ngrxFormsFacade.touched$;
 
-    this.store.dispatch({ type: '[ngrxForms] SET_STRUCTURE', payload: structure });
-    this.store.dispatch({ type: '[ngrxForms] SET_DATA', payload: '' });
+    this.ngrxFormsFacade.setStructure(structure);
+    this.ngrxFormsFacade.setData('');
     this.auhtFacade.auht$
       .pipe(filter(auth => auth.loggedIn), combineLatest(this.facade.authorUsername$), takeUntil(this.unsubscribe$))
       .subscribe(([auth, username]) => {
@@ -80,7 +81,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.facade.submit(slug);
   }
   updateForm(changes: any) {
-    this.store.dispatch({ type: '[ngrxForms] UPDATE_DATA', payload: changes });
+    this.ngrxFormsFacade.updateData(changes);
   }
 
   ngOnDestroy() {

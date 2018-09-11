@@ -1,6 +1,41 @@
-import { NgrxForms, NgrxFormsState } from './ngrx-forms.interfaces';
+import { ValidatorFn } from '@angular/forms';
+
 import { NgrxFormsAction, NgrxFormsActionTypes } from './ngrx-forms.actions';
-import { ngrxFormsInitialState } from './ngrx-forms.init';
+
+export interface NgrxForms {
+  data: any;
+  structure: Field[];
+  valid: boolean;
+  errors: Errors;
+  touched: boolean;
+}
+
+export interface NgrxFormsState {
+  readonly ngrxForms: NgrxForms;
+}
+
+export interface Field {
+  type: FieldType;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  validator?: ValidatorFn[];
+  attrs?: any;
+}
+
+export type FieldType = 'INPUT' | 'TEXTAREA';
+
+export interface Errors {
+  [key: string]: string;
+}
+
+export const ngrxFormsInitialState: NgrxForms = {
+  data: {},
+  structure: [],
+  valid: true,
+  errors: {},
+  touched: false
+};
 
 export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): NgrxForms {
   switch (action.type) {
@@ -32,9 +67,3 @@ export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): Ngr
     }
   }
 }
-
-export const getStructure = (state: NgrxFormsState) => state.ngrxForms.structure;
-export const getData = (state: NgrxFormsState) => state.ngrxForms.data;
-export const isValid = (state: NgrxFormsState) => state.ngrxForms.valid;
-export const getErrors = (state: NgrxFormsState) => state.ngrxForms.errors;
-export const getTouchedForm = (state: NgrxFormsState) => state.ngrxForms.touched;

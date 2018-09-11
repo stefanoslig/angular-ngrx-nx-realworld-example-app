@@ -1,6 +1,5 @@
 import { ArticleService } from '../article.service';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
-import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -21,6 +20,7 @@ import {
   UnFollow,
   ArticleActionTypes
 } from './article.actions';
+import { NgrxFormsFacade, ResetForm, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 
 @Injectable()
 export class ArticleEffects {
@@ -67,26 +67,20 @@ export class ArticleEffects {
     );
 
   @Effect()
-  addComment = this.actions.ofType<AddComment>(ArticleActionTypes.ADD_COMMENT).pipe(
-    map(action => action.payload),
-    withLatestFrom(this.store.select(fromNgrxForms.getData), this.store.select(fromNgrxForms.getStructure)),
-    exhaustMap(([slug, data, structure]) =>
-      this.articleService.addComment(slug, data.comment).pipe(
-        mergeMap(comment => [
-          new fromActions.AddCommentSuccess(comment),
-          {
-            type: '[ngrxForms] RESET_FORM'
-          }
-        ]),
-        catchError(result =>
-          of({
-            type: '[ngrxForms] SET_ERRORS',
-            payload: result.error.errors
-          })
-        )
+  addComment = this.actions
+    .ofType<AddComment>(ArticleActionTypes.ADD_COMMENT)
+    .pipe(
+      map(action => action.payload),
+      withLatestFrom(this.ngrxFormsFacade.data$, this.ngrxFormsFacade.structure$),
+      exhaustMap(([slug, data, structure]) =>
+        this.articleService
+          .addComment(slug, data.comment)
+          .pipe(
+            mergeMap(comment => [new fromActions.AddCommentSuccess(comment), new ResetForm()]),
+            catchError(result => of(new SetErrors(result.error.errors)))
+          )
       )
-    )
-  );
+    );
 
   @Effect()
   deleteComment = this.actions
@@ -167,6 +161,6 @@ export class ArticleEffects {
     private actions: Actions,
     private articleService: ArticleService,
     private actionsService: ActionsService,
-    private store: Store<any>
+    private ngrxFormsFacade: NgrxFormsFacade
   ) {}
 }

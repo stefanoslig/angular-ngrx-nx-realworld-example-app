@@ -1,21 +1,18 @@
-import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
-import * as fromActions from '@angular-ngrx-nx-realworld-example-app/auth';
-import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { AuthFacade, GetUser } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { NgrxFormsFacade, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from '../settings.service';
-import { EditSettings } from './settings.actions';
-import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { EditSettings, SettingsActionTypes } from './settings.actions';
 
 @Injectable()
 export class SettingsEffects {
   @Effect()
-  editSettings = this.actions.ofType<EditSettings>('[settings] EDIT_SETTINGS').pipe(
-    withLatestFrom(this.store.select(fromNgrxForms.getData), this.authFacade.user$),
+  editSettings = this.actions.ofType<EditSettings>(SettingsActionTypes.EDIT_SETTINGS).pipe(
+    withLatestFrom(this.ngrxFormsFacade.data$, this.authFacade.user$),
     map(([_, data, user]) => ({
       ...user,
       image: data.image,
@@ -25,25 +22,19 @@ export class SettingsEffects {
       email: data.email
     })),
     concatMap(data =>
-      this.settingsService.update(data).pipe(
-        mergeMap(result => [
-          new fromActions.GetUser(),
-          { type: '[router] Go', payload: { path: ['profile', result.username] } }
-        ]),
-        catchError(result =>
-          of({
-            type: '[ngrxForms] SET_ERRORS',
-            payload: result.error.errors
-          })
+      this.settingsService
+        .update(data)
+        .pipe(
+          mergeMap(result => [new GetUser(), { type: '[router] Go', payload: { path: ['profile', result.username] } }]),
+          catchError(result => of(new SetErrors(result.error.errors)))
         )
-      )
     )
   );
 
   constructor(
     private actions: Actions,
-    private store: Store<any>,
     private settingsService: SettingsService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private ngrxFormsFacade: NgrxFormsFacade
   ) {}
 }
