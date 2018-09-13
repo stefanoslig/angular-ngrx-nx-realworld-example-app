@@ -1,12 +1,11 @@
 import { User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { combineLatest, map, takeUntil, tap } from 'rxjs/operators';
 
-import { Profile, ProfileState } from './+state/profile.interfaces';
-import * as fromProfile from './+state/profile.reducer';
+import { ProfileFacade } from './+state/profile.facade';
+import { Profile } from './+state/profile.reducer';
 
 @Component({
   selector: 'app-profile',
@@ -22,10 +21,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   following: boolean;
   username: string;
 
-  constructor(private store: Store<ProfileState>, private authFacade: AuthFacade) {}
+  constructor(private facade: ProfileFacade, private authFacade: AuthFacade) {}
 
   ngOnInit() {
-    this.profile$ = this.store.select(fromProfile.getProfile);
+    this.profile$ = this.facade.profile$;
     this.currentUser$ = this.authFacade.user$;
 
     this.profile$
@@ -43,15 +42,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   toggleFollowing() {
     if (this.following) {
-      this.store.dispatch({
-        type: '[profile] UNFOLLOW',
-        payload: this.username
-      });
+      this.facade.unfollow(this.username);
     } else {
-      this.store.dispatch({
-        type: '[profile] FOLLOW',
-        payload: this.username
-      });
+      this.facade.follow(this.username);
     }
   }
 

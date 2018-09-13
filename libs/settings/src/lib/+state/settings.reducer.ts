@@ -1,7 +1,10 @@
-import { Settings } from './settings.interfaces';
 import { SettingsAction } from './settings.actions';
 
-export function settingsReducer(state: Settings, action: SettingsAction): Settings {
+export interface SettingsState {
+  readonly settings: {};
+}
+
+export function settingsReducer(state: {}, action: SettingsAction): {} {
   switch (action.type) {
     default: {
       return state;

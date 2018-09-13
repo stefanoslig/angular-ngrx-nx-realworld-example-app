@@ -1,9 +1,8 @@
 import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Profile } from '@angular-ngrx-nx-realworld-example-app/profile/src/lib/+state/profile.reducer';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { Profile } from './+state/profile.interfaces';
 
 @Injectable()
 export class ProfileService {

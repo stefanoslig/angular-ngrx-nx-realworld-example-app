@@ -8,8 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProfileEffects } from './+state/profile.effects';
-import { profileInitialState } from './+state/profile.init';
-import { profileReducer } from './+state/profile.reducer';
+import { ProfileFacade } from './+state/profile.facade';
+import { profileInitialState, profileReducer } from './+state/profile.reducer';
 import { ProfileArticlesComponent } from './profile-articles.component';
 import {
   ProfileArticlesResolverService,
@@ -52,7 +52,8 @@ import { ProfileService } from './profile.service';
     ProfileService,
     ProfileResolverService,
     ProfileArticlesResolverService,
-    ProfileFavoritesResolverService
+    ProfileFavoritesResolverService,
+    ProfileFacade
   ],
   declarations: [ProfileComponent, ProfileArticlesComponent]
 })

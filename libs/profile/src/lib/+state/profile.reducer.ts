@@ -1,20 +1,39 @@
-import { Profile, ProfileState } from './profile.interfaces';
-import { ProfileAction } from './profile.actions';
-import { profileInitialState } from './profile.init';
+import { ProfileAction, ProfileActionTypes } from './profile.actions';
+import { createFeatureSelector } from '@ngrx/store';
+
+export interface Profile {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+  loading: boolean;
+}
+
+export interface ProfileState {
+  readonly profile: Profile;
+}
+
+export const profileInitialState: Profile = {
+  username: '',
+  bio: '',
+  image: '',
+  following: false,
+  loading: false
+};
 
 export function profileReducer(state: Profile, action: ProfileAction): Profile {
   switch (action.type) {
-    case '[profile] GET_PROFILE': {
+    case ProfileActionTypes.GET_PROFILE: {
       return { ...state, loading: true };
     }
-    case '[profile] GET_PROFILE_SUCCESS': {
+    case ProfileActionTypes.GET_PROFILE_SUCCESS: {
       return { ...action.payload, loading: false };
     }
-    case '[profile] GET_PROFILE_FAIL': {
+    case ProfileActionTypes.GET_PROFILE_FAIL: {
       return profileInitialState;
     }
-    case '[profile] FOLLOW_SUCCESS':
-    case '[profile] UNFOLLOW_SUCCESS': {
+    case ProfileActionTypes.FOLLOW_SUCCESS:
+    case ProfileActionTypes.UNFOLLOW_SUCCESS: {
       return action.payload;
     }
     default: {
@@ -23,4 +42,4 @@ export function profileReducer(state: Profile, action: ProfileAction): Profile {
   }
 }
 
-export const getProfile = (state: ProfileState) => state.profile;
+export const getProfile = createFeatureSelector<Profile>('profile');

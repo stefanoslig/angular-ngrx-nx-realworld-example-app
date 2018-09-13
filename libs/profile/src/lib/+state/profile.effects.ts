@@ -1,5 +1,5 @@
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
-import { GetProfile } from '../+state/profile.actions';
+import { GetProfile, ProfileActionTypes } from '../+state/profile.actions';
 import { ProfileService } from '../profile.service';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
@@ -11,7 +11,7 @@ import { Follow, UnFollow } from './profile.actions';
 @Injectable()
 export class ProfileEffects {
   @Effect()
-  getProfile = this.actions.ofType<GetProfile>('[profile] GET_PROFILE').pipe(
+  getProfile = this.actions.ofType<GetProfile>(ProfileActionTypes.GET_PROFILE).pipe(
     groupBy(action => action.payload),
     mergeMap(group =>
       group.pipe(
@@ -19,12 +19,12 @@ export class ProfileEffects {
         switchMap(username =>
           this.profileService.getProfile(username).pipe(
             map(results => ({
-              type: '[profile] GET_PROFILE_SUCCESS',
+              type: ProfileActionTypes.GET_PROFILE_SUCCESS,
               payload: results
             })),
             catchError(error =>
               of({
-                type: '[profile] GET_PROFILE_FAIL',
+                type: ProfileActionTypes.GET_PROFILE_FAIL,
                 payload: error
               })
             )
@@ -35,17 +35,17 @@ export class ProfileEffects {
   );
 
   @Effect()
-  follow = this.actions.ofType<Follow>('[profile] FOLLOW').pipe(
+  follow = this.actions.ofType<Follow>(ProfileActionTypes.FOLLOW).pipe(
     map(action => action.payload),
     concatMap(slug =>
       this.actionsService.followUser(slug).pipe(
         map(results => ({
-          type: '[profile] FOLLOW_SUCCESS',
+          type: ProfileActionTypes.FOLLOW_SUCCESS,
           payload: results
         })),
         catchError(error =>
           of({
-            type: '[profile] FOLLOW_FAIL',
+            type: ProfileActionTypes.FOLLOW_FAIL,
             payload: error
           })
         )
@@ -54,17 +54,17 @@ export class ProfileEffects {
   );
 
   @Effect()
-  unFollow = this.actions.ofType<UnFollow>('[profile] UNFOLLOW').pipe(
+  unFollow = this.actions.ofType<UnFollow>(ProfileActionTypes.UNFOLLOW).pipe(
     map(action => action.payload),
     concatMap(slug =>
       this.actionsService.unfollowUser(slug).pipe(
         map(results => ({
-          type: '[profile] UNFOLLOW_SUCCESS',
+          type: ProfileActionTypes.UNFOLLOW_SUCCESS,
           payload: results
         })),
         catchError(error =>
           of({
-            type: '[profile] UNFOLLOW_FAIL',
+            type: ProfileActionTypes.UNFOLLOW_FAIL,
             payload: error
           })
         )

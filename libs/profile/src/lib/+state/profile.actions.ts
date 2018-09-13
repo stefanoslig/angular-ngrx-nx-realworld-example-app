@@ -1,48 +1,61 @@
-import { Profile } from './profile.interfaces';
+import { Profile } from './profile.reducer';
+import { Action } from '@ngrx/store';
 
-export interface GetProfile {
-  type: '[profile] GET_PROFILE';
-  payload: string;
+export enum ProfileActionTypes {
+  GET_PROFILE = '[profile] GET_PROFILE',
+  GET_PROFILE_SUCCESS = '[profile] GET_PROFILE_SUCCESS',
+  GET_PROFILE_FAIL = '[profile] GET_PROFILE_FAIL',
+  FOLLOW = '[profile] FOLLOW',
+  FOLLOW_SUCCESS = '[profile] FOLLOW_SUCCESS',
+  FOLLOW_FAIL = '[profile] FOLLOW_FAIL',
+  UNFOLLOW = '[profile] UNFOLLOW',
+  UNFOLLOW_SUCCESS = '[profile] UNFOLLOW_SUCCESS',
+  UNFOLLOW_FAIL = '[profile] UNFOLLOW_FAIL'
 }
 
-export interface GetProfileSuccess {
-  type: '[profile] GET_PROFILE_SUCCESS';
-  payload: Profile;
+export class GetProfile implements Action {
+  readonly type = ProfileActionTypes.GET_PROFILE;
+  constructor(public payload: string) {}
 }
 
-export interface GetProfileFail {
-  type: '[profile] GET_PROFILE_FAIL';
-  payload: Error;
+export class GetProfileSuccess implements Action {
+  readonly type = ProfileActionTypes.GET_PROFILE_SUCCESS;
+  constructor(public payload: Profile) {}
 }
 
-export interface Follow {
-  type: '[profile] FOLLOW';
-  payload: string;
+export class GetProfileFail implements Action {
+  readonly type = ProfileActionTypes.GET_PROFILE_FAIL;
+  constructor(public payload: Error) {}
 }
 
-export interface FollowSuccess {
-  type: '[profile] FOLLOW_SUCCESS';
-  payload: Profile;
+export class Follow implements Action {
+  readonly type = ProfileActionTypes.FOLLOW;
+  constructor(public payload: string) {}
 }
 
-export interface FollowFail {
-  type: '[profile] FOLLOW_FAIL';
-  payload: Error;
+export class FollowSuccess implements Action {
+  readonly type = ProfileActionTypes.FOLLOW_SUCCESS;
+  constructor(public payload: Profile) {}
 }
 
-export interface UnFollow {
-  type: '[profile] UNFOLLOW';
-  payload: string;
+export class FollowFail implements Action {
+  readonly type = ProfileActionTypes.FOLLOW_FAIL;
+  constructor(public payload: Error) {}
 }
 
-export interface UnFollowSuccess {
-  type: '[profile] UNFOLLOW_SUCCESS';
-  payload: Profile;
+export class UnFollow implements Action {
+  readonly type = ProfileActionTypes.UNFOLLOW;
+  constructor(public payload: string) {}
 }
 
-export interface UnFollowFail {
-  type: '[profile] UNFOLLOW_FAIL';
-  payload: Error;
+export class UnFollowSuccess implements Action {
+  readonly type = ProfileActionTypes.UNFOLLOW_SUCCESS;
+  constructor(public payload: Profile) {}
+}
+
+export class UnFollowFail implements Action {
+  readonly type = ProfileActionTypes.UNFOLLOW_FAIL;
+  constructor(public payload: Error) {}
 }
 
 export type ProfileAction =
