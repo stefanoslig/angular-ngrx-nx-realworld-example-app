@@ -1,6 +1,5 @@
 import { ApiModule } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthModule } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { CoreModule } from '@angular-ngrx-nx-realworld-example-app/core';
 import { NgrxErrorModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-error';
 import { NgrxRouterModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 import { NgModule } from '@angular/core';
@@ -18,32 +17,31 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @NgModule({
-  imports: [
-    ApiModule,
-    AuthModule,
-    CoreModule,
-    BrowserModule,
-    NxModule.forRoot(),
-    RouterModule.forRoot(
-      [
-        { path: '', loadChildren: '@angular-ngrx-nx-realworld-example-app/home#HomeModule' },
-        { path: 'article/:slug', loadChildren: '@angular-ngrx-nx-realworld-example-app/article#ArticleModule' },
-        { path: 'settings', loadChildren: '@angular-ngrx-nx-realworld-example-app/settings#SettingsModule' },
-        { path: 'editor', loadChildren: '@angular-ngrx-nx-realworld-example-app/editor#EditorModule' },
-        { path: 'profile/:username', loadChildren: '@angular-ngrx-nx-realworld-example-app/profile#ProfileModule' }
-      ],
-      {
-        initialNavigation: 'enabled',
-        useHash: true
-      }
-    ),
-    StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze] : [] }),
-    EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    NgrxRouterModule,
-    NgrxErrorModule
-  ],
-  declarations: [AppComponent, FooterComponent, NavbarComponent],
-  bootstrap: [AppComponent]
+	imports: [
+		ApiModule,
+		AuthModule,
+		BrowserModule,
+		NxModule.forRoot(),
+		RouterModule.forRoot(
+			[
+				{ path: '', loadChildren: '@angular-ngrx-nx-realworld-example-app/home#HomeModule' },
+				{ path: 'article/:slug', loadChildren: '@angular-ngrx-nx-realworld-example-app/article#ArticleModule' },
+				{ path: 'settings', loadChildren: '@angular-ngrx-nx-realworld-example-app/settings#SettingsModule' },
+				{ path: 'editor', loadChildren: '@angular-ngrx-nx-realworld-example-app/editor#EditorModule' },
+				{ path: 'profile/:username', loadChildren: '@angular-ngrx-nx-realworld-example-app/profile#ProfileModule' }
+			],
+			{
+				initialNavigation: 'enabled',
+				useHash: true
+			}
+		),
+		StoreModule.forRoot({}, { metaReducers: !environment.production ? [storeFreeze] : [] }),
+		EffectsModule.forRoot([]),
+		!environment.production ? StoreDevtoolsModule.instrument() : [],
+		NgrxRouterModule,
+		NgrxErrorModule
+	],
+	declarations: [AppComponent, FooterComponent, NavbarComponent],
+	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
