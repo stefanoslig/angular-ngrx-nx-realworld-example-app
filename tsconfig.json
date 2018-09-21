@@ -1,73 +1,76 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@angular-ngrx-nx-realworld-example-app/*": [
-        "libs/*"
-      ],
-      "@default/*": [
-        "apps/conduit/src/app/*"
-      ],
-      "@env/*": [
-        "apps/conduit/src/environments/*"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/api": [
-        "libs/api/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/article": [
-        "libs/article/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/article-list": [
-        "libs/article-list/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/auth": [
-        "libs/auth/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/core": [
-        "libs/core/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/editor": [
-        "libs/editor/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/home": [
-        "libs/home/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/ngrx-error": [
-        "libs/ngrx-error/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/ngrx-forms": [
-        "libs/ngrx-forms/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/profile": [
-        "libs/profile/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/ngrx-router": [
-        "libs/ngrx-router/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/settings": [
-        "libs/settings/src/index.ts"
-      ],
-      "@angular-ngrx-nx-realworld-example-app/shared": [
-        "libs/shared/src/index.ts"
-      ]
-    }
-  },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"target": "es5",
+		"types": [
+			"jest"
+		],
+		"typeRoots": [
+			"node_modules/@types"
+		],
+		"lib": [
+			"es2017",
+			"dom"
+		],
+		"baseUrl": ".",
+		"paths": {
+			"@angular-ngrx-nx-realworld-example-app/*": [
+				"libs/*"
+			],
+			"@default/*": [
+				"apps/conduit/src/app/*"
+			],
+			"@env/*": [
+				"apps/conduit/src/environments/*"
+			],
+			"@angular-ngrx-nx-realworld-example-app/api": [
+				"libs/api/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/article": [
+				"libs/article/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/article-list": [
+				"libs/article-list/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/auth": [
+				"libs/auth/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/core": [
+				"libs/core/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/editor": [
+				"libs/editor/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/home": [
+				"libs/home/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/ngrx-error": [
+				"libs/ngrx-error/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/ngrx-forms": [
+				"libs/ngrx-forms/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/profile": [
+				"libs/profile/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/ngrx-router": [
+				"libs/ngrx-router/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/settings": [
+				"libs/settings/src/index.ts"
+			],
+			"@angular-ngrx-nx-realworld-example-app/shared": [
+				"libs/shared/src/index.ts"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"tmp"
+	]
 }
