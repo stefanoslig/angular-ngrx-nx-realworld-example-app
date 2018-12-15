@@ -8,24 +8,26 @@ import { hot } from '@nrwl/nx/testing';
 
 import { SettingsService } from '../settings.service';
 import { SettingsEffects } from './settings.effects';
+import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 
 describe('SettingsEffects', () => {
-  let actions;
-  let effects: SettingsEffects;
+	let actions;
+	let effects: SettingsEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-      providers: [SettingsEffects, DataPersistence, provideMockActions(() => actions), SettingsService, ApiService]
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+			providers: [SettingsEffects, DataPersistence, provideMockActions(() => actions), SettingsService, ApiService, AuthFacade, NgrxFormsFacade]
+		});
 
-    effects = TestBed.get(SettingsEffects);
-  });
+		effects = TestBed.get(SettingsEffects);
+	});
 
-  describe('someEffect', () => {
-    it('should work', async () => {
-      actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
-      expect(true).toBeTruthy();
-    });
-  });
+	describe('someEffect', () => {
+		it('should work', async () => {
+			actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
+			expect(true).toBeTruthy();
+		});
+	});
 });

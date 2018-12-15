@@ -3,23 +3,24 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { hot } from '@nrwl/nx/testing';
 
 import { NgrxFormsEffects } from './ngrx-forms.effects';
+import { NgrxFormsFacade } from './ngrx-forms.facade';
 
 describe('NgrxFormsEffects', () => {
-  let actions;
-  let effects: NgrxFormsEffects;
+	let actions;
+	let effects: NgrxFormsEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [NgrxFormsEffects, provideMockActions(() => actions)]
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [NgrxFormsEffects, provideMockActions(() => actions), NgrxFormsFacade]
+		});
 
-    effects = TestBed.get(NgrxFormsEffects);
-  });
+		effects = TestBed.get(NgrxFormsEffects);
+	});
 
-  describe('someEffect', () => {
-    it('should work', async () => {
-      actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
-      expect(true).toBeTruthy();
-    });
-  });
+	describe('someEffect', () => {
+		it('should work', async () => {
+			actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
+			expect(true).toBeTruthy();
+		});
+	});
 });

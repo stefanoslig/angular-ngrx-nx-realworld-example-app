@@ -79,7 +79,6 @@ export class AuthEffects {
 	constructor(
 		private actions: Actions,
 		private localStorageJwtService: LocalStorageJwtService,
-		private apiService: ApiService,
 		private ngrxFormsFacade: NgrxFormsFacade,
 		private authService: AuthService,
 		private router: Router

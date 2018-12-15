@@ -8,24 +8,25 @@ import { hot } from '@nrwl/nx/testing';
 
 import { EditorService } from '../editor.service';
 import { EditorEffects } from './editor.effects';
+import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 
 describe('EditorEffects', () => {
-  let actions;
-  let effects: EditorEffects;
+	let actions;
+	let effects: EditorEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-      providers: [EditorEffects, DataPersistence, provideMockActions(() => actions), EditorService, ApiService]
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+			providers: [EditorEffects, DataPersistence, provideMockActions(() => actions), EditorService, ApiService, NgrxFormsFacade]
+		});
 
-    effects = TestBed.get(EditorEffects);
-  });
+		effects = TestBed.get(EditorEffects);
+	});
 
-  describe('someEffect', () => {
-    it('should work', async () => {
-      actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
-      expect(true).toBeTruthy();
-    });
-  });
+	describe('someEffect', () => {
+		it('should work', async () => {
+			actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
+			expect(true).toBeTruthy();
+		});
+	});
 });

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ApiService, User } from '@angular-ngrx-nx-realworld-example-app/api';
-import { map } from 'rxjs/operators/map';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SettingsService {

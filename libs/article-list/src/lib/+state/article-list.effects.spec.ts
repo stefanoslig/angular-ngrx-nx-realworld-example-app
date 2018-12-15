@@ -9,31 +9,33 @@ import { hot } from '@nrwl/nx/testing';
 
 import { ArticleListService } from '../article-list.service';
 import { ArticleListEffects } from './article-list.effects';
+import { ArticleListFacade } from './article-list.facade';
 
 describe('ArticleListEffects', () => {
-  let actions;
-  let effects: ArticleListEffects;
+	let actions;
+	let effects: ArticleListEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-      providers: [
-        ArticleListEffects,
-        DataPersistence,
-        provideMockActions(() => actions),
-        ActionsService,
-        ArticleListService,
-        ApiService
-      ]
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+			providers: [
+				ArticleListEffects,
+				DataPersistence,
+				provideMockActions(() => actions),
+				ActionsService,
+				ArticleListService,
+				ApiService,
+				ArticleListFacade
+			]
+		});
 
-    effects = TestBed.get(ArticleListEffects);
-  });
+		effects = TestBed.get(ArticleListEffects);
+	});
 
-  describe('someEffect', () => {
-    it('should work', async () => {
-      actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
-      expect(true).toBeTruthy();
-    });
-  });
+	describe('someEffect', () => {
+		it('should work', async () => {
+			actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
+			expect(true).toBeTruthy();
+		});
+	});
 });
