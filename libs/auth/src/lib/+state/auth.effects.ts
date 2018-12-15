@@ -16,12 +16,11 @@ import { LocalStorageJwtService } from '../local-storage-jwt.service';
 @Injectable()
 export class AuthEffects {
 	@Effect()
-	getUser = this.actions
+	getUser$ = this.actions
 		.ofType<GetUser>(AuthActionTypes.GET_USER)
 		.pipe(
 			switchMap(item =>
-				this.apiService
-					.get('/user')
+				this.authService.user()
 					.pipe(
 						map(data => new fromActions.GetUserSuccess(data.user)),
 						catchError(error => of(new fromActions.GetUserFail(error)))
@@ -30,22 +29,22 @@ export class AuthEffects {
 		);
 
 	@Effect()
-	login = this.actions
+	login$ = this.actions
 		.ofType<Login>(AuthActionTypes.LOGIN)
 		.pipe(
 			withLatestFrom(this.ngrxFormsFacade.data$),
 			exhaustMap(([action, data]) =>
 				this.authService
-					.authUser('LOGIN', data)
+					.login(data)
 					.pipe(
-						map(result => new fromActions.LoginSuccess(result.user)),
+						map(user => new fromActions.LoginSuccess(user)),
 						catchError(result => of(new fromNgrxForms.SetErrors(result.error.errors)))
 					)
 			)
 		);
 
 	@Effect({ dispatch: false })
-	loginRegisterSuccess = this.actions
+	loginOrRegisterSuccess$ = this.actions
 		.ofType<LoginSuccess | RegisterSuccess>(AuthActionTypes.LOGIN_SUCCESS, AuthActionTypes.REGISTER_SUCCESS)
 		.pipe(
 			tap(action => {
@@ -55,22 +54,22 @@ export class AuthEffects {
 		);
 
 	@Effect()
-	register = this.actions
+	register$ = this.actions
 		.ofType<Register>(AuthActionTypes.REGISTER)
 		.pipe(
 			withLatestFrom(this.ngrxFormsFacade.data$),
 			exhaustMap(([action, data]) =>
 				this.authService
-					.authUser('REGISTER', data)
+					.register(data)
 					.pipe(
-						map(result => new fromActions.RegisterSuccess(result.user)),
+						map(user => new fromActions.RegisterSuccess(user)),
 						catchError(result => of(new fromNgrxForms.SetErrors(result.error.errors)))
 					)
 			)
 		);
 
 	@Effect({ dispatch: false })
-	logout = this.actions.ofType<Logout>(AuthActionTypes.LOGOUT).pipe(
+	logout$ = this.actions.ofType<Logout>(AuthActionTypes.LOGOUT).pipe(
 		tap(action => {
 			this.localStorageJwtService.removeItem();
 			this.router.navigateByUrl('/login');

@@ -1,9 +1,9 @@
 import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
-import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
+import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 describe('AuthService', () => {
   beforeEach(() => {

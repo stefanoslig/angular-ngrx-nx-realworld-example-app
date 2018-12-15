@@ -17,36 +17,37 @@ import { RegisterComponent } from './register/register.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 
 const authRouting: ModuleWithProviders = RouterModule.forChild([
-	{
-		path: 'login',
-		component: LoginComponent
-	},
-	{
-		path: 'register',
-		component: RegisterComponent
-	}
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  }
 ]);
 
 @NgModule({
-	imports: [
-		CommonModule,
-		NgrxFormsModule,
-		authRouting,
-		StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
-		EffectsModule.forFeature([AuthEffects])
-	],
-	providers: [
-		AuthEffects,
-		AuthGuardService,
-		AuthService,
-		AuthFacade,
-		TokenInterceptorService,
-		LocalStorageJwtService,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: TokenInterceptorService,
-			multi: true
-		}],
-	declarations: [LoginComponent, RegisterComponent]
+  imports: [
+    CommonModule,
+    NgrxFormsModule,
+    authRouting,
+    StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
+    EffectsModule.forFeature([AuthEffects])
+  ],
+  providers: [
+    AuthEffects,
+    AuthGuardService,
+    AuthService,
+    AuthFacade,
+    TokenInterceptorService,
+    LocalStorageJwtService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
+  declarations: [LoginComponent, RegisterComponent]
 })
-export class AuthModule { }
+export class AuthModule {}

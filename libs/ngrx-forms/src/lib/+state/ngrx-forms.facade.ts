@@ -7,34 +7,34 @@ import { ngrxFormsQuery } from './ngrx-forms.selectors';
 
 @Injectable()
 export class NgrxFormsFacade {
-  data$ = this.store.select(ngrxFormsQuery.getData);
-  structure$ = this.store.select(ngrxFormsQuery.getStructure);
-  errors$ = this.store.select(ngrxFormsQuery.getErrors);
-  touched$ = this.store.select(ngrxFormsQuery.getTouchedForm);
+	data$ = this.store.select(ngrxFormsQuery.getData);
+	structure$ = this.store.select(ngrxFormsQuery.getStructure);
+	errors$ = this.store.select(ngrxFormsQuery.getErrors);
+	touched$ = this.store.select(ngrxFormsQuery.getTouchedForm);
 
-  constructor(private store: Store<NgrxFormsState>) {}
+	constructor(private store: Store<NgrxFormsState>) { }
 
-  setStructure(structure: any) {
-    this.store.dispatch(new SetStructure(structure));
-  }
+	setStructure(structure: any) {
+		this.store.dispatch(new SetStructure(structure));
+	}
 
-  setData(data: any) {
-    this.store.dispatch(new SetData(data));
-  }
+	setData(data: any) {
+		this.store.dispatch(new SetData(data));
+	}
 
-  updateData(data: any) {
-    this.store.dispatch(new UpdateData(data));
-  }
+	updateData(data: any) {
+		this.store.dispatch(new UpdateData(data));
+	}
 
-  initializeForm() {
-    this.store.dispatch(new InitializeForm());
-  }
+	initializeForm() {
+		this.store.dispatch(new InitializeForm());
+	}
 
-  initializeErrors() {
-    this.store.dispatch(new InitializeErrors());
-  }
+	initializeErrors() {
+		this.store.dispatch(new InitializeErrors());
+	}
 
-  resetForm() {
-    this.store.dispatch(new ResetForm());
-  }
+	resetForm() {
+		this.store.dispatch(new ResetForm());
+	}
 }
