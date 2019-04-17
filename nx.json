@@ -29,11 +29,6 @@
         "auth"
       ]
     },
-    "core": {
-      "tags": [
-        "core"
-      ]
-    },
     "editor": {
       "tags": [
         "editor"

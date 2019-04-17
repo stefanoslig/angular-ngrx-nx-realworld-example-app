@@ -66,8 +66,7 @@
 					"builder": "@angular-devkit/build-angular:tslint",
 					"options": {
 						"tsConfig": [
-							"apps/conduit/tsconfig.app.json",
-							"apps/conduit/tsconfig.spec.json"
+							"apps/conduit/tsconfig.app.json"
 						],
 						"exclude": [
 							"**/node_modules/**"
