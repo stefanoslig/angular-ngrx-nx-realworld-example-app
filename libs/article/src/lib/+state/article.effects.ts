@@ -2,8 +2,6 @@ import { ArticleService } from '../article.service';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { DataPersistence } from '@nrwl/nx';
 import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import * as fromActions from './article.actions';

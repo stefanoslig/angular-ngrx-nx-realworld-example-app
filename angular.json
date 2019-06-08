@@ -26,24 +26,31 @@
 						"scripts": []
 					},
 					"configurations": {
-						"production": {
-							"optimization": true,
-							"outputHashing": "all",
-							"sourceMap": false,
-							"extractCss": true,
-							"namedChunks": false,
-							"aot": true,
-							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true,
-							"fileReplacements": [
-								{
-									"replace": "apps/conduit/src/environments/environment.ts",
-									"with": "apps/conduit/src/environments/environment.prod.ts"
-								}
-							]
-						}
-					}
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/myworkspace/src/environments/environment.ts",
+                  "with": "apps/myworkspace/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
 				},
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
@@ -72,7 +79,15 @@
 							"**/node_modules/**"
 						]
 					}
-				}
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/conduit/jest.config.js",
+            "tsConfig": "apps/conduit/tsconfig.spec.json",
+            "setupFile": "apps/conduit/src/test-setup.ts"
+          }
+        }
 			},
 			"prefix": "app"
 		},
@@ -82,12 +97,18 @@
 			"projectType": "application",
 			"architect": {
 				"e2e": {
-					"builder": "@angular-devkit/build-angular:protractor",
+					"builder": "@nrwl/cypress:cypress",
 					"options": {
-						"protractorConfig": "apps/conduit-e2e/protractor.conf.js",
-						"devServerTarget": "conduit:serve"
+						"cypressConfig": "apps/conduit-e2e/cypress.json",
+            "devServerTarget": "conduit:serve",
+            "tsConfig": "apps/conduit-e2e/tsconfig.e2e.json"
 					}
-				},
+        },
+        "configurations": {
+          "production": {
+            "devServerTarget": "conduit:serve:production"
+          }
+        },
 				"lint": {
 					"builder": "@angular-devkit/build-angular:tslint",
 					"options": {
@@ -112,7 +133,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/api/tsconfig.lib.json",
-							"libs/api/tsconfig.spec.json",
 							"libs/api/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -121,7 +141,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/api/jest.config.js",
 						"tsConfig": "libs/api/tsconfig.spec.json",
@@ -141,7 +161,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/article/tsconfig.lib.json",
-							"libs/article/tsconfig.spec.json",
 							"libs/article/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -150,7 +169,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/article/jest.config.js",
 						"tsConfig": "libs/article/tsconfig.spec.json",
@@ -170,7 +189,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/article-list/tsconfig.lib.json",
-							"libs/article-list/tsconfig.spec.json",
 							"libs/article-list/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -179,7 +197,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/article-list/jest.config.js",
 						"tsConfig": "libs/article-list/tsconfig.spec.json",
@@ -199,7 +217,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/auth/tsconfig.lib.json",
-							"libs/auth/tsconfig.spec.json",
 							"libs/auth/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -208,7 +225,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/auth/jest.config.js",
 						"tsConfig": "libs/auth/tsconfig.spec.json",
@@ -228,7 +245,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/editor/tsconfig.lib.json",
-							"libs/editor/tsconfig.spec.json",
 							"libs/editor/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -237,7 +253,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/editor/jest.config.js",
 						"tsConfig": "libs/editor/tsconfig.spec.json",
@@ -257,7 +273,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/home/tsconfig.lib.json",
-							"libs/home/tsconfig.spec.json",
 							"libs/home/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -266,7 +281,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/home/jest.config.js",
 						"tsConfig": "libs/home/tsconfig.spec.json",
@@ -286,7 +301,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/ngrx-error/tsconfig.lib.json",
-							"libs/ngrx-error/tsconfig.spec.json",
 							"libs/ngrx-error/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -295,7 +309,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/ngrx-error/jest.config.js",
 						"tsConfig": "libs/ngrx-error/tsconfig.spec.json",
@@ -315,7 +329,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/ngrx-forms/tsconfig.lib.json",
-							"libs/ngrx-forms/tsconfig.spec.json",
 							"libs/ngrx-forms/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -324,7 +337,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/ngrx-forms/jest.config.js",
 						"tsConfig": "libs/ngrx-forms/tsconfig.spec.json",
@@ -344,7 +357,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/profile/tsconfig.lib.json",
-							"libs/profile/tsconfig.spec.json",
 							"libs/profile/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -353,7 +365,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/profile/jest.config.js",
 						"tsConfig": "libs/profile/tsconfig.spec.json",
@@ -373,7 +385,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/ngrx-router/tsconfig.lib.json",
-							"libs/ngrx-router/tsconfig.spec.json",
 							"libs/ngrx-router/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -382,7 +393,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/ngrx-router/jest.config.js",
 						"tsConfig": "libs/ngrx-router/tsconfig.spec.json",
@@ -402,7 +413,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/settings/tsconfig.lib.json",
-							"libs/settings/tsconfig.spec.json",
 							"libs/settings/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -411,7 +421,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/settings/jest.config.js",
 						"tsConfig": "libs/settings/tsconfig.spec.json",
@@ -431,7 +441,6 @@
 					"options": {
 						"tsConfig": [
 							"libs/shared/tsconfig.lib.json",
-							"libs/shared/tsconfig.spec.json",
 							"libs/shared/tsconfig.spec.json"
 						],
 						"exclude": [
@@ -440,7 +449,7 @@
 					}
 				},
 				"test": {
-					"builder": "@nrwl/builders:jest",
+					"builder": "@nrwl/jest:jest",
 					"options": {
 						"jestConfig": "libs/shared/jest.config.js",
 						"tsConfig": "libs/shared/tsconfig.spec.json",
@@ -453,9 +462,19 @@
 	},
 	"defaultProject": "conduit",
 	"cli": {
-		"warnings": {
-			"typescriptMismatch": false
-		},
-		"defaultCollection": "@nrwl/schematics"
-	}
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  }
 }

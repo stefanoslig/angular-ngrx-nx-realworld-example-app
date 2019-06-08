@@ -1,10 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/libs/article-list",
+    "outDir": "../../dist/out-tsc",
     "module": "commonjs",
     "types": ["jest", "node"]
   },
-  "files": ["src/test-setup.ts", "src/polyfills.ts"],
+  "files": ["src/test-setup.ts"],
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

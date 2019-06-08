@@ -1,13 +1,8 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/apps/conduit-e2e",
-    "module": "commonjs",
-    "target": "es5",
-    "types": [
-      "jasmine",
-      "jasminewd2",
-      "node"
-    ]
-  }
+    "sourceMap": false,
+    "outDir": "../../dist/out-tsc"
+  },
+  "include": ["src/**/*.ts"]
 }

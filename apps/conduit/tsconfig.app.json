@@ -1,10 +1,10 @@
 {
-	"extends": "../../tsconfig.json",
-	"compilerOptions": {
-		"outDir": "../../dist/out-tsc/apps/conduit",
-		"module": "es2015"
-	},
-	"include": [
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": []
+  },
+  "include": [
 		"**/*.ts",
 		"../../libs/home/src/index.ts",
 		"../../libs/editor/src/index.ts",
@@ -12,8 +12,5 @@
 		"../../libs/article/src/index.ts",
 		"../../libs/profile/src/index.ts"
 	],
-	"exclude": [
-		"**/*.spec.ts",
-		//"src/test.ts"
-	]
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts"]
 }
