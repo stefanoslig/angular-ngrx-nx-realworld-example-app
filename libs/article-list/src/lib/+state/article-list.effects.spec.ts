@@ -4,8 +4,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { DataPersistence } from '@nrwl/nx';
-import { hot } from '@nrwl/nx/testing';
+import { DataPersistence } from '@nrwl/angular';
+import { hot } from '@nrwl/angular/testing';
 
 import { ArticleListService } from '../article-list.service';
 import { ArticleListEffects } from './article-list.effects';

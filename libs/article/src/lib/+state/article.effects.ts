@@ -1,162 +1,152 @@
 import { ArticleService } from '../article.service';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
-import * as fromActions from './article.actions';
+import {
+  catchError,
+  concatMap,
+  exhaustMap,
+  map,
+  mergeMap,
+  withLatestFrom
+} from 'rxjs/operators';
+import * as ArticleActions from './article.actions';
 
 import {
-  AddComment,
-  DeleteArticle,
-  DeleteComment,
-  Favorite,
-  Follow,
-  LoadArticle,
-  LoadComments,
-  UnFavorite,
-  UnFollow,
-  ArticleActionTypes
-} from './article.actions';
-import { NgrxFormsFacade, ResetForm, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+  NgrxFormsFacade,
+  ResetForm,
+  SetErrors
+} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 
 @Injectable()
 export class ArticleEffects {
-  @Effect()
-  loadArticle = this.actions
-    .ofType<LoadArticle>(ArticleActionTypes.LOAD_ARTICLE)
-    .pipe(
+  loadArticle = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.loadArticle),
       concatMap(action =>
-        this.articleService
-          .get(action.payload)
-          .pipe(
-            map(results => new fromActions.LoadArticleSuccess(results)),
-            catchError(error => of(new fromActions.LoadArticleFail(error)))
-          )
+        this.articleService.get(action.slug).pipe(
+          map(results =>
+            ArticleActions.loadArticleSuccess({ article: results })
+          ),
+          catchError(error => of(ArticleActions.loadArticleFail(error)))
+        )
       )
-    );
+    )
+  );
 
-  @Effect()
-  loadComments = this.actions
-    .ofType<LoadComments>(ArticleActionTypes.LOAD_COMMENTS)
-    .pipe(
+  loadComments = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.loadComments),
       concatMap(action =>
-        this.articleService
-          .getComments(action.payload)
-          .pipe(
-            map(results => new fromActions.LoadCommentsSuccess(results)),
-            catchError(error => of(new fromActions.LoadCommentsFail(error)))
-          )
+        this.articleService.getComments(action.slug).pipe(
+          map(comments => ArticleActions.loadCommentsSuccess({ comments })),
+          catchError(error => of(ArticleActions.loadCommentsFail(error)))
+        )
       )
-    );
+    )
+  );
 
-  @Effect()
-  deleteArticle = this.actions
-    .ofType<DeleteArticle>(ArticleActionTypes.DELETE_ARTICLE)
-    .pipe(
+  deleteArticle = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.deleteArticle),
       concatMap(action =>
-        this.articleService
-          .deleteArticle(action.payload)
-          .pipe(
-            map(_ => ({ type: '[router] Go', payload: { path: ['/'] } })),
-            catchError(error => of(new fromActions.DeleteArticleFail(error)))
-          )
+        this.articleService.deleteArticle(action.slug).pipe(
+          map(_ => ({ type: '[router] Go', payload: { path: ['/'] } })),
+          catchError(error => of(ArticleActions.deleteArticleFail(error)))
+        )
       )
-    );
+    )
+  );
 
-  @Effect()
-  addComment = this.actions
-    .ofType<AddComment>(ArticleActionTypes.ADD_COMMENT)
-    .pipe(
-      map(action => action.payload),
-      withLatestFrom(this.ngrxFormsFacade.data$, this.ngrxFormsFacade.structure$),
+  addComment = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.addComment),
+      map(action => action.slug),
+      withLatestFrom(
+        this.ngrxFormsFacade.data$,
+        this.ngrxFormsFacade.structure$
+      ),
       exhaustMap(([slug, data, structure]) =>
-        this.articleService
-          .addComment(slug, data.comment)
-          .pipe(
-            mergeMap(comment => [new fromActions.AddCommentSuccess(comment), new ResetForm()]),
-            catchError(result => of(new SetErrors(result.error.errors)))
-          )
+        this.articleService.addComment(slug, data.comment).pipe(
+          mergeMap(comment => [
+            ArticleActions.addCommentSuccess({ comment }),
+            new ResetForm()
+          ]),
+          catchError(result => of(new SetErrors(result.error.errors)))
+        )
       )
-    );
+    )
+  );
 
-  @Effect()
-  deleteComment = this.actions
-    .ofType<DeleteComment>(ArticleActionTypes.DELETE_COMMENT)
-    .pipe(
-      map(action => action.payload),
-      concatMap(data =>
-        this.articleService
-          .deleteComment(data.commentId, data.slug)
-          .pipe(
-            map(_ => new fromActions.DeleteCommentSuccess(data.commentId)),
-            catchError(error => of(new fromActions.DeleteCommentFail(error)))
-          )
+  deleteComment = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.deleteComment),
+      concatMap(action =>
+        this.articleService.deleteComment(action.commentId, action.slug).pipe(
+          map(_ =>
+            ArticleActions.deleteCommentSuccess({ commentId: action.commentId })
+          ),
+          catchError(error => of(ArticleActions.deleteCommentFail(error)))
+        )
       )
-    );
+    )
+  );
 
-  @Effect()
-  follow = this.actions
-    .ofType<Follow>(ArticleActionTypes.FOLLOW)
-    .pipe(
-      map(action => action.payload),
+  follow = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.follow),
+      map(action => action.username),
+      concatMap(username =>
+        this.actionsService.followUser(username).pipe(
+          map(profile => ArticleActions.followSuccess({ profile })),
+          catchError(error => of(ArticleActions.followFail(error)))
+        )
+      )
+    )
+  );
+
+  unFollow = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.unFollow),
+      map(action => action.username),
+      concatMap(username =>
+        this.actionsService.unfollowUser(username).pipe(
+          map(profile => ArticleActions.unFollowSuccess({ profile })),
+          catchError(error => of(ArticleActions.unFollowFail(error)))
+        )
+      )
+    )
+  );
+
+  favorite = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.favorite),
+      map(action => action.slug),
       concatMap(slug =>
-        this.actionsService
-          .followUser(slug)
-          .pipe(
-            map(results => new fromActions.FollowSuccess(results)),
-            catchError(error => of(new fromActions.FollowFail(error)))
-          )
+        this.actionsService.favorite(slug).pipe(
+          map(article => ArticleActions.favoriteSuccess({ article })),
+          catchError(error => of(ArticleActions.favoriteFail(error)))
+        )
       )
-    );
+    )
+  );
 
-  @Effect()
-  unFollow = this.actions
-    .ofType<UnFollow>(ArticleActionTypes.UNFOLLOW)
-    .pipe(
-      map(action => action.payload),
+  unFavorite = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ArticleActions.unFavorite),
+      map(action => action.slug),
       concatMap(slug =>
-        this.actionsService
-          .unfollowUser(slug)
-          .pipe(
-            map(results => new fromActions.UnFollowSuccess(results)),
-            catchError(error => of(new fromActions.UnFollowFail(error)))
-          )
+        this.actionsService.unfavorite(slug).pipe(
+          map(article => ArticleActions.unFavoriteSuccess({ article })),
+          catchError(error => of(ArticleActions.unFavoriteFail(error)))
+        )
       )
-    );
-
-  @Effect()
-  favorite = this.actions
-    .ofType<Favorite>(ArticleActionTypes.FAVORITE)
-    .pipe(
-      map(action => action.payload),
-      concatMap(slug =>
-        this.actionsService
-          .favorite(slug)
-          .pipe(
-            map(results => new fromActions.FavoriteSuccess(results)),
-            catchError(error => of(new fromActions.FavoriteFail(error)))
-          )
-      )
-    );
-
-  @Effect()
-  unFavorite = this.actions
-    .ofType<UnFavorite>(ArticleActionTypes.UNFAVORITE)
-    .pipe(
-      map(action => action.payload),
-      concatMap(slug =>
-        this.actionsService
-          .unfavorite(slug)
-          .pipe(
-            map(results => new fromActions.UnFavoriteSuccess(results)),
-            catchError(error => of(new fromActions.UnFavoriteFail(error)))
-          )
-      )
-    );
+    )
+  );
 
   constructor(
-    private actions: Actions,
+    private actions$: Actions,
     private articleService: ArticleService,
     private actionsService: ActionsService,
     private ngrxFormsFacade: NgrxFormsFacade

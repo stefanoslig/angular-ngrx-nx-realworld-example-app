@@ -378,9 +378,9 @@
     webpack "4.19.1"
     webpack-node-externals "1.7.2"
 
-"@nrwl/nx@7.1.1":
+"@nrwl/angular@7.1.1":
   version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/nx/-/nx-7.1.1.tgz#cc0483f66024fd4854d4a14a89da6064121afae6"
+  resolved "https://registry.yarnpkg.com/@nrwl/angular/-/nx-7.1.1.tgz#cc0483f66024fd4854d4a14a89da6064121afae6"
   integrity sha512-2K9WuS8MSdX/PCtUFE6ged2mnwSE1g6iS7ViGJSNAvLje7RzBDUH+9LTKYa3RKOTVO3R4kOJjKRhXed2HDAucA==
 
 "@nrwl/schematics@7.1.1":

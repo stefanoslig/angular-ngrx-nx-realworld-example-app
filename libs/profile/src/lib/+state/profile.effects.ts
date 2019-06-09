@@ -2,16 +2,24 @@ import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { GetProfile, ProfileActionTypes } from '../+state/profile.actions';
 import { ProfileService } from '../profile.service';
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, groupBy, map, mergeMap, switchMap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  groupBy,
+  map,
+  mergeMap,
+  switchMap
+} from 'rxjs/operators';
 
 import { Follow, UnFollow } from './profile.actions';
 
 @Injectable()
 export class ProfileEffects {
   @Effect()
-  getProfile = this.actions.ofType<GetProfile>(ProfileActionTypes.GET_PROFILE).pipe(
+  getProfile = this.actions.pipe(
+    ofType<GetProfile>(ProfileActionTypes.GET_PROFILE),
     groupBy(action => action.payload),
     mergeMap(group =>
       group.pipe(
@@ -35,7 +43,8 @@ export class ProfileEffects {
   );
 
   @Effect()
-  follow = this.actions.ofType<Follow>(ProfileActionTypes.FOLLOW).pipe(
+  follow = this.actions.pipe(
+    ofType<Follow>(ProfileActionTypes.FOLLOW),
     map(action => action.payload),
     concatMap(slug =>
       this.actionsService.followUser(slug).pipe(
@@ -54,7 +63,8 @@ export class ProfileEffects {
   );
 
   @Effect()
-  unFollow = this.actions.ofType<UnFollow>(ProfileActionTypes.UNFOLLOW).pipe(
+  unFollow = this.actions.pipe(
+    ofType<UnFollow>(ProfileActionTypes.UNFOLLOW),
     map(action => action.payload),
     concatMap(slug =>
       this.actionsService.unfollowUser(slug).pipe(

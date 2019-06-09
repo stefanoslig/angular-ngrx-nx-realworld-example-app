@@ -1,195 +1,138 @@
-import { Action } from '@ngrx/store';
-import { ArticleData, ArticleComment, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import { createAction, props } from '@ngrx/store';
+import {
+  ArticleData,
+  ArticleComment,
+  Profile
+} from '@angular-ngrx-nx-realworld-example-app/api';
 
-export enum ArticleActionTypes {
-  LOAD_ARTICLE = '[article] LOAD_ARTICLE',
-  LOAD_ARTICLE_SUCCESS = '[article] LOAD_ARTICLE_SUCCESS',
-  LOAD_ARTICLE_FAIL = '[article] LOAD_ARTICLE_FAIL',
-  DELETE_ARTICLE = '[article] DELETE_ARTICLE',
-  DELETE_ARTICLE_FAIL = '[article] DELETE_ARTICLE_FAIL',
-  INITIALIZE_ARTICLE = '[article] INITIALIZE_ARTICLE',
-  LOAD_COMMENTS = '[article] LOAD_COMMENTS',
-  LOAD_COMMENTS_SUCCESS = '[article] LOAD_COMMENTS_SUCCESS',
-  LOAD_COMMENTS_FAIL = '[article] LOAD_COMMENTS_FAIL',
-  FAVORITE = '[article] FAVORITE',
-  FAVORITE_SUCCESS = '[article] FAVORITE_SUCCESS',
-  FAVORITE_FAIL = '[article] FAVORITE_FAIL',
-  UNFAVORITE = '[article] UNFAVORITE',
-  UNFAVORITE_SUCCESS = '[article] UNFAVORITE_SUCCESS',
-  UNFAVORITE_FAIL = '[article] UNFAVORITE_FAIL',
-  FOLLOW = '[article] FOLLOW',
-  FOLLOW_SUCCESS = '[article] FOLLOW_SUCCESS',
-  FOLLOW_FAIL = '[article] FOLLOW_FAIL',
-  UNFOLLOW = '[article] UNFOLLOW',
-  UNFOLLOW_SUCCESS = '[article] UNFOLLOW_SUCCESS',
-  UNFOLLOW_FAIL = '[article] UNFOLLOW_FAIL',
-  ADD_COMMENT = '[article] ADD_COMMENT',
-  ADD_COMMENT_FAIL = '[article] ADD_COMMENT_FAIL',
-  ADD_COMMENT_SUCCESS = '[article] ADD_COMMENT_SUCCESS',
-  DELETE_COMMENT = '[article] DELETE_COMMENT',
-  DELETE_COMMENT_FAIL = '[article] DELETE_COMMENT_FAIL',
-  DELETE_COMMENT_SUCCESS = '[article] DELETE_COMMENT_SUCCESS'
-}
+export const loadArticle = createAction(
+  '[article] LOAD_ARTICLE',
+  props<{ slug: string }>()
+);
 
-export class LoadArticle implements Action {
-  readonly type = ArticleActionTypes.LOAD_ARTICLE;
-  constructor(public payload: string) {}
-}
+export const loadArticleSuccess = createAction(
+  '[article] LOAD_ARTICLE_SUCCESS',
+  props<{ article: ArticleData }>()
+);
 
-export class LoadArticleSuccess implements Action {
-  readonly type = ArticleActionTypes.LOAD_ARTICLE_SUCCESS;
-  constructor(public payload: ArticleData) {}
-}
+export const loadArticleFail = createAction(
+  '[article] LOAD_ARTICLE_FAIL',
+  props<{ error: Error }>()
+);
 
-export class LoadArticleFail implements Action {
-  readonly type = ArticleActionTypes.LOAD_ARTICLE_FAIL;
-  constructor(public payload: Error) {}
-}
+export const deleteArticle = createAction(
+  '[article] DELETE_ARTICLE',
+  props<{ slug: string }>()
+);
 
-export class DeleteArticle implements Action {
-  readonly type = ArticleActionTypes.DELETE_ARTICLE;
-  constructor(public payload: string) {}
-}
+export const deleteArticleFail = createAction(
+  '[article] DELETE_ARTICLE_FAIL',
+  props<{ error: Error }>()
+);
 
-export class DeleteArticleFail implements Action {
-  readonly type = ArticleActionTypes.DELETE_ARTICLE_FAIL;
-  constructor(public payload: Error) {}
-}
+export const initializeArticle = createAction('[article] INITIALIZE_ARTICLE');
 
-export class InitializeArticle implements Action {
-  readonly type = ArticleActionTypes.INITIALIZE_ARTICLE;
-}
+export const loadComments = createAction(
+  '[article] LOAD_COMMENTS',
+  props<{ slug: string }>()
+);
 
-export class LoadComments implements Action {
-  readonly type = ArticleActionTypes.LOAD_COMMENTS;
-  constructor(public payload: string) {}
-}
+export const loadCommentsSuccess = createAction(
+  '[article] LOAD_COMMENTS_SUCCESS',
+  props<{ comments: ArticleComment[] }>()
+);
 
-export class LoadCommentsSuccess implements Action {
-  readonly type = ArticleActionTypes.LOAD_COMMENTS_SUCCESS;
-  constructor(public payload: ArticleComment[]) {}
-}
+export const loadCommentsFail = createAction(
+  '[article] LOAD_COMMENTS_FAIL',
+  props<{ error: Error }>()
+);
 
-export class LoadCommentsFail implements Action {
-  readonly type = ArticleActionTypes.LOAD_COMMENTS_FAIL;
-  constructor(public payload: Error) {}
-}
+export const favorite = createAction(
+  '[article] FAVORITE',
+  props<{ slug: string }>()
+);
 
-export class Favorite implements Action {
-  readonly type = ArticleActionTypes.FAVORITE;
-  constructor(public payload: string) {}
-}
+export const favoriteSuccess = createAction(
+  '[article] FAVORITE_SUCCESS',
+  props<{ article: ArticleData }>()
+);
 
-export class FavoriteSuccess implements Action {
-  readonly type = ArticleActionTypes.FAVORITE_SUCCESS;
-  constructor(public payload: ArticleData) {}
-}
+export const favoriteFail = createAction(
+  '[article] FAVORITE_FAIL',
+  props<{ error: Error }>()
+);
 
-export class FavoriteFail implements Action {
-  readonly type = ArticleActionTypes.FAVORITE_FAIL;
-  constructor(public payload: Error) {}
-}
+export const unFavorite = createAction(
+  '[article] UNFAVORITE',
+  props<{ slug: string }>()
+);
 
-export class UnFavorite implements Action {
-  readonly type = ArticleActionTypes.UNFAVORITE;
-  constructor(public payload: string) {}
-}
+export const unFavoriteSuccess = createAction(
+  '[article] UNFAVORITE_SUCCESS',
+  props<{ article: ArticleData }>()
+);
 
-export class UnFavoriteSuccess implements Action {
-  readonly type = ArticleActionTypes.UNFAVORITE_SUCCESS;
-  constructor(public payload: ArticleData) {}
-}
+export const unFavoriteFail = createAction(
+  '[article] UNFAVORITE_FAIL',
+  props<{ error: Error }>()
+);
 
-export class UnFavoriteFail implements Action {
-  readonly type = ArticleActionTypes.UNFAVORITE_FAIL;
-  constructor(public payload: Error) {}
-}
+export const follow = createAction(
+  '[article] FOLLOW',
+  props<{ username: string }>()
+);
 
-export class Follow implements Action {
-  readonly type = ArticleActionTypes.FOLLOW;
-  constructor(public payload: string) {}
-}
+export const followSuccess = createAction(
+  '[article] FOLLOW_SUCCESS',
+  props<{ profile: Profile }>()
+);
 
-export class FollowSuccess implements Action {
-  readonly type = ArticleActionTypes.FOLLOW_SUCCESS;
-  constructor(public payload: Profile) {}
-}
+export const followFail = createAction(
+  '[article] FOLLOW_FAIL',
+  props<{ error: Error }>()
+);
 
-export class FollowFail implements Action {
-  readonly type = ArticleActionTypes.FOLLOW_FAIL;
-  constructor(public payload: Error) {}
-}
+export const unFollow = createAction(
+  '[article] UNFOLLOW',
+  props<{ username: string }>()
+);
 
-export class UnFollow implements Action {
-  readonly type = ArticleActionTypes.UNFOLLOW;
-  constructor(public payload: string) {}
-}
+export const unFollowSuccess = createAction(
+  '[article] UNFOLLOW_SUCCESS',
+  props<{ profile: Profile }>()
+);
 
-export class UnFollowSuccess implements Action {
-  readonly type = ArticleActionTypes.UNFOLLOW_SUCCESS;
-  constructor(public payload: Profile) {}
-}
+export const unFollowFail = createAction(
+  '[article] UNFOLLOW_FAIL',
+  props<{ error: Error }>()
+);
 
-export class UnFollowFail implements Action {
-  readonly type = ArticleActionTypes.UNFOLLOW_FAIL;
-  constructor(public payload: Error) {}
-}
+export const addComment = createAction(
+  '[article] ADD_COMMENT',
+  props<{ slug: string }>()
+);
 
-export class AddComment implements Action {
-  readonly type = ArticleActionTypes.ADD_COMMENT;
-  constructor(public payload: string) {}
-}
+export const addCommentFail = createAction(
+  '[article] ADD_COMMENT_FAIL',
+  props<{ error: Error }>()
+);
 
-export class AddCommentFail implements Action {
-  readonly type = ArticleActionTypes.ADD_COMMENT_FAIL;
-  constructor(public payload: Error) {}
-}
+export const addCommentSuccess = createAction(
+  '[article] ADD_COMMENT_SUCCESS',
+  props<{ comment: ArticleComment }>()
+);
 
-export class AddCommentSuccess implements Action {
-  readonly type = ArticleActionTypes.ADD_COMMENT_SUCCESS;
-  constructor(public payload: ArticleComment) {}
-}
+export const deleteComment = createAction(
+  '[article] DELETE_COMMENT',
+  props<{ commentId: number; slug: string }>()
+);
 
-export class DeleteComment implements Action {
-  readonly type = ArticleActionTypes.DELETE_COMMENT;
-  constructor(public payload: { commentId: number; slug: string }) {}
-}
+export const deleteCommentFail = createAction(
+  '[article] DELETE_COMMENT_FAIL',
+  props<{ error: Error }>()
+);
 
-export class DeleteCommentFail implements Action {
-  readonly type = ArticleActionTypes.DELETE_COMMENT_FAIL;
-  constructor(public payload: Error) {}
-}
-
-export class DeleteCommentSuccess implements Action {
-  readonly type = ArticleActionTypes.DELETE_COMMENT_SUCCESS;
-  constructor(public payload: number) {}
-}
-
-export type ArticleAction =
-  | InitializeArticle
-  | LoadArticle
-  | LoadArticleSuccess
-  | LoadArticleFail
-  | DeleteComment
-  | DeleteCommentFail
-  | DeleteCommentSuccess
-  | DeleteArticle
-  | DeleteArticleFail
-  | LoadComments
-  | LoadCommentsSuccess
-  | LoadCommentsFail
-  | Favorite
-  | FavoriteSuccess
-  | FavoriteFail
-  | UnFavorite
-  | UnFavoriteSuccess
-  | UnFavoriteFail
-  | Follow
-  | FollowSuccess
-  | FollowFail
-  | UnFollow
-  | UnFollowSuccess
-  | UnFollowFail
-  | AddComment
-  | AddCommentFail
-  | AddCommentSuccess;
+export const deleteCommentSuccess = createAction(
+  '[article] DELETE_COMMENT_SUCCESS',
+  props<{ commentId: number }>()
+);

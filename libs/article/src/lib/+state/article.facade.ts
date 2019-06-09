@@ -1,20 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import {
-  AddComment,
-  DeleteArticle,
-  DeleteComment,
-  Favorite,
-  Follow,
-  UnFavorite,
-  UnFollow,
-  LoadArticle,
-  LoadComments
-} from './article.actions';
+import * as ArticleActions from './article.actions';
 import { ArticleState } from './article.reducer';
 import { articleQuery } from './article.selectors';
-import { InitializeArticle } from '@angular-ngrx-nx-realworld-example-app/editor/src/lib/+state/editor.actions';
 
 @Injectable()
 export class ArticleFacade {
@@ -26,33 +15,33 @@ export class ArticleFacade {
   constructor(private store: Store<ArticleState>) {}
 
   loadArticle(slug: string) {
-    this.store.dispatch(new LoadArticle(slug));
+    this.store.dispatch(ArticleActions.loadArticle({slug}));
   }
   loadComments(slug: string) {
-    this.store.dispatch(new LoadComments(slug));
+    this.store.dispatch(ArticleActions.loadComments({slug}));
   }
   follow(username: string) {
-    this.store.dispatch(new Follow(username));
+    this.store.dispatch(ArticleActions.follow({username}));
   }
   unfollow(username: string) {
-    this.store.dispatch(new UnFollow(username));
+    this.store.dispatch(ArticleActions.unFollow({username}));
   }
   favorite(slug: string) {
-    this.store.dispatch(new Favorite(slug));
+    this.store.dispatch(ArticleActions.favorite({slug}));
   }
   unfavorite(slug: string) {
-    this.store.dispatch(new UnFavorite(slug));
+    this.store.dispatch(ArticleActions.unFavorite({slug}));
   }
   delete(slug: string) {
-    this.store.dispatch(new DeleteArticle(slug));
+    this.store.dispatch(ArticleActions.deleteArticle({slug}));
   }
   deleteComment(data: { commentId: number; slug: string }) {
-    this.store.dispatch(new DeleteComment(data));
+    this.store.dispatch(ArticleActions.deleteComment(data));
   }
   submit(slug: string) {
-    this.store.dispatch(new AddComment(slug));
+    this.store.dispatch(ArticleActions.addComment({slug}));
   }
   initializeArticle() {
-    this.store.dispatch(new InitializeArticle());
+    this.store.dispatch(ArticleActions.initializeArticle());
   }
 }

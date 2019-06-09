@@ -1,7 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SettingsService } from './settings.service';
-import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/core';
 import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 

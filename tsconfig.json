@@ -37,9 +37,6 @@
 			"@angular-ngrx-nx-realworld-example-app/auth": [
 				"libs/auth/src/index.ts"
 			],
-			"@angular-ngrx-nx-realworld-example-app/core": [
-				"libs/core/src/index.ts"
-			],
 			"@angular-ngrx-nx-realworld-example-app/editor": [
 				"libs/editor/src/index.ts"
 			],

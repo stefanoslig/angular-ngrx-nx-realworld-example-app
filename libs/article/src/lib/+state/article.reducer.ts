@@ -1,5 +1,9 @@
-import { ArticleAction, ArticleActionTypes } from './article.actions';
-import { Profile, ArticleComment, ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import {
+  ArticleComment,
+  ArticleData
+} from '@angular-ngrx-nx-realworld-example-app/api';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as ArticleActions from './article.actions';
 
 export interface Article {
   data: ArticleData;
@@ -36,45 +40,58 @@ export const articleInitialState: Article = {
   loading: false
 };
 
-export function articleReducer(state: Article = articleInitialState, action: ArticleAction): Article {
-  switch (action.type) {
-    case ArticleActionTypes.LOAD_ARTICLE_SUCCESS: {
-      return { ...state, data: action.payload, loaded: true, loading: false };
-    }
-    case ArticleActionTypes.LOAD_ARTICLE_FAIL: {
-      return { ...state, data: articleInitialState.data, loaded: false, loading: false };
-    }
-    case ArticleActionTypes.ADD_COMMENT_SUCCESS: {
-      const comments: ArticleComment[] = [action.payload, ...state.comments];
-      return { ...state, comments };
-    }
-    case ArticleActionTypes.DELETE_COMMENT_SUCCESS: {
-      const comments: ArticleComment[] = state.comments.filter(item => item.id !== action.payload);
-      return { ...state, comments };
-    }
-    case ArticleActionTypes.INITIALIZE_ARTICLE: {
-      return articleInitialState;
-    }
-    case ArticleActionTypes.DELETE_ARTICLE_FAIL: {
-      return articleInitialState;
-    }
-    case ArticleActionTypes.LOAD_COMMENTS_SUCCESS: {
-      return { ...state, comments: action.payload };
-    }
-    case ArticleActionTypes.LOAD_COMMENTS_FAIL: {
-      return { ...state, comments: articleInitialState.comments };
-    }
-    case ArticleActionTypes.FOLLOW_SUCCESS:
-    case ArticleActionTypes.UNFOLLOW_SUCCESS: {
-      const data: ArticleData = { ...state.data, author: action.payload };
+const reducer = createReducer(
+  articleInitialState,
+  on(ArticleActions.loadArticleSuccess, (state, action) => ({
+    ...state,
+    data: action.article,
+    loaded: true,
+    loading: false
+  })),
+  on(ArticleActions.loadArticleFail, state => ({
+    ...state,
+    data: articleInitialState.data,
+    loaded: false,
+    loading: false
+  })),
+  on(ArticleActions.addCommentSuccess, (state, action) => {
+    const comments: ArticleComment[] = [action.comment, ...state.comments];
+    return { ...state, comments };
+  }),
+  on(ArticleActions.deleteCommentSuccess, (state, action) => {
+    const comments: ArticleComment[] = state.comments.filter(
+      item => item.id !== action.commentId
+    );
+    return { ...state, comments };
+  }),
+  on(ArticleActions.initializeArticle, state => articleInitialState),
+  on(ArticleActions.deleteArticleFail, state => articleInitialState),
+  on(ArticleActions.loadCommentsSuccess, (state, action) => ({
+    ...state,
+    comments: action.comments
+  })),
+  on(ArticleActions.loadCommentsFail, state => ({
+    ...state,
+    comments: articleInitialState.comments
+  })),
+  on(
+    ArticleActions.followSuccess,
+    ArticleActions.unFollowSuccess,
+    (state, action) => {
+      const data: ArticleData = { ...state.data, author: action.profile };
       return { ...state, data };
     }
-    case ArticleActionTypes.FAVORITE_SUCCESS:
-    case ArticleActionTypes.UNFAVORITE_SUCCESS: {
-      return { ...state, data: action.payload };
-    }
-    default: {
-      return state;
-    }
-  }
+  ),
+  on(
+    ArticleActions.favoriteSuccess,
+    ArticleActions.unFavoriteSuccess,
+    (state, action) => ({ ...state, data: action.article })
+  )
+);
+
+export function articleReducer(
+  state: Article | undefined,
+  action: Action
+): Article {
+  return reducer(state, action);
 }

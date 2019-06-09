@@ -5,9 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FooterComponent } from '@default/layout/footer/footer.component';
 import { NavbarComponent } from '@default/layout/navbar/navbar.component';
 import { StoreModule } from '@ngrx/store';
-import { LocalStorageJwtService, CoreModule } from '@angular-ngrx-nx-realworld-example-app/core';
-import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+import { AuthFacade, LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/auth';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -16,9 +14,9 @@ describe('AppComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        imports: [RouterTestingModule, CoreModule, StoreModule.forRoot({})],
+        imports: [RouterTestingModule, StoreModule.forRoot({})],
         declarations: [AppComponent, FooterComponent, NavbarComponent],
-        providers: [LocalStorageJwtService]
+        providers: [AuthFacade, LocalStorageJwtService]
       }).compileComponents();
     })
   );
