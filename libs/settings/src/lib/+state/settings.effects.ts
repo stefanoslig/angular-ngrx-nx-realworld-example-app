@@ -1,6 +1,6 @@
 import {
   AuthFacade,
-  GetUser
+  getUser
 } from '@angular-ngrx-nx-realworld-example-app/auth';
 import {
   NgrxFormsFacade,
@@ -37,7 +37,7 @@ export class SettingsEffects {
     concatMap(data =>
       this.settingsService.update(data).pipe(
         mergeMap(result => [
-          new GetUser(),
+          getUser(),
           {
             type: '[router] Go',
             payload: { path: ['profile', result.username] }

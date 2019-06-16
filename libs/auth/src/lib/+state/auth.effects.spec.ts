@@ -10,10 +10,10 @@ import { StoreModule } from '@ngrx/store';
 import { hot } from '@nrwl/angular/testing';
 import { cold } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
+import * as AuthActions from './auth.actions';
 
 import { AuthService } from '../auth.service';
 import { LocalStorageJwtService } from '../local-storage-jwt.service';
-import { GetUser, GetUserFail, GetUserSuccess, Login, LoginSuccess, Register, RegisterSuccess } from './auth.actions';
 import { AuthEffects } from './auth.effects';
 
 describe('AuthEffects', () => {
@@ -73,8 +73,8 @@ describe('AuthEffects', () => {
 				bio: '',
 				image: ''
 			}
-			const loginAction = new Login();
-			const loginSuccessAction = new LoginSuccess(result);
+			const loginAction = AuthActions.login();
+			const loginSuccessAction = AuthActions.loginSuccess({user: result});
 
 			actions$ = hot('-a---', { a: loginAction });
 			const response = cold('-a|', { a: result });
@@ -90,7 +90,7 @@ describe('AuthEffects', () => {
 					errors: { invalid: 'Invalid username or password' } as Errors
 				}
 			};
-			const loginAction = new Login();
+			const loginAction = AuthActions.login();
 			const setErrors = new SetErrors(result.error.errors);
 
 			actions$ = hot('-a---', { a: loginAction });
@@ -112,8 +112,8 @@ describe('AuthEffects', () => {
 				bio: '',
 				image: ''
 			}
-			const registerAction = new Register();
-			const registerSuccessAction = new RegisterSuccess(result);
+			const registerAction = AuthActions.register();
+			const registerSuccessAction = AuthActions.registerSuccess({user: result});
 
 			actions$ = hot('-a---', { a: registerAction });
 			const response = cold('-a|', { a: result });
@@ -129,7 +129,7 @@ describe('AuthEffects', () => {
 					errors: { invalid: 'Invalid data' } as Errors
 				}
 			};
-			const registerAction = new Register();
+			const registerAction = AuthActions.register();
 			const setErrors = new SetErrors(result.error.errors);
 
 			actions$ = hot('-a---', { a: registerAction });
@@ -151,7 +151,7 @@ describe('AuthEffects', () => {
 				image: ''
 			}
 
-			const loginSuccessAction = new LoginSuccess(result);
+			const loginSuccessAction = AuthActions.loginSuccess({user:result});
 			actions$ = of(loginSuccessAction);
 
 			effects.loginOrRegisterSuccess$.subscribe(a => {
@@ -169,7 +169,7 @@ describe('AuthEffects', () => {
 				image: ''
 			}
 
-			const registerSuccessAction = new RegisterSuccess(result);
+			const registerSuccessAction = AuthActions.registerSuccess({user: result});
 			actions$ = of(registerSuccessAction);
 
 			effects.loginOrRegisterSuccess$.subscribe(a => {
@@ -190,8 +190,8 @@ describe('AuthEffects', () => {
 				image: ''
 			}
 
-			const getUserAction = new GetUser();
-			const getUserActionSuccess = new GetUserSuccess(user);
+			const getUserAction = AuthActions.getUser();
+			const getUserActionSuccess = AuthActions.getUserSuccess({user});
 
 			actions$ = hot('-a---', { a: getUserAction });
 			const response = cold('-a|', { a: { user } });
@@ -203,8 +203,8 @@ describe('AuthEffects', () => {
 
 		it('should return a GetUserFail action when user call throws', () => {
 			const error = new Error('error');
-			const getUserAction = new GetUser();
-			const getUserFail = new GetUserFail(error);
+			const getUserAction = AuthActions.getUser();
+			const getUserFail = AuthActions.getUserFail({error});
 
 			actions$ = hot('-a---', { a: getUserAction });
 			const response = cold('-#', {}, error);

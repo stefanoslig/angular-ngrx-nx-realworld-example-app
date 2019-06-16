@@ -1,73 +1,34 @@
 import { User } from '@angular-ngrx-nx-realworld-example-app/api';
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-export const enum AuthActionTypes {
-  GET_USER = '[auth] GET_USER',
-  GET_USER_SUCCESS = '[auth] GET_USER_SUCCESS',
-  GET_USER_FAIL = '[auth] GET_USER_FAIL',
-  LOGIN = '[auth] LOGIN',
-  LOGIN_SUCCESS = '[auth] LOGIN_SUCCESS',
-  LOGIN_FAIL = '[auth] LOGIN_FAIL',
-  REGISTER = '[auth] REGISTER',
-  REGISTER_SUCCESS = '[auth] REGISTER_SUCCESS',
-  REGISTER_FAIL = '[auth] REGISTER_FAIL',
-  LOGOUT = '[auth] LOGOUT'
-}
+export const getUser = createAction('[auth] GET_USER');
 
-export class GetUser implements Action {
-  readonly type = AuthActionTypes.GET_USER;
-}
+export const getUserSuccess = createAction(
+  '[auth] GET_USER_SUCCESS',
+  props<{ user: User }>()
+);
 
-export class GetUserSuccess implements Action {
-  readonly type = AuthActionTypes.GET_USER_SUCCESS;
-  constructor(public payload: User) {}
-}
+export const getUserFail = createAction(
+  '[auth] GET_USER_FAIL',
+  props<{ error: Error }>()
+);
 
-export class GetUserFail implements Action {
-  readonly type = AuthActionTypes.GET_USER_FAIL;
-  constructor(public payload: Error) {}
-}
+export const login = createAction('[auth] LOGIN');
 
-export class Login implements Action {
-  readonly type = AuthActionTypes.LOGIN;
-}
+export const loginSuccess = createAction(
+  '[auth] LOGIN_SUCCESS',
+  props<{ user: User }>()
+);
 
-export class LoginSuccess implements Action {
-  readonly type = AuthActionTypes.LOGIN_SUCCESS;
+export const loginFail = createAction('[auth] LOGIN_FAIL');
 
-  constructor(public payload: User) {}
-}
+export const register = createAction('[auth] REGISTER');
 
-export class LoginFail implements Action {
-  readonly type = AuthActionTypes.LOGIN_FAIL;
-}
+export const registerSuccess = createAction(
+  '[auth] REGISTER_SUCCESS',
+  props<{ user: User }>()
+);
 
-export class Register implements Action {
-  readonly type = AuthActionTypes.REGISTER;
-}
+export const registerFail = createAction('[auth] REGISTER_FAIL');
 
-export class RegisterSuccess implements Action {
-  readonly type = AuthActionTypes.REGISTER_SUCCESS;
-
-  constructor(public payload: User) {}
-}
-
-export class RegisterFail implements Action {
-  readonly type = AuthActionTypes.REGISTER_FAIL;
-}
-
-export class Logout implements Action {
-  readonly type = AuthActionTypes.LOGOUT;
-}
-
-export type AuthAction =
-  | GetUser
-  | GetUserFail
-  | GetUserSuccess
-  | Login
-  | LoginSuccess
-  | LoginFail
-  | Register
-  | RegisterSuccess
-  | RegisterFail
-  | Logout;
+export const logout = createAction('[auth] LOGOUT');

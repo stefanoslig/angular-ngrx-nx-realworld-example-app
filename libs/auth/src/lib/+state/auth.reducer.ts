@@ -1,6 +1,6 @@
 import { User } from '@angular-ngrx-nx-realworld-example-app/api';
-
-import { AuthAction, AuthActionTypes } from './auth.actions';
+import { createReducer, Action, on } from '@ngrx/store';
+import * as AuthActions from './auth.actions';
 
 export interface Auth {
   loggedIn: boolean;
@@ -12,11 +12,11 @@ export interface AuthState {
   readonly auth: Auth;
 }
 
-export type Status = 'INIT' | 'IN_PROGRESS';
+export enum Status { INIT = 'INIT' , IN_PROGRESS = 'IN_PROGRESS'}
 
 export const authInitialState: Auth = {
   loggedIn: false,
-  status: 'INIT',
+  status: Status.INIT,
   user: {
     email: '',
     token: '',
@@ -26,40 +26,39 @@ export const authInitialState: Auth = {
   }
 };
 
-export function authReducer(state: Auth, action: AuthAction): Auth {
-  switch (action.type) {
-    case AuthActionTypes.GET_USER_SUCCESS: {
-      return {
-        ...state,
-        loggedIn: true,
-        user: action.payload
-      };
-    }
-    case AuthActionTypes.GET_USER_FAIL: {
-      return authInitialState;
-    }
-    case AuthActionTypes.LOGIN:
-    case AuthActionTypes.REGISTER: {
-      return { ...state, status: 'IN_PROGRESS' };
-    }
-    case AuthActionTypes.REGISTER_SUCCESS:
-    case AuthActionTypes.LOGIN_SUCCESS: {
-      return {
-        ...state,
-        loggedIn: true,
-        status: 'INIT',
-        user: action.payload
-      };
-    }
-    case AuthActionTypes.LOGIN_FAIL:
-    case AuthActionTypes.REGISTER_FAIL: {
-      return { ...state, status: 'INIT' };
-    }
-    case AuthActionTypes.LOGOUT: {
-      return authInitialState;
-    }
-    default: {
-      return state;
-    }
-  }
+const reducer = createReducer(
+  authInitialState,
+  on(AuthActions.getUserSuccess, (state, action) => ({
+    ...state,
+    loggedIn: true,
+    user: action.user
+  })),
+  on(AuthActions.getUserFail, (state, action) => ({
+    ...authInitialState
+  })),
+  on(AuthActions.login, AuthActions.register, (state, _) => ({
+    ...state,
+    status: Status.IN_PROGRESS
+  })),
+  on(
+    AuthActions.registerSuccess,
+    AuthActions.loginSuccess,
+    (state, action) => ({
+      ...state,
+      loggedIn: true,
+      status: Status.INIT,
+      user: action.user
+    })
+  ),
+  on(AuthActions.registerFail, AuthActions.loginFail, (state, _) => ({
+    ...state,
+    status: Status.INIT,
+  })),
+  on(AuthActions.logout, (state, action) => ({
+    ...authInitialState
+  }))
+);
+
+export function authReducer(state: Auth | undefined, action: Action): Auth {
+  return reducer(state, action);
 }

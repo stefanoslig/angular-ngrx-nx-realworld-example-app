@@ -1,86 +1,56 @@
+import { createAction, props } from '@ngrx/store';
 import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
-import { Action } from '@ngrx/store';
 
 import { ArticleListConfig } from './article-list.reducer';
 
-export enum ArticleListActionTypes {
-  SET_LIST_PAGE = '[article-list] SET_LIST_PAGE',
-  SET_LIST_CONFIG = '[article-list] SET_LIST_CONFIG',
-  LOAD_ARTICLES = '[article-list] LOAD_ARTICLES',
-  LOAD_ARTICLES_SUCCESS = '[article-list] LOAD_ARTICLES_SUCCESS',
-  LOAD_ARTICLES_FAIL = '[article-list] LOAD_ARTICLES_FAIL',
-  FAVORITE = '[article-list] FAVORITE',
-  FAVORITE_SUCCESS = '[article-list] FAVORITE_SUCCESS',
-  FAVORITE_FAIL = '[article-list] FAVORITE_FAIL',
-  UNFAVORITE = '[article-list] UNFAVORITE',
-  UNFAVORITE_SUCCESS = '[article-list] UNFAVORITE_SUCCESS',
-  UNFAVORITE_FAIL = '[article-list] UNFAVORITE_FAIL'
-}
+export const setListPage = createAction(
+  '[article-list] SET_LIST_PAGE',
+  props<{ page: number }>()
+);
 
-export class SetListPage implements Action {
-  readonly type = '[article-list] SET_LIST_PAGE';
-  constructor(public payload: number) {}
-}
+export const setListConfig = createAction(
+  '[article-list] SET_LIST_CONFIG',
+  props<{ config: ArticleListConfig }>()
+);
 
-export class SetListConfig implements Action {
-  readonly type = '[article-list] SET_LIST_CONFIG';
-  constructor(public payload: ArticleListConfig) {}
-}
+export const loadArticles = createAction('[article-list] LOAD_ARTICLES');
 
-export class LoadArticles implements Action {
-  readonly type = '[article-list] LOAD_ARTICLES';
-  constructor() {}
-}
+export const loadArticlesSuccess = createAction(
+  '[article-list] LOAD_ARTICLES_SUCCESS',
+  props<{ articles: ArticleData[], articlesCount: number }>()
+);
 
-export class LoadArticlesSuccess implements Action {
-  readonly type = '[article-list] LOAD_ARTICLES_SUCCESS';
-  constructor(public payload: { articles: ArticleData[]; articlesCount: number }) {}
-}
+export const loadArticlesFail = createAction(
+  '[article-list] LOAD_ARTICLES_FAIL',
+  props<{ error: Error }>()
+);
 
-export class LoadArticlesFail implements Action {
-  readonly type = '[article-list] LOAD_ARTICLES_FAIL';
-  constructor(public payload: Error) {}
-}
+export const favorite = createAction(
+  '[article-list] FAVORITE',
+  props<{ slug: string }>()
+);
 
-export class Favorite implements Action {
-  readonly type = '[article-list] FAVORITE';
-  constructor(public payload: string) {}
-}
+export const favoriteSuccess = createAction(
+  '[article-list] FAVORITE_SUCCESS',
+  props<{ article: ArticleData }>()
+);
 
-export class FavoriteSuccess implements Action {
-  readonly type = '[article-list] FAVORITE_SUCCESS';
-  constructor(public payload: ArticleData) {}
-}
+export const favoriteFail = createAction(
+  '[article-list] FAVORITE_FAIL',
+  props<{ error: Error }>()
+);
 
-export class FavoriteFail implements Action {
-  readonly type = '[article-list] FAVORITE_FAIL';
-  constructor(public payload: Error) {}
-}
+export const unFavorite = createAction(
+  '[article-list] UNFAVORITE',
+  props<{ slug: string }>()
+);
 
-export class UnFavorite implements Action {
-  readonly type = '[article-list] UNFAVORITE';
-  constructor(public payload: string) {}
-}
+export const unFavoriteSuccess = createAction(
+  '[article-list] UNFAVORITE_SUCCESS',
+  props<{ article: ArticleData }>()
+);
 
-export class UnFavoriteSuccess implements Action {
-  readonly type = '[article-list] UNFAVORITE_SUCCESS';
-  constructor(public payload: ArticleData) {}
-}
-
-export class UnFavoriteFail implements Action {
-  readonly type = '[article-list] UNFAVORITE_FAIL';
-  constructor(public payload: Error) {}
-}
-
-export type ArticleListAction =
-  | SetListPage
-  | SetListConfig
-  | LoadArticles
-  | LoadArticlesSuccess
-  | LoadArticlesFail
-  | Favorite
-  | FavoriteSuccess
-  | FavoriteFail
-  | UnFavorite
-  | UnFavoriteSuccess
-  | UnFavoriteFail;
+export const unFavoriteFail = createAction(
+  '[article-list] UNFAVORITE_FAIL',
+  props<{ error: Error }>()
+);

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { GetUser, Login, Logout, Register } from './auth.actions';
 import { AuthState } from './auth.reducer';
 import { authQuery } from './auth.selectors';
+import * as AuthActions from './auth.actions';
 
 @Injectable()
 export class AuthFacade {
@@ -14,18 +14,18 @@ export class AuthFacade {
 	constructor(private store: Store<AuthState>) { }
 
 	login() {
-		this.store.dispatch(new Login());
+		this.store.dispatch(AuthActions.login());
 	}
 
 	logout() {
-		this.store.dispatch(new Logout());
+		this.store.dispatch(AuthActions.logout());
 	}
 
 	register() {
-		this.store.dispatch(new Register());
+		this.store.dispatch(AuthActions.register());
 	}
 
 	user() {
-		this.store.dispatch(new GetUser());
+		this.store.dispatch(AuthActions.getUser());
 	}
 }
