@@ -1,11 +1,10 @@
-import { User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { User, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { combineLatest, map, takeUntil, tap } from 'rxjs/operators';
 
 import { ProfileFacade } from './+state/profile.facade';
-import { Profile } from './+state/profile.reducer';
 
 @Component({
   selector: 'app-profile',

@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { GetProfile } from './+state/profile.actions';
-import { Profile } from './+state/profile.reducer';
+import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Injectable()
 export class ProfileResolverService implements Resolve<Profile> {

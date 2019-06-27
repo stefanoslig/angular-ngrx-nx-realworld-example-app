@@ -1,5 +1,5 @@
-import { Profile } from './profile.reducer';
 import { Action } from '@ngrx/store';
+import { Profile } from '@angular-ngrx-nx-realworld-example-app/api/src/lib/types';
 
 export enum ProfileActionTypes {
   GET_PROFILE = '[profile] GET_PROFILE',

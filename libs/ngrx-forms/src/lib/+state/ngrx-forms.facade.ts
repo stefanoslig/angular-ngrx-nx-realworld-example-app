@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SetData, SetStructure, UpdateData, InitializeForm, InitializeErrors, ResetForm } from './ngrx-forms.actions';
-import { NgrxFormsState } from './ngrx-forms.reducer';
+import { NgrxFormsState } from './ngrx-forms.interfaces';
 import { ngrxFormsQuery } from './ngrx-forms.selectors';
 
 @Injectable()

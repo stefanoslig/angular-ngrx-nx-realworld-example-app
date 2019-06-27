@@ -1,13 +1,6 @@
 import { ProfileAction, ProfileActionTypes } from './profile.actions';
 import { createFeatureSelector } from '@ngrx/store';
-
-export interface Profile {
-  username: string;
-  bio: string;
-  image: string;
-  following: boolean;
-  loading: boolean;
-}
+import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 
 export interface ProfileState {
   readonly profile: Profile;
