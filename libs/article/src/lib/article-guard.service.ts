@@ -12,7 +12,10 @@ export class ArticleGuardService implements CanActivate {
   constructor(private facade: ArticleFacade) {}
 
   waitForArticleToLoad(): Observable<boolean> {
-    return this.facade.articleLoaded$.pipe(filter(loaded => loaded), take(1));
+    return this.facade.articleLoaded$.pipe(
+      filter(loaded => loaded),
+      take(1),
+    );
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {

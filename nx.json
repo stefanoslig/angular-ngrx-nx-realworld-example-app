@@ -1,80 +1,54 @@
 {
-  "npmScope": "angular-ngrx-nx-realworld-example-app",
-  "projects": {
-    "conduit": {
-      "tags": [
-        "conduit"
-      ]
-    },
-    "conduit-e2e": {
-      "tags": []
-    },
-    "api": {
-      "tags": [
-        "api"
-      ]
-    },
-    "article": {
-      "tags": [
-        "article"
-      ]
-    },
-    "article-list": {
-      "tags": [
-        "article-list"
-      ]
-    },
-    "auth": {
-      "tags": [
-        "auth"
-      ]
-    },
-    "editor": {
-      "tags": [
-        "editor"
-      ]
-    },
-    "home": {
-      "tags": [
-        "home"
-      ]
-    },
-    "ngrx-error": {
-      "tags": [
-        "ngrx-error"
-      ]
-    },
-    "ngrx-forms": {
-      "tags": [
-        "ngrx-forms"
-      ]
-    },
-    "profile": {
-      "tags": [
-        "profile"
-      ]
-    },
-    "ngrx-router": {
-      "tags": [
-        "ngrx-router"
-      ]
-    },
-    "settings": {
-      "tags": [
-        "settings"
-      ]
-    },
-    "shared": {
-      "tags": [
-        "shared"
-      ]
-    }
-  },
+  "npmScope": "conduit",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
     "tsconfig.json": "*",
     "tslint.json": "*",
     "nx.json": "*"
+  },
+  "projects": {
+    "conduit-e2e": {
+      "tags": []
+    },
+    "conduit": {
+      "tags": []
+    },
+    "api": {
+      "tags": ["api"]
+    },
+    "article": {
+      "tags": ["article"]
+    },
+    "article-list": {
+      "tags": ["article-list"]
+    },
+    "auth": {
+      "tags": ["auth"]
+    },
+    "editor": {
+      "tags": ["editor"]
+    },
+    "home": {
+      "tags": ["home"]
+    },
+    "ngrx-error": {
+      "tags": ["ngrx-error"]
+    },
+    "ngrx-forms": {
+      "tags": ["ngrx-forms"]
+    },
+    "profile": {
+      "tags": ["profile"]
+    },
+    "ngrx-router": {
+      "tags": ["ngrx-router"]
+    },
+    "settings": {
+      "tags": ["settings"]
+    },
+    "shared": {
+      "tags": ["shared"]
+    }
   }
 }

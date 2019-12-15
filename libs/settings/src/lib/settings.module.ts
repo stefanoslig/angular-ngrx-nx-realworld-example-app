@@ -16,12 +16,17 @@ import { SettingsComponent } from './settings/settings.component';
     CommonModule,
     NgrxFormsModule,
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: SettingsComponent, canActivate: [AuthGuardService] }
+      {
+        path: '',
+        pathMatch: 'full',
+        component: SettingsComponent,
+        canActivate: [AuthGuardService],
+      },
     ]),
     StoreModule.forFeature('settings', settingsReducer, { initialState: {} }),
-    EffectsModule.forFeature([SettingsEffects])
+    EffectsModule.forFeature([SettingsEffects]),
   ],
   declarations: [SettingsComponent],
-  providers: [SettingsEffects, SettingsService]
+  providers: [SettingsEffects, SettingsService],
 })
 export class SettingsModule {}

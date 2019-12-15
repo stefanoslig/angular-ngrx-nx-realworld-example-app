@@ -5,7 +5,7 @@ import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
   selector: 'app-article-list-item',
   templateUrl: './article-list-item.component.html',
   styleUrls: ['./article-list-item.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {
   @Input() article: ArticleData;

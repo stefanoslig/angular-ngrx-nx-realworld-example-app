@@ -11,7 +11,7 @@ export const profileInitialState: Profile = {
   bio: '',
   image: '',
   following: false,
-  loading: false
+  loading: false,
 };
 
 export function profileReducer(state: Profile, action: ProfileAction): Profile {

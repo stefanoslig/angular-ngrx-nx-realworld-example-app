@@ -8,7 +8,7 @@ export enum NgrxFormsActionTypes {
   SET_ERRORS = '[ngrxForms] SET_ERRORS',
   INITIALIZE_ERRORS = '[ngrxForms] INITIALIZE_ERRORS',
   INITIALIZE_FORM = '[ngrxForms] INITIALIZE_FORM',
-  RESET_FORM = '[ngrxForms] RESET_FORM'
+  RESET_FORM = '[ngrxForms] RESET_FORM',
 }
 
 export class SetData implements Action {

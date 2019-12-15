@@ -17,12 +17,14 @@ import { ListErrorsComponent } from './list-errors/list-errors.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('ngrxForms', ngrxFormsReducer, { initialState: ngrxFormsInitialState }),
-    EffectsModule.forFeature([NgrxFormsEffects])
+    StoreModule.forFeature('ngrxForms', ngrxFormsReducer, {
+      initialState: ngrxFormsInitialState,
+    }),
+    EffectsModule.forFeature([NgrxFormsEffects]),
   ],
   providers: [NgrxFormsEffects, NgrxFormsFacade],
   declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent, ListErrorsComponent],
   entryComponents: [InputComponent, TextareaComponent],
-  exports: [DynamicFormComponent, ListErrorsComponent]
+  exports: [DynamicFormComponent, ListErrorsComponent],
 })
 export class NgrxFormsModule {}

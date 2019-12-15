@@ -7,6 +7,6 @@ import { ActionsService } from './actions.service';
   imports: [CommonModule],
   declarations: [PagerComponent],
   exports: [PagerComponent],
-  providers: [ActionsService]
+  providers: [ActionsService],
 })
 export class SharedModule {}

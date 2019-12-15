@@ -7,7 +7,7 @@ import { NgrxFormsFacade } from '../+state/ngrx-forms.facade';
   selector: 'app-list-errors',
   templateUrl: './list-errors.component.html',
   styleUrls: ['./list-errors.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListErrorsComponent implements OnInit, OnDestroy {
   errors: string[];

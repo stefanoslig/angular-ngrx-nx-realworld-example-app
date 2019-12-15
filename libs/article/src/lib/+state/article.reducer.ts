@@ -1,7 +1,4 @@
-import {
-  ArticleComment,
-  ArticleData
-} from '@angular-ngrx-nx-realworld-example-app/api';
+import { ArticleComment, ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ArticleActions from './article.actions';
 
@@ -32,12 +29,12 @@ export const articleInitialState: Article = {
       bio: '',
       image: '',
       following: false,
-      loading: false
-    }
+      loading: false,
+    },
   },
   comments: [],
   loaded: false,
-  loading: false
+  loading: false,
 };
 
 const reducer = createReducer(
@@ -46,52 +43,42 @@ const reducer = createReducer(
     ...state,
     data: action.article,
     loaded: true,
-    loading: false
+    loading: false,
   })),
   on(ArticleActions.loadArticleFail, state => ({
     ...state,
     data: articleInitialState.data,
     loaded: false,
-    loading: false
+    loading: false,
   })),
   on(ArticleActions.addCommentSuccess, (state, action) => {
     const comments: ArticleComment[] = [action.comment, ...state.comments];
     return { ...state, comments };
   }),
   on(ArticleActions.deleteCommentSuccess, (state, action) => {
-    const comments: ArticleComment[] = state.comments.filter(
-      item => item.id !== action.commentId
-    );
+    const comments: ArticleComment[] = state.comments.filter(item => item.id !== action.commentId);
     return { ...state, comments };
   }),
   on(ArticleActions.initializeArticle, state => articleInitialState),
   on(ArticleActions.deleteArticleFail, state => articleInitialState),
   on(ArticleActions.loadCommentsSuccess, (state, action) => ({
     ...state,
-    comments: action.comments
+    comments: action.comments,
   })),
   on(ArticleActions.loadCommentsFail, state => ({
     ...state,
-    comments: articleInitialState.comments
+    comments: articleInitialState.comments,
   })),
-  on(
-    ArticleActions.followSuccess,
-    ArticleActions.unFollowSuccess,
-    (state, action) => {
-      const data: ArticleData = { ...state.data, author: action.profile };
-      return { ...state, data };
-    }
-  ),
-  on(
-    ArticleActions.favoriteSuccess,
-    ArticleActions.unFavoriteSuccess,
-    (state, action) => ({ ...state, data: action.article })
-  )
+  on(ArticleActions.followSuccess, ArticleActions.unFollowSuccess, (state, action) => {
+    const data: ArticleData = { ...state.data, author: action.profile };
+    return { ...state, data };
+  }),
+  on(ArticleActions.favoriteSuccess, ArticleActions.unFavoriteSuccess, (state, action) => ({
+    ...state,
+    data: action.article,
+  })),
 );
 
-export function articleReducer(
-  state: Article | undefined,
-  action: Action
-): Article {
+export function articleReducer(state: Article | undefined, action: Action): Article {
   return reducer(state, action);
 }

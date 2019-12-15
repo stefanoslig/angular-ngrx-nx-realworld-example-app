@@ -12,7 +12,10 @@ export interface AuthState {
   readonly auth: Auth;
 }
 
-export enum Status { INIT = 'INIT' , IN_PROGRESS = 'IN_PROGRESS'}
+export enum Status {
+  INIT = 'INIT',
+  IN_PROGRESS = 'IN_PROGRESS',
+}
 
 export const authInitialState: Auth = {
   loggedIn: false,
@@ -22,8 +25,8 @@ export const authInitialState: Auth = {
     token: '',
     username: '',
     bio: '',
-    image: ''
-  }
+    image: '',
+  },
 };
 
 const reducer = createReducer(
@@ -31,32 +34,28 @@ const reducer = createReducer(
   on(AuthActions.getUserSuccess, (state, action) => ({
     ...state,
     loggedIn: true,
-    user: action.user
+    user: action.user,
   })),
   on(AuthActions.getUserFail, (state, action) => ({
-    ...authInitialState
+    ...authInitialState,
   })),
   on(AuthActions.login, AuthActions.register, (state, _) => ({
     ...state,
-    status: Status.IN_PROGRESS
+    status: Status.IN_PROGRESS,
   })),
-  on(
-    AuthActions.registerSuccess,
-    AuthActions.loginSuccess,
-    (state, action) => ({
-      ...state,
-      loggedIn: true,
-      status: Status.INIT,
-      user: action.user
-    })
-  ),
+  on(AuthActions.registerSuccess, AuthActions.loginSuccess, (state, action) => ({
+    ...state,
+    loggedIn: true,
+    status: Status.INIT,
+    user: action.user,
+  })),
   on(AuthActions.registerFail, AuthActions.loginFail, (state, _) => ({
     ...state,
     status: Status.INIT,
   })),
   on(AuthActions.logout, (state, action) => ({
-    ...authInitialState
-  }))
+    ...authInitialState,
+  })),
 );
 
 export function authReducer(state: Auth | undefined, action: Action): Auth {

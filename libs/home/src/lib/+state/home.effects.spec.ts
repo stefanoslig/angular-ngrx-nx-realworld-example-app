@@ -16,10 +16,10 @@ describe('HomeEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-      providers: [HomeEffects, DataPersistence, provideMockActions(() => actions), ApiService, HomeService]
+      providers: [HomeEffects, DataPersistence, provideMockActions(() => actions), ApiService, HomeService],
     });
 
-    effects = TestBed.get(HomeEffects);
+    effects = TestBed.inject(HomeEffects);
   });
 
   describe('someEffect', () => {

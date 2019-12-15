@@ -4,7 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-profile-articles',
   templateUrl: './profile-articles.component.html',
   styleUrls: ['./profile-articles.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileArticlesComponent implements OnInit {
   constructor() {}

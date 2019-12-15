@@ -10,7 +10,7 @@ import { ArticleListConfig } from './+state/article-list.reducer';
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent implements OnInit {
   totalPages$: Observable<number[]>;

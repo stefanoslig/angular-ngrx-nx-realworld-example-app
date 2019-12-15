@@ -8,14 +8,11 @@ describe('TokenInterceptorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
-      providers: [TokenInterceptorService, LocalStorageJwtService]
+      providers: [TokenInterceptorService, LocalStorageJwtService],
     });
   });
 
-  it(
-    'should be created',
-    inject([TokenInterceptorService], (service: TokenInterceptorService) => {
-      expect(service).toBeTruthy();
-    })
-  );
+  it('should be created', inject([TokenInterceptorService], (service: TokenInterceptorService) => {
+    expect(service).toBeTruthy();
+  }));
 });

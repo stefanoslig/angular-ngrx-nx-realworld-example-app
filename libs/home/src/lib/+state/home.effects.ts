@@ -4,12 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { HomeService } from '../home.service';
-import {
-  HomeActionsType,
-  LoadTags,
-  LoadTagsSuccess,
-  LoadTagsFail
-} from './home.actions';
+import { HomeActionsType, LoadTags, LoadTagsSuccess, LoadTagsFail } from './home.actions';
 
 @Injectable()
 export class HomeEffects {
@@ -19,13 +14,8 @@ export class HomeEffects {
     switchMap(() =>
       this.homeService
         .getTags()
-        .pipe(
-          map(
-            results => new LoadTagsSuccess(results.tags),
-            catchError(error => of(new LoadTagsFail(error)))
-          )
-        )
-    )
+        .pipe(map(results => new LoadTagsSuccess(results.tags), catchError(error => of(new LoadTagsFail(error))))),
+    ),
   );
 
   constructor(private actions: Actions, private homeService: HomeService) {}

@@ -15,11 +15,8 @@ export class ArticleListFacade {
   totalPages$ = this.articlesCount$.pipe(
     withLatestFrom(this.listConfig$),
     map(([articlesCount, config]) => {
-      return Array.from(
-        new Array(Math.ceil(articlesCount / config.filters.limit)),
-        (val, index) => index + 1
-      );
-    })
+      return Array.from(new Array(Math.ceil(articlesCount / config.filters.limit)), (val, index) => index + 1);
+    }),
   );
 
   constructor(private store: Store<ArticleListState>) {}
@@ -35,7 +32,7 @@ export class ArticleListFacade {
   navigateToArticle(slug: string) {
     this.store.dispatch({
       type: '[router] Go',
-      payload: { path: ['/article', slug] }
+      payload: { path: ['/article', slug] },
     });
   }
 

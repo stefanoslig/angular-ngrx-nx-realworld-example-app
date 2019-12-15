@@ -10,13 +10,13 @@ const structure: Field[] = [
     type: 'INPUT',
     name: 'username',
     placeholder: 'Username',
-    validator: [Validators.required]
+    validator: [Validators.required],
   },
   {
     type: 'INPUT',
     name: 'email',
     placeholder: 'Email',
-    validator: [Validators.required]
+    validator: [Validators.required],
   },
   {
     type: 'INPUT',
@@ -24,16 +24,16 @@ const structure: Field[] = [
     placeholder: 'Password',
     validator: [Validators.required],
     attrs: {
-      type: 'password'
-    }
-  }
+      type: 'password',
+    },
+  },
 ];
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;

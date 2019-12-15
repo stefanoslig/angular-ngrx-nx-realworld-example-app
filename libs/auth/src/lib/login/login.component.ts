@@ -10,7 +10,7 @@ const structure: Field[] = [
     type: 'INPUT',
     name: 'email',
     placeholder: 'Username',
-    validator: [Validators.required]
+    validator: [Validators.required],
   },
   {
     type: 'INPUT',
@@ -18,16 +18,16 @@ const structure: Field[] = [
     placeholder: 'Password',
     validator: [Validators.required],
     attrs: {
-      type: 'password'
-    }
-  }
+      type: 'password',
+    },
+  },
 ];
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;

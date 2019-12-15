@@ -1,21 +1,9 @@
-import {
-  AuthFacade,
-  getUser
-} from '@angular-ngrx-nx-realworld-example-app/auth';
-import {
-  NgrxFormsFacade,
-  SetErrors
-} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { AuthFacade, getUser } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { NgrxFormsFacade, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import {
-  catchError,
-  concatMap,
-  map,
-  mergeMap,
-  withLatestFrom
-} from 'rxjs/operators';
+import { catchError, concatMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from '../settings.service';
 import { EditSettings, SettingsActionTypes } from './settings.actions';
@@ -32,7 +20,7 @@ export class SettingsEffects {
       username: data.username,
       bio: data.bio,
       pass: data.pass,
-      email: data.email
+      email: data.email,
     })),
     concatMap(data =>
       this.settingsService.update(data).pipe(
@@ -40,18 +28,18 @@ export class SettingsEffects {
           getUser(),
           {
             type: '[router] Go',
-            payload: { path: ['profile', result.username] }
-          }
+            payload: { path: ['profile', result.username] },
+          },
         ]),
-        catchError(result => of(new SetErrors(result.error.errors)))
-      )
-    )
+        catchError(result => of(new SetErrors(result.error.errors))),
+      ),
+    ),
   );
 
   constructor(
     private actions: Actions,
     private settingsService: SettingsService,
     private authFacade: AuthFacade,
-    private ngrxFormsFacade: NgrxFormsFacade
+    private ngrxFormsFacade: NgrxFormsFacade,
   ) {}
 }

@@ -27,7 +27,7 @@ export class NgrxErrorInterceptorService implements HttpInterceptor {
           }
         }
         return throwError(error);
-      })
+      }),
     );
   }
 }

@@ -17,7 +17,7 @@ import { HomeFacade } from './+state/home.facade';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
   listConfig$: Observable<ArticleListConfig>;
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private facade: HomeFacade,
     private router: Router,
     private articleListFacade: ArticleListFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
   ) {}
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   setListTo(type: string = 'ALL') {
     this.articleListFacade.setListConfig(<ArticleListConfig>{
       ...articleListInitialState.listConfig,
-      type
+      type,
     });
   }
 
@@ -61,8 +61,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       ...articleListInitialState.listConfig,
       filters: {
         ...articleListInitialState.listConfig.filters,
-        tag
-      }
+        tag,
+      },
     });
   }
 

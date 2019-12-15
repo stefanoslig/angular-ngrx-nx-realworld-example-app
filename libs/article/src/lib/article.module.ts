@@ -20,13 +20,21 @@ import { MarkdownPipe } from './markdown.pipe';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: '', component: ArticleComponent, canActivate: [ArticleGuardService] }]),
-    StoreModule.forFeature('article', articleReducer, { initialState: articleInitialState }),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ArticleComponent,
+        canActivate: [ArticleGuardService],
+      },
+    ]),
+    StoreModule.forFeature('article', articleReducer, {
+      initialState: articleInitialState,
+    }),
     EffectsModule.forFeature([ArticleEffects]),
     NgrxFormsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [ArticleEffects, ArticleService, ArticleGuardService, ArticleFacade],
-  declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent]
+  declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent],
 })
 export class ArticleModule {}

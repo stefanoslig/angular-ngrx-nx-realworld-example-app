@@ -2,8 +2,8 @@ import { ArticleComment, ArticleData, User } from '@angular-ngrx-nx-realworld-ex
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { combineLatest, filter, takeUntil } from 'rxjs/operators';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { ArticleFacade } from './+state/article.facade';
 
@@ -13,16 +13,16 @@ const structure: Field[] = [
     name: 'comment',
     placeholder: 'Write a comment...',
     attrs: {
-      rows: 3
-    }
-  }
+      rows: 3,
+    },
+  },
 ];
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   article$: Observable<ArticleData>;
@@ -38,7 +38,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   constructor(
     private ngrxFormsFacade: NgrxFormsFacade,
     private facade: ArticleFacade,
-    private auhtFacade: AuthFacade
+    private auhtFacade: AuthFacade,
   ) {}
 
   ngOnInit() {
@@ -53,7 +53,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.ngrxFormsFacade.setStructure(structure);
     this.ngrxFormsFacade.setData('');
     this.auhtFacade.auht$
-      .pipe(filter(auth => auth.loggedIn), combineLatest(this.facade.authorUsername$), takeUntil(this.unsubscribe$))
+      .pipe(
+        filter(auth => auth.loggedIn),
+        auth$ => combineLatest([auth$, this.facade.authorUsername$]),
+        takeUntil(this.unsubscribe$),
+      )
       .subscribe(([auth, username]) => {
         this.canModify = auth.user.username === username;
       });

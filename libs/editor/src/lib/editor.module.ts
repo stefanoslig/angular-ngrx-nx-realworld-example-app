@@ -23,14 +23,20 @@ import { EditorService } from './editor.service';
         pathMatch: 'full',
         component: ArticleEditorComponent,
         resolve: { EditorResolverService },
-        canActivate: [AuthGuardService]
+        canActivate: [AuthGuardService],
       },
-      { path: ':slug', component: ArticleEditorComponent, resolve: { EditorResolverService } }
+      {
+        path: ':slug',
+        component: ArticleEditorComponent,
+        resolve: { EditorResolverService },
+      },
     ]),
-    StoreModule.forFeature('editor', editorReducer, { initialState: editorInitialState }),
-    EffectsModule.forFeature([EditorEffects])
+    StoreModule.forFeature('editor', editorReducer, {
+      initialState: editorInitialState,
+    }),
+    EffectsModule.forFeature([EditorEffects]),
   ],
   declarations: [ArticleEditorComponent],
-  providers: [EditorEffects, EditorService, EditorResolverService, EditorFacade]
+  providers: [EditorEffects, EditorService, EditorResolverService, EditorFacade],
 })
 export class EditorModule {}

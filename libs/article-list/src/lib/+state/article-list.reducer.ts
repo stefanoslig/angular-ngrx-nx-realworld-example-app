@@ -39,15 +39,15 @@ export const articleListInitialState: ArticleList = {
     type: 'ALL',
     currentPage: 1,
     filters: {
-      limit: 10
-    }
+      limit: 10,
+    },
   },
   articles: {
     entities: [],
     articlesCount: 0,
     loaded: false,
-    loading: false
-  }
+    loading: false,
+  },
 };
 
 const reducer = createReducer(
@@ -55,18 +55,18 @@ const reducer = createReducer(
   on(ArticleListActions.setListPage, (state, action) => {
     const filters = {
       ...state.listConfig.filters,
-      offset: state.listConfig.filters.limit * (action.page - 1)
+      offset: state.listConfig.filters.limit * (action.page - 1),
     };
     const listConfig = {
       ...state.listConfig,
       currentPage: action.page,
-      filters
+      filters,
     };
     return { ...state, listConfig };
   }),
   on(ArticleListActions.setListConfig, (state, action) => ({
     ...state,
-    listConfig: action.config
+    listConfig: action.config,
   })),
   on(ArticleListActions.loadArticles, (state, _) => {
     const articles = { ...state.articles, loading: true };
@@ -78,7 +78,7 @@ const reducer = createReducer(
       entities: action.articles,
       articlesCount: action.articlesCount,
       loading: false,
-      loaded: true
+      loaded: true,
     };
     return { ...state, articles };
   }),
@@ -88,35 +88,26 @@ const reducer = createReducer(
       entities: [],
       articlesCount: 0,
       loading: false,
-      loaded: true
+      loaded: true,
     };
     return { ...state, articles };
   }),
-  on(
-    ArticleListActions.unFavoriteSuccess,
-    ArticleListActions.favoriteSuccess,
-    (state, action) => ({
-      ...state,
-      articles: replaceArticle(state.articles, action.article)
-    })
-  )
+  on(ArticleListActions.unFavoriteSuccess, ArticleListActions.favoriteSuccess, (state, action) => ({
+    ...state,
+    articles: replaceArticle(state.articles, action.article),
+  })),
 );
 
 function replaceArticle(articles: Articles, payload: ArticleData): Articles {
-  const articleIndex = articles.entities.findIndex(
-    a => a.slug === payload.slug
-  );
+  const articleIndex = articles.entities.findIndex(a => a.slug === payload.slug);
   const entities = [
     ...articles.entities.slice(0, articleIndex),
     Object.assign({}, articles.entities[articleIndex], payload),
-    ...articles.entities.slice(articleIndex + 1)
+    ...articles.entities.slice(articleIndex + 1),
   ];
   return { ...articles, entities, loading: false, loaded: true };
 }
 
-export function articleListReducer(
-  state: ArticleList | undefined,
-  action: Action
-): ArticleList {
+export function articleListReducer(state: ArticleList | undefined, action: Action): ArticleList {
   return reducer(state, action);
 }

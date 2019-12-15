@@ -7,14 +7,11 @@ describe('ApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ApiService]
+      providers: [ApiService],
     });
   });
 
-  it(
-    'should be created',
-    inject([ApiService], (service: ApiService) => {
-      expect(service).toBeTruthy();
-    })
-  );
+  it('should be created', inject([ApiService], (service: ApiService) => {
+    expect(service).toBeTruthy();
+  }));
 });

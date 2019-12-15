@@ -9,7 +9,7 @@ export interface HomeState {
 }
 
 export const homeInitialState: Home = {
-  tags: []
+  tags: [],
 };
 
 export function homeReducer(state: Home = homeInitialState, action: HomeAction): Home {

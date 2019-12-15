@@ -4,7 +4,7 @@ import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy
   selector: 'app-pager',
   templateUrl: './pager.component.html',
   styleUrls: ['./pager.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PagerComponent {
   @Input() currentPage: number;

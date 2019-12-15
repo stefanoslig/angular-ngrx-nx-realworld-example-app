@@ -26,9 +26,9 @@ export const editorInitialState: Editor = {
       bio: '',
       image: '',
       following: false,
-      loading: false
-    }
-  }
+      loading: false,
+    },
+  },
 };
 
 export function editorReducer(state: Editor, action: EditorAction): Editor {

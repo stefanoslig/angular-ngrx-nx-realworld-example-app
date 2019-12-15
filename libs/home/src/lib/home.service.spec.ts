@@ -8,14 +8,11 @@ describe('HomeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HomeService, ApiService]
+      providers: [HomeService, ApiService],
     });
   });
 
-  it(
-    'should be created',
-    inject([HomeService], (service: HomeService) => {
-      expect(service).toBeTruthy();
-    })
-  );
+  it('should be created', inject([HomeService], (service: HomeService) => {
+    expect(service).toBeTruthy();
+  }));
 });

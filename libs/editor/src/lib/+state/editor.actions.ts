@@ -6,7 +6,7 @@ export enum EditorActionsType {
   LOAD_ARTICLE = '[editor] LOAD_ARTICLE',
   INITIALIZE_ARTICLE = '[editor] INITIALIZE_ARTICLE',
   LOAD_ARTICLE_SUCCESS = '[editor] LOAD_ARTICLE_SUCCESS',
-  LOAD_ARTICLE_FAIL = '[editor] LOAD_ARTICLE_FAIL'
+  LOAD_ARTICLE_FAIL = '[editor] LOAD_ARTICLE_FAIL',
 }
 
 export class PublishArticle implements Action {

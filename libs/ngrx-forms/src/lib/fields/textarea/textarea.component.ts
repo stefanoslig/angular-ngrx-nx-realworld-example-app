@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-textarea',
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent {
   @Input() field: Field;

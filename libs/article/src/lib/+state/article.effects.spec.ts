@@ -11,22 +11,29 @@ import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 
 describe('ArticleEffects', () => {
-	let actions;
-	let effects: ArticleEffects;
+  let actions;
+  let effects: ArticleEffects;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-			providers: [ArticleEffects, provideMockActions(() => actions), ArticleService, ApiService, ActionsService, NgrxFormsFacade]
-		});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+      providers: [
+        ArticleEffects,
+        provideMockActions(() => actions),
+        ArticleService,
+        ApiService,
+        ActionsService,
+        NgrxFormsFacade,
+      ],
+    });
 
-		effects = TestBed.get(ArticleEffects);
-	});
+    effects = TestBed.inject(ArticleEffects);
+  });
 
-	describe('someEffect', () => {
-		it('should work', async () => {
-			actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
-			expect(true).toBeTruthy();
-		});
-	});
+  describe('someEffect', () => {
+    it('should work', async () => {
+      actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
+      expect(true).toBeTruthy();
+    });
+  });
 });

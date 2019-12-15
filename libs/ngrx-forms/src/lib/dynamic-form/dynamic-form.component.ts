@@ -1,14 +1,14 @@
 import { Field } from '../+state/ngrx-forms.interfaces';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
-import { combineLatest, debounceTime, map, takeUntil, tap, filter } from 'rxjs/operators';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { debounceTime, map, takeUntil, tap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit, OnDestroy {
   @Input() structure$: Observable<Field[]>;
@@ -26,14 +26,17 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         map(this.formBuilder),
         tap(f => (this.form = f)),
         tap(f => this.listenFormChanges(f)),
-        combineLatest(this.data$),
-        takeUntil(this.unsubscribe$)
+        f$ => combineLatest([f$, this.data$]),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe(this.patchValue);
 
     if (this.touchedForm$) {
       this.touchedForm$
-        .pipe(filter(t => !t && !!this.form), takeUntil(this.unsubscribe$))
+        .pipe(
+          filter(t => !t && !!this.form),
+          takeUntil(this.unsubscribe$),
+        )
         .subscribe(_ => this.form.reset());
     }
   }
@@ -59,7 +62,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   private listenFormChanges(form: FormGroup) {
     form.valueChanges
-      .pipe(debounceTime(100), takeUntil(this.unsubscribe$))
+      .pipe(
+        debounceTime(100),
+        takeUntil(this.unsubscribe$),
+      )
       .subscribe((changes: any) => this.updateForm.emit(changes));
   }
 }

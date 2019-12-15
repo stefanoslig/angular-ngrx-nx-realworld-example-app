@@ -1,7 +1,7 @@
 import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -16,15 +16,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 
-const authRouting: ModuleWithProviders = RouterModule.forChild([
+const authRouting = RouterModule.forChild([
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
-  }
+    component: RegisterComponent,
+  },
 ]);
 
 @NgModule({
@@ -32,8 +32,10 @@ const authRouting: ModuleWithProviders = RouterModule.forChild([
     CommonModule,
     NgrxFormsModule,
     authRouting,
-    StoreModule.forFeature('auth', authReducer, { initialState: authInitialState }),
-    EffectsModule.forFeature([AuthEffects])
+    StoreModule.forFeature('auth', authReducer, {
+      initialState: authInitialState,
+    }),
+    EffectsModule.forFeature([AuthEffects]),
   ],
   providers: [
     AuthEffects,
@@ -45,9 +47,9 @@ const authRouting: ModuleWithProviders = RouterModule.forChild([
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  declarations: [LoginComponent, RegisterComponent]
+  declarations: [LoginComponent, RegisterComponent],
 })
 export class AuthModule {}

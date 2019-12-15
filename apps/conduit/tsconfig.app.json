@@ -4,13 +4,17 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
   "include": [
-		"**/*.ts",
+		"**/*.d.ts",
 		"../../libs/home/src/index.ts",
 		"../../libs/editor/src/index.ts",
 		"../../libs/settings/src/index.ts",
 		"../../libs/article/src/index.ts",
 		"../../libs/profile/src/index.ts"
-	],
+  ],
   "exclude": ["src/test-setup.ts", "**/*.spec.ts"]
 }

@@ -10,8 +10,10 @@ import { NgrxErrorFacade } from './+state/ngrx-error.facade';
 
 @NgModule({
   imports: [
-    StoreModule.forFeature('ngrxError', ngrxErrorReducer, { initialState: ngrxErrorInitialState }),
-    EffectsModule.forFeature([NgrxErrorEffects])
+    StoreModule.forFeature('ngrxError', ngrxErrorReducer, {
+      initialState: ngrxErrorInitialState,
+    }),
+    EffectsModule.forFeature([NgrxErrorEffects]),
   ],
   providers: [
     NgrxErrorFacade,
@@ -19,8 +21,8 @@ import { NgrxErrorFacade } from './+state/ngrx-error.facade';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: NgrxErrorInterceptorService,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class NgrxErrorModule {}

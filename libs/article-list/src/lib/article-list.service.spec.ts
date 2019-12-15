@@ -8,14 +8,11 @@ describe('ArticleListService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ArticleListService, ApiService]
+      providers: [ArticleListService, ApiService],
     });
   });
 
-  it(
-    'should be created',
-    inject([ArticleListService], (service: ArticleListService) => {
-      expect(service).toBeTruthy();
-    })
-  );
+  it('should be created', inject([ArticleListService], (service: ArticleListService) => {
+    expect(service).toBeTruthy();
+  }));
 });

@@ -14,15 +14,15 @@ export class ArticleListEffects {
   setListPage = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleListActions.setListPage),
-      map(() => ArticleListActions.loadArticles)
-    )
+      map(() => ArticleListActions.loadArticles()),
+    ),
   );
 
   setListTag = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleListActions.setListConfig),
-      map(() => ArticleListActions.loadArticles)
-    )
+      map(() => ArticleListActions.loadArticles()),
+    ),
   );
 
   loadArticles = createEffect(() =>
@@ -34,15 +34,13 @@ export class ArticleListEffects {
           map(results =>
             ArticleListActions.loadArticlesSuccess({
               articles: results.articles,
-              articlesCount: results.articlesCount
-            })
+              articlesCount: results.articlesCount,
+            }),
           ),
-          catchError(error =>
-            of(ArticleListActions.loadArticlesFail({ error }))
-          )
-        )
-      )
-    )
+          catchError(error => of(ArticleListActions.loadArticlesFail({ error }))),
+        ),
+      ),
+    ),
   );
 
   favorite = createEffect(() =>
@@ -52,10 +50,10 @@ export class ArticleListEffects {
       concatMap(slug =>
         this.actionsService.favorite(slug).pipe(
           map(article => ArticleListActions.favoriteSuccess({ article })),
-          catchError(error => of(ArticleListActions.favoriteFail(error)))
-        )
-      )
-    )
+          catchError(error => of(ArticleListActions.favoriteFail(error))),
+        ),
+      ),
+    ),
   );
 
   unFavorite = createEffect(() =>
@@ -65,16 +63,16 @@ export class ArticleListEffects {
       concatMap(slug =>
         this.actionsService.unfavorite(slug).pipe(
           map(article => ArticleListActions.unFavoriteSuccess({ article })),
-          catchError(error => of(ArticleListActions.unFavoriteFail(error)))
-        )
-      )
-    )
+          catchError(error => of(ArticleListActions.unFavoriteFail(error))),
+        ),
+      ),
+    ),
   );
 
   constructor(
     private actions$: Actions,
     private articleListService: ArticleListService,
     private actionsService: ActionsService,
-    private facade: ArticleListFacade
+    private facade: ArticleListFacade,
   ) {}
 }

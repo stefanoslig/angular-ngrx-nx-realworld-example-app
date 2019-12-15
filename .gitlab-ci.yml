@@ -1,0 +1,73 @@
+image: node:latest
+
+stages:
+  - build
+  - linting
+  - test
+  - deploy
+
+build:
+  stage: build
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - npm install --quiet
+    - npm run build --prod
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
+
+linting:
+  stage: linting
+  script:
+    - npm run lint
+  dependencies:
+    - build
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
+
+test:unit:
+  stage: test
+  script:
+    - npm run test:coverage
+  dependencies:
+    - build
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
+
+# test:e2e:
+#   stage: test
+#   image: cypress/browsers:chrome69
+#   dependencies:
+#     - install
+#     - build
+#   script:
+#     - npm run e2e
+#   artifacts:
+#     paths:
+#       - cypress/screenshots
+#       - cypress/videos
+#     expire_in: 1 day
+
+deploy_prod:
+  stage: deploy
+  environment:
+    name: production
+    url: $FIREBASE_URL
+  only:
+   - master
+  dependencies:
+    - build
+  cache:
+    policy: pull
+    paths:
+      - node_modules/
+  script:
+    - npm run deploy
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
+

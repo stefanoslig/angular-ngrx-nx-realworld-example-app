@@ -5,11 +5,14 @@ import { ArticleComment, ArticleData, User } from '@angular-ngrx-nx-realworld-ex
   selector: 'app-article-comment',
   templateUrl: './article-comment.component.html',
   styleUrls: ['./article-comment.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleCommentComponent {
   @Input() currentUser: User;
   @Input() comment: ArticleComment;
   @Input() article: ArticleData;
-  @Output() delete: EventEmitter<{ commentId: number; slug: string }> = new EventEmitter();
+  @Output() delete: EventEmitter<{
+    commentId: number;
+    slug: string;
+  }> = new EventEmitter();
 }

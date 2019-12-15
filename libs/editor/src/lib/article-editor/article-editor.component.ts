@@ -12,33 +12,33 @@ const structure: Field[] = [
     type: 'INPUT',
     name: 'title',
     placeholder: 'Article Title',
-    validator: [Validators.required]
+    validator: [Validators.required],
   },
   {
     type: 'INPUT',
     name: 'description',
     placeholder: "What's this article about?",
-    validator: [Validators.required]
+    validator: [Validators.required],
   },
   {
     type: 'TEXTAREA',
     name: 'body',
     placeholder: 'Write your article (in markdown)',
-    validator: [Validators.required]
+    validator: [Validators.required],
   },
   {
     type: 'INPUT',
     name: 'tagList',
     placeholder: 'Enter Tags',
-    validator: []
-  }
+    validator: [],
+  },
 ];
 
 @Component({
   selector: 'app-article-editor',
   templateUrl: './article-editor.component.html',
   styleUrls: ['./article-editor.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleEditorComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;

@@ -6,7 +6,7 @@ import {
   OnChanges,
   OnInit,
   Type,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -16,11 +16,11 @@ import { TextareaComponent } from '../fields/textarea/textarea.component';
 
 const componentsMapper: { [key: string]: Type<any> } = {
   INPUT: InputComponent,
-  TEXTAREA: TextareaComponent
+  TEXTAREA: TextareaComponent,
 };
 
 @Directive({
-  selector: '[appDynamicField]'
+  selector: '[appDynamicField]',
 })
 export class DynamicFieldDirective implements OnInit, OnChanges {
   @Input() field: Field;

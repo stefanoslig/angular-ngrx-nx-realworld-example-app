@@ -7,25 +7,25 @@ import * as AuthActions from './auth.actions';
 
 @Injectable()
 export class AuthFacade {
-	auht$ = this.store.select(authQuery.getAuth);
-	user$ = this.store.select(authQuery.getUser);
-	isLoggedIn$ = this.store.select(authQuery.getLoggedIn);
+  auht$ = this.store.select(authQuery.getAuth);
+  user$ = this.store.select(authQuery.getUser);
+  isLoggedIn$ = this.store.select(authQuery.getLoggedIn);
 
-	constructor(private store: Store<AuthState>) { }
+  constructor(private store: Store<AuthState>) {}
 
-	login() {
-		this.store.dispatch(AuthActions.login());
-	}
+  login() {
+    this.store.dispatch(AuthActions.login());
+  }
 
-	logout() {
-		this.store.dispatch(AuthActions.logout());
-	}
+  logout() {
+    this.store.dispatch(AuthActions.logout());
+  }
 
-	register() {
-		this.store.dispatch(AuthActions.register());
-	}
+  register() {
+    this.store.dispatch(AuthActions.register());
+  }
 
-	user() {
-		this.store.dispatch(AuthActions.getUser());
-	}
+  user() {
+    this.store.dispatch(AuthActions.getUser());
+  }
 }

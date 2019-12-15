@@ -17,11 +17,13 @@ import { ArticleListService } from './article-list.service';
     CommonModule,
     SharedModule,
     RouterModule,
-    StoreModule.forFeature('articleList', articleListReducer, { initialState: articleListInitialState }),
-    EffectsModule.forFeature([ArticleListEffects])
+    StoreModule.forFeature('articleList', articleListReducer, {
+      initialState: articleListInitialState,
+    }),
+    EffectsModule.forFeature([ArticleListEffects]),
   ],
   declarations: [ArticleListComponent, ArticleListItemComponent],
   providers: [ArticleListService, ArticleListEffects, ArticleListFacade],
-  exports: [ArticleListComponent]
+  exports: [ArticleListComponent],
 })
 export class ArticleListModule {}

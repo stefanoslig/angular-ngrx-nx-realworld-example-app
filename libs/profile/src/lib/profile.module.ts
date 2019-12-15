@@ -14,7 +14,7 @@ import { ProfileArticlesComponent } from './profile-articles.component';
 import {
   ProfileArticlesResolverService,
   ProfileFavoritesResolverService,
-  ProfileResolverService
+  ProfileResolverService,
 } from './profile-resolver.service';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
@@ -34,18 +34,20 @@ import { ProfileService } from './profile.service';
           {
             path: '',
             component: ProfileArticlesComponent,
-            resolve: { ProfileArticlesResolverService }
+            resolve: { ProfileArticlesResolverService },
           },
           {
             path: 'favorites',
             component: ProfileArticlesComponent,
-            resolve: { ProfileFavoritesResolverService }
-          }
-        ]
-      }
+            resolve: { ProfileFavoritesResolverService },
+          },
+        ],
+      },
     ]),
-    StoreModule.forFeature('profile', profileReducer, { initialState: profileInitialState }),
-    EffectsModule.forFeature([ProfileEffects])
+    StoreModule.forFeature('profile', profileReducer, {
+      initialState: profileInitialState,
+    }),
+    EffectsModule.forFeature([ProfileEffects]),
   ],
   providers: [
     ProfileEffects,
@@ -53,8 +55,8 @@ import { ProfileService } from './profile.service';
     ProfileResolverService,
     ProfileArticlesResolverService,
     ProfileFavoritesResolverService,
-    ProfileFacade
+    ProfileFacade,
   ],
-  declarations: [ProfileComponent, ProfileArticlesComponent]
+  declarations: [ProfileComponent, ProfileArticlesComponent],
 })
 export class ProfileModule {}

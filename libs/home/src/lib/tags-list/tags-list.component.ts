@@ -4,7 +4,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   selector: 'app-tags-list',
   templateUrl: './tags-list.component.html',
   styleUrls: ['./tags-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagsListComponent {
   @Input() tags: string[];

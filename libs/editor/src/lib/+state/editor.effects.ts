@@ -1,18 +1,11 @@
-import {
-  NgrxFormsFacade,
-  SetErrors
-} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
 
 import { EditorService } from '../editor.service';
-import {
-  EditorActionsType,
-  LoadArticle,
-  PublishArticle
-} from './editor.actions';
+import { EditorActionsType, LoadArticle, PublishArticle } from './editor.actions';
 import * as fromActions from './editor.actions';
 
 @Injectable()
@@ -25,11 +18,11 @@ export class EditorEffects {
       this.editorService.publishArticle(data).pipe(
         map(result => ({
           type: '[router] Go',
-          payload: { path: ['article', result.slug] }
+          payload: { path: ['article', result.slug] },
         })),
-        catchError(result => of(new SetErrors(result.error.errors)))
-      )
-    )
+        catchError(result => of(new SetErrors(result.error.errors))),
+      ),
+    ),
   );
 
   @Effect()
@@ -38,14 +31,14 @@ export class EditorEffects {
     concatMap(action =>
       this.editorService.get(action.payload).pipe(
         map(results => new fromActions.LoadArticleSuccess(results)),
-        catchError(error => of(new fromActions.LoadArticleFail(error)))
-      )
-    )
+        catchError(error => of(new fromActions.LoadArticleFail(error))),
+      ),
+    ),
   );
 
   constructor(
     private actions: Actions,
     private ngrxFormsFacade: NgrxFormsFacade,
-    private editorService: EditorService
+    private editorService: EditorService,
   ) {}
 }

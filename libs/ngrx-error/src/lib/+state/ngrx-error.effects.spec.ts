@@ -13,10 +13,10 @@ describe('NgrxErrorEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
-      providers: [NgrxErrorEffects, DataPersistence, provideMockActions(() => actions)]
+      providers: [NgrxErrorEffects, DataPersistence, provideMockActions(() => actions)],
     });
 
-    effects = TestBed.get(NgrxErrorEffects);
+    effects = TestBed.inject(NgrxErrorEffects);
   });
 
   describe('someEffect', () => {

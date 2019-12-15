@@ -11,22 +11,29 @@ import { EditorEffects } from './editor.effects';
 import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 
 describe('EditorEffects', () => {
-	let actions;
-	let effects: EditorEffects;
+  let actions;
+  let effects: EditorEffects;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [StoreModule.forRoot({}), HttpClientTestingModule],
-			providers: [EditorEffects, DataPersistence, provideMockActions(() => actions), EditorService, ApiService, NgrxFormsFacade]
-		});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+      providers: [
+        EditorEffects,
+        DataPersistence,
+        provideMockActions(() => actions),
+        EditorService,
+        ApiService,
+        NgrxFormsFacade,
+      ],
+    });
 
-		effects = TestBed.get(EditorEffects);
-	});
+    effects = TestBed.inject(EditorEffects);
+  });
 
-	describe('someEffect', () => {
-		it('should work', async () => {
-			actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
-			expect(true).toBeTruthy();
-		});
-	});
+  describe('someEffect', () => {
+    it('should work', async () => {
+      actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
+      expect(true).toBeTruthy();
+    });
+  });
 });

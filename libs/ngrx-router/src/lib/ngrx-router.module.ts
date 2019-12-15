@@ -12,8 +12,8 @@ import { RouterEffects } from './+state/router.effects';
     CommonModule,
     StoreModule.forFeature('router', routerReducer),
     EffectsModule.forFeature([RouterEffects]),
-    StoreRouterConnectingModule.forRoot({ stateKey: 'router' })
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
   ],
-  providers: [RouterEffects, [{ provide: RouterStateSerializer, useClass: CustomSerializer }]]
+  providers: [RouterEffects, [{ provide: RouterStateSerializer, useClass: CustomSerializer }]],
 })
 export class NgrxRouterModule {}

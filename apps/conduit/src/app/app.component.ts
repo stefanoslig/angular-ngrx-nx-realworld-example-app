@@ -6,10 +6,10 @@ import { filter, take } from 'rxjs/operators';
 import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/auth';
 
 @Component({
-  selector: 'app-root',
+  selector: 'conduit-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   user$: Observable<User>;
@@ -22,7 +22,10 @@ export class AppComponent implements OnInit {
     this.isLoggedIn$ = this.authFacade.isLoggedIn$;
     this.localStorageJwtService
       .getItem()
-      .pipe(take(1), filter(token => !!token))
+      .pipe(
+        take(1),
+        filter(token => !!token),
+      )
       .subscribe(token => this.authFacade.user());
   }
 }

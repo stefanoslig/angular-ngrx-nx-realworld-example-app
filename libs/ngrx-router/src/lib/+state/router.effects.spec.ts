@@ -15,10 +15,10 @@ describe('RouterEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({}), RouterTestingModule],
-      providers: [RouterEffects, DataPersistence, provideMockActions(() => actions), Location]
+      providers: [RouterEffects, DataPersistence, provideMockActions(() => actions), Location],
     });
 
-    effects = TestBed.get(RouterEffects);
+    effects = TestBed.inject(RouterEffects);
   });
 
   describe('someEffect', () => {

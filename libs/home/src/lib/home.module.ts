@@ -18,12 +18,19 @@ import { TagsListComponent } from './tags-list/tags-list.component';
     CommonModule,
     ArticleListModule,
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: HomeComponent, resolve: { HomeResolverService } }
+      {
+        path: '',
+        pathMatch: 'full',
+        component: HomeComponent,
+        resolve: { HomeResolverService },
+      },
     ]),
-    StoreModule.forFeature('home', homeReducer, { initialState: homeInitialState }),
-    EffectsModule.forFeature([HomeEffects])
+    StoreModule.forFeature('home', homeReducer, {
+      initialState: homeInitialState,
+    }),
+    EffectsModule.forFeature([HomeEffects]),
   ],
   declarations: [HomeComponent, TagsListComponent],
-  providers: [HomeEffects, HomeResolverService, HomeService, HomeFacade]
+  providers: [HomeEffects, HomeResolverService, HomeService, HomeFacade],
 })
 export class HomeModule {}

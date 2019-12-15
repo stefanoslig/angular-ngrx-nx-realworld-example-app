@@ -23,11 +23,11 @@ describe('ProfileEffects', () => {
         provideMockActions(() => actions),
         ProfileService,
         ApiService,
-        ActionsService
-      ]
+        ActionsService,
+      ],
     });
 
-    effects = TestBed.get(ProfileEffects);
+    effects = TestBed.inject(ProfileEffects);
   });
 
   describe('someEffect', () => {

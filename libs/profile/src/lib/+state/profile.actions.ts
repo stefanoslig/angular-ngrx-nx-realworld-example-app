@@ -10,7 +10,7 @@ export enum ProfileActionTypes {
   FOLLOW_FAIL = '[profile] FOLLOW_FAIL',
   UNFOLLOW = '[profile] UNFOLLOW',
   UNFOLLOW_SUCCESS = '[profile] UNFOLLOW_SUCCESS',
-  UNFOLLOW_FAIL = '[profile] UNFOLLOW_FAIL'
+  UNFOLLOW_FAIL = '[profile] UNFOLLOW_FAIL',
 }
 
 export class GetProfile implements Action {

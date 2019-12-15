@@ -15,31 +15,31 @@ export class ArticleFacade {
   constructor(private store: Store<ArticleState>) {}
 
   loadArticle(slug: string) {
-    this.store.dispatch(ArticleActions.loadArticle({slug}));
+    this.store.dispatch(ArticleActions.loadArticle({ slug }));
   }
   loadComments(slug: string) {
-    this.store.dispatch(ArticleActions.loadComments({slug}));
+    this.store.dispatch(ArticleActions.loadComments({ slug }));
   }
   follow(username: string) {
-    this.store.dispatch(ArticleActions.follow({username}));
+    this.store.dispatch(ArticleActions.follow({ username }));
   }
   unfollow(username: string) {
-    this.store.dispatch(ArticleActions.unFollow({username}));
+    this.store.dispatch(ArticleActions.unFollow({ username }));
   }
   favorite(slug: string) {
-    this.store.dispatch(ArticleActions.favorite({slug}));
+    this.store.dispatch(ArticleActions.favorite({ slug }));
   }
   unfavorite(slug: string) {
-    this.store.dispatch(ArticleActions.unFavorite({slug}));
+    this.store.dispatch(ArticleActions.unFavorite({ slug }));
   }
   delete(slug: string) {
-    this.store.dispatch(ArticleActions.deleteArticle({slug}));
+    this.store.dispatch(ArticleActions.deleteArticle({ slug }));
   }
   deleteComment(data: { commentId: number; slug: string }) {
     this.store.dispatch(ArticleActions.deleteComment(data));
   }
   submit(slug: string) {
-    this.store.dispatch(ArticleActions.addComment({slug}));
+    this.store.dispatch(ArticleActions.addComment({ slug }));
   }
   initializeArticle() {
     this.store.dispatch(ArticleActions.initializeArticle());

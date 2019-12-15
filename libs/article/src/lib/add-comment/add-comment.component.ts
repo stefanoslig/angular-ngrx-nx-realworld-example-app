@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
   styleUrls: ['./add-comment.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddCommentComponent {
   @Input() article: ArticleData;
@@ -15,6 +15,6 @@ export class AddCommentComponent {
   @Input() data$: Observable<any>;
   @Input() structure$: Observable<Field[]>;
   @Input() touchedForm$: Observable<boolean>;
-  @Output() submit: EventEmitter<string> = new EventEmitter();
+  @Output() submitComment: EventEmitter<string> = new EventEmitter();
   @Output() updateForm: EventEmitter<any> = new EventEmitter();
 }

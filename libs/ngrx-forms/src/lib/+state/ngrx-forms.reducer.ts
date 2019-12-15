@@ -6,7 +6,7 @@ export const ngrxFormsInitialState: NgrxForms = {
   structure: [],
   valid: true,
   errors: {},
-  touched: false
+  touched: false,
 };
 
 export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): NgrxForms {

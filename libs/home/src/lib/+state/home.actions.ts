@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 export enum HomeActionsType {
   LOAD_TAGS = '[home] LOAD_TAGS',
   LOAD_TAGS_SUCCESS = '[home] LOAD_TAGS_SUCCESS',
-  LOAD_TAGS_FAIL = '[home] LOAD_TAGS_FAIL'
+  LOAD_TAGS_FAIL = '[home] LOAD_TAGS_FAIL',
 }
 
 export class LoadTags implements Action {

@@ -10,7 +10,7 @@ export interface NgrxErrorState {
 }
 
 export const ngrxErrorInitialState: NgrxError = {
-  code: -1
+  code: -1,
 };
 
 export function ngrxErrorReducer(state: NgrxError, action: NgrxErrorAction): NgrxError {

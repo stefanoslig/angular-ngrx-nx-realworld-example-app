@@ -1,8 +1,8 @@
 import { User, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { combineLatest, map, takeUntil, tap } from 'rxjs/operators';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { map, takeUntil, tap } from 'rxjs/operators';
 
 import { ProfileFacade } from './+state/profile.facade';
 
@@ -10,7 +10,7 @@ import { ProfileFacade } from './+state/profile.facade';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   profile$: Observable<Profile>;
@@ -25,16 +25,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.profile$ = this.facade.profile$;
     this.currentUser$ = this.authFacade.user$;
-
-    this.profile$
+    combineLatest([this.profile$, this.currentUser$])
       .pipe(
-        combineLatest(this.currentUser$),
         tap(([p, u]) => {
           this.username = p.username;
           this.following = p.following;
         }),
         map(([p, u]) => p.username === u.username),
-        takeUntil(this.unsubscribe$)
+        takeUntil(this.unsubscribe$),
       )
       .subscribe(isUser => this.isUser$.next(isUser));
   }
