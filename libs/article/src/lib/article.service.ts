@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService, ArticleData, ArticleComment } from '@angular-ngrx-nx-realworld-example-app/api';
+import {
+  ApiService,
+  ArticleData,
+  ArticleComment,
+  ArticleCommentPost,
+} from '@angular-ngrx-nx-realworld-example-app/api';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -23,9 +28,9 @@ export class ArticleService {
     return this.apiService.delete(`/articles/${slug}/comments/${commentId}`);
   }
 
-  addComment(slug, payload = ''): Observable<ArticleComment> {
-    return this.apiService
-      .post(`/articles/${slug}/comments`, { comment: { body: payload } })
-      .pipe(map(data => data.comment));
+  addComment(slug: string, payload = ''): Observable<ArticleComment> {
+    return this.apiService.post<ArticleComment, ArticleCommentPost>(`/articles/${slug}/comments`, {
+      comment: { body: payload },
+    });
   }
 }

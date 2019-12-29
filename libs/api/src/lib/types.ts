@@ -7,10 +7,18 @@ export interface Profile {
 }
 
 export interface ArticleComment {
-  id: number;
-  body: string;
-  createdAt: string;
-  author: Profile;
+  comment: {
+    id: number;
+    body: string;
+    createdAt: string;
+    author: Profile;
+  };
+}
+
+export interface ArticleCommentPost {
+  comment: {
+    body: string;
+  };
 }
 
 export interface ArticleData {
@@ -32,4 +40,14 @@ export interface User {
   username: string;
   bio: string;
   image: string;
+}
+
+export interface LoginCredentials {
+  username: string;
+  password: string;
+}
+
+export interface RegisterCredentials {
+  username: string;
+  password: string;
 }

@@ -56,7 +56,7 @@ const reducer = createReducer(
     return { ...state, comments };
   }),
   on(ArticleActions.deleteCommentSuccess, (state, action) => {
-    const comments: ArticleComment[] = state.comments.filter(item => item.id !== action.commentId);
+    const comments: ArticleComment[] = state.comments.filter(item => item.comment.id !== action.commentId);
     return { ...state, comments };
   }),
   on(ArticleActions.initializeArticle, state => articleInitialState),
