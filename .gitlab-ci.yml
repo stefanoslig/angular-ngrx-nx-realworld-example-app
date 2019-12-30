@@ -6,13 +6,21 @@ stages:
   - test
   - deploy
 
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm
+    - cache/Cypress
+    - node_modules
+
 build:
   stage: build
-  cache:
-    paths:
-      - node_modules/
   script:
-    - npm install --quiet
+    - npm ci
     - npm run build --prod
   except:
     variables:
@@ -21,7 +29,7 @@ build:
 linting:
   stage: linting
   script:
-    - npm run lint
+    - npx ng lint
   dependencies:
     - build
   except:
@@ -31,26 +39,29 @@ linting:
 test:unit:
   stage: test
   script:
-    - npm run test:coverage
+    - npm run test
   dependencies:
     - build
   except:
     variables:
       - $CI_COMMIT_MESSAGE =~ /skip-ci/
 
-# test:e2e:
-#   stage: test
-#   image: cypress/browsers:chrome69
-#   dependencies:
-#     - install
-#     - build
-#   script:
-#     - npm run e2e
-#   artifacts:
-#     paths:
-#       - cypress/screenshots
-#       - cypress/videos
-#     expire_in: 1 day
+test:e2e:
+  stage: test
+  image: cypress/base:10
+  dependencies:
+    - build
+    - linting
+  script:
+    - npm run e2e
+  artifacts:
+    paths:
+      - cypress/screenshots
+      - cypress/videos
+    expire_in: 1 day
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /skip-ci/
 
 deploy_prod:
   stage: deploy
