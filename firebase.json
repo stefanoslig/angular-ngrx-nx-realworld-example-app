@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "/builds/stefanoslig/angular-ngrx-nx-realworld-example-app/dist/apps/conduit",
+    "public": "dist/apps/conduit",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

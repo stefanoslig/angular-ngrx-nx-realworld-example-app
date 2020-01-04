@@ -25,6 +25,10 @@ build:
   except:
     variables:
       - $CI_COMMIT_MESSAGE =~ /skip-ci/
+  artifacts:
+    paths:
+        - dist/
+
 
 linting:
   stage: linting
