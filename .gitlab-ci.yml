@@ -51,7 +51,6 @@ test:e2e:
   image: cypress/base:10
   dependencies:
     - build
-    - linting
   script:
     - npm run e2e
   artifacts:
@@ -72,8 +71,6 @@ deploy_prod:
    - master
   dependencies:
     - build
-    - linting
-    - test
   cache:
     policy: pull
     paths:
