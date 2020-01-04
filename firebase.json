@@ -1,16 +1,12 @@
 {
-	"hosting": {
-		"public": "dist/apps/conduit",
-		"ignore": [
-			"firebase.json",
-			"**/.*",
-			"**/node_modules/**"
-		],
-		"rewrites": [
-			{
-				"source": "**",
-				"destination": "/index.html"
-			}
-		]
-	}
+  "hosting": {
+    "public": "/builds/stefanoslig/angular-ngrx-nx-realworld-example-app/dist/apps/conduit",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }

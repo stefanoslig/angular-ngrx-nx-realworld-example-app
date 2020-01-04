@@ -72,12 +72,15 @@ deploy_prod:
    - master
   dependencies:
     - build
+    - linting
+    - test
   cache:
     policy: pull
     paths:
       - node_modules/
   script:
     - npm run deploy
+  when: manual
   except:
     variables:
       - $CI_COMMIT_MESSAGE =~ /skip-ci/
