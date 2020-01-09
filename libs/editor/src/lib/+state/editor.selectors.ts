@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { EditorState, Editor } from './editor.reducer';
+import { Editor } from './editor.reducer';
 
 const getEditor = createFeatureSelector<Editor>('editor');
 export const getArticle = createSelector(
