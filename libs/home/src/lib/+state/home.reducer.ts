@@ -1,27 +1,24 @@
-import { HomeAction, HomeActionsType } from './home.actions';
-
-export interface Home {
-  tags: string[];
-}
+import { Action, createReducer, on } from '@ngrx/store';
+import * as HomeActions from './home.actions';
 
 export interface HomeState {
   readonly home: Home;
+}
+
+export interface Home {
+  tags: string[];
 }
 
 export const homeInitialState: Home = {
   tags: [],
 };
 
-export function homeReducer(state: Home = homeInitialState, action: HomeAction): Home {
-  switch (action.type) {
-    case HomeActionsType.LOAD_TAGS_SUCCESS: {
-      return { ...state, tags: action.payload };
-    }
-    case HomeActionsType.LOAD_TAGS_FAIL: {
-      return { ...state, tags: [] };
-    }
-    default: {
-      return state;
-    }
-  }
+const reducer = createReducer(
+  homeInitialState,
+  on(HomeActions.loadTagsSuccess, (state, action) => ({ ...state, tags: action.tags })),
+  on(HomeActions.loadTagsFail, (state, action) => ({ ...state, tags: [] })),
+);
+
+export function homeReducer(state: Home | undefined, action: Action): Home {
+  return reducer(state, action);
 }
