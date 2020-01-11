@@ -1,23 +1,5 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
-export enum HomeActionsType {
-  LOAD_TAGS = '[home] LOAD_TAGS',
-  LOAD_TAGS_SUCCESS = '[home] LOAD_TAGS_SUCCESS',
-  LOAD_TAGS_FAIL = '[home] LOAD_TAGS_FAIL',
-}
-
-export class LoadTags implements Action {
-  readonly type = HomeActionsType.LOAD_TAGS;
-}
-
-export class LoadTagsSuccess implements Action {
-  readonly type = HomeActionsType.LOAD_TAGS_SUCCESS;
-  constructor(public payload: string[]) {}
-}
-
-export class LoadTagsFail implements Action {
-  readonly type = HomeActionsType.LOAD_TAGS_FAIL;
-  constructor(public payload: Error) {}
-}
-
-export type HomeAction = LoadTags | LoadTagsSuccess | LoadTagsFail;
+export const loadTags = createAction('[home] LOAD_TAGS');
+export const loadTagsSuccess = createAction('[home] LOAD_TAGS_SUCCESS', props<{ tags: string[] }>());
+export const loadTagsFail = createAction('[home] LOAD_TAGS_FAIL', props<{ error: Error }>());

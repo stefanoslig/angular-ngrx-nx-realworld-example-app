@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class HomeService {
   constructor(private apiService: ApiService) {}
 
-  getTags(): Observable<any> {
+  getTags(): Observable<{ tags: string[] }> {
     return this.apiService.get('/tags');
   }
 }

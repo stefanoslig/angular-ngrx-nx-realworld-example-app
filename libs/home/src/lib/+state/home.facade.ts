@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { HomeState } from './home.reducer';
 import { homeQuery } from './home.selectors';
-import { LoadTags, LoadTagsSuccess, LoadTagsFail } from './home.actions';
+import * as HomeActions from './home.actions';
+import { HomeState } from './home.reducer';
 
 @Injectable()
 export class HomeFacade {
@@ -13,6 +13,6 @@ export class HomeFacade {
   constructor(private store: Store<HomeState>) {}
 
   loadTags() {
-    this.store.dispatch(new LoadTags());
+    this.store.dispatch(HomeActions.loadTags());
   }
 }
