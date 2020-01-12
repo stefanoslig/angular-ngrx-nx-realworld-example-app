@@ -1,5 +1,6 @@
-import { NgrxFormsAction, NgrxFormsActionTypes } from './ngrx-forms.actions';
 import { NgrxForms } from './ngrx-forms.interfaces';
+import * as NgrxFormsActions from './ngrx-forms.actions';
+import { Action, createReducer, on } from '@ngrx/store';
 
 export const ngrxFormsInitialState: NgrxForms = {
   data: {},
@@ -9,33 +10,17 @@ export const ngrxFormsInitialState: NgrxForms = {
   touched: false,
 };
 
-export function ngrxFormsReducer(state: NgrxForms, action: NgrxFormsAction): NgrxForms {
-  switch (action.type) {
-    case NgrxFormsActionTypes.SET_DATA: {
-      return { ...state, data: action.payload };
-    }
-    case NgrxFormsActionTypes.UPDATE_DATA: {
-      const data = { ...state.data, ...action.payload };
-      return { ...state, data, touched: true };
-    }
-    case NgrxFormsActionTypes.SET_STRUCTURE: {
-      const structure = action.payload.slice(0);
-      return { ...state, structure };
-    }
-    case NgrxFormsActionTypes.SET_ERRORS: {
-      return { ...state, errors: action.payload };
-    }
-    case NgrxFormsActionTypes.INITIALIZE_ERRORS: {
-      return { ...state, errors: {} };
-    }
-    case NgrxFormsActionTypes.INITIALIZE_FORM: {
-      return ngrxFormsInitialState;
-    }
-    case NgrxFormsActionTypes.RESET_FORM: {
-      return { ...state, touched: false };
-    }
-    default: {
-      return state;
-    }
-  }
+const reducer = createReducer(
+  ngrxFormsInitialState,
+  on(NgrxFormsActions.setData, (state, action) => ({ ...state, data: action.data })),
+  on(NgrxFormsActions.updateData, (state, action) => ({ ...state, ...action.data, touched: true })),
+  on(NgrxFormsActions.setStructure, (state, action) => ({ ...state, structure: action.structure.slice(0) })),
+  on(NgrxFormsActions.setErrors, (state, action) => ({ ...state, errors: action.errors })),
+  on(NgrxFormsActions.initializeErrors, (state, action) => ({ ...state, errors: {} })),
+  on(NgrxFormsActions.initializeForm, (state, action) => ngrxFormsInitialState),
+  on(NgrxFormsActions.resetForm, (state, action) => ({ ...state, touched: false })),
+);
+
+export function ngrxFormsReducer(state: NgrxForms | undefined, action: Action): NgrxForms {
+  return reducer(state, action);
 }

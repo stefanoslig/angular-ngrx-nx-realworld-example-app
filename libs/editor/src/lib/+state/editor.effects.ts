@@ -1,4 +1,4 @@
-import { NgrxFormsFacade, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -20,8 +20,7 @@ export class EditorEffects {
             type: '[router] Go',
             payload: { path: ['article', result.slug] },
           })),
-          // TODO change this action when you refactor the ngrx-forms lib
-          catchError(result => of(new SetErrors(result.error.errors))),
+          catchError(result => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),

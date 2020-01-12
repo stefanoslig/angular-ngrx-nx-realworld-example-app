@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { SetData, UpdateData, NgrxFormsActionTypes } from './ngrx-forms.actions';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
+import * as NgrxFormsActions from './ngrx-forms.actions';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class NgrxFormsEffects {
-  @Effect()
-  setData = this.actions.pipe(
-    ofType<SetData | UpdateData>(NgrxFormsActionTypes.SET_DATA, NgrxFormsActionTypes.UPDATE_DATA),
-    map(action => ({
-      type: NgrxFormsActionTypes.INITIALIZE_ERRORS,
-    })),
+  setData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NgrxFormsActions.setData, NgrxFormsActions.updateData),
+      map(action => NgrxFormsActions.initializeErrors()),
+    ),
   );
 
-  constructor(private actions: Actions) {}
+  constructor(private actions$: Actions) {}
 }

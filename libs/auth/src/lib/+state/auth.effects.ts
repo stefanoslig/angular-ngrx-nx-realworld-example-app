@@ -1,5 +1,5 @@
 import { AuthService } from '../auth.service';
-import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class AuthEffects {
       exhaustMap(([action, data]) =>
         this.authService.login(data).pipe(
           map(user => AuthActions.loginSuccess({ user })),
-          catchError(result => of(new fromNgrxForms.SetErrors(result.error.errors))),
+          catchError(result => of(fromNgrxForms.setErrors(result.error.errors))),
         ),
       ),
     ),
@@ -56,7 +56,7 @@ export class AuthEffects {
       exhaustMap(([action, data]) =>
         this.authService.register(data).pipe(
           map(user => AuthActions.registerSuccess({ user })),
-          catchError(result => of(new fromNgrxForms.SetErrors(result.error.errors))),
+          catchError(result => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),

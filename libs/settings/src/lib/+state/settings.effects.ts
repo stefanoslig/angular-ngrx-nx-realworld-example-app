@@ -1,5 +1,5 @@
 import { AuthFacade, getUser } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { NgrxFormsFacade, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -31,7 +31,7 @@ export class SettingsEffects {
             payload: { path: ['profile', result.username] },
           },
         ]),
-        catchError(result => of(new SetErrors(result.error.errors))),
+        catchError(result => of(setErrors({ errors: result.error.errors }))),
       ),
     ),
   );
