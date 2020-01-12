@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import * as ArticleActions from './article.actions';
 
-import { NgrxFormsFacade, ResetForm, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade, setErrors, resetForm } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 
 @Injectable()
 export class ArticleEffects {
@@ -53,8 +53,8 @@ export class ArticleEffects {
       withLatestFrom(this.ngrxFormsFacade.data$, this.ngrxFormsFacade.structure$),
       exhaustMap(([slug, data, structure]) =>
         this.articleService.addComment(slug, data.comment).pipe(
-          mergeMap(comment => [ArticleActions.addCommentSuccess({ comment }), new ResetForm()]),
-          catchError(result => of(new SetErrors(result.error.errors))),
+          mergeMap(comment => [ArticleActions.addCommentSuccess({ comment }), resetForm()]),
+          catchError(result => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),

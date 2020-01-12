@@ -1,17 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import {
-  SetData,
-  SetStructure,
-  UpdateData,
-  InitializeForm,
-  InitializeErrors,
-  ResetForm,
-  SetErrors,
-} from './ngrx-forms.actions';
-import { NgrxFormsState, Errors } from './ngrx-forms.interfaces';
+import { NgrxFormsState } from './ngrx-forms.interfaces';
 import { ngrxFormsQuery } from './ngrx-forms.selectors';
+import * as NgrxFormsActions from './ngrx-forms.actions';
 
 @Injectable()
 export class NgrxFormsFacade {
@@ -23,26 +14,26 @@ export class NgrxFormsFacade {
   constructor(private store: Store<NgrxFormsState>) {}
 
   setStructure(structure: any) {
-    this.store.dispatch(new SetStructure(structure));
+    this.store.dispatch(NgrxFormsActions.setStructure({ structure }));
   }
 
   setData(data: any) {
-    this.store.dispatch(new SetData(data));
+    this.store.dispatch(NgrxFormsActions.setData({ data }));
   }
 
   updateData(data: any) {
-    this.store.dispatch(new UpdateData(data));
+    this.store.dispatch(NgrxFormsActions.updateData({ data }));
   }
 
   initializeForm() {
-    this.store.dispatch(new InitializeForm());
+    this.store.dispatch(NgrxFormsActions.initializeForm());
   }
 
   initializeErrors() {
-    this.store.dispatch(new InitializeErrors());
+    this.store.dispatch(NgrxFormsActions.initializeErrors());
   }
 
   resetForm() {
-    this.store.dispatch(new ResetForm());
+    this.store.dispatch(NgrxFormsActions.resetForm());
   }
 }
