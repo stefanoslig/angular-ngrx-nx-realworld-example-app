@@ -5,10 +5,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 
 import { SettingsEffects } from './+state/settings.effects';
-import { settingsReducer } from './+state/settings.reducer';
 import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
@@ -23,7 +21,6 @@ import { SettingsComponent } from './settings/settings.component';
         canActivate: [AuthGuardService],
       },
     ]),
-    StoreModule.forFeature('settings', settingsReducer, { initialState: {} }),
     EffectsModule.forFeature([SettingsEffects]),
   ],
   declarations: [SettingsComponent],

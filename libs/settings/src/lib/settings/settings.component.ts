@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { EditSettings } from '../+state/settings.actions';
+import { editSettings } from '../+state/settings.actions';
 
 const structure: Field[] = [
   {
@@ -73,7 +73,7 @@ export class SettingsComponent implements OnInit {
   }
 
   submit() {
-    this.store.dispatch(new EditSettings());
+    this.store.dispatch(editSettings());
   }
 
   logout() {

@@ -31,7 +31,7 @@ export class AuthEffects {
       exhaustMap(([action, data]) =>
         this.authService.login(data).pipe(
           map(user => AuthActions.loginSuccess({ user })),
-          catchError(result => of(fromNgrxForms.setErrors(result.error.errors))),
+          catchError(result => of(fromNgrxForms.setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),
