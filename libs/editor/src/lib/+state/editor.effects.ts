@@ -6,6 +6,7 @@ import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
 
 import { EditorService } from '../editor.service';
 import * as EditorActions from './editor.actions';
+import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 
 @Injectable()
 export class EditorEffects {
@@ -16,10 +17,11 @@ export class EditorEffects {
       concatMap(([_, data]) =>
         this.editorService.publishArticle(data).pipe(
           // TODO dispatch this action from the router facade when you refactor
-          map(result => ({
-            type: '[router] Go',
-            payload: { path: ['article', result.slug] },
-          })),
+          map(result =>
+            go({
+              to: { path: ['article', result.slug] },
+            }),
+          ),
           catchError(result => of(setErrors({ errors: result.error.errors }))),
         ),
       ),

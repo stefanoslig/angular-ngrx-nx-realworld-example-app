@@ -7,7 +7,7 @@ import { catchError, concatMap, exhaustMap, map, mergeMap, withLatestFrom } from
 import * as ArticleActions from './article.actions';
 
 import { NgrxFormsFacade, setErrors, resetForm } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-
+import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 @Injectable()
 export class ArticleEffects {
   loadArticle = createEffect(() =>
@@ -39,7 +39,7 @@ export class ArticleEffects {
       ofType(ArticleActions.deleteArticle),
       concatMap(action =>
         this.articleService.deleteArticle(action.slug).pipe(
-          map(_ => ({ type: '[router] Go', payload: { path: ['/'] } })),
+          map(_ => go({ to: { path: ['/'] } })),
           catchError(error => of(ArticleActions.deleteArticleFail(error))),
         ),
       ),

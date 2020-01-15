@@ -1,4 +1,4 @@
-import { Params } from '@angular/router';
+import { Params, NavigationExtras } from '@angular/router';
 import * as fromRouter from '@ngrx/router-store';
 
 export interface RouterStateUrl {
@@ -9,4 +9,10 @@ export interface RouterStateUrl {
 
 export interface RouterState {
   router: fromRouter.RouterReducerState<RouterStateUrl>;
+}
+
+export interface NgrxRoute {
+  path: any[];
+  query?: object;
+  extras?: NavigationExtras;
 }

@@ -5,7 +5,7 @@ import { ArticleListState, ArticleListConfig } from './article-list.reducer';
 import { articleListQuery } from './article-list.selectors';
 import * as ArticleListActions from './article-list.actions';
 import { withLatestFrom, map } from 'rxjs/operators';
-
+import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 @Injectable()
 export class ArticleListFacade {
   articles$ = this.store.select(articleListQuery.getArticles);
@@ -30,10 +30,7 @@ export class ArticleListFacade {
   }
 
   navigateToArticle(slug: string) {
-    this.store.dispatch({
-      type: '[router] Go',
-      payload: { path: ['/article', slug] },
-    });
+    this.store.dispatch(go({ to: { path: ['/article', slug] } }));
   }
 
   setPage(page: number) {

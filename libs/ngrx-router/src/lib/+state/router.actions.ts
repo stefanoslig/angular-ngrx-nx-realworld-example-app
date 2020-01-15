@@ -1,20 +1,6 @@
-import { NavigationExtras } from '@angular/router';
+import { createAction, props } from '@ngrx/store';
+import { NgrxRoute } from './router.interfaces';
 
-export interface Go {
-  type: '[router] Go';
-  payload: {
-    path: any[];
-    query?: object;
-    extras?: NavigationExtras;
-  };
-}
-
-export interface Back {
-  type: '[router] BACK';
-}
-
-export interface Forward {
-  type: '[router] FORWARD';
-}
-
-export type RouterAction = Go | Back | Forward;
+export const go = createAction('[router] Go', props<{ to: NgrxRoute }>());
+export const back = createAction('[router] BACK');
+export const forward = createAction('[router] FORWARD');
