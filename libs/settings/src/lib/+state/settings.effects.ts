@@ -7,6 +7,7 @@ import { catchError, concatMap, map, mergeMap, withLatestFrom } from 'rxjs/opera
 
 import { SettingsService } from '../settings.service';
 import * as SettingsActions from './settings.actions';
+import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 
 @Injectable()
 export class SettingsEffects {
@@ -26,10 +27,9 @@ export class SettingsEffects {
         this.settingsService.update(data).pipe(
           mergeMap(result => [
             getUser(),
-            {
-              type: '[router] Go',
-              payload: { path: ['profile', result.username] },
-            },
+            go({
+              to: { path: ['profile', result.username] },
+            }),
           ]),
           catchError(result => of(setErrors({ errors: result.error.errors }))),
         ),
