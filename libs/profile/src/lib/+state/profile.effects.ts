@@ -1,33 +1,24 @@
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
-import { GetProfile, ProfileActionTypes } from '../+state/profile.actions';
 import { ProfileService } from '../profile.service';
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, groupBy, map, mergeMap, switchMap } from 'rxjs/operators';
-
-import { Follow, UnFollow } from './profile.actions';
+import * as ProfileActions from './profile.actions';
 
 @Injectable()
 export class ProfileEffects {
-  @Effect()
-  getProfile = this.actions.pipe(
-    ofType<GetProfile>(ProfileActionTypes.GET_PROFILE),
-    groupBy(action => action.payload),
-    mergeMap(group =>
-      group.pipe(
-        map(action => action.payload),
-        switchMap(username =>
-          this.profileService.getProfile(username).pipe(
-            map(results => ({
-              type: ProfileActionTypes.GET_PROFILE_SUCCESS,
-              payload: results,
-            })),
-            catchError(error =>
-              of({
-                type: ProfileActionTypes.GET_PROFILE_FAIL,
-                payload: error,
-              }),
+  getProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.getProfile),
+      groupBy(action => action.id),
+      mergeMap(group =>
+        group.pipe(
+          map(action => action.id),
+          switchMap(username =>
+            this.profileService.getProfile(username).pipe(
+              map(profile => ProfileActions.getProfileSuccess({ profile })),
+              catchError(error => of(ProfileActions.getProfileFail({ error }))),
             ),
           ),
         ),
@@ -35,48 +26,34 @@ export class ProfileEffects {
     ),
   );
 
-  @Effect()
-  follow = this.actions.pipe(
-    ofType<Follow>(ProfileActionTypes.FOLLOW),
-    map(action => action.payload),
-    concatMap(slug =>
-      this.actionsService.followUser(slug).pipe(
-        map(results => ({
-          type: ProfileActionTypes.FOLLOW_SUCCESS,
-          payload: results,
-        })),
-        catchError(error =>
-          of({
-            type: ProfileActionTypes.FOLLOW_FAIL,
-            payload: error,
-          }),
+  follow$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.follow),
+      map(action => action.id),
+      concatMap(slug =>
+        this.actionsService.followUser(slug).pipe(
+          map(profile => ProfileActions.followSuccess({ profile })),
+          catchError(error => of(ProfileActions.followFail({ error }))),
         ),
       ),
     ),
   );
 
-  @Effect()
-  unFollow = this.actions.pipe(
-    ofType<UnFollow>(ProfileActionTypes.UNFOLLOW),
-    map(action => action.payload),
-    concatMap(slug =>
-      this.actionsService.unfollowUser(slug).pipe(
-        map(results => ({
-          type: ProfileActionTypes.UNFOLLOW_SUCCESS,
-          payload: results,
-        })),
-        catchError(error =>
-          of({
-            type: ProfileActionTypes.UNFOLLOW_FAIL,
-            payload: error,
-          }),
+  unFollow$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.unFollow),
+      map(action => action.id),
+      concatMap(slug =>
+        this.actionsService.unfollowUser(slug).pipe(
+          map(profile => ProfileActions.unFollowSuccess({ profile })),
+          catchError(error => of(ProfileActions.unFollowFail({ error }))),
         ),
       ),
     ),
   );
 
   constructor(
-    private actions: Actions,
+    private actions$: Actions,
     private actionsService: ActionsService,
     private profileService: ProfileService,
   ) {}
