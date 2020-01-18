@@ -1,6 +1,6 @@
-import { ProfileAction, ProfileActionTypes } from './profile.actions';
-import { createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, Action, createReducer, on } from '@ngrx/store';
 import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import * as ProfileActions from './profile.actions';
 
 export interface ProfileState {
   readonly profile: Profile;
@@ -14,25 +14,16 @@ export const profileInitialState: Profile = {
   loading: false,
 };
 
-export function profileReducer(state: Profile, action: ProfileAction): Profile {
-  switch (action.type) {
-    case ProfileActionTypes.GET_PROFILE: {
-      return { ...state, loading: true };
-    }
-    case ProfileActionTypes.GET_PROFILE_SUCCESS: {
-      return { ...action.payload, loading: false };
-    }
-    case ProfileActionTypes.GET_PROFILE_FAIL: {
-      return profileInitialState;
-    }
-    case ProfileActionTypes.FOLLOW_SUCCESS:
-    case ProfileActionTypes.UNFOLLOW_SUCCESS: {
-      return action.payload;
-    }
-    default: {
-      return state;
-    }
-  }
-}
-
 export const getProfile = createFeatureSelector<Profile>('profile');
+
+const reducer = createReducer(
+  profileInitialState,
+  on(ProfileActions.getProfile, (state, action) => ({ ...state, loading: true })),
+  on(ProfileActions.getProfileSuccess, (state, action) => ({ ...action.profile, loading: false })),
+  on(ProfileActions.getProfileFail, (state, action) => profileInitialState),
+  on(ProfileActions.followSuccess, ProfileActions.unFollowSuccess, (state, action) => action.profile),
+);
+
+export function profileReducer(state: Profile | undefined, action: Action): Profile {
+  return reducer(state, action);
+}

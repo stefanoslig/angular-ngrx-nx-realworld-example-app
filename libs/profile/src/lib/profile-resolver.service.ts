@@ -1,11 +1,11 @@
-import { ArticleListConfig, articleListInitialState } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { articleListInitialState } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import * as fromArticleList from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { GetProfile } from './+state/profile.actions';
+import { getProfile } from './+state/profile.actions';
 import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class ProfileResolverService implements Resolve<Profile> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     const username = route.params['username'];
-    this.store.dispatch(new GetProfile(username));
+    this.store.dispatch(getProfile({ id: username }));
   }
 }
 
