@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { ArticleData, ArticleComment, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Comment } from '../article.interfaces';
 
 export const loadArticle = createAction('[article] LOAD_ARTICLE', props<{ slug: string }>());
 
-export const loadArticleSuccess = createAction('[article] LOAD_ARTICLE_SUCCESS', props<{ article: ArticleData }>());
+export const loadArticleSuccess = createAction('[article] LOAD_ARTICLE_SUCCESS', props<{ article: Article }>());
 
 export const loadArticleFail = createAction('[article] LOAD_ARTICLE_FAIL', props<{ error: Error }>());
 
@@ -15,22 +16,19 @@ export const initializeArticle = createAction('[article] INITIALIZE_ARTICLE');
 
 export const loadComments = createAction('[article] LOAD_COMMENTS', props<{ slug: string }>());
 
-export const loadCommentsSuccess = createAction(
-  '[article] LOAD_COMMENTS_SUCCESS',
-  props<{ comments: ArticleComment[] }>(),
-);
+export const loadCommentsSuccess = createAction('[article] LOAD_COMMENTS_SUCCESS', props<{ comments: Comment[] }>());
 
 export const loadCommentsFail = createAction('[article] LOAD_COMMENTS_FAIL', props<{ error: Error }>());
 
 export const favorite = createAction('[article] FAVORITE', props<{ slug: string }>());
 
-export const favoriteSuccess = createAction('[article] FAVORITE_SUCCESS', props<{ article: ArticleData }>());
+export const favoriteSuccess = createAction('[article] FAVORITE_SUCCESS', props<{ article: Article }>());
 
 export const favoriteFail = createAction('[article] FAVORITE_FAIL', props<{ error: Error }>());
 
 export const unFavorite = createAction('[article] UNFAVORITE', props<{ slug: string }>());
 
-export const unFavoriteSuccess = createAction('[article] UNFAVORITE_SUCCESS', props<{ article: ArticleData }>());
+export const unFavoriteSuccess = createAction('[article] UNFAVORITE_SUCCESS', props<{ article: Article }>());
 
 export const unFavoriteFail = createAction('[article] UNFAVORITE_FAIL', props<{ error: Error }>());
 
@@ -50,7 +48,7 @@ export const addComment = createAction('[article] ADD_COMMENT', props<{ slug: st
 
 export const addCommentFail = createAction('[article] ADD_COMMENT_FAIL', props<{ error: Error }>());
 
-export const addCommentSuccess = createAction('[article] ADD_COMMENT_SUCCESS', props<{ comment: ArticleComment }>());
+export const addCommentSuccess = createAction('[article] ADD_COMMENT_SUCCESS', props<{ comment: Comment }>());
 
 export const deleteComment = createAction('[article] DELETE_COMMENT', props<{ commentId: number; slug: string }>());
 

@@ -1,22 +1,22 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Article } from './article.reducer';
+import { ArticleState } from './article.reducer';
 
-const getArticle = createFeatureSelector<Article>('article');
+const getArticle = createFeatureSelector<ArticleState>('article');
 export const getArticleData = createSelector(
   getArticle,
-  (state: Article) => state.data,
+  (state: ArticleState) => state.data,
 );
 export const getComments = createSelector(
   getArticle,
-  (state: Article) => state.comments,
+  (state: ArticleState) => state.comments,
 );
 export const getArticleLoaded = createSelector(
   getArticle,
-  (state: Article) => state.loaded,
+  (state: ArticleState) => state.loaded,
 );
 export const getAuthorUsername = createSelector(
   getArticle,
-  (state: Article) => state.data.author.username,
+  (state: ArticleState) => state.data.author.username,
 );
 
 export const articleQuery = {

@@ -1,4 +1,4 @@
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ArticleListActions from './article-list.actions';
 
@@ -28,7 +28,7 @@ export interface Filters {
 export type ListType = 'ALL' | 'FEED';
 
 export interface Articles {
-  entities: ArticleData[];
+  entities: Article[];
   articlesCount: number;
   loaded: boolean;
   loading: boolean;
@@ -98,7 +98,7 @@ const reducer = createReducer(
   })),
 );
 
-function replaceArticle(articles: Articles, payload: ArticleData): Articles {
+function replaceArticle(articles: Articles, payload: Article): Articles {
   const articleIndex = articles.entities.findIndex(a => a.slug === payload.slug);
   const entities = [
     ...articles.entities.slice(0, articleIndex),

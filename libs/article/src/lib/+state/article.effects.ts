@@ -8,14 +8,15 @@ import * as ArticleActions from './article.actions';
 
 import { NgrxFormsFacade, setErrors, resetForm } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
+
 @Injectable()
 export class ArticleEffects {
   loadArticle = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.loadArticle),
       concatMap(action =>
-        this.articleService.get(action.slug).pipe(
-          map(results => ArticleActions.loadArticleSuccess({ article: results })),
+        this.articleService.getArticle(action.slug).pipe(
+          map(response => ArticleActions.loadArticleSuccess({ article: response.article })),
           catchError(error => of(ArticleActions.loadArticleFail(error))),
         ),
       ),
@@ -27,7 +28,7 @@ export class ArticleEffects {
       ofType(ArticleActions.loadComments),
       concatMap(action =>
         this.articleService.getComments(action.slug).pipe(
-          map(comments => ArticleActions.loadCommentsSuccess({ comments })),
+          map(data => ArticleActions.loadCommentsSuccess({ comments: data.comments })),
           catchError(error => of(ArticleActions.loadCommentsFail(error))),
         ),
       ),
@@ -53,7 +54,7 @@ export class ArticleEffects {
       withLatestFrom(this.ngrxFormsFacade.data$, this.ngrxFormsFacade.structure$),
       exhaustMap(([slug, data, structure]) =>
         this.articleService.addComment(slug, data.comment).pipe(
-          mergeMap(comment => [ArticleActions.addCommentSuccess({ comment }), resetForm()]),
+          mergeMap(response => [ArticleActions.addCommentSuccess({ comment: response.comment }), resetForm()]),
           catchError(result => of(setErrors({ errors: result.error.errors }))),
         ),
       ),

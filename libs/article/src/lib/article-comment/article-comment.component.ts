@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { ArticleComment, ArticleData, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Comment } from '../article.interfaces';
 
 @Component({
   selector: 'app-article-comment',
@@ -9,8 +10,8 @@ import { ArticleComment, ArticleData, User } from '@angular-ngrx-nx-realworld-ex
 })
 export class ArticleCommentComponent {
   @Input() currentUser: User;
-  @Input() comment: ArticleComment;
-  @Input() article: ArticleData;
+  @Input() comment: Comment;
+  @Input() article: Article;
   @Output() delete: EventEmitter<{
     commentId: number;
     slug: string;

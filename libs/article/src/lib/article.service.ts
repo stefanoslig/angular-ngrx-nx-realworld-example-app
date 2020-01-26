@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService, ArticleData, ArticleComment } from '@angular-ngrx-nx-realworld-example-app/api';
-import { map } from 'rxjs/operators';
+import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { SingleCommentResponse, MultipleCommentsResponse, SingleArticleResponse } from './article.interfaces';
 
 @Injectable()
 export class ArticleService {
   constructor(private apiService: ApiService) {}
 
-  get(slug: string): Observable<ArticleData> {
-    return this.apiService.get('/articles/' + slug).pipe(map((data: any) => data.article));
+  getArticle(slug: string): Observable<SingleArticleResponse> {
+    return this.apiService.get<SingleArticleResponse>('/articles/' + slug);
   }
 
-  getComments(slug: string): Observable<ArticleComment[]> {
-    return this.apiService.get(`/articles/${slug}/comments`).pipe(map((data: any) => data.comments));
+  getComments(slug: string): Observable<MultipleCommentsResponse> {
+    return this.apiService.get<MultipleCommentsResponse>(`/articles/${slug}/comments`);
   }
 
-  deleteArticle(slug: string) {
-    return this.apiService.delete('/articles/' + slug);
+  deleteArticle(slug: string): Observable<void> {
+    return this.apiService.delete<void>('/articles/' + slug);
   }
 
-  deleteComment(commentId: number, slug: string) {
-    return this.apiService.delete(`/articles/${slug}/comments/${commentId}`);
+  deleteComment(commentId: number, slug: string): Observable<void> {
+    return this.apiService.delete<void>(`/articles/${slug}/comments/${commentId}`);
   }
 
-  addComment(slug, payload = ''): Observable<ArticleComment> {
-    return this.apiService
-      .post(`/articles/${slug}/comments`, { comment: { body: payload } })
-      .pipe(map(data => data.comment));
+  addComment(slug: string, payload = ''): Observable<SingleCommentResponse> {
+    return this.apiService.post<SingleCommentResponse, { comment: { body: string } }>(`/articles/${slug}/comments`, {
+      comment: { body: payload },
+    });
   }
 }
