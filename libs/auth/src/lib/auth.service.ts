@@ -1,21 +1,21 @@
 import { ApiService, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { NewUserRequest, UserResponse, NewUser, LoginUser, LoginUserRequest } from './auth.interfaces';
 
 @Injectable()
 export class AuthService {
   constructor(private apiService: ApiService) {}
 
-  user(): Observable<{ user: User }> {
-    return this.apiService.get('/user');
+  user(): Observable<UserResponse> {
+    return this.apiService.get<UserResponse>('/user');
   }
 
-  login(credentials: { email: string; password: string }): Observable<User> {
-    return this.apiService.post('/users/login', { user: credentials }).pipe(map(r => r.user));
+  login(credentials: LoginUser): Observable<UserResponse> {
+    return this.apiService.post<UserResponse, LoginUserRequest>('/users/login', { user: credentials });
   }
 
-  register(credentials: { username: string; email: string; password: string }): Observable<User> {
-    return this.apiService.post('/users', { user: credentials }).pipe(map(r => r.user));
+  register(credentials: NewUser): Observable<UserResponse> {
+    return this.apiService.post<UserResponse, NewUserRequest>('/users', { user: credentials });
   }
 }
