@@ -19,7 +19,7 @@ export class EditorEffects {
           // TODO dispatch this action from the router facade when you refactor
           map(result =>
             go({
-              to: { path: ['article', result.slug] },
+              to: { path: ['article', result.article.slug] },
             }),
           ),
           catchError(result => of(setErrors({ errors: result.error.errors }))),
@@ -33,7 +33,7 @@ export class EditorEffects {
       ofType(EditorActions.loadArticle),
       concatMap(action =>
         this.editorService.get(action.id).pipe(
-          map(article => EditorActions.loadArticleSuccess({ article })),
+          map(response => EditorActions.loadArticleSuccess({ article: response.article })),
           catchError(error => of(EditorActions.loadArticleFail(error))),
         ),
       ),

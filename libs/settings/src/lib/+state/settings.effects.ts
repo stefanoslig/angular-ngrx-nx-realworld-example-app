@@ -28,7 +28,7 @@ export class SettingsEffects {
           mergeMap(result => [
             getUser(),
             go({
-              to: { path: ['profile', result.username] },
+              to: { path: ['profile', result.user.username] },
             }),
           ]),
           catchError(result => of(setErrors({ errors: result.error.errors }))),

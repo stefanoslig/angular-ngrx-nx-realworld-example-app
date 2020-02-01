@@ -1,9 +1,3 @@
-import { User } from '@angular-ngrx-nx-realworld-example-app/api/src/lib/shared.interfaces';
-
-export interface UserResponse {
-  user: User;
-}
-
 export interface NewUserRequest {
   user: NewUser;
 }

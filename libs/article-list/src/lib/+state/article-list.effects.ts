@@ -49,7 +49,7 @@ export class ArticleListEffects {
       map(action => action.slug),
       concatMap(slug =>
         this.actionsService.favorite(slug).pipe(
-          map(article => ArticleListActions.favoriteSuccess({ article })),
+          map(response => ArticleListActions.favoriteSuccess({ article: response.article })),
           catchError(error => of(ArticleListActions.favoriteFail(error))),
         ),
       ),
@@ -62,7 +62,7 @@ export class ArticleListEffects {
       map(action => action.slug),
       concatMap(slug =>
         this.actionsService.unfavorite(slug).pipe(
-          map(article => ArticleListActions.unFavoriteSuccess({ article })),
+          map(response => ArticleListActions.unFavoriteSuccess({ article: response.article })),
           catchError(error => of(ArticleListActions.unFavoriteFail(error))),
         ),
       ),

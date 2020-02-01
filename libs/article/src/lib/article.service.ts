@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
-import { SingleCommentResponse, MultipleCommentsResponse, SingleArticleResponse } from './article.interfaces';
+import { ApiService, SingleArticleResponse } from '@angular-ngrx-nx-realworld-example-app/api';
+import { SingleCommentResponse, MultipleCommentsResponse } from './article.interfaces';
 
 @Injectable()
 export class ArticleService {

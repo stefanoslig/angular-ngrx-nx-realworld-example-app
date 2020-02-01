@@ -26,3 +26,15 @@ export interface User {
   bio: string;
   image: string;
 }
+
+export interface SingleArticleResponse {
+  article: Article;
+}
+
+export interface UserResponse {
+  user: User;
+}
+
+export interface ProfileResponse {
+  profile: Profile;
+}

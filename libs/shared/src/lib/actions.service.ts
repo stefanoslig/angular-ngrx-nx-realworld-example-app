@@ -1,25 +1,24 @@
-import { ApiService, Profile, Article } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ApiService, ProfileResponse, SingleArticleResponse } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ActionsService {
   constructor(private apiService: ApiService) {}
 
-  followUser(username: string): Observable<Profile> {
-    return this.apiService.post('/profiles/' + username + '/follow').pipe(map(data => data.profile));
+  followUser(username: string): Observable<ProfileResponse> {
+    return this.apiService.post<ProfileResponse, void>('/profiles/' + username + '/follow', null);
   }
 
-  unfollowUser(username: string): Observable<Profile> {
-    return this.apiService.delete('/profiles/' + username + '/follow').pipe(map(data => data.profile));
+  unfollowUser(username: string): Observable<ProfileResponse> {
+    return this.apiService.delete<ProfileResponse>('/profiles/' + username + '/follow');
   }
 
-  favorite(slug): Observable<Article> {
-    return this.apiService.post('/articles/' + slug + '/favorite').pipe(map(data => data.article));
+  favorite(slug: string): Observable<SingleArticleResponse> {
+    return this.apiService.post<SingleArticleResponse, void>('/articles/' + slug + '/favorite', null);
   }
 
-  unfavorite(slug): Observable<Article> {
-    return this.apiService.delete('/articles/' + slug + '/favorite').pipe(map(data => data.article));
+  unfavorite(slug: string): Observable<SingleArticleResponse> {
+    return this.apiService.delete<SingleArticleResponse>('/articles/' + slug + '/favorite');
   }
 }

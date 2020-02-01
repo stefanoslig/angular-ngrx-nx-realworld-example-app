@@ -79,7 +79,7 @@ export class ArticleEffects {
       map(action => action.username),
       concatMap(username =>
         this.actionsService.followUser(username).pipe(
-          map(profile => ArticleActions.followSuccess({ profile })),
+          map(response => ArticleActions.followSuccess({ profile: response.profile })),
           catchError(error => of(ArticleActions.followFail(error))),
         ),
       ),
@@ -92,7 +92,7 @@ export class ArticleEffects {
       map(action => action.username),
       concatMap(username =>
         this.actionsService.unfollowUser(username).pipe(
-          map(profile => ArticleActions.unFollowSuccess({ profile })),
+          map(response => ArticleActions.unFollowSuccess({ profile: response.profile })),
           catchError(error => of(ArticleActions.unFollowFail(error))),
         ),
       ),
@@ -105,7 +105,7 @@ export class ArticleEffects {
       map(action => action.slug),
       concatMap(slug =>
         this.actionsService.favorite(slug).pipe(
-          map(article => ArticleActions.favoriteSuccess({ article })),
+          map(response => ArticleActions.favoriteSuccess({ article: response.article })),
           catchError(error => of(ArticleActions.favoriteFail(error))),
         ),
       ),
@@ -118,7 +118,7 @@ export class ArticleEffects {
       map(action => action.slug),
       concatMap(slug =>
         this.actionsService.unfavorite(slug).pipe(
-          map(article => ArticleActions.unFavoriteSuccess({ article })),
+          map(response => ArticleActions.unFavoriteSuccess({ article: response.article })),
           catchError(error => of(ArticleActions.unFavoriteFail(error))),
         ),
       ),
