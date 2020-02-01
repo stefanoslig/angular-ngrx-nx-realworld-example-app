@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Component({
   selector: 'app-article-meta',
@@ -8,7 +8,7 @@ import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleMetaComponent {
-  @Input() article: ArticleData;
+  @Input() article: Article;
   @Input() isAuthenticated: boolean;
   @Input() canModify: boolean;
   @Output() follow: EventEmitter<string> = new EventEmitter<string>();

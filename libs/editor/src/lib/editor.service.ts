@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService, ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
-import { map } from 'rxjs/operators';
+import { ApiService, Article, SingleArticleResponse } from '@angular-ngrx-nx-realworld-example-app/api';
+import { NewArticleRequest } from './editor.interfaces';
 
 @Injectable()
 export class EditorService {
   constructor(private apiService: ApiService) {}
 
-  publishArticle(article): Observable<ArticleData> {
+  publishArticle(article: Article): Observable<SingleArticleResponse> {
     if (article.slug) {
-      return this.apiService.put('/articles/' + article.slug, { article: article }).pipe(map(data => data.article));
+      return this.apiService.put<SingleArticleResponse, NewArticleRequest>('/articles/' + article.slug, {
+        article: article,
+      });
     }
-    return this.apiService.post('/articles/', { article: article }).pipe(map(data => data.article));
+    return this.apiService.post<SingleArticleResponse, NewArticleRequest>('/articles/', { article: article });
   }
 
-  get(slug: string): Observable<ArticleData> {
-    return this.apiService.get('/articles/' + slug).pipe(map((data: any) => data.article));
+  get(slug: string): Observable<SingleArticleResponse> {
+    return this.apiService.get<SingleArticleResponse>('/articles/' + slug);
   }
 }

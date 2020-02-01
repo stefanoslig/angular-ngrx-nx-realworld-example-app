@@ -1,4 +1,4 @@
-import { ArticleData, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddCommentComponent {
-  @Input() article: ArticleData;
+  @Input() article: Article;
   @Input() currentUser: User;
   @Input() data$: Observable<any>;
   @Input() structure$: Observable<Field[]>;

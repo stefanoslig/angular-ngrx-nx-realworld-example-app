@@ -30,7 +30,7 @@ export class AuthEffects {
       withLatestFrom(this.ngrxFormsFacade.data$),
       exhaustMap(([action, data]) =>
         this.authService.login(data).pipe(
-          map(user => AuthActions.loginSuccess({ user })),
+          map(response => AuthActions.loginSuccess({ user: response.user })),
           catchError(result => of(fromNgrxForms.setErrors({ errors: result.error.errors }))),
         ),
       ),
@@ -55,7 +55,7 @@ export class AuthEffects {
       withLatestFrom(this.ngrxFormsFacade.data$),
       exhaustMap(([action, data]) =>
         this.authService.register(data).pipe(
-          map(user => AuthActions.registerSuccess({ user })),
+          map(response => AuthActions.registerSuccess({ user: response.user })),
           catchError(result => of(setErrors({ errors: result.error.errors }))),
         ),
       ),

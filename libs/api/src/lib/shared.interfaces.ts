@@ -6,14 +6,7 @@ export interface Profile {
   loading: boolean;
 }
 
-export interface ArticleComment {
-  id: number;
-  body: string;
-  createdAt: string;
-  author: Profile;
-}
-
-export interface ArticleData {
+export interface Article {
   slug: string;
   title: string;
   description: string;
@@ -32,4 +25,16 @@ export interface User {
   username: string;
   bio: string;
   image: string;
+}
+
+export interface SingleArticleResponse {
+  article: Article;
+}
+
+export interface UserResponse {
+  user: User;
+}
+
+export interface ProfileResponse {
+  profile: Profile;
 }

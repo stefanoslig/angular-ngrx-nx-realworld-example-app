@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 
 @Component({
   selector: 'app-article-list-item',
@@ -8,12 +8,12 @@ import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {
-  @Input() article: ArticleData;
+  @Input() article: Article;
   @Output() favorite: EventEmitter<string> = new EventEmitter();
   @Output() unFavorite: EventEmitter<string> = new EventEmitter();
   @Output() navigateToArticle: EventEmitter<string> = new EventEmitter();
 
-  toggleFavorite(article: ArticleData) {
+  toggleFavorite(article: Article) {
     if (article.favorited) {
       this.unFavorite.emit(article.slug);
     } else {

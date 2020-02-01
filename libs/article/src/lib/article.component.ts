@@ -1,10 +1,10 @@
-import { ArticleComment, ArticleData, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-
+import { Comment } from './article.interfaces';
 import { ArticleFacade } from './+state/article.facade';
 
 const structure: Field[] = [
@@ -25,8 +25,8 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
-  article$: Observable<ArticleData>;
-  comments$: Observable<ArticleComment[]>;
+  article$: Observable<Article>;
+  comments$: Observable<Comment[]>;
   canModify = false;
   isAuthenticated$: Observable<boolean>;
   structure$: Observable<Field[]>;

@@ -1,10 +1,10 @@
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 
 import { Action, createReducer, on } from '@ngrx/store';
 import * as EditorActions from './editor.actions';
 
 export interface Editor {
-  article: ArticleData;
+  article: Article;
 }
 
 export interface EditorState {

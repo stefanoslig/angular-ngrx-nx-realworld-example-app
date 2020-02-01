@@ -1,4 +1,4 @@
-import { ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { ArticleListConfig } from './+state/article-list.reducer';
 })
 export class ArticleListComponent implements OnInit {
   totalPages$: Observable<number[]>;
-  articles$: Observable<ArticleData[]>;
+  articles$: Observable<Article[]>;
   listConfig$: Observable<ArticleListConfig>;
   isLoading$: Observable<boolean>;
 

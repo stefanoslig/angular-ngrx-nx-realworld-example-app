@@ -1,19 +1,20 @@
-import { ArticleComment, ArticleData } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ArticleActions from './article.actions';
+import { Comment } from '../article.interfaces';
 
-export interface Article {
-  data: ArticleData;
-  comments: ArticleComment[];
+export interface ArticleState {
+  data: Article;
+  comments: Comment[];
   loading: boolean;
   loaded: boolean;
 }
 
-export interface ArticleState {
-  readonly article: Article;
+export interface ArticleRootState {
+  readonly article: ArticleState;
 }
 
-export const articleInitialState: Article = {
+export const articleInitialState: ArticleState = {
   data: {
     slug: '',
     title: '',
@@ -52,11 +53,11 @@ const reducer = createReducer(
     loading: false,
   })),
   on(ArticleActions.addCommentSuccess, (state, action) => {
-    const comments: ArticleComment[] = [action.comment, ...state.comments];
+    const comments: Comment[] = [action.comment, ...state.comments];
     return { ...state, comments };
   }),
   on(ArticleActions.deleteCommentSuccess, (state, action) => {
-    const comments: ArticleComment[] = state.comments.filter(item => item.id !== action.commentId);
+    const comments: Comment[] = state.comments.filter(item => item.id !== action.commentId);
     return { ...state, comments };
   }),
   on(ArticleActions.initializeArticle, state => articleInitialState),
@@ -70,7 +71,7 @@ const reducer = createReducer(
     comments: articleInitialState.comments,
   })),
   on(ArticleActions.followSuccess, ArticleActions.unFollowSuccess, (state, action) => {
-    const data: ArticleData = { ...state.data, author: action.profile };
+    const data: Article = { ...state.data, author: action.profile };
     return { ...state, data };
   }),
   on(ArticleActions.favoriteSuccess, ArticleActions.unFavoriteSuccess, (state, action) => ({
@@ -79,6 +80,6 @@ const reducer = createReducer(
   })),
 );
 
-export function articleReducer(state: Article | undefined, action: Action): Article {
+export function articleReducer(state: ArticleState | undefined, action: Action): ArticleState {
   return reducer(state, action);
 }

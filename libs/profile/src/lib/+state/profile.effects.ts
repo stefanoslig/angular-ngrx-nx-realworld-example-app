@@ -32,7 +32,7 @@ export class ProfileEffects {
       map(action => action.id),
       concatMap(slug =>
         this.actionsService.followUser(slug).pipe(
-          map(profile => ProfileActions.followSuccess({ profile })),
+          map(response => ProfileActions.followSuccess({ profile: response.profile })),
           catchError(error => of(ProfileActions.followFail({ error }))),
         ),
       ),
@@ -45,7 +45,7 @@ export class ProfileEffects {
       map(action => action.id),
       concatMap(slug =>
         this.actionsService.unfollowUser(slug).pipe(
-          map(profile => ProfileActions.unFollowSuccess({ profile })),
+          map(response => ProfileActions.unFollowSuccess({ profile: response.profile })),
           catchError(error => of(ProfileActions.unFollowFail({ error }))),
         ),
       ),
