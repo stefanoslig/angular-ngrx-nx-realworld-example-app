@@ -9,7 +9,8 @@
   },
   "projects": {
     "conduit-e2e": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["conduit"]
     },
     "conduit": {
       "tags": []
