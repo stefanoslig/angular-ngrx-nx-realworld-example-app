@@ -41,7 +41,7 @@
     "@angular/platform-browser-dynamic": "^9.0.1",
     "@angular/router": "^9.0.1",
     "core-js": "^2.5.4",
-    "rxjs": "~6.5.3",
+    "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2",
     "@ngrx/effects": "8.6.0",
