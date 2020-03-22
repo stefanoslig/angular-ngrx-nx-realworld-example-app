@@ -1,66 +1,71 @@
-<div class="article-page">
-  <div class="banner">
-    <div class="container">
-      <h1>{{ (article$ | async).title }}</h1>
-      <app-article-meta
-        [article]="article$ | async"
-        (follow)="follow($event)"
-        (unfollow)="unfollow($event)"
-        (favorite)="favorite($event)"
-        (unfavorite)="unfavorite($event)"
-        (delete)="delete($event)"
-        [canModify]="canModify"
-      >
-      </app-article-meta>
-    </div>
-  </div>
-
-  <div class="container page">
-    <div class="row article-content">
-      <div class="col-md-12">
-        <div [innerHTML]="(article$ | async)?.body | markdown"></div>
-      </div>
-    </div>
-    <hr />
-    <div class="article-actions">
-      <app-article-meta
-        [article]="article$ | async"
-        (follow)="follow($event)"
-        (unfollow)="unfollow($event)"
-        (favorite)="favorite($event)"
-        (unfavorite)="unfavorite($event)"
-        (delete)="delete($event)"
-        [canModify]="canModify"
-      ></app-article-meta>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-md-8 offset-md-2">
-        <app-add-comment
-          *ngIf="isAuthenticated$ | async"
-          [article]="article$ | async"
-          [data$]="data$"
-          [structure$]="structure$"
-          [currentUser]="currentUser$ | async"
-          [touchedForm$]="touchedForm$"
-          (submitComment)="submit($event)"
-          (updateForm)="updateForm($event)"
+<ng-container *ngrxLet="article$ as article">
+  <div class="article-page">
+    <div class="banner">
+      <div class="container">
+        <h1>{{ article.title }}</h1>
+        <app-article-meta
+          [article]="article"
+          (follow)="follow($event)"
+          (unfollow)="unfollow($event)"
+          (favorite)="favorite($event)"
+          (unfavorite)="unfavorite($event)"
+          (delete)="delete($event)"
+          [canModify]="canModify"
         >
-        </app-add-comment>
-
-        <div *ngIf="(isAuthenticated$ | async) === false">
-          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
-          this article.
-        </div>
-
-        <app-article-comment
-          *ngFor="let comment of comments$ | async"
-          [currentUser]="currentUser$ | async"
-          (delete)="deleteComment($event)"
-          [article]="article$ | async"
-          [comment]="comment"
-        ></app-article-comment>
+        </app-article-meta>
       </div>
     </div>
+
+    <div class="container page">
+      <div class="row article-content">
+        <div class="col-md-12">
+          <div [innerHTML]="article?.body | markdown"></div>
+        </div>
+      </div>
+      <hr />
+      <div class="article-actions">
+        <app-article-meta
+          [article]="article"
+          (follow)="follow($event)"
+          (unfollow)="unfollow($event)"
+          (favorite)="favorite($event)"
+          (unfavorite)="unfavorite($event)"
+          (delete)="delete($event)"
+          [canModify]="canModify"
+        ></app-article-meta>
+      </div>
+
+      <ng-container *ngrxLet="currentUser$ as currentUser">
+        <div class="row">
+          <div class="col-xs-12 col-md-8 offset-md-2">
+            <ng-container *ngrxLet="isAuthenticated$ as isAuthenticated">
+              <app-add-comment
+                *ngIf="isAuthenticated"
+                [article]="article"
+                [data$]="data$"
+                [structure$]="structure$"
+                [currentUser]="currentUser"
+                [touchedForm$]="touchedForm$"
+                (submitComment)="submit($event)"
+                (updateForm)="updateForm($event)"
+              >
+              </app-add-comment>
+
+              <div *ngIf="isAuthenticated === false">
+                <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments
+                on this article.
+              </div>
+            </ng-container>
+            <app-article-comment
+              *ngFor="let comment of comments$ | ngrxPush"
+              [currentUser]="currentUser"
+              (delete)="deleteComment($event)"
+              [article]="article"
+              [comment]="comment"
+            ></app-article-comment>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
-</div>
+</ng-container>

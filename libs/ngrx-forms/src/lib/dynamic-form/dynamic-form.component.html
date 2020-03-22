@@ -1,3 +1,4 @@
 <form class="dynamic-form" [formGroup]="form" autocomplete="off">
-  <ng-container *ngFor="let field of structure$ | async" appDynamicField [field]="field" [group]="form"> </ng-container>
+  <ng-container *ngFor="let field of structure$ | ngrxPush" appDynamicField [field]="field" [group]="form">
+  </ng-container>
 </form>

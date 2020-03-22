@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ArticleListEffects } from './+state/article-list.effects';
 import { ArticleListFacade } from './+state/article-list.facade';
@@ -21,6 +22,7 @@ import { ArticleListService } from './article-list.service';
       initialState: articleListInitialState,
     }),
     EffectsModule.forFeature([ArticleListEffects]),
+    ReactiveComponentModule,
   ],
   declarations: [ArticleListComponent, ArticleListItemComponent],
   providers: [ArticleListService, ArticleListEffects, ArticleListFacade],

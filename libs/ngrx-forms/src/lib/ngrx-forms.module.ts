@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { NgrxFormsEffects } from './+state/ngrx-forms.effects';
 import { NgrxFormsFacade } from './+state/ngrx-forms.facade';
@@ -12,6 +13,7 @@ import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { InputComponent } from './fields/input/input.component';
 import { TextareaComponent } from './fields/textarea/textarea.component';
 import { ListErrorsComponent } from './list-errors/list-errors.component';
+import { ListErrorsPipe } from './list-errors/list-errors.pipe';
 
 @NgModule({
   imports: [
@@ -21,9 +23,17 @@ import { ListErrorsComponent } from './list-errors/list-errors.component';
       initialState: ngrxFormsInitialState,
     }),
     EffectsModule.forFeature([NgrxFormsEffects]),
+    ReactiveComponentModule,
   ],
   providers: [NgrxFormsEffects, NgrxFormsFacade],
-  declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent, ListErrorsComponent],
+  declarations: [
+    DynamicFormComponent,
+    DynamicFieldDirective,
+    InputComponent,
+    TextareaComponent,
+    ListErrorsComponent,
+    ListErrorsPipe,
+  ],
   entryComponents: [InputComponent, TextareaComponent],
   exports: [DynamicFormComponent, ListErrorsComponent],
 })
