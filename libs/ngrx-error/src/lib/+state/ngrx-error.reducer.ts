@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as NgrxErrorActions from './ngrx-error.actions';
 
-export const ngrxErrorFeatureKey = 'ngrxError'
+export const ngrxErrorFeatureKey = 'ngrxError';
 
 export interface NgrxError {
   code: number;

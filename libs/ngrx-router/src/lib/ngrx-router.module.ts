@@ -13,7 +13,7 @@ import { ngrxRouterFeatureKey } from './+state/router.interfaces';
     CommonModule,
     StoreModule.forFeature(ngrxRouterFeatureKey, routerReducer),
     EffectsModule.forFeature([RouterEffects]),
-    StoreRouterConnectingModule.forRoot({ stateKey: ngrxRouterFeatureKey}),
+    StoreRouterConnectingModule.forRoot({ stateKey: ngrxRouterFeatureKey }),
   ],
   providers: [RouterEffects, [{ provide: RouterStateSerializer, useClass: CustomSerializer }]],
 })

@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as HomeActions from './home.actions';
-export const homeFeatureKey = 'home'
+export const homeFeatureKey = 'home';
 
 export interface HomeState {
   readonly [homeFeatureKey]: Home;

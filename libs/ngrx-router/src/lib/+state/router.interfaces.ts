@@ -1,7 +1,7 @@
 import { Params, NavigationExtras } from '@angular/router';
 import * as fromRouter from '@ngrx/router-store';
 
-export const ngrxRouterFeatureKey = 'router'
+export const ngrxRouterFeatureKey = 'router';
 
 export interface RouterStateUrl {
   url: string;

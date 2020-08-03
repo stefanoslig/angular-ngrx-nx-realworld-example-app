@@ -2,7 +2,7 @@ import { createFeatureSelector, Action, createReducer, on } from '@ngrx/store';
 import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 import * as ProfileActions from './profile.actions';
 
-export const profileFeatureKey = 'profile'
+export const profileFeatureKey = 'profile';
 
 export interface ProfileState {
   readonly [profileFeatureKey]: Profile;
