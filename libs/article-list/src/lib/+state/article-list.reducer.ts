@@ -2,13 +2,16 @@ import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ArticleListActions from './article-list.actions';
 
+export const articleListFeatureKey = 'article'
+
+
 export interface ArticleList {
   listConfig: ArticleListConfig;
   articles: Articles;
 }
 
 export interface ArticleListState {
-  readonly articleList: ArticleList;
+  readonly [articleListFeatureKey]: ArticleList;
 }
 
 export interface ArticleListConfig {

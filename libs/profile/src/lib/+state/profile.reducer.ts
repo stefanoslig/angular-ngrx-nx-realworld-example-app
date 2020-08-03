@@ -2,8 +2,10 @@ import { createFeatureSelector, Action, createReducer, on } from '@ngrx/store';
 import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 import * as ProfileActions from './profile.actions';
 
+export const profileFeatureKey = 'profile'
+
 export interface ProfileState {
-  readonly profile: Profile;
+  readonly [profileFeatureKey]: Profile;
 }
 
 export const profileInitialState: Profile = {
@@ -14,7 +16,7 @@ export const profileInitialState: Profile = {
   loading: false,
 };
 
-export const getProfile = createFeatureSelector<Profile>('profile');
+export const getProfile = createFeatureSelector<Profile>(profileFeatureKey);
 
 const reducer = createReducer(
   profileInitialState,

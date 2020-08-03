@@ -10,7 +10,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ProfileEffects } from './+state/profile.effects';
 import { ProfileFacade } from './+state/profile.facade';
-import { profileInitialState, profileReducer } from './+state/profile.reducer';
+import { profileInitialState, profileReducer, profileFeatureKey } from './+state/profile.reducer';
 import { ProfileArticlesComponent } from './profile-articles.component';
 import {
   ProfileArticlesResolverService,
@@ -45,7 +45,7 @@ import { ProfileService } from './profile.service';
         ],
       },
     ]),
-    StoreModule.forFeature('profile', profileReducer, {
+    StoreModule.forFeature(profileFeatureKey, profileReducer, {
       initialState: profileInitialState,
     }),
     EffectsModule.forFeature([ProfileEffects]),

@@ -2,6 +2,8 @@ import { User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { createReducer, Action, on } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 
+export const authFeatureKey = 'auth'
+
 export interface Auth {
   loggedIn: boolean;
   user: User;
@@ -9,7 +11,7 @@ export interface Auth {
 }
 
 export interface AuthState {
-  readonly auth: Auth;
+  readonly [authFeatureKey]: Auth;
 }
 
 export enum Status {

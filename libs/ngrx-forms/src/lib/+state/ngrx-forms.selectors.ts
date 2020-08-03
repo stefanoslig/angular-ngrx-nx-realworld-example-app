@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { NgrxForms } from './ngrx-forms.interfaces';
+import { ngrxFormsFeatureKey } from './ngrx-forms.reducer';
 
-const getNgrxForms = createFeatureSelector<NgrxForms>('ngrxForms');
+const getNgrxForms = createFeatureSelector<NgrxForms>(ngrxFormsFeatureKey);
 export const getStructure = createSelector(
   getNgrxForms,
   (state: NgrxForms) => state.structure,

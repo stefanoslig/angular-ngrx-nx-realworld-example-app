@@ -2,6 +2,12 @@ import { NgrxForms } from './ngrx-forms.interfaces';
 import * as NgrxFormsActions from './ngrx-forms.actions';
 import { Action, createReducer, on } from '@ngrx/store';
 
+export const ngrxFormsFeatureKey = 'ngrxForms'
+
+export interface NgrxFormsState {
+  readonly [ngrxFormsFeatureKey]: NgrxForms;
+}
+
 export const ngrxFormsInitialState: NgrxForms = {
   data: {},
   structure: [],

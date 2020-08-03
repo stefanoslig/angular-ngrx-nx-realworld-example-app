@@ -8,7 +8,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ArticleListEffects } from './+state/article-list.effects';
 import { ArticleListFacade } from './+state/article-list.facade';
-import { articleListInitialState, articleListReducer } from './+state/article-list.reducer';
+import { articleListInitialState, articleListReducer, articleListFeatureKey } from './+state/article-list.reducer';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 import { ArticleListComponent } from './article-list.component';
 import { ArticleListService } from './article-list.service';
@@ -18,7 +18,7 @@ import { ArticleListService } from './article-list.service';
     CommonModule,
     SharedModule,
     RouterModule,
-    StoreModule.forFeature('articleList', articleListReducer, {
+    StoreModule.forFeature(articleListFeatureKey, articleListReducer, {
       initialState: articleListInitialState,
     }),
     EffectsModule.forFeature([ArticleListEffects]),

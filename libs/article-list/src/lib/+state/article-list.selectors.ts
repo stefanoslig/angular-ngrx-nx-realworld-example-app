@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ArticleList } from './article-list.reducer';
+import { ArticleList, articleListFeatureKey } from './article-list.reducer';
 
-const getArticleList = createFeatureSelector<ArticleList>('articleList');
+const getArticleList = createFeatureSelector<ArticleList>(articleListFeatureKey);
 export const getListConfig = createSelector(
   getArticleList,
   (state: ArticleList) => state.listConfig,

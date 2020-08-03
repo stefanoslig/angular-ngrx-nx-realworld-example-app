@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { AuthEffects } from './+state/auth.effects';
 import { AuthFacade } from './+state/auth.facade';
-import { authInitialState, authReducer } from './+state/auth.reducer';
+import { authInitialState, authReducer, authFeatureKey } from './+state/auth.reducer';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
@@ -32,7 +32,7 @@ const authRouting = RouterModule.forChild([
     CommonModule,
     NgrxFormsModule,
     authRouting,
-    StoreModule.forFeature('auth', authReducer, {
+    StoreModule.forFeature(authFeatureKey, authReducer, {
       initialState: authInitialState,
     }),
     EffectsModule.forFeature([AuthEffects]),

@@ -8,10 +8,6 @@ export interface NgrxForms {
   touched: boolean;
 }
 
-export interface NgrxFormsState {
-  readonly ngrxForms: NgrxForms;
-}
-
 export interface Field {
   type: FieldType;
   name: string;

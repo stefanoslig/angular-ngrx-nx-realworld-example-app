@@ -3,12 +3,14 @@ import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as EditorActions from './editor.actions';
 
+export const editorFeatureKey = 'editor'
+
 export interface Editor {
   article: Article;
 }
 
 export interface EditorState {
-  readonly editor: Editor;
+  readonly [editorFeatureKey]: Editor;
 }
 
 export const editorInitialState: Editor = {
