@@ -1,6 +1,8 @@
 import { Params, NavigationExtras } from '@angular/router';
 import * as fromRouter from '@ngrx/router-store';
 
+export const ngrxRouterFeatureKey = 'router';
+
 export interface RouterStateUrl {
   url: string;
   queryParams: Params;
@@ -8,7 +10,7 @@ export interface RouterStateUrl {
 }
 
 export interface RouterState {
-  router: fromRouter.RouterReducerState<RouterStateUrl>;
+  readonly [ngrxRouterFeatureKey]: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
 export interface NgrxRoute {

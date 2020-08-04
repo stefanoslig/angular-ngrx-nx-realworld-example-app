@@ -3,6 +3,8 @@ import { Action, createReducer, on } from '@ngrx/store';
 import * as ArticleActions from './article.actions';
 import { Comment } from '../article.interfaces';
 
+export const articleFeatureKey = 'article';
+
 export interface ArticleState {
   data: Article;
   comments: Comment[];
@@ -11,7 +13,7 @@ export interface ArticleState {
 }
 
 export interface ArticleRootState {
-  readonly article: ArticleState;
+  readonly [articleFeatureKey]: ArticleState;
 }
 
 export const articleInitialState: ArticleState = {

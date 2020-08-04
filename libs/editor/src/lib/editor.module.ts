@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { EditorEffects } from './+state/editor.effects';
 import { EditorFacade } from './+state/editor.facade';
-import { editorReducer, editorInitialState } from './+state/editor.reducer';
+import { editorReducer, editorInitialState, editorFeatureKey } from './+state/editor.reducer';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { EditorResolverService } from './editor-resolver.service';
 import { EditorService } from './editor.service';
@@ -31,7 +31,7 @@ import { EditorService } from './editor.service';
         resolve: { EditorResolverService },
       },
     ]),
-    StoreModule.forFeature('editor', editorReducer, {
+    StoreModule.forFeature(editorFeatureKey, editorReducer, {
       initialState: editorInitialState,
     }),
     EffectsModule.forFeature([EditorEffects]),

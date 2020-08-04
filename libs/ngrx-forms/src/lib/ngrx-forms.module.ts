@@ -7,7 +7,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
 
 import { NgrxFormsEffects } from './+state/ngrx-forms.effects';
 import { NgrxFormsFacade } from './+state/ngrx-forms.facade';
-import { ngrxFormsInitialState, ngrxFormsReducer } from './+state/ngrx-forms.reducer';
+import { ngrxFormsInitialState, ngrxFormsReducer, ngrxFormsFeatureKey } from './+state/ngrx-forms.reducer';
 import { DynamicFieldDirective } from './dynamic-form/dynamic-field.directive';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { InputComponent } from './fields/input/input.component';
@@ -19,7 +19,7 @@ import { ListErrorsPipe } from './list-errors/list-errors.pipe';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('ngrxForms', ngrxFormsReducer, {
+    StoreModule.forFeature(ngrxFormsFeatureKey, ngrxFormsReducer, {
       initialState: ngrxFormsInitialState,
     }),
     EffectsModule.forFeature([NgrxFormsEffects]),
