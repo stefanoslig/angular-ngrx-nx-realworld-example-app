@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NgrxFormsState } from './ngrx-forms.interfaces';
+import { NgrxFormsState } from './ngrx-forms.reducer';
 import { ngrxFormsQuery } from './ngrx-forms.selectors';
 import * as NgrxFormsActions from './ngrx-forms.actions';
 
