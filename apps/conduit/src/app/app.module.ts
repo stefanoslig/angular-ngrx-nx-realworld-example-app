@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ReactiveComponentModule } from '@ngrx/component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NxModule } from '@nrwl/angular';
 
@@ -59,7 +58,6 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     ),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    ReactiveComponentModule,
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     NgrxRouterModule,
     NgrxErrorModule,

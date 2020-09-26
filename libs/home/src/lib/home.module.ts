@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ReactiveComponentModule } from '@ngrx/component';
 
 import { HomeEffects } from './+state/home.effects';
 import { HomeFacade } from './+state/home.facade';
@@ -30,7 +29,6 @@ import { TagsListComponent } from './tags-list/tags-list.component';
       initialState: homeInitialState,
     }),
     EffectsModule.forFeature([HomeEffects]),
-    ReactiveComponentModule,
   ],
   declarations: [HomeComponent, TagsListComponent],
   providers: [HomeEffects, HomeResolverService, HomeService, HomeFacade],

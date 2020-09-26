@@ -10,31 +10,32 @@
     <div class="row">
       <div class="col-md-9">
         <div class="feed-toggle">
-          <ng-container *ngrxLet="listConfig$ as listConfig">
-            <ul class="nav nav-pills outline-active">
-              <li class="nav-item">
-                <a [ngClass]="{ active: listConfig?.type === 'FEED' }" class="nav-link" (click)="setListTo('FEED')"
-                  >Your Feed</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  [ngClass]="{
-                    active: listConfig?.type === 'ALL' && !listConfig.filters?.tag
-                  }"
-                  class="nav-link"
-                  (click)="setListTo('ALL')"
-                  >Global Feed</a
-                >
-              </li>
-              <li class="nav-item" [hidden]="!listConfig.filters?.tag">
-                <a class="nav-link active">
-                  <i class="ion-pound"></i>
-                  {{ listConfig.filters?.tag }}
-                </a>
-              </li>
-            </ul>
-          </ng-container>
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a
+                [ngClass]="{ active: (listConfig$ | async)?.type === 'FEED' }"
+                class="nav-link"
+                (click)="setListTo('FEED')"
+                >Your Feed</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                [ngClass]="{
+                  active: (listConfig$ | async)?.type === 'ALL' && !(listConfig$ | async).filters?.tag
+                }"
+                class="nav-link"
+                (click)="setListTo('ALL')"
+                >Global Feed</a
+              >
+            </li>
+            <li class="nav-item" [hidden]="!(listConfig$ | async).filters?.tag">
+              <a class="nav-link active">
+                <i class="ion-pound"></i>
+                {{ (listConfig$ | async).filters?.tag }}
+              </a>
+            </li>
+          </ul>
         </div>
 
         <app-article-list></app-article-list>
@@ -42,7 +43,7 @@
 
       <div class="col-md-3">
         <div class="sidebar">
-          <app-tags-list (setListTag)="setListTag($event)" [tags]="tags$ | ngrxPush"></app-tags-list>
+          <app-tags-list (setListTag)="setListTag($event)" [tags]="tags$ | async"></app-tags-list>
         </div>
       </div>
     </div>

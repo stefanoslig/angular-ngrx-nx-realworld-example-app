@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ArticleEffects } from './+state/article.effects';
 import { ArticleFacade } from './+state/article.facade';
@@ -32,7 +31,6 @@ import { MarkdownPipe } from './markdown.pipe';
       initialState: articleInitialState,
     }),
     EffectsModule.forFeature([ArticleEffects]),
-    ReactiveComponentModule,
     NgrxFormsModule,
     SharedModule,
   ],

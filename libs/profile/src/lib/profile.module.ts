@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ProfileEffects } from './+state/profile.effects';
 import { ProfileFacade } from './+state/profile.facade';
@@ -49,7 +48,6 @@ import { ProfileService } from './profile.service';
       initialState: profileInitialState,
     }),
     EffectsModule.forFeature([ProfileEffects]),
-    ReactiveComponentModule,
   ],
   providers: [
     ProfileEffects,

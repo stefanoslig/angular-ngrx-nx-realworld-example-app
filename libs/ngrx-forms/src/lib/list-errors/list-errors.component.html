@@ -1,7 +1,5 @@
-<ng-container *ngrxLet="errors$ as errors">
-  <ul class="error-messages">
-    <li *ngFor="let error of errors | listErrors">
-      {{ error }}
-    </li>
-  </ul>
-</ng-container>
+<ul class="error-messages" *ngIf="errors?.length > 0">
+  <li *ngFor="let error of errors">
+    {{ error }}
+  </li>
+</ul>
