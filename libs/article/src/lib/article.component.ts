@@ -38,21 +38,21 @@ export class ArticleComponent implements OnInit, OnDestroy {
   constructor(
     private ngrxFormsFacade: NgrxFormsFacade,
     private facade: ArticleFacade,
-    private auhtFacade: AuthFacade,
+    private authFacade: AuthFacade,
   ) {}
 
   ngOnInit() {
     this.article$ = this.facade.article$;
     this.comments$ = this.facade.comments$;
-    this.isAuthenticated$ = this.auhtFacade.isLoggedIn$;
-    this.currentUser$ = this.auhtFacade.user$;
+    this.isAuthenticated$ = this.authFacade.isLoggedIn$;
+    this.currentUser$ = this.authFacade.user$;
     this.data$ = this.ngrxFormsFacade.data$;
     this.structure$ = this.ngrxFormsFacade.structure$;
     this.touchedForm$ = this.ngrxFormsFacade.touched$;
 
     this.ngrxFormsFacade.setStructure(structure);
     this.ngrxFormsFacade.setData('');
-    this.auhtFacade.auht$
+    this.authFacade.auth$
       .pipe(
         filter(auth => auth.loggedIn),
         auth$ => combineLatest([auth$, this.facade.authorUsername$]),
