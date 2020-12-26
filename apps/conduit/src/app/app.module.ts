@@ -52,9 +52,10 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
         },
       ],
       {
-        initialNavigation: 'enabled',
-        useHash: true,
-      },
+    initialNavigation: 'enabled',
+    useHash: true,
+    relativeLinkResolution: 'legacy'
+},
     ),
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),

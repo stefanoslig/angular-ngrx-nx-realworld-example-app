@@ -21,8 +21,13 @@
             "polyfills": "apps/conduit/src/polyfills.ts",
             "tsConfig": "apps/conduit/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/conduit/src/favicon.ico", "apps/conduit/src/assets"],
-            "styles": ["apps/conduit/src/styles.scss"],
+            "assets": [
+              "apps/conduit/src/favicon.ico",
+              "apps/conduit/src/assets"
+            ],
+            "styles": [
+              "apps/conduit/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -36,7 +41,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -54,7 +58,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -76,8 +83,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/conduit/tsconfig.app.json", "apps/conduit/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/conduit/**/*"]
+            "tsConfig": [
+              "apps/conduit/tsconfig.app.json",
+              "apps/conduit/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/conduit/**/*"
+            ]
           }
         },
         "test": {
@@ -85,7 +98,10 @@
           "options": {
             "jestConfig": "apps/conduit/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/conduit"
+          ]
         }
       }
     },
@@ -110,8 +126,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/conduit-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/conduit-e2e/**/*"]
+            "tsConfig": [
+              "apps/conduit-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/conduit-e2e/**/*"
+            ]
           }
         }
       },
@@ -125,8 +146,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/api/tsconfig.lib.json", "libs/api/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/api/**/*"]
+            "tsConfig": [
+              "libs/api/tsconfig.lib.json",
+              "libs/api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/api/**/*"
+            ]
           }
         },
         "test": {
@@ -134,7 +161,10 @@
           "options": {
             "jestConfig": "libs/api/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/api"
+          ]
         }
       },
       "prefix": "app"
@@ -147,8 +177,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/article/tsconfig.lib.json", "libs/article/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/article/**/*"]
+            "tsConfig": [
+              "libs/article/tsconfig.lib.json",
+              "libs/article/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/article/**/*"
+            ]
           }
         },
         "test": {
@@ -156,7 +192,10 @@
           "options": {
             "jestConfig": "libs/article/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/article"
+          ]
         }
       },
       "prefix": "app"
@@ -169,8 +208,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/article-list/tsconfig.lib.json", "libs/article-list/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/article-list/**/*"]
+            "tsConfig": [
+              "libs/article-list/tsconfig.lib.json",
+              "libs/article-list/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/article-list/**/*"
+            ]
           }
         },
         "test": {
@@ -178,7 +223,10 @@
           "options": {
             "jestConfig": "libs/article-list/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/article-list"
+          ]
         }
       },
       "prefix": "app"
@@ -191,8 +239,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/auth/tsconfig.lib.json", "libs/auth/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/auth/**/*"]
+            "tsConfig": [
+              "libs/auth/tsconfig.lib.json",
+              "libs/auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/auth/**/*"
+            ]
           }
         },
         "test": {
@@ -200,7 +254,10 @@
           "options": {
             "jestConfig": "libs/auth/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/auth"
+          ]
         }
       },
       "prefix": "app"
@@ -213,8 +270,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/editor/tsconfig.lib.json", "libs/editor/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/editor/**/*"]
+            "tsConfig": [
+              "libs/editor/tsconfig.lib.json",
+              "libs/editor/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/editor/**/*"
+            ]
           }
         },
         "test": {
@@ -222,7 +285,10 @@
           "options": {
             "jestConfig": "libs/editor/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/editor"
+          ]
         }
       },
       "prefix": "app"
@@ -235,8 +301,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/home/tsconfig.lib.json", "libs/home/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/home/**/*"]
+            "tsConfig": [
+              "libs/home/tsconfig.lib.json",
+              "libs/home/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/home/**/*"
+            ]
           }
         },
         "test": {
@@ -244,7 +316,10 @@
           "options": {
             "jestConfig": "libs/home/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/home"
+          ]
         }
       },
       "prefix": "app"
@@ -257,8 +332,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/ngrx-error/tsconfig.lib.json", "libs/ngrx-error/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/ngrx-error/**/*"]
+            "tsConfig": [
+              "libs/ngrx-error/tsconfig.lib.json",
+              "libs/ngrx-error/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ngrx-error/**/*"
+            ]
           }
         },
         "test": {
@@ -266,7 +347,10 @@
           "options": {
             "jestConfig": "libs/ngrx-error/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/ngrx-error"
+          ]
         }
       },
       "prefix": "app"
@@ -279,8 +363,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/ngrx-forms/tsconfig.lib.json", "libs/ngrx-forms/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/ngrx-forms/**/*"]
+            "tsConfig": [
+              "libs/ngrx-forms/tsconfig.lib.json",
+              "libs/ngrx-forms/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ngrx-forms/**/*"
+            ]
           }
         },
         "test": {
@@ -288,7 +378,10 @@
           "options": {
             "jestConfig": "libs/ngrx-forms/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/ngrx-forms"
+          ]
         }
       },
       "prefix": "app"
@@ -301,8 +394,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/profile/tsconfig.lib.json", "libs/profile/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/profile/**/*"]
+            "tsConfig": [
+              "libs/profile/tsconfig.lib.json",
+              "libs/profile/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/profile/**/*"
+            ]
           }
         },
         "test": {
@@ -310,7 +409,10 @@
           "options": {
             "jestConfig": "libs/profile/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/profile"
+          ]
         }
       },
       "prefix": "app"
@@ -323,8 +425,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/ngrx-router/tsconfig.lib.json", "libs/ngrx-router/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/ngrx-router/**/*"]
+            "tsConfig": [
+              "libs/ngrx-router/tsconfig.lib.json",
+              "libs/ngrx-router/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/ngrx-router/**/*"
+            ]
           }
         },
         "test": {
@@ -332,7 +440,10 @@
           "options": {
             "jestConfig": "libs/ngrx-router/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/ngrx-router"
+          ]
         }
       },
       "prefix": "app"
@@ -345,8 +456,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/settings/tsconfig.lib.json", "libs/settings/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/settings/**/*"]
+            "tsConfig": [
+              "libs/settings/tsconfig.lib.json",
+              "libs/settings/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/settings/**/*"
+            ]
           }
         },
         "test": {
@@ -354,7 +471,10 @@
           "options": {
             "jestConfig": "libs/settings/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/settings"
+          ]
         }
       },
       "prefix": "app"
@@ -367,8 +487,14 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/shared/tsconfig.lib.json", "libs/shared/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/**/*"]
+            "tsConfig": [
+              "libs/shared/tsconfig.lib.json",
+              "libs/shared/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/**/*"
+            ]
           }
         },
         "test": {
@@ -376,7 +502,10 @@
           "options": {
             "jestConfig": "libs/shared/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/shared"
+          ]
         }
       },
       "prefix": "app"
