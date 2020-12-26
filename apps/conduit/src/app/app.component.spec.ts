@@ -11,13 +11,15 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, StoreModule.forRoot({})],
-      declarations: [AppComponent, FooterComponent, NavbarComponent],
-      providers: [AuthFacade, LocalStorageJwtService],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, StoreModule.forRoot({})],
+        declarations: [AppComponent, FooterComponent, NavbarComponent],
+        providers: [AuthFacade, LocalStorageJwtService],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
