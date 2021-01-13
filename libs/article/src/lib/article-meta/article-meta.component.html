@@ -10,11 +10,11 @@
   </div>
 
   <span [hidden]="!canModify">
-    <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', article.slug]">
+    <a data-e2e-id="edit-article" class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', article.slug]">
       <i class="ion-edit"></i> Edit Article
     </a>
 
-    <button class="btn btn-sm btn-outline-danger" (click)="deleteArticle()">
+    <button data-e2e-id="delete-article" class="btn btn-sm btn-outline-danger" (click)="deleteArticle()">
       <i class="ion-trash-a"></i> Delete Article
     </button>
   </span>

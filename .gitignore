@@ -37,3 +37,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# e2e-tests
+/e2e-tests/protractor/node_modules

@@ -18,13 +18,14 @@
       }"
       class="btn btn-sm pull-xs-right"
       (click)="toggleFavorite(article)"
+      data-e2e-id="favorite-article"
     >
       <i class="ion-heart"></i>
       <div class="info">{{ article.favoritesCount }}</div>
     </button>
   </div>
   <a (click)="navigateToArticle.emit(article.slug)" class="preview-link">
-    <h1>{{ article.title }}</h1>
+    <h1 data-e2e-id="article-title">{{ article.title }}</h1>
     <p>{{ article.description }}</p>
     <span>Read more...</span>
     <ul class="tag-list">
