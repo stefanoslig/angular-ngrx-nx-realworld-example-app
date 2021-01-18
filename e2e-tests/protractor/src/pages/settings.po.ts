@@ -1,14 +1,11 @@
-import { browser, by, element } from 'protractor';
+import { by, element } from 'protractor';
+import { headerNavBar } from './header-nav-bar.po';
 
 const logoutButton = element(by.buttonText('Or click here to logout.'));
 
 export const settingsPage = {
-  async navigateToSettingsPage() {
-    await browser.get(`${browser.baseUrl}#/settings`);
-  },
-
   async logout() {
-    await this.navigateToSettingsPage();
+    await headerNavBar.clickSettings();
     await logoutButton.click();
   },
 };

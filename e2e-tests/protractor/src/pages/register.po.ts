@@ -1,4 +1,6 @@
-import { $, browser, by, element } from 'protractor';
+import { $, by, element } from 'protractor';
+import { app } from './app.po';
+import axios from 'axios';
 
 const usernameField = $("[placeholder='Username']");
 const emailField = $("[placeholder='Email']");
@@ -18,10 +20,6 @@ export const registerPage = {
     await signUpButton.click();
   },
 
-  async navigateToRegisterPage() {
-    await browser.get(`${browser.baseUrl}#/register`);
-  },
-
   async getErrorMessage(): Promise<string[]> {
     const errors: string[] = [];
 
@@ -32,8 +30,24 @@ export const registerPage = {
     return errors;
   },
 
-  async registerAccount(userId: string) {
-    await this.navigateToRegisterPage();
-    await this.createNewAccount(userId);
+  async registerAccountAPI(userId: string) {
+    await app.navigateToApp();
+
+    try {
+      await axios({
+        method: 'post',
+        url: 'https://conduit.productionready.io/api/users',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        data: JSON.stringify({"user":{"email":`${userId}@example.com`,"password":userId,"username":userId}})
+      });
+    } catch (e) {
+      console.error(
+        `Could not register user`
+      );
+      throw e;
+    }
   },
 };

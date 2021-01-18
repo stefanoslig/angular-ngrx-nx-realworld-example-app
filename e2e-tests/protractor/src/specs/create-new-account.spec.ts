@@ -8,7 +8,8 @@ describe('Create new account', () => {
   let userId: string;
 
   beforeEach(async () => {
-    await registerPage.navigateToRegisterPage();
+    await app.navigateToApp();
+    await headerNavBar.clickSignUp();
   });
 
   describe('Click on Sign Up button on Register page', () => {
@@ -27,10 +28,10 @@ describe('Create new account', () => {
 
       // create one account and then try creating a new account with the same credentials
       await registerPage.createNewAccount(userId);
-      await headerNavBar.waitForLoginInfo(userId);
+      await headerNavBar.waitForLoginInfo(userId); // need to explicitly wait here, so that we are sure that the user is logged in
       await settingsPage.logout();
       await app.navigateToApp();
-      await registerPage.navigateToRegisterPage();
+      await headerNavBar.clickSignUp();
       await registerPage.createNewAccount(userId);
 
       expect(await registerPage.getErrorMessage()).toEqual([

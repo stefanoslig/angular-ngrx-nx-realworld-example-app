@@ -7,16 +7,16 @@ import { myProfilePage } from 'src/pages/my-profile.po';
 import { newArticlePage } from 'src/pages/new-article.po';
 import { registerPage } from 'src/pages/register.po';
 import { generateRandomString } from 'src/utils';
-import { ArticleInterface } from 'types';
+import { ArticleInterface } from 'src/types';
+import { signInPage } from 'src/pages/sign-in.po';
 
 describe('Delete article', () => {
   let userId: string;
 
   beforeEach(async () => {
     userId = generateRandomString();
-    await registerPage.registerAccount(userId);
-    await headerNavBar.waitForLoginInfo(userId);
-    await newArticlePage.navigateToArticlePage();
+    await registerPage.registerAccountAPI(userId);
+    await signInPage.signIn({ username: userId, password: userId });
   });
 
   it('should remove the article from My Articles section', async () => {
@@ -26,9 +26,11 @@ describe('Delete article', () => {
       body: 'Automation testing description',
     };
 
-    await newArticlePage.publishArticle(articleDetails);
+    await newArticlePage.publishArticleAPI(userId, articleDetails);
+    await newArticlePage.openArticle(userId, articleDetails.title);
+
     await articleDetailsPage.clickDeleteArticle();
-    await myProfilePage.navigateToMyProfilePage(userId);
+    await headerNavBar.clickMyProfile(userId);
 
     expect(await myProfilePage.isArticlePresent(articleDetails.title)).toBe(
       false,
@@ -43,7 +45,9 @@ describe('Delete article', () => {
       body: 'Automation testing description',
     };
 
-    await newArticlePage.publishArticle(articleDetails);
+    await newArticlePage.publishArticleAPI(userId, articleDetails);
+    await newArticlePage.openArticle(userId, articleDetails.title);
+
     await articleDetailsPage.clickDeleteArticle();
     await app.navigateToApp();
     await homePage.openGlobalFeed();

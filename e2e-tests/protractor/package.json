@@ -2,14 +2,15 @@
   "name": "e2e-protractor",
   "version": "1.0.0",
   "scripts": {
+    "webdrive-update": "webdriver-manager update",
     "test": "protractor protractor.conf.js"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.17",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^14.14.20",
+    "axios": "^0.21.1",
     "jasmine-spec-reporter": "^6.0.0",
-    "prettier": "^2.2.1",
     "protractor": "^7.0.0",
     "typescript": "^4.1.3"
   }

@@ -6,10 +6,6 @@ const favoriteButton = element(by.e2eId('favorite-article'));
 const favoritedArticles = element(by.linkText('Favorited Articles'));
 
 export const myProfilePage = {
-  async navigateToMyProfilePage(userId: string) {
-    await browser.get(`${browser.baseUrl}#/profile/${userId}`);
-  },
-
   async isArticlePresent(titleText: string) {
     try {
       await browser.wait(
@@ -30,4 +26,9 @@ export const myProfilePage = {
   async openFavoritedArticles() {
     await favoritedArticles.click();
   },
+
+  async clickOnArticle(articleTitle: string) {
+    const article = element(by.cssContainingText("[data-e2e-id='article-title']", articleTitle));
+    await article.click();
+  }
 };

@@ -9,10 +9,7 @@ describe('Authentication', () => {
 
   beforeEach(async () => {
     userId = generateRandomString();
-    await registerPage.registerAccount(userId);
-    await headerNavBar.waitForLoginInfo(userId);
-    await settingsPage.logout();
-    await signInPage.navigateToSignInPage();
+    await registerPage.registerAccountAPI(userId);
   });
 
   describe('Click on Sign In button on Login page', () => {
@@ -37,7 +34,7 @@ describe('Authentication', () => {
   describe('Click on Logout button on Settings page', () => {
     it('should bring the user to Login page', async () => {
       await signInPage.signIn({ username: userId, password: userId });
-      await headerNavBar.waitForLoginInfo(userId);
+      await headerNavBar.waitForLoginInfo(userId); // need to explicitly wait here, so that we are sure that the user is logged in
       await settingsPage.logout();
 
       expect(await headerNavBar.isUserLoggedIn(userId)).toBe(

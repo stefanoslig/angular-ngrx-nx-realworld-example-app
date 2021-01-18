@@ -41,6 +41,8 @@ exports.config = {
 
     afterEach(async () => {
       await browser.manage().deleteAllCookies();
+      await browser.executeScript('window.sessionStorage.clear();');
+      await browser.executeScript('window.localStorage.clear();');
     });
   },
 };

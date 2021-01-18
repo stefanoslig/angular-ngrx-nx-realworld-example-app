@@ -1,5 +1,6 @@
-import { $, browser, by, element } from 'protractor';
-import { AccountInterface } from 'types';
+import { $, by, element } from 'protractor';
+import { AccountInterface } from 'src/types';
+import { headerNavBar } from './header-nav-bar.po';
 
 const usernameField = $("[placeholder='Username']");
 const passwordField = $("[placeholder='Password']");
@@ -7,11 +8,9 @@ const signInButton = element(by.buttonText('Sign in'));
 const errorMessage = element(by.e2eId('error'));
 
 export const signInPage = {
-  async navigateToSignInPage() {
-    await browser.get(`${browser.baseUrl}#/login`);
-  },
-
   async signIn(accountCred: AccountInterface) {
+    await headerNavBar.clickSignIn();
+
     await usernameField.clear();
     await passwordField.clear();
 

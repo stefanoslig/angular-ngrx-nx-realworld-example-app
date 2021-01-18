@@ -6,6 +6,7 @@ import { homePage } from 'src/pages/home.po';
 import { myProfilePage } from 'src/pages/my-profile.po';
 import { newArticlePage } from 'src/pages/new-article.po';
 import { registerPage } from 'src/pages/register.po';
+import { signInPage } from 'src/pages/sign-in.po';
 import { generateRandomString } from 'src/utils';
 
 describe('New article', () => {
@@ -13,14 +14,14 @@ describe('New article', () => {
 
   beforeEach(async () => {
     userId = generateRandomString();
-    await registerPage.registerAccount(userId);
-    await headerNavBar.waitForLoginInfo(userId);
-    await newArticlePage.navigateToArticlePage();
+    await registerPage.registerAccountAPI(userId);
+    await signInPage.signIn({ username: userId, password: userId });
+    await headerNavBar.clickNewPost();
   });
 
   it('should be published after pressing Publish button', async () => {
     await newArticlePage.publishArticle({
-      title: 'Automation Testing',
+      title: 'Automation Testing 1',
       summary: 'How to do automation testing',
       body: 'Automation testing description',
     });
@@ -40,7 +41,7 @@ describe('New article', () => {
     await articleDetailsPage.waitForArticleToBePublished(
       'Automation Testing 2'
     );
-    await myProfilePage.navigateToMyProfilePage(userId);
+    await headerNavBar.clickMyProfile(userId);
 
     expect(await myProfilePage.isArticlePresent('Automation Testing 2')).toBe(
       true,
