@@ -11,7 +11,7 @@
 
         <app-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
         </app-dynamic-form>
-        <button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
+        <button data-e2e-id="sign-up" (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
           Sign up
         </button>
       </div>
