@@ -7,14 +7,14 @@ Feature: Login
     Background: 
         Given I am registered user
         And I open Login page
-        When @login I input a correct username
+        When I input a correct username
 
     Scenario: Valid login    
-        And @login I input a correct password
-        And @login I click Login button
-        Then @home my information is displayed in the header
+        And I input a correct password
+        And I click Login button
+        Then my information is displayed in the header
 
     Scenario: Invalid login
-        And @login I input incorrect password
-        And @login I click Login button
-        Then @login I see an error message
+        And I input incorrect password
+        And I click Login button
+        Then I see an error message

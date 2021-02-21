@@ -3,7 +3,7 @@ declare namespace Cypress {
   interface Chainable<Subject> {
     registerUserApi(userId: string): void;
     getByE2eId(selector: string, ...args): HTMLElement;
-    login(userId: string): void;
+    loginApi(userId: string): void;
   }
 }
 
@@ -17,10 +17,11 @@ Cypress.Commands.add('getByE2eId', (selector: string, ...args) => {
   return cy.get(`[data-e2e-id=${selector}]`, ...args);
 });
 
-Cypress.Commands.add('login', (userId: string) => {
+Cypress.Commands.add('loginApi', (userId: string) => {
   cy.registerUserApi(userId);
-  cy.visit('#/login');
-  cy.get("[placeholder='Username']").clear().type(`${userId}@example.com`);
-  cy.get("[placeholder='Password']").clear().type(userId);
-  cy.getByE2eId('sign-in').click();
+  cy.request('POST', 'https://conduit.productionready.io/api/users/login', {
+    user: { email: `${userId}@example.com`, password: userId },
+  }).then((response: any) => {
+    window.localStorage.setItem('jwtToken', response.body.user.token);
+  });
 });

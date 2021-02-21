@@ -1,7 +1,7 @@
 <div class="article-page">
   <div class="banner">
     <div class="container">
-      <h1>{{ (article$ | async).title }}</h1>
+      <h1 data-e2e-id="article-title">{{ (article$ | async).title }}</h1>
       <app-article-meta
         [article]="article$ | async"
         (follow)="follow($event)"

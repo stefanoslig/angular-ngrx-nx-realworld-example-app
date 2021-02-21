@@ -1,24 +1,24 @@
 import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
 import { generateRandomString } from '../../support/generate-random-string';
 
-let userId;
+let userId = '';
 
 beforeEach(() => {
   userId = generateRandomString();
 });
 
 Given('I am logged in to the system', () => {
-  cy.login(userId);
+  cy.loginApi(userId);
 });
 
 And('I open Settings page', () => {
-  cy.contains('Settings').click();
+  cy.visit('#/settings');
 });
 
-When('@settings I press on Logout button', () => {
+When('I press on Logout button', () => {
   cy.contains('Or click here to logout.').click();
 });
 
-Then('@home my credentials are not displayed in the header anymore', () => {
+Then('my credentials are not displayed in the header anymore', () => {
   cy.getByE2eId('logedin-user').should('not.exist');
 });

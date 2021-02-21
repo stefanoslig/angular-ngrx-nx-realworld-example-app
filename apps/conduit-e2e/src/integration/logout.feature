@@ -7,5 +7,5 @@ Feature: Logout
     Scenario: Successful logout
         Given I am logged in to the system
         And I open Settings page
-        When @settings I press on Logout button
-        Then @home my credentials are not displayed in the header anymore
+        When I press on Logout button
+        Then my credentials are not displayed in the header anymore
