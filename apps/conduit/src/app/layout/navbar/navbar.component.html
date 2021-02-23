@@ -38,7 +38,12 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/profile', user.username]" routerLinkActive="active">
+        <a
+          data-e2e-id="logedin-user"
+          class="nav-link"
+          [routerLink]="['/profile', user.username]"
+          routerLinkActive="active"
+        >
           <img [src]="user.image" *ngIf="user.image" class="user-pic" />
           {{ user.username }}
         </a>
