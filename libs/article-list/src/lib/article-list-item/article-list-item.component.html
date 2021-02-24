@@ -24,7 +24,7 @@
     </button>
   </div>
   <a (click)="navigateToArticle.emit(article.slug)" class="preview-link">
-    <h1>{{ article.title }}</h1>
+    <h1 data-e2e-id="article-list-title">{{ article.title }}</h1>
     <p>{{ article.description }}</p>
     <span>Read more...</span>
     <ul class="tag-list">
