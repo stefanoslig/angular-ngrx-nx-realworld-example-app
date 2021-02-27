@@ -2,7 +2,7 @@ import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as ArticleListActions from './article-list.actions';
 
-export const articleListFeatureKey = 'article';
+export const articleListFeatureKey = 'articles-list';
 
 export interface ArticleList {
   listConfig: ArticleListConfig;

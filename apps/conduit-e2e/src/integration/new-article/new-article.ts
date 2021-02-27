@@ -53,5 +53,5 @@ Then('the new article is displayed in Global Feed', () => {
 
   cy.contains('Home').click();
   cy.contains('Global Feed').click();
-  cy.getByE2eId('article-list-title').should('have.text', articleTitle);
+  cy.getFirstByE2eId('article-list-title').should('have.text', articleTitle);
 });

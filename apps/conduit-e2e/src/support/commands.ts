@@ -3,6 +3,7 @@ declare namespace Cypress {
   interface Chainable<Subject> {
     registerUserApi(userId: string): void;
     getByE2eId(selector: string, ...args): HTMLElement;
+    getFirstByE2eId(selector: string, ...args): HTMLElement;
     loginApi(userId: string): void;
   }
 }
@@ -15,6 +16,10 @@ Cypress.Commands.add('registerUserApi', (userId: string) => {
 
 Cypress.Commands.add('getByE2eId', (selector: string, ...args) => {
   return cy.get(`[data-e2e-id=${selector}]`, ...args);
+});
+
+Cypress.Commands.add('getFirstByE2eId', (selector: string, ...args) => {
+  return cy.get(`[data-e2e-id=${selector}]`, ...args).first();
 });
 
 Cypress.Commands.add('loginApi', (userId: string) => {
