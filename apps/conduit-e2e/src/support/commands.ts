@@ -1,12 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-namespace
-declare namespace Cypress {
-  interface Chainable<Subject> {
-    registerUserApi(userId: string): void;
-    getByE2eId(selector: string, ...args): HTMLElement;
-    getFirstByE2eId(selector: string, ...args): HTMLElement;
-    loginApi(userId: string): void;
-  }
-}
+// @ts-check
+///<reference path="../../global.d.ts" />
 
 Cypress.Commands.add('registerUserApi', (userId: string) => {
   cy.request('POST', 'https://conduit.productionready.io/api/users', {

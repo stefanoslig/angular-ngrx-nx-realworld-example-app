@@ -4,7 +4,7 @@
       <img [src]="article.author.image" />
     </a>
     <div class="info">
-      <a class="author" [routerLink]="['/profile', article.author.username]">
+      <a data-e2e-id="article-author" class="author" [routerLink]="['/profile', article.author.username]">
         {{ article.author.username }}
       </a>
       <span class="date">

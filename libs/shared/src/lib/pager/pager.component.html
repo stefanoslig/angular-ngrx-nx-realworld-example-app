@@ -1,10 +1,11 @@
 <ul class="pagination">
   <li
+    data-e2e-id="pagination-item"
     class="page-item"
     [ngClass]="{ active: pageNumber === currentPage }"
     *ngFor="let pageNumber of totalPages"
     (click)="setPage.emit(pageNumber)"
   >
-    <a class="page-link">{{ pageNumber }}</a>
+    <a data-e2e-id="pagination-link" class="page-link">{{ pageNumber }}</a>
   </li>
 </ul>

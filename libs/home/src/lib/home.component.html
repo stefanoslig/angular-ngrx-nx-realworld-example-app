@@ -21,6 +21,7 @@
             </li>
             <li class="nav-item">
               <a
+                data-e2e-id="global-feed"
                 [ngClass]="{
                   active: (listConfig$ | async)?.type === 'ALL' && !(listConfig$ | async).filters?.tag
                 }"
