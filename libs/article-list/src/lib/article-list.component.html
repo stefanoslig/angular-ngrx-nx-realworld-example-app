@@ -1,24 +1,27 @@
-<div class="app-article-preview" [hidden]="(isLoading$ | async) === false">
-  Loading articles...
-</div>
+<ng-container *ngIf="!(isLoading$ | async); else isLoading">
+  <ng-container *ngIf="[articles$ | async].length > 0; else noArticles">
+    <app-article-list-item
+      data-e2e-id="article-list"
+      (navigateToArticle)="navigateToArticle($event)"
+      (unFavorite)="unFavorite($event)"
+      (favorite)="favorite($event)"
+      *ngFor="let article of articles$ | async"
+      [article]="article"
+    >
+    </app-article-list-item>
 
-<div class="app-article-preview" [hidden]="(isLoading$ | async) || (articles$ | async).length > 0">
-  No articles are here... yet.
-</div>
+    <app-pager
+      (setPage)="setPage($event)"
+      [currentPage]="(listConfig$ | async).currentPage"
+      [totalPages]="totalPages$ | async"
+    ></app-pager>
+  </ng-container>
 
-<app-article-list-item
-  [hidden]="isLoading$ | async"
-  (navigateToArticle)="navigateToArticle($event)"
-  (unFavorite)="unFavorite($event)"
-  (favorite)="favorite($event)"
-  *ngFor="let article of articles$ | async"
-  [article]="article"
->
-</app-article-list-item>
+  <ng-template #noArticles>
+    <div>No articles are here... yet.</div>
+  </ng-template>
+</ng-container>
 
-<app-pager
-  (setPage)="setPage($event)"
-  [hidden]="(totalPages$ | async)?.length <= 1 || (isLoading$ | async)"
-  [currentPage]="(listConfig$ | async).currentPage"
-  [totalPages]="totalPages$ | async"
-></app-pager>
+<ng-template #isLoading>
+  <div>Loading articles...</div>
+</ng-template>
