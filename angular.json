@@ -1,5 +1,30 @@
 {
   "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "conduit",
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular": {
+      "convert-tslint-to-eslint": {
+        "ignoreExistingTslintConfig": true,
+        "removeTSLintIfNoMoreTSLintTargets": true
+      }
+    },
+    "@nrwl/cypress": {
+      "convert-tslint-to-eslint": {
+        "ignoreExistingTslintConfig": true,
+        "removeTSLintIfNoMoreTSLintTargets": false
+      }
+    }
+  },
   "projects": {
     "conduit": {
       "projectType": "application",
@@ -74,10 +99,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["apps/conduit/tsconfig.app.json", "apps/conduit/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!apps/conduit/**/*"]
+            "lintFilePatterns": ["apps/conduit/src/**/*.ts", "apps/conduit/src/**/*.html"]
           }
         },
         "test": {
@@ -109,10 +133,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["apps/conduit-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/conduit-e2e/**/*"]
+            "lintFilePatterns": ["apps/conduit-e2e/**/*.{js,ts}"]
           }
         }
       },
@@ -394,18 +417,5 @@
       },
       "prefix": "app"
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
-    }
-  },
-  "defaultProject": "conduit"
+  }
 }

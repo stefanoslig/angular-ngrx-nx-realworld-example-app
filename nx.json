@@ -1,11 +1,22 @@
 {
-  "npmScope": "conduit",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
     "tslint.json": "*",
     "nx.json": "*",
     "tsconfig.base.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "conduit",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
   },
   "projects": {
     "conduit-e2e": {
@@ -51,16 +62,5 @@
     "shared": {
       "tags": ["shared"]
     }
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
-  },
-  "affected": {
-    "defaultBase": "master"
   }
 }
