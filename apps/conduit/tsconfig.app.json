@@ -13,5 +13,5 @@
     "../../libs/article/src/index.ts",
     "../../libs/profile/src/index.ts"
   ],
-  "exclude": ["src/test-setup.ts", "**/*.spec.ts"]
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

@@ -1,31 +1,70 @@
 {
   "version": 1,
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "defaultProject": "conduit",
-  "schematics": {
-    "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular": {
-      "convert-tslint-to-eslint": {
-        "ignoreExistingTslintConfig": true,
-        "removeTSLintIfNoMoreTSLintTargets": true
-      }
-    },
-    "@nrwl/cypress": {
-      "convert-tslint-to-eslint": {
-        "ignoreExistingTslintConfig": true,
-        "removeTSLintIfNoMoreTSLintTargets": false
-      }
-    }
-  },
   "projects": {
+    "api": {
+      "root": "libs/api",
+      "sourceRoot": "libs/api/src",
+      "projectType": "library",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/api/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/api"]
+        }
+      },
+      "prefix": "app"
+    },
+    "article": {
+      "root": "libs/article",
+      "sourceRoot": "libs/article/src",
+      "projectType": "library",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/article/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/article"]
+        }
+      },
+      "prefix": "app"
+    },
+    "article-list": {
+      "root": "libs/article-list",
+      "sourceRoot": "libs/article-list/src",
+      "projectType": "library",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/article-list/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/article-list"]
+        }
+      },
+      "prefix": "app"
+    },
+    "auth": {
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth/src",
+      "projectType": "library",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/auth/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/auth"]
+        }
+      },
+      "prefix": "app"
+    },
     "conduit": {
       "projectType": "application",
       "schematics": {
@@ -102,7 +141,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/conduit/src/**/*.ts", "apps/conduit/src/**/*.html"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -136,99 +176,8 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/conduit-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "prefix": "app"
-    },
-    "api": {
-      "root": "libs/api",
-      "sourceRoot": "libs/api/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/api/tsconfig.lib.json", "libs/api/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/api/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/api/jest.config.js",
-            "passWithNoTests": true
           },
-          "outputs": ["coverage/libs/api"]
-        }
-      },
-      "prefix": "app"
-    },
-    "article": {
-      "root": "libs/article",
-      "sourceRoot": "libs/article/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/article/tsconfig.lib.json", "libs/article/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/article/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/article/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/article"]
-        }
-      },
-      "prefix": "app"
-    },
-    "article-list": {
-      "root": "libs/article-list",
-      "sourceRoot": "libs/article-list/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/article-list/tsconfig.lib.json", "libs/article-list/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/article-list/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/article-list/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/article-list"]
-        }
-      },
-      "prefix": "app"
-    },
-    "auth": {
-      "root": "libs/auth",
-      "sourceRoot": "libs/auth/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/auth/tsconfig.lib.json", "libs/auth/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/auth/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/auth/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/auth"]
+          "outputs": ["{options.outputFile}"]
         }
       },
       "prefix": "app"
@@ -238,13 +187,6 @@
       "sourceRoot": "libs/editor/src",
       "projectType": "library",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/editor/tsconfig.lib.json", "libs/editor/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/editor/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -261,13 +203,6 @@
       "sourceRoot": "libs/home/src",
       "projectType": "library",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/home/tsconfig.lib.json", "libs/home/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/home/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -284,13 +219,6 @@
       "sourceRoot": "libs/ngrx-error/src",
       "projectType": "library",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/ngrx-error/tsconfig.lib.json", "libs/ngrx-error/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/ngrx-error/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -307,13 +235,6 @@
       "sourceRoot": "libs/ngrx-forms/src",
       "projectType": "library",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/ngrx-forms/tsconfig.lib.json", "libs/ngrx-forms/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/ngrx-forms/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -325,41 +246,11 @@
       },
       "prefix": "app"
     },
-    "profile": {
-      "root": "libs/profile",
-      "sourceRoot": "libs/profile/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/profile/tsconfig.lib.json", "libs/profile/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/profile/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/profile/jest.config.js",
-            "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/profile"]
-        }
-      },
-      "prefix": "app"
-    },
     "ngrx-router": {
       "root": "libs/ngrx-router",
       "sourceRoot": "libs/ngrx-router/src",
       "projectType": "library",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/ngrx-router/tsconfig.lib.json", "libs/ngrx-router/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/ngrx-router/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -371,18 +262,27 @@
       },
       "prefix": "app"
     },
+    "profile": {
+      "root": "libs/profile",
+      "sourceRoot": "libs/profile/src",
+      "projectType": "library",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profile/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/profile"]
+        }
+      },
+      "prefix": "app"
+    },
     "settings": {
       "root": "libs/settings",
       "sourceRoot": "libs/settings/src",
       "projectType": "library",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/settings/tsconfig.lib.json", "libs/settings/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/settings/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
@@ -399,13 +299,6 @@
       "sourceRoot": "libs/shared/src",
       "projectType": "library",
       "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["libs/shared/tsconfig.lib.json", "libs/shared/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/shared/**/*"]
-          }
-        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {

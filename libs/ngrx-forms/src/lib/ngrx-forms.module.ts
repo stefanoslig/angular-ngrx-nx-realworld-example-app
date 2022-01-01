@@ -24,7 +24,6 @@ import { ListErrorsComponent } from './list-errors/list-errors.component';
   ],
   providers: [NgrxFormsEffects, NgrxFormsFacade],
   declarations: [DynamicFormComponent, DynamicFieldDirective, InputComponent, TextareaComponent, ListErrorsComponent],
-  entryComponents: [InputComponent, TextareaComponent],
   exports: [DynamicFormComponent, ListErrorsComponent],
 })
 export class NgrxFormsModule {}

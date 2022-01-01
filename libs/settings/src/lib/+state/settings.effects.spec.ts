@@ -4,12 +4,12 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
 
 import { SettingsService } from '../settings.service';
 import { SettingsEffects } from './settings.effects';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { hot } from 'jasmine-marbles';
 
 describe('SettingsEffects', () => {
   let actions;

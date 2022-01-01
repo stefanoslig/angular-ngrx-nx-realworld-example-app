@@ -7,7 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule, Action } from '@ngrx/store';
-import { hot } from '@nrwl/angular/testing';
 import { cold, getTestScheduler } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 import * as AuthActions from './auth.actions';
@@ -15,6 +14,7 @@ import * as AuthActions from './auth.actions';
 import { AuthService } from '../auth.service';
 import { LocalStorageJwtService } from '../local-storage-jwt.service';
 import { AuthEffects } from './auth.effects';
+import { hot } from 'jasmine-marbles';
 
 xdescribe('AuthEffects', () => {
   let actions$: Observable<Action>;
@@ -154,7 +154,7 @@ xdescribe('AuthEffects', () => {
       const loginSuccessAction = AuthActions.loginSuccess({ user: result });
       actions$ = of(loginSuccessAction);
 
-      effects.loginOrRegisterSuccess$.subscribe(a => {
+      effects.loginOrRegisterSuccess$.subscribe((a) => {
         expect(router.navigateByUrl).toHaveBeenCalledWith('/');
         done();
       });
@@ -174,7 +174,7 @@ xdescribe('AuthEffects', () => {
       });
       actions$ = of(registerSuccessAction);
 
-      effects.loginOrRegisterSuccess$.subscribe(a => {
+      effects.loginOrRegisterSuccess$.subscribe((a) => {
         expect(router.navigateByUrl).toHaveBeenCalledWith('/');
         expect(storage.setItem).toHaveBeenCalledWith(result.token);
         done();

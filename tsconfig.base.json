@@ -17,15 +17,15 @@
     "baseUrl": ".",
     "paths": {
       "@angular-ngrx-nx-realworld-example-app/*": ["libs/*"],
-      "@default/*": ["apps/conduit/src/app/*"],
-      "@env/*": ["apps/conduit/src/environments/*"],
       "@angular-ngrx-nx-realworld-example-app/api": ["libs/api/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/article-list": ["libs/article-list/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/auth": ["libs/auth/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/ngrx-error": ["libs/ngrx-error/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/ngrx-forms": ["libs/ngrx-forms/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/ngrx-router": ["libs/ngrx-router/src/index.ts"],
-      "@angular-ngrx-nx-realworld-example-app/shared": ["libs/shared/src/index.ts"]
+      "@angular-ngrx-nx-realworld-example-app/shared": ["libs/shared/src/index.ts"],
+      "@default/*": ["apps/conduit/src/app/*"],
+      "@env/*": ["apps/conduit/src/environments/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

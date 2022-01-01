@@ -5,10 +5,10 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
 
 import { ProfileService } from '../profile.service';
 import { ProfileEffects } from './profile.effects';
+import { hot } from 'jasmine-marbles';
 
 describe('ProfileEffects', () => {
   let actions;

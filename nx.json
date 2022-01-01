@@ -14,53 +14,42 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "parallel": 3
       }
     }
   },
-  "projects": {
-    "conduit-e2e": {
-      "tags": [],
-      "implicitDependencies": ["conduit"]
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "conduit",
+  "generators": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
     },
-    "conduit": {
-      "tags": []
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
     },
-    "api": {
-      "tags": ["api"]
+    "@nrwl/angular": {
+      "convert-tslint-to-eslint": {
+        "ignoreExistingTslintConfig": true,
+        "removeTSLintIfNoMoreTSLintTargets": true
+      }
     },
-    "article": {
-      "tags": ["article"]
-    },
-    "article-list": {
-      "tags": ["article-list"]
-    },
-    "auth": {
-      "tags": ["auth"]
-    },
-    "editor": {
-      "tags": ["editor"]
-    },
-    "home": {
-      "tags": ["home"]
-    },
-    "ngrx-error": {
-      "tags": ["ngrx-error"]
-    },
-    "ngrx-forms": {
-      "tags": ["ngrx-forms"]
-    },
-    "profile": {
-      "tags": ["profile"]
-    },
-    "ngrx-router": {
-      "tags": ["ngrx-router"]
-    },
-    "settings": {
-      "tags": ["settings"]
-    },
-    "shared": {
-      "tags": ["shared"]
+    "@nrwl/cypress": {
+      "convert-tslint-to-eslint": {
+        "ignoreExistingTslintConfig": true,
+        "removeTSLintIfNoMoreTSLintTargets": false
+      }
     }
   }
 }

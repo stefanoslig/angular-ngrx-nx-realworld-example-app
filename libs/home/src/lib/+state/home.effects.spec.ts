@@ -4,10 +4,10 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
 
 import { HomeService } from '../home.service';
 import { HomeEffects } from './home.effects';
+import { hot } from 'jasmine-marbles';
 
 describe('HomeEffects', () => {
   let actions;

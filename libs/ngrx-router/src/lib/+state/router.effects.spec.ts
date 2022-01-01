@@ -4,9 +4,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
-import { hot } from '@nrwl/angular/testing';
 
 import { RouterEffects } from './router.effects';
+import { hot } from 'jasmine-marbles';
 
 describe('RouterEffects', () => {
   let actions;

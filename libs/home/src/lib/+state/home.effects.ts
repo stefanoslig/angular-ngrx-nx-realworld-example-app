@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
@@ -13,8 +13,8 @@ export class HomeEffects {
       ofType(HomeActions.loadTags),
       switchMap(() =>
         this.homeService.getTags().pipe(
-          map(results => HomeActions.loadTagsSuccess({ tags: results.tags })),
-          catchError(error => of(HomeActions.loadTagsFail(error))),
+          map((results) => HomeActions.loadTagsSuccess({ tags: results.tags })),
+          catchError((error) => of(HomeActions.loadTagsFail(error))),
         ),
       ),
     ),
