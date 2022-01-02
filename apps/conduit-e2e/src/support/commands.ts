@@ -2,7 +2,7 @@
 ///<reference path="../../global.d.ts" />
 
 Cypress.Commands.add('registerUserApi', (userId: string) => {
-  cy.request('POST', 'https://conduit.productionready.io/api/users', {
+  cy.request('POST', 'https://api.realworld.io/api/users', {
     user: { email: `${userId}@example.com`, password: userId, username: userId },
   });
 });
@@ -17,7 +17,7 @@ Cypress.Commands.add('getFirstByE2eId', (selector: string, ...args) => {
 
 Cypress.Commands.add('loginApi', (userId: string) => {
   cy.registerUserApi(userId);
-  cy.request('POST', 'https://conduit.productionready.io/api/users/login', {
+  cy.request('POST', 'https://api.realworld.io/api/users/login', {
     user: { email: `${userId}@example.com`, password: userId },
   }).then((response: any) => {
     window.localStorage.setItem('jwtToken', response.body.user.token);

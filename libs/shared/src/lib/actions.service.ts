@@ -7,7 +7,7 @@ export class ActionsService {
   constructor(private apiService: ApiService) {}
 
   followUser(username: string): Observable<ProfileResponse> {
-    return this.apiService.post<ProfileResponse, void>('/profiles/' + username + '/follow', null);
+    return this.apiService.post<ProfileResponse, void>('/profiles/' + username + '/follow');
   }
 
   unfollowUser(username: string): Observable<ProfileResponse> {
@@ -15,7 +15,7 @@ export class ActionsService {
   }
 
   favorite(slug: string): Observable<SingleArticleResponse> {
-    return this.apiService.post<SingleArticleResponse, void>('/articles/' + slug + '/favorite', null);
+    return this.apiService.post<SingleArticleResponse, void>('/articles/' + slug + '/favorite');
   }
 
   unfavorite(slug: string): Observable<SingleArticleResponse> {
