@@ -1,0 +1,28 @@
+{
+  "root": "apps/conduit-e2e",
+  "sourceRoot": "apps/conduit-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/conduit-e2e/cypress.json",
+        "devServerTarget": "conduit:serve",
+        "tsConfig": "apps/conduit-e2e/tsconfig.e2e.json"
+      }
+    },
+    "configurations": {
+      "production": {
+        "devServerTarget": "conduit:serve:production"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/conduit-e2e/**/*.{js,ts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "prefix": "app"
+}

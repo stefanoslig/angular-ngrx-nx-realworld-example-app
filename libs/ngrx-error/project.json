@@ -1,0 +1,16 @@
+{
+  "root": "libs/ngrx-error",
+  "sourceRoot": "libs/ngrx-error/src",
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/ngrx-error/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/ngrx-error"]
+    }
+  },
+  "prefix": "app"
+}

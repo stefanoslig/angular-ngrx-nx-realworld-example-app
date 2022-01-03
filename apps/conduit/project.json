@@ -1,0 +1,89 @@
+{
+  "projectType": "application",
+  "generators": {
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "root": "apps/conduit",
+  "sourceRoot": "apps/conduit/src",
+  "prefix": "conduit",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/conduit",
+        "index": "apps/conduit/src/index.html",
+        "main": "apps/conduit/src/main.ts",
+        "polyfills": "apps/conduit/src/polyfills.ts",
+        "tsConfig": "apps/conduit/tsconfig.app.json",
+        "aot": true,
+        "assets": ["apps/conduit/src/favicon.ico", "apps/conduit/src/assets"],
+        "styles": ["apps/conduit/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/conduit/src/environments/environment.ts",
+              "with": "apps/conduit/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "6kb",
+              "maximumError": "10kb"
+            }
+          ]
+        }
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "conduit:build"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "conduit:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "conduit:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/conduit/src/**/*.ts", "apps/conduit/src/**/*.html"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/conduit/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/apps/conduit"]
+    }
+  }
+}

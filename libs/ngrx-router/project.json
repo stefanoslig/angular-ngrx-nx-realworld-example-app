@@ -1,0 +1,16 @@
+{
+  "root": "libs/ngrx-router",
+  "sourceRoot": "libs/ngrx-router/src",
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/ngrx-router/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/ngrx-router"]
+    }
+  },
+  "prefix": "app"
+}

@@ -1,0 +1,16 @@
+{
+  "root": "libs/profile",
+  "sourceRoot": "libs/profile/src",
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/profile/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/profile"]
+    }
+  },
+  "prefix": "app"
+}

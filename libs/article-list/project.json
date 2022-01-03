@@ -1,0 +1,16 @@
+{
+  "root": "libs/article-list",
+  "sourceRoot": "libs/article-list/src",
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/article-list/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/article-list"]
+    }
+  },
+  "prefix": "app"
+}
