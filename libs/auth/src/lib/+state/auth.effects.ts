@@ -15,10 +15,10 @@ export class AuthEffects {
   getUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.getUser),
-      switchMap(item =>
+      switchMap(() =>
         this.authService.user().pipe(
-          map(data => AuthActions.getUserSuccess({ user: data.user })),
-          catchError(error => of(AuthActions.getUserFail(error))),
+          map((data) => AuthActions.getUserSuccess({ user: data.user })),
+          catchError((error) => of(AuthActions.getUserFail(error))),
         ),
       ),
     ),
@@ -28,10 +28,10 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       withLatestFrom(this.ngrxFormsFacade.data$),
-      exhaustMap(([action, data]) =>
+      exhaustMap(([, data]) =>
         this.authService.login(data).pipe(
-          map(response => AuthActions.loginSuccess({ user: response.user })),
-          catchError(result => of(fromNgrxForms.setErrors({ errors: result.error.errors }))),
+          map((response) => AuthActions.loginSuccess({ user: response.user })),
+          catchError((result) => of(fromNgrxForms.setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),
@@ -41,7 +41,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess, AuthActions.registerSuccess),
-        tap(action => {
+        tap((action) => {
           this.localStorageJwtService.setItem(action.user.token);
           this.router.navigateByUrl('/');
         }),
@@ -53,10 +53,10 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.register),
       withLatestFrom(this.ngrxFormsFacade.data$),
-      exhaustMap(([action, data]) =>
+      exhaustMap(([, data]) =>
         this.authService.register(data).pipe(
-          map(response => AuthActions.registerSuccess({ user: response.user })),
-          catchError(result => of(setErrors({ errors: result.error.errors }))),
+          map((response) => AuthActions.registerSuccess({ user: response.user })),
+          catchError((result) => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),
@@ -66,7 +66,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.logout),
-        tap(action => {
+        tap(() => {
           this.localStorageJwtService.removeItem();
           this.router.navigateByUrl('login');
         }),

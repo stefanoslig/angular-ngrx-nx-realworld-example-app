@@ -14,10 +14,10 @@ export class ArticleEffects {
   loadArticle = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.loadArticle),
-      concatMap(action =>
+      concatMap((action) =>
         this.articleService.getArticle(action.slug).pipe(
-          map(response => ArticleActions.loadArticleSuccess({ article: response.article })),
-          catchError(error => of(ArticleActions.loadArticleFail(error))),
+          map((response) => ArticleActions.loadArticleSuccess({ article: response.article })),
+          catchError((error) => of(ArticleActions.loadArticleFail(error))),
         ),
       ),
     ),
@@ -26,10 +26,10 @@ export class ArticleEffects {
   loadComments = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.loadComments),
-      concatMap(action =>
+      concatMap((action) =>
         this.articleService.getComments(action.slug).pipe(
-          map(data => ArticleActions.loadCommentsSuccess({ comments: data.comments })),
-          catchError(error => of(ArticleActions.loadCommentsFail(error))),
+          map((data) => ArticleActions.loadCommentsSuccess({ comments: data.comments })),
+          catchError((error) => of(ArticleActions.loadCommentsFail(error))),
         ),
       ),
     ),
@@ -38,10 +38,10 @@ export class ArticleEffects {
   deleteArticle = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.deleteArticle),
-      concatMap(action =>
+      concatMap((action) =>
         this.articleService.deleteArticle(action.slug).pipe(
-          map(_ => go({ to: { path: ['/'] } })),
-          catchError(error => of(ArticleActions.deleteArticleFail(error))),
+          map((_) => go({ to: { path: ['/'] } })),
+          catchError((error) => of(ArticleActions.deleteArticleFail(error))),
         ),
       ),
     ),
@@ -50,12 +50,11 @@ export class ArticleEffects {
   addComment = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.addComment),
-      map(action => action.slug),
-      withLatestFrom(this.ngrxFormsFacade.data$, this.ngrxFormsFacade.structure$),
-      exhaustMap(([slug, data, structure]) =>
+      withLatestFrom(this.ngrxFormsFacade.data$),
+      exhaustMap(([{ slug }, data]) =>
         this.articleService.addComment(slug, data.comment).pipe(
-          mergeMap(response => [ArticleActions.addCommentSuccess({ comment: response.comment }), resetForm()]),
-          catchError(result => of(setErrors({ errors: result.error.errors }))),
+          mergeMap((response) => [ArticleActions.addCommentSuccess({ comment: response.comment }), resetForm()]),
+          catchError((result) => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),
@@ -64,10 +63,10 @@ export class ArticleEffects {
   deleteComment = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.deleteComment),
-      concatMap(action =>
+      concatMap((action) =>
         this.articleService.deleteComment(action.commentId, action.slug).pipe(
-          map(_ => ArticleActions.deleteCommentSuccess({ commentId: action.commentId })),
-          catchError(error => of(ArticleActions.deleteCommentFail(error))),
+          map((_) => ArticleActions.deleteCommentSuccess({ commentId: action.commentId })),
+          catchError((error) => of(ArticleActions.deleteCommentFail(error))),
         ),
       ),
     ),
@@ -76,11 +75,10 @@ export class ArticleEffects {
   follow = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.follow),
-      map(action => action.username),
-      concatMap(username =>
+      concatMap(({ username }) =>
         this.actionsService.followUser(username).pipe(
-          map(response => ArticleActions.followSuccess({ profile: response.profile })),
-          catchError(error => of(ArticleActions.followFail(error))),
+          map((response) => ArticleActions.followSuccess({ profile: response.profile })),
+          catchError((error) => of(ArticleActions.followFail(error))),
         ),
       ),
     ),
@@ -89,11 +87,10 @@ export class ArticleEffects {
   unFollow = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.unFollow),
-      map(action => action.username),
-      concatMap(username =>
+      concatMap(({ username }) =>
         this.actionsService.unfollowUser(username).pipe(
-          map(response => ArticleActions.unFollowSuccess({ profile: response.profile })),
-          catchError(error => of(ArticleActions.unFollowFail(error))),
+          map((response) => ArticleActions.unFollowSuccess({ profile: response.profile })),
+          catchError((error) => of(ArticleActions.unFollowFail(error))),
         ),
       ),
     ),
@@ -102,11 +99,10 @@ export class ArticleEffects {
   favorite = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.favorite),
-      map(action => action.slug),
-      concatMap(slug =>
+      concatMap(({ slug }) =>
         this.actionsService.favorite(slug).pipe(
-          map(response => ArticleActions.favoriteSuccess({ article: response.article })),
-          catchError(error => of(ArticleActions.favoriteFail(error))),
+          map((response) => ArticleActions.favoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticleActions.favoriteFail(error))),
         ),
       ),
     ),
@@ -115,11 +111,10 @@ export class ArticleEffects {
   unFavorite = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.unFavorite),
-      map(action => action.slug),
-      concatMap(slug =>
+      concatMap(({ slug }) =>
         this.actionsService.unfavorite(slug).pipe(
-          map(response => ArticleActions.unFavoriteSuccess({ article: response.article })),
-          catchError(error => of(ArticleActions.unFavoriteFail(error))),
+          map((response) => ArticleActions.unFavoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticleActions.unFavoriteFail(error))),
         ),
       ),
     ),

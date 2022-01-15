@@ -4,20 +4,14 @@ import { Store } from '@ngrx/store';
 import { ArticleListState, ArticleListConfig } from './article-list.reducer';
 import { articleListQuery } from './article-list.selectors';
 import * as ArticleListActions from './article-list.actions';
-import { withLatestFrom, map } from 'rxjs/operators';
 import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 @Injectable()
 export class ArticleListFacade {
-  articles$ = this.store.select(articleListQuery.getArticles);
-  listConfig$ = this.store.select(articleListQuery.getListConfig);
+  articles$ = this.store.select(articleListQuery.selectArticleEntities);
+  listConfig$ = this.store.select(articleListQuery.selectListConfig);
   isLoading$ = this.store.select(articleListQuery.isLoading);
-  articlesCount$ = this.store.select(articleListQuery.getArticlesCount);
-  totalPages$ = this.articlesCount$.pipe(
-    withLatestFrom(this.listConfig$),
-    map(([articlesCount, config]) => {
-      return Array.from(new Array(Math.ceil(articlesCount / config.filters.limit)), (val, index) => index + 1);
-    }),
-  );
+  articlesCount$ = this.store.select(articleListQuery.selectArticlesCount);
+  totalPages$ = this.store.select(articleListQuery.selectTotalPages);
 
   constructor(private store: Store<ArticleListState>) {}
 

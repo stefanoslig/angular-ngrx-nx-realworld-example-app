@@ -31,13 +31,13 @@ export class ArticleListEffects {
       withLatestFrom(this.facade.listConfig$),
       concatMap(([_, config]) =>
         this.articleListService.query(config).pipe(
-          map(results =>
+          map((results) =>
             ArticleListActions.loadArticlesSuccess({
               articles: results.articles,
               articlesCount: results.articlesCount,
             }),
           ),
-          catchError(error => of(ArticleListActions.loadArticlesFail({ error }))),
+          catchError((error) => of(ArticleListActions.loadArticlesFail({ error }))),
         ),
       ),
     ),
@@ -46,11 +46,10 @@ export class ArticleListEffects {
   favorite = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleListActions.favorite),
-      map(action => action.slug),
-      concatMap(slug =>
+      concatMap(({ slug }) =>
         this.actionsService.favorite(slug).pipe(
-          map(response => ArticleListActions.favoriteSuccess({ article: response.article })),
-          catchError(error => of(ArticleListActions.favoriteFail(error))),
+          map((response) => ArticleListActions.favoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticleListActions.favoriteFail(error))),
         ),
       ),
     ),
@@ -59,11 +58,10 @@ export class ArticleListEffects {
   unFavorite = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleListActions.unFavorite),
-      map(action => action.slug),
-      concatMap(slug =>
+      concatMap(({ slug }) =>
         this.actionsService.unfavorite(slug).pipe(
-          map(response => ArticleListActions.unFavoriteSuccess({ article: response.article })),
-          catchError(error => of(ArticleListActions.unFavoriteFail(error))),
+          map((response) => ArticleListActions.unFavoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticleListActions.unFavoriteFail(error))),
         ),
       ),
     ),
