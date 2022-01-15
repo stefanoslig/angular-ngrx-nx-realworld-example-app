@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { ArticleEffects } from './+state/article.effects';
 import { ArticleFacade } from './+state/article.facade';
-import { articleInitialState, articleReducer, articleFeatureKey } from './+state/article.reducer';
+import { articleFeature } from './+state/article.reducer';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { ArticleGuardService } from './article-guard.service';
@@ -27,9 +27,7 @@ import { MarkdownPipe } from './markdown.pipe';
         canActivate: [ArticleGuardService],
       },
     ]),
-    StoreModule.forFeature(articleFeatureKey, articleReducer, {
-      initialState: articleInitialState,
-    }),
+    StoreModule.forFeature(articleFeature),
     EffectsModule.forFeature([ArticleEffects]),
     NgrxFormsModule,
     SharedModule,

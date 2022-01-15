@@ -1,15 +1,14 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ArticleState, articleFeatureKey } from './article.reducer';
+import { createSelector } from '@ngrx/store';
+import { articleFeature, ArticleState } from './article.reducer';
 
-const getArticle = createFeatureSelector<ArticleState>(articleFeatureKey);
-export const getArticleData = createSelector(getArticle, (state: ArticleState) => state.data);
-export const getComments = createSelector(getArticle, (state: ArticleState) => state.comments);
-export const getArticleLoaded = createSelector(getArticle, (state: ArticleState) => state.loaded);
-export const getAuthorUsername = createSelector(getArticle, (state: ArticleState) => state.data.author.username);
+export const { selectArticleState, selectComments, selectData, selectLoaded, selectLoading } = articleFeature;
+export const getAuthorUsername = createSelector(selectData, (data) => data.author.username);
 
 export const articleQuery = {
-  getArticleData,
-  getComments,
-  getArticleLoaded,
+  selectArticleState,
+  selectComments,
+  selectData,
+  selectLoaded,
+  selectLoading,
   getAuthorUsername,
 };

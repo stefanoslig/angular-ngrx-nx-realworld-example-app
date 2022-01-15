@@ -7,9 +7,9 @@ import { articleQuery } from './article.selectors';
 
 @Injectable()
 export class ArticleFacade {
-  article$ = this.store.select(articleQuery.getArticleData);
-  comments$ = this.store.select(articleQuery.getComments);
-  articleLoaded$ = this.store.select(articleQuery.getArticleLoaded);
+  article$ = this.store.select(articleQuery.selectData);
+  comments$ = this.store.select(articleQuery.selectComments);
+  articleLoaded$ = this.store.select(articleQuery.selectLoaded);
   authorUsername$ = this.store.select(articleQuery.getAuthorUsername);
 
   constructor(private store: Store<ArticleState>) {}
