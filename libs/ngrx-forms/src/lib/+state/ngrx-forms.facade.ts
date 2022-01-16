@@ -6,10 +6,10 @@ import * as NgrxFormsActions from './ngrx-forms.actions';
 
 @Injectable()
 export class NgrxFormsFacade {
-  data$ = this.store.select(ngrxFormsQuery.getData);
-  structure$ = this.store.select(ngrxFormsQuery.getStructure);
-  errors$ = this.store.select(ngrxFormsQuery.getErrors);
-  touched$ = this.store.select(ngrxFormsQuery.getTouchedForm);
+  data$ = this.store.select(ngrxFormsQuery.selectData);
+  structure$ = this.store.select(ngrxFormsQuery.selectStructure);
+  errors$ = this.store.select(ngrxFormsQuery.selectErrors);
+  touched$ = this.store.select(ngrxFormsQuery.selectTouched);
 
   constructor(private store: Store<NgrxFormsState>) {}
 
