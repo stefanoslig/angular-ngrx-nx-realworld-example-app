@@ -1,17 +1,11 @@
 import { User } from '@angular-ngrx-nx-realworld-example-app/api';
-import { createReducer, Action, on } from '@ngrx/store';
+import { createReducer, on, createFeature } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 
-export const authFeatureKey = 'auth';
-
-export interface Auth {
+export interface AuthState {
   loggedIn: boolean;
   user: User;
   status: Status;
-}
-
-export interface AuthState {
-  readonly [authFeatureKey]: Auth;
 }
 
 export enum Status {
@@ -19,7 +13,7 @@ export enum Status {
   IN_PROGRESS = 'IN_PROGRESS',
 }
 
-export const authInitialState: Auth = {
+export const authInitialState: AuthState = {
   loggedIn: false,
   status: Status.INIT,
   user: {
@@ -31,35 +25,29 @@ export const authInitialState: Auth = {
   },
 };
 
-const reducer = createReducer(
-  authInitialState,
-  on(AuthActions.getUserSuccess, (state, action) => ({
-    ...state,
-    loggedIn: true,
-    user: action.user,
-  })),
-  on(AuthActions.getUserFail, (state, action) => ({
-    ...authInitialState,
-  })),
-  on(AuthActions.login, AuthActions.register, (state, _) => ({
-    ...state,
-    status: Status.IN_PROGRESS,
-  })),
-  on(AuthActions.registerSuccess, AuthActions.loginSuccess, (state, action) => ({
-    ...state,
-    loggedIn: true,
-    status: Status.INIT,
-    user: action.user,
-  })),
-  on(AuthActions.registerFail, AuthActions.loginFail, (state, _) => ({
-    ...state,
-    status: Status.INIT,
-  })),
-  on(AuthActions.logout, (state, action) => ({
-    ...authInitialState,
-  })),
-);
-
-export function authReducer(state: Auth | undefined, action: Action): Auth {
-  return reducer(state, action);
-}
+export const authFeature = createFeature({
+  name: 'auth',
+  reducer: createReducer(
+    authInitialState,
+    on(AuthActions.getUserSuccess, (state, action) => ({
+      ...state,
+      loggedIn: true,
+      user: action.user,
+    })),
+    on(AuthActions.getUserFail, AuthActions.logout, () => authInitialState),
+    on(AuthActions.login, AuthActions.register, (state) => ({
+      ...state,
+      status: Status.IN_PROGRESS,
+    })),
+    on(AuthActions.registerSuccess, AuthActions.loginSuccess, (state, action) => ({
+      ...state,
+      loggedIn: true,
+      status: Status.INIT,
+      user: action.user,
+    })),
+    on(AuthActions.registerFail, AuthActions.loginFail, (state) => ({
+      ...state,
+      status: Status.INIT,
+    })),
+  ),
+});

@@ -25,9 +25,9 @@ const reducer = createReducer(
   }),
   on(NgrxFormsActions.setStructure, (state, action) => ({ ...state, structure: action.structure.slice(0) })),
   on(NgrxFormsActions.setErrors, (state, action) => ({ ...state, errors: action.errors })),
-  on(NgrxFormsActions.initializeErrors, (state, action) => ({ ...state, errors: {} })),
-  on(NgrxFormsActions.initializeForm, (state, action) => ngrxFormsInitialState),
-  on(NgrxFormsActions.resetForm, (state, action) => ({ ...state, touched: false })),
+  on(NgrxFormsActions.initializeErrors, (state) => ({ ...state, errors: {} })),
+  on(NgrxFormsActions.initializeForm, () => ngrxFormsInitialState),
+  on(NgrxFormsActions.resetForm, (state) => ({ ...state, touched: false })),
 );
 
 export function ngrxFormsReducer(state: NgrxForms | undefined, action: Action): NgrxForms {

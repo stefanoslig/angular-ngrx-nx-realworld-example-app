@@ -7,9 +7,9 @@ import * as AuthActions from './auth.actions';
 
 @Injectable()
 export class AuthFacade {
-  auth$ = this.store.select(authQuery.getAuth);
-  user$ = this.store.select(authQuery.getUser);
-  isLoggedIn$ = this.store.select(authQuery.getLoggedIn);
+  auth$ = this.store.select(authQuery.selectAuthState);
+  user$ = this.store.select(authQuery.selectUser);
+  isLoggedIn$ = this.store.select(authQuery.selectLoggedIn);
 
   constructor(private store: Store<AuthState>) {}
 

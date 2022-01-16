@@ -17,7 +17,7 @@ export const homeInitialState: Home = {
 const reducer = createReducer(
   homeInitialState,
   on(HomeActions.loadTagsSuccess, (state, action) => ({ ...state, tags: action.tags })),
-  on(HomeActions.loadTagsFail, (state, action) => ({ ...state, tags: [] })),
+  on(HomeActions.loadTagsFail, (state) => ({ ...state, tags: [] })),
 );
 
 export function homeReducer(state: Home | undefined, action: Action): Home {
