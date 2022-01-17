@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { ProfileEffects } from './+state/profile.effects';
 import { ProfileFacade } from './+state/profile.facade';
-import { profileInitialState, profileReducer, profileFeatureKey } from './+state/profile.reducer';
+import { profileFeature } from './+state/profile.reducer';
 import { ProfileArticlesComponent } from './profile-articles.component';
 import {
   ProfileArticlesResolverService,
@@ -44,9 +44,7 @@ import { ProfileService } from './profile.service';
         ],
       },
     ]),
-    StoreModule.forFeature(profileFeatureKey, profileReducer, {
-      initialState: profileInitialState,
-    }),
+    StoreModule.forFeature(profileFeature),
     EffectsModule.forFeature([ProfileEffects]),
   ],
   providers: [

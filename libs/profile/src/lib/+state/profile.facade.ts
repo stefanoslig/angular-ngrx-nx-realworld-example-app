@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as ProfileActions from './profile.actions';
 
-import { getProfile, ProfileState } from './profile.reducer';
+import { ProfileState } from './profile.reducer';
+import { profileQuery } from './profile.selectors';
 
 @Injectable()
 export class ProfileFacade {
-  profile$ = this.store.select(getProfile);
+  profile$ = this.store.select(profileQuery.selectProfileState);
 
   constructor(private store: Store<ProfileState>) {}
 
