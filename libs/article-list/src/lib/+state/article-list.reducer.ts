@@ -72,11 +72,25 @@ export const articleListFeature = createFeature({
       const articles = { ...state.articles, loading: true };
       return { ...state, articles };
     }),
-    on(ArticleListActions.loadArticlesSuccess, (state, { articles, articlesCount }) => {
-      return { ...state, entities: articles, articlesCount, loading: false, loaded: true };
+    on(ArticleListActions.loadArticlesSuccess, (state, action) => {
+      const articles = {
+        ...state.articles,
+        entities: action.articles,
+        articlesCount: action.articlesCount,
+        loading: false,
+        loaded: true,
+      };
+      return { ...state, articles };
     }),
-    on(ArticleListActions.loadArticlesFail, (state) => {
-      return { ...state, entities: [], articlesCount: 0, loading: false, loaded: true };
+    on(ArticleListActions.loadArticlesFail, (state, _) => {
+      const articles = {
+        ...state.articles,
+        entities: [],
+        articlesCount: 0,
+        loading: false,
+        loaded: true,
+      };
+      return { ...state, articles };
     }),
     on(ArticleListActions.unFavoriteSuccess, ArticleListActions.favoriteSuccess, (state, { article }) => ({
       ...state,

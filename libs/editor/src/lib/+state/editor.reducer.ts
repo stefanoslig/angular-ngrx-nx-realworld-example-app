@@ -1,19 +1,13 @@
 import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 
-import { Action, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import * as EditorActions from './editor.actions';
 
-export const editorFeatureKey = 'editor';
-
-export interface Editor {
+export interface EditorState {
   article: Article;
 }
 
-export interface EditorState {
-  readonly [editorFeatureKey]: Editor;
-}
-
-export const editorInitialState: Editor = {
+export const editorInitialState: EditorState = {
   article: {
     slug: '',
     title: '',
@@ -34,12 +28,11 @@ export const editorInitialState: Editor = {
   },
 };
 
-const reducer = createReducer(
-  editorInitialState,
-  on(EditorActions.loadArticleSuccess, (state, action) => ({ ...state, article: action.article })),
-  on(EditorActions.loadArticleFail, EditorActions.initializeArticle, () => editorInitialState),
-);
-
-export function editorReducer(state: Editor | undefined, action: Action): Editor {
-  return reducer(state, action);
-}
+export const editorFeature = createFeature({
+  name: 'editor',
+  reducer: createReducer(
+    editorInitialState,
+    on(EditorActions.loadArticleSuccess, (state, action) => ({ ...state, article: action.article })),
+    on(EditorActions.loadArticleFail, EditorActions.initializeArticle, () => editorInitialState),
+  ),
+});

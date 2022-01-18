@@ -8,7 +8,7 @@ import { editorQuery } from './editor.selectors';
 
 @Injectable()
 export class EditorFacade {
-  article$ = this.store.select(editorQuery.getArticle);
+  article$ = this.store.select(editorQuery.selectArticle);
 
   constructor(private store: Store<EditorState>) {}
 
