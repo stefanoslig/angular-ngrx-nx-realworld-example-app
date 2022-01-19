@@ -1,27 +1,27 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import * as NgrxErrorActions from './ngrx-error.actions';
 
-export const ngrxErrorFeatureKey = 'ngrxError';
-
-export interface NgrxError {
-  code: number;
-  message?: string;
-}
-
 export interface NgrxErrorState {
-  readonly [ngrxErrorFeatureKey]: NgrxError;
+  code: number;
+  message: string | undefined;
 }
 
-export const ngrxErrorInitialState: NgrxError = {
+export const ngrxErrorInitialState: NgrxErrorState = {
+  message: undefined,
   code: -1,
 };
 
-const reducer = createReducer(
-  ngrxErrorInitialState,
-  on(NgrxErrorActions.throw401Error, (state, action) => ({ code: action.error.status, message: action.error.message })),
-  on(NgrxErrorActions.throw404Error, (state, action) => ({ code: action.error.status, message: action.error.message })),
-);
-
-export function ngrxErrorReducer(state: NgrxError | undefined, action: Action): NgrxError {
-  return reducer(state, action);
-}
+export const ngrxErrorFeature = createFeature({
+  name: 'ngrxError',
+  reducer: createReducer(
+    ngrxErrorInitialState,
+    on(NgrxErrorActions.throw401Error, (state, action) => ({
+      code: action.error.status,
+      message: action.error.message,
+    })),
+    on(NgrxErrorActions.throw404Error, (state, action) => ({
+      code: action.error.status,
+      message: action.error.message,
+    })),
+  ),
+});
