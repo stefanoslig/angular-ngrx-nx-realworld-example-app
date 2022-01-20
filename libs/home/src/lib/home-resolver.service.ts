@@ -3,10 +3,10 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Observable, of } from 'rxjs';
 
 import { HomeFacade } from './+state/home.facade';
-import { Home } from './+state/home.reducer';
+import { HomeState } from './+state/home.reducer';
 
 @Injectable()
-export class HomeResolverService implements Resolve<Home> {
+export class HomeResolverService implements Resolve<HomeState> {
   constructor(private facade: HomeFacade) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {

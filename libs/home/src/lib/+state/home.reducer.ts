@@ -1,25 +1,20 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import * as HomeActions from './home.actions';
 export const homeFeatureKey = 'home';
 
 export interface HomeState {
-  readonly [homeFeatureKey]: Home;
-}
-
-export interface Home {
   tags: string[];
 }
 
-export const homeInitialState: Home = {
+export const homeInitialState: HomeState = {
   tags: [],
 };
 
-const reducer = createReducer(
-  homeInitialState,
-  on(HomeActions.loadTagsSuccess, (state, action) => ({ ...state, tags: action.tags })),
-  on(HomeActions.loadTagsFail, (state) => ({ ...state, tags: [] })),
-);
-
-export function homeReducer(state: Home | undefined, action: Action): Home {
-  return reducer(state, action);
-}
+export const homeFeature = createFeature({
+  name: 'home',
+  reducer: createReducer(
+    homeInitialState,
+    on(HomeActions.loadTagsSuccess, (state, action) => ({ ...state, tags: action.tags })),
+    on(HomeActions.loadTagsFail, (state) => ({ ...state, tags: [] })),
+  ),
+});
