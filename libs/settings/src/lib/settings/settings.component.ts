@@ -2,9 +2,9 @@ import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { editSettings } from '../+state/settings.actions';
 
@@ -44,6 +44,7 @@ const structure: Field[] = [
   },
 ];
 
+@UntilDestroy()
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -54,16 +55,11 @@ export class SettingsComponent implements OnInit {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(
-    private store: Store<any>,
-    private router: Router,
-    private authFacade: AuthFacade,
-    private ngrxFormsFacade: NgrxFormsFacade,
-  ) {}
+  constructor(private store: Store<any>, private authFacade: AuthFacade, private ngrxFormsFacade: NgrxFormsFacade) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
-    this.authFacade.user$.subscribe(user => this.ngrxFormsFacade.setData(user));
+    this.authFacade.user$.pipe(untilDestroyed(this)).subscribe((user) => this.ngrxFormsFacade.setData(user));
     this.data$ = this.ngrxFormsFacade.data$;
     this.structure$ = this.ngrxFormsFacade.structure$;
   }

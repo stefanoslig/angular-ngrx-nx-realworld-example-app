@@ -2,10 +2,11 @@ import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject, combineLatest } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Comment } from './article.interfaces';
 import { ArticleFacade } from './+state/article.facade';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 const structure: Field[] = [
   {
@@ -18,6 +19,7 @@ const structure: Field[] = [
   },
 ];
 
+UntilDestroy();
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
@@ -31,7 +33,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   isAuthenticated$: Observable<boolean>;
   structure$: Observable<Field[]>;
   data$: Observable<any>;
-  unsubscribe$ = new Subject<void>();
   currentUser$: Observable<User>;
   touchedForm$: Observable<boolean>;
 
@@ -54,9 +55,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.ngrxFormsFacade.setData('');
     this.authFacade.auth$
       .pipe(
-        filter(auth => auth.loggedIn),
-        auth$ => combineLatest([auth$, this.facade.authorUsername$]),
-        takeUntil(this.unsubscribe$),
+        filter((auth) => auth.loggedIn),
+        (auth$) => combineLatest([auth$, this.facade.authorUsername$]),
+        untilDestroyed(this),
       )
       .subscribe(([auth, username]) => {
         this.canModify = auth.user.username === username;
@@ -89,8 +90,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
     this.facade.initializeArticle();
   }
 }
