@@ -1,25 +1,20 @@
 import { Observable, Subject } from 'rxjs';
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Store } from '@ngrx/store';
-
-import * as fromHome from './+state/home.reducer';
-import * as fromAuth from '@angular-ngrx-nx-realworld-example-app/auth';
-import { withLatestFrom, tap, takeUntil } from 'rxjs/operators';
-import * as fromArticleList from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { ArticleListConfig } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { articleListInitialState, ArticleListFacade } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { HomeFacade } from './+state/home.facade';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   listConfig$: Observable<ArticleListConfig>;
   tags$: Observable<string[]>;
   isAuthenticated: boolean;
@@ -27,13 +22,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private facade: HomeFacade,
-    private router: Router,
     private articleListFacade: ArticleListFacade,
     private authFacade: AuthFacade,
   ) {}
 
   ngOnInit() {
-    this.authFacade.isLoggedIn$.pipe(takeUntil(this.unsubscribe$)).subscribe(isLoggedIn => {
+    this.authFacade.isLoggedIn$.pipe(untilDestroyed(this)).subscribe((isLoggedIn) => {
       this.isAuthenticated = isLoggedIn;
       this.getArticles();
     });
@@ -64,10 +58,5 @@ export class HomeComponent implements OnInit, OnDestroy {
         tag,
       },
     });
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }

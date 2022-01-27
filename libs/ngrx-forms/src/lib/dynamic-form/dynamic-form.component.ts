@@ -1,21 +1,22 @@
 import { Field } from '../+state/ngrx-forms.interfaces';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Observable, Subject, combineLatest } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { debounceTime, map, takeUntil, tap, filter } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+UntilDestroy();
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynamicFormComponent implements OnInit, OnDestroy {
+export class DynamicFormComponent implements OnInit {
   @Input() structure$: Observable<Field[]>;
   @Input() data$: Observable<any>;
   @Input() touchedForm$: Observable<boolean>;
   @Output() updateForm: EventEmitter<any> = new EventEmitter();
-  unsubscribe$: Subject<void> = new Subject();
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {}
@@ -24,31 +25,26 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     this.structure$
       .pipe(
         map(this.formBuilder),
-        tap(f => (this.form = f)),
-        tap(f => this.listenFormChanges(f)),
-        f$ => combineLatest([f$, this.data$]),
-        takeUntil(this.unsubscribe$),
+        tap((f) => (this.form = f)),
+        tap((f) => this.listenFormChanges(f)),
+        (f$) => combineLatest([f$, this.data$]),
+        untilDestroyed(this),
       )
       .subscribe(this.patchValue);
 
     if (this.touchedForm$) {
       this.touchedForm$
         .pipe(
-          filter(t => !t && !!this.form),
-          takeUntil(this.unsubscribe$),
+          filter((t) => !t && !!this.form),
+          untilDestroyed(this),
         )
-        .subscribe(_ => this.form.reset());
+        .subscribe((_) => this.form.reset());
     }
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   private formBuilder = (structure: Field[]): FormGroup => {
     const group = this.fb.group({});
-    structure.forEach(field => group.addControl(field.name, this.control(field)));
+    structure.forEach((field) => group.addControl(field.name, this.control(field)));
     return group;
   };
 
@@ -62,10 +58,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   private listenFormChanges(form: FormGroup) {
     form.valueChanges
-      .pipe(
-        debounceTime(100),
-        takeUntil(this.unsubscribe$),
-      )
+      .pipe(debounceTime(100), untilDestroyed(this))
       .subscribe((changes: any) => this.updateForm.emit(changes));
   }
 }

@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
       .getItem()
       .pipe(
         take(1),
-        filter(token => !!token),
+        filter((token) => !!token),
       )
-      .subscribe(token => this.authFacade.user());
+      .subscribe(() => this.authFacade.user());
   }
 }

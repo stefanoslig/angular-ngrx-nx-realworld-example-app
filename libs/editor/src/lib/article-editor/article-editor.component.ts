@@ -2,7 +2,7 @@ import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/n
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 
 import { EditorFacade } from '../+state/editor.facade';
@@ -34,6 +34,7 @@ const structure: Field[] = [
   },
 ];
 
+UntilDestroy();
 @Component({
   selector: 'app-article-editor',
   templateUrl: './article-editor.component.html',
@@ -44,13 +45,13 @@ export class ArticleEditorComponent implements OnInit, OnDestroy {
   structure$: Observable<Field[]>;
   data$: Observable<any>;
 
-  constructor(private ngrxFormsFacade: NgrxFormsFacade, private router: Router, private facade: EditorFacade) {}
+  constructor(private ngrxFormsFacade: NgrxFormsFacade, private facade: EditorFacade) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
     this.data$ = this.ngrxFormsFacade.data$;
     this.structure$ = this.ngrxFormsFacade.structure$;
-    this.facade.article$.subscribe(article => this.ngrxFormsFacade.setData(article));
+    this.facade.article$.pipe(untilDestroyed(this)).subscribe((article) => this.ngrxFormsFacade.setData(article));
   }
 
   updateForm(changes: any) {
