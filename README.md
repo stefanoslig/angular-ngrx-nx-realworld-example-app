@@ -16,13 +16,11 @@ For more information on how to this works with other frontends/backends, head ov
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5 using [Nrwl Nx](https://nrwl.io/nx).
 
-## Nrwl Extensions for Angular (Nx)
+## Nx - Smart, Fast and Extensible Build System
 
-<a href="https://nrwl.io/nx"><img src="https://preview.ibb.co/mW6sdw/nx_logo.png" width="180"></a>
+<p style="text-align: center;"><a href="https://nx.dev"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="180"></a></p>
 
-Nx is an open source toolkit for enterprise Angular applications.
-
-Nx is designed to help you create and build enterprise grade Angular applications. It provides an opinionated approach to application project structure and patterns.
+Nx is a smart, fast and extensible build system with first class monorepo support and powerful integrations. It helps you architect, test, and build at any scale, integrating seamlessly with modern technologies and libraries while providing a robust CLI, caching, dependency management, and more.
 
 ## Quick Start & Documentation
 
