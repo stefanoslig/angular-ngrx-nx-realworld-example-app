@@ -24,47 +24,82 @@ Nx is a smart, fast and extensible build system with first class monorepo suppor
 
 ## Quick Start & Documentation
 
-### Requirements
+[Nx Documentation](https://nx.dev/angular)
 
-Install the Angular CLI globally
+[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
 
-```console
-npm install -g @angular/cli
-```
+[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
 
-or
+## Adding capabilities to your workspace
 
-```console
-yarn global add @angular/cli
-```
+Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
-### Initial setup
+These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-cd into the local repo directory and run:
+Below are our core plugins:
 
-```console
-npm install
-```
+- [Angular](https://angular.io)
+  - `ng add @nrwl/angular`
+- [React](https://reactjs.org)
+  - `ng add @nrwl/react`
+- Web (no framework frontends)
+  - `ng add @nrwl/web`
+- [Nest](https://nestjs.com)
+  - `ng add @nrwl/nest`
+- [Express](https://expressjs.com)
+  - `ng add @nrwl/express`
+- [Node](https://nodejs.org)
+  - `ng add @nrwl/node`
 
-or
+There are also many [community plugins](https://nx.dev/community) you could add.
 
-```console
-yarn
-```
+## Generate an application
 
-### Running the application
+Run `ng g @nrwl/angular:app my-app` to generate an application.
 
-```console
-ng serve
-```
+> You can use any of the plugins above to generate applications as well.
 
-### Running tests for the application
+When using Nx, you can create multiple applications and libraries in the same workspace.
 
-```console
-ng test
-```
+## Generate a library
 
-[Watch a 5-minute video on how to get started with Nx.](http://nrwl.io/nx)
+Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+
+> You can also use any of the plugins above to generate libraries as well.
+
+Libraries are shareable across libraries and applications. They can be imported from `@test/mylib`.
+
+## Development server
+
+Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng g component my-component --project=my-app` to generate a new component.
+
+## Build
+
+Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+
+Run `nx affected:test` to execute the unit tests affected by a change.
+
+## Running end-to-end tests
+
+Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+
+Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+
+## Understand your workspace
+
+Run `nx graph` to see a diagram of the dependencies of your projects.
+
+## Further help
+
+Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
 
 ## Functionality overview
 
