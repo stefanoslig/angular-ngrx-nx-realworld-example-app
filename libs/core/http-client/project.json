@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/core/http-client",
+  "sourceRoot": "libs/core/http-client/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/core/http-client"],
+      "options": {
+        "jestConfig": "libs/core/http-client/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/http-client/src/**/*.ts", "libs/core/http-client/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

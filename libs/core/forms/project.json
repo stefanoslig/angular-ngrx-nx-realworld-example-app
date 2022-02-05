@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/core/forms",
+  "sourceRoot": "libs/core/forms/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/core/forms"],
+      "options": {
+        "jestConfig": "libs/core/forms/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/forms/src/**/*.ts", "libs/core/forms/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

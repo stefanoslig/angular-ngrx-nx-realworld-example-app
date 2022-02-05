@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/ui/components",
+  "sourceRoot": "libs/ui/components/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui/components"],
+      "options": {
+        "jestConfig": "libs/ui/components/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/ui/components/src/**/*.ts", "libs/ui/components/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}
