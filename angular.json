@@ -4,15 +4,24 @@
     "api": "libs/api",
     "article": "libs/article",
     "article-list": "libs/article-list",
+    "articles-data-access": "libs/articles/data-access",
+    "articles-feature-article": "libs/articles/feature-article",
+    "articles-feature-article-edit": "libs/articles/feature-article-edit",
+    "articles-feature-articles-list": "libs/articles/feature-articles-list",
     "auth": "libs/auth",
     "conduit": "apps/conduit",
     "conduit-e2e": "apps/conduit-e2e",
+    "core-api-types": "libs/core/api-types",
+    "core-error-handler": "libs/core/error-handler",
+    "core-forms": "libs/core/forms",
+    "core-http-client": "libs/core/http-client",
     "editor": "libs/editor",
     "home": "libs/home",
     "ngrx-error": "libs/ngrx-error",
     "ngrx-forms": "libs/ngrx-forms",
     "profile": "libs/profile",
     "settings": "libs/settings",
-    "shared": "libs/shared"
+    "shared": "libs/shared",
+    "ui-components": "libs/ui/components"
   }
 }

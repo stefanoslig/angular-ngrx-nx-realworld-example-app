@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/core/error-handler",
+  "sourceRoot": "libs/core/error-handler/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/core/error-handler"],
+      "options": {
+        "jestConfig": "libs/core/error-handler/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/error-handler/src/**/*.ts", "libs/core/error-handler/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/core/api-types",
+  "sourceRoot": "libs/core/api-types/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/core/api-types"],
+      "options": {
+        "jestConfig": "libs/core/api-types/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/api-types/src/**/*.ts", "libs/core/api-types/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}
