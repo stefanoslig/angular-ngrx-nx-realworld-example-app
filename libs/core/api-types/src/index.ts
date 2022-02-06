@@ -1,1 +1,3 @@
-export * from './lib/core-api-types.module';
+export * from './lib/article';
+export * from './lib/user';
+export * from './lib/profile';

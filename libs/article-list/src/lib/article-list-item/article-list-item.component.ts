@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, NgModule } from '@angular/core';
-import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'app-article-list-item',
   templateUrl: './article-list-item.component.html',

@@ -1,5 +1,6 @@
-import { ApiService, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Errors, NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { ApiService } from '@realworld/core/http-client';
+import { User } from '@realworld/core/api-types';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';

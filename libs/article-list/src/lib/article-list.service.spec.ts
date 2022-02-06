@@ -1,4 +1,4 @@
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ApiService } from '@realworld/core/http-client';
 import { inject, TestBed } from '@angular/core/testing';
 
 import { ArticleListService } from './article-list.service';
