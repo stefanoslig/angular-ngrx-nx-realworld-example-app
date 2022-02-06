@@ -1,4 +1,4 @@
-import { Profile } from "./profile";
+import { Profile } from './profile';
 
 export interface Article {
   slug: string;
@@ -16,4 +16,3 @@ export interface Article {
 export interface ArticleResponse {
   article: Article;
 }
-
