@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, User } from '@realworld/core/api-types';
 import { Comment } from '../article.interfaces';
 
 @Component({

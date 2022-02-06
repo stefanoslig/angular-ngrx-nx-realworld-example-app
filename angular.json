@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "api": "libs/api",
     "article": "libs/article",
     "article-list": "libs/article-list",
     "articles-data-access": "libs/articles/data-access",

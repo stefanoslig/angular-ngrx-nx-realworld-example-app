@@ -1,9 +1,9 @@
-import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, User } from '@realworld/core/api-types';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { Comment } from './article.interfaces';
 import { ArticleFacade } from './+state/article.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';

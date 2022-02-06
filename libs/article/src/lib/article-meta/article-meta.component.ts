@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
-
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'app-article-meta',
   templateUrl: './article-meta.component.html',

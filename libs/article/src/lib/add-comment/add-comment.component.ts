@@ -1,4 +1,4 @@
-import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, User } from '@realworld/core/api-types';
 import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';

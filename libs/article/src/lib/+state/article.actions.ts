@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Article, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, Profile } from '@realworld/core/api-types';
 import { Comment } from '../article.interfaces';
 
 export const loadArticle = createAction('[article] LOAD_ARTICLE', props<{ slug: string }>());

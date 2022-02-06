@@ -1,4 +1,4 @@
-import { ApiModule } from '@angular-ngrx-nx-realworld-example-app/api';
+import { CoreHttpClientModule } from '@realworld/core/http-client';
 import { AuthModule } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxErrorModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-error';
 import { NgrxRouterModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
@@ -17,7 +17,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @NgModule({
   imports: [
-    ApiModule,
+    CoreHttpClientModule,
     AuthModule,
     BrowserModule,
     NxModule.forRoot(),

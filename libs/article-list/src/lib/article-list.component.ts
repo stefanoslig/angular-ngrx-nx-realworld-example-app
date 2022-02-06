@@ -1,4 +1,4 @@
-import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@realworld/core/api-types';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
