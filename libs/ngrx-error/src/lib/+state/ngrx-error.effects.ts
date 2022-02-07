@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import * as NgrxErrorActions from './ngrx-error.actions';
-import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 
 @Injectable()
 export class NgrxErrorEffects {
-  error401$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(NgrxErrorActions.throw401Error),
-      map(_ => go({ to: { path: ['/login'] } })),
-    ),
+  error401$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(NgrxErrorActions.throw401Error),
+        tap(() => this.router.navigate(['/login'])),
+      ),
+    { dispatch: false },
   );
 
-  error404$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(NgrxErrorActions.throw404Error),
-      map(_ => go({ to: { path: ['/'] } })),
-    ),
+  error404$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(NgrxErrorActions.throw404Error),
+        tap(() => this.router.navigate(['/'])),
+      ),
+    { dispatch: false },
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(private readonly actions$: Actions, private readonly router: Router) {}
 }

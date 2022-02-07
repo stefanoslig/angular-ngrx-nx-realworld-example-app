@@ -3,11 +3,11 @@ import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import * as ArticleActions from './article.actions';
 
 import { NgrxFormsFacade, setErrors, resetForm } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ArticleEffects {
@@ -40,7 +40,8 @@ export class ArticleEffects {
       ofType(ArticleActions.deleteArticle),
       concatMap((action) =>
         this.articleService.deleteArticle(action.slug).pipe(
-          map((_) => go({ to: { path: ['/'] } })),
+          tap((_) => this.router.navigate(['/'])),
+          map((_) => ArticleActions.deleteArticleSuccess()),
           catchError((error) => of(ArticleActions.deleteArticleFail(error))),
         ),
       ),
@@ -121,9 +122,10 @@ export class ArticleEffects {
   );
 
   constructor(
-    private actions$: Actions,
-    private articleService: ArticleService,
-    private actionsService: ActionsService,
-    private ngrxFormsFacade: NgrxFormsFacade,
+    private readonly actions$: Actions,
+    private readonly articleService: ArticleService,
+    private readonly actionsService: ActionsService,
+    private readonly ngrxFormsFacade: NgrxFormsFacade,
+    private readonly router: Router,
   ) {}
 }

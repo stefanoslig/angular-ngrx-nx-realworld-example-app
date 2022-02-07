@@ -1,13 +1,13 @@
 import { AuthFacade, getUser } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import { SettingsService } from '../settings.service';
 import * as SettingsActions from './settings.actions';
-import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 
 @Injectable()
 export class SettingsEffects {
@@ -23,24 +23,21 @@ export class SettingsEffects {
         pass: data.pass,
         email: data.email,
       })),
-      concatMap(data =>
+      concatMap((data) =>
         this.settingsService.update(data).pipe(
-          mergeMap(result => [
-            getUser(),
-            go({
-              to: { path: ['profile', result.user.username] },
-            }),
-          ]),
-          catchError(result => of(setErrors({ errors: result.error.errors }))),
+          tap((result) => this.router.navigate(['profile', result.user.username])),
+          map(() => getUser()),
+          catchError((result) => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),
   );
 
   constructor(
-    private actions$: Actions,
-    private settingsService: SettingsService,
-    private authFacade: AuthFacade,
-    private ngrxFormsFacade: NgrxFormsFacade,
+    private readonly actions$: Actions,
+    private readonly settingsService: SettingsService,
+    private readonly authFacade: AuthFacade,
+    private readonly ngrxFormsFacade: NgrxFormsFacade,
+    private readonly router: Router,
   ) {}
 }
