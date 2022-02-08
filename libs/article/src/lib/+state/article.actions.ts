@@ -12,6 +12,8 @@ export const deleteArticle = createAction('[article] DELETE_ARTICLE', props<{ sl
 
 export const deleteArticleFail = createAction('[article] DELETE_ARTICLE_FAIL', props<{ error: Error }>());
 
+export const deleteArticleSuccess = createAction('[article] DELETE_ARTICLE_SUCCESS');
+
 export const initializeArticle = createAction('[article] INITIALIZE_ARTICLE');
 
 export const loadComments = createAction('[article] LOAD_COMMENTS', props<{ slug: string }>());

@@ -1,11 +1,11 @@
 import { ApiModule } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthModule } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxErrorModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-error';
-import { NgrxRouterModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NxModule } from '@nrwl/angular';
@@ -64,7 +64,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    NgrxRouterModule,
+    StoreRouterConnectingModule.forRoot(),
     NgrxErrorModule,
   ],
   declarations: [AppComponent, FooterComponent, NavbarComponent],

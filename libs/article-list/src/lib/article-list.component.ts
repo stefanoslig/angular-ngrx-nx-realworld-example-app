@@ -1,5 +1,6 @@
 import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
 
@@ -18,7 +19,7 @@ export class ArticleListComponent implements OnInit {
   listConfig$: Observable<ArticleListConfig>;
   isLoading$: Observable<boolean>;
 
-  constructor(private facade: ArticleListFacade) {}
+  constructor(private readonly facade: ArticleListFacade, private readonly router: Router) {}
 
   ngOnInit() {
     this.totalPages$ = this.facade.totalPages$;
@@ -36,7 +37,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   navigateToArticle(slug: string) {
-    this.facade.navigateToArticle(slug);
+    this.router.navigate(['/article', slug]);
   }
 
   setPage(page: number) {

@@ -1,12 +1,12 @@
 import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import { EditorService } from '../editor.service';
 import * as EditorActions from './editor.actions';
-import { go } from '@angular-ngrx-nx-realworld-example-app/ngrx-router';
 
 @Injectable()
 export class EditorEffects {
@@ -16,13 +16,9 @@ export class EditorEffects {
       withLatestFrom(this.ngrxFormsFacade.data$),
       concatMap(([_, data]) =>
         this.editorService.publishArticle(data).pipe(
-          // TODO dispatch this action from the router facade when you refactor
-          map(result =>
-            go({
-              to: { path: ['article', result.article.slug] },
-            }),
-          ),
-          catchError(result => of(setErrors({ errors: result.error.errors }))),
+          tap((result) => this.router.navigate(['article', result.article.slug])),
+          map(() => EditorActions.publishArticleSuccess()),
+          catchError((result) => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),
@@ -31,10 +27,10 @@ export class EditorEffects {
   loadArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EditorActions.loadArticle),
-      concatMap(action =>
+      concatMap((action) =>
         this.editorService.get(action.id).pipe(
-          map(response => EditorActions.loadArticleSuccess({ article: response.article })),
-          catchError(error => of(EditorActions.loadArticleFail(error))),
+          map((response) => EditorActions.loadArticleSuccess({ article: response.article })),
+          catchError((error) => of(EditorActions.loadArticleFail(error))),
         ),
       ),
     ),
@@ -44,5 +40,6 @@ export class EditorEffects {
     private actions$: Actions,
     private ngrxFormsFacade: NgrxFormsFacade,
     private editorService: EditorService,
+    private router: Router,
   ) {}
 }
