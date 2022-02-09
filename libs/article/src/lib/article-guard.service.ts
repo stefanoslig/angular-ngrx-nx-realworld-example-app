@@ -13,7 +13,7 @@ export class ArticleGuardService implements CanActivate {
 
   waitForArticleToLoad(): Observable<boolean> {
     return this.facade.articleLoaded$.pipe(
-      filter(loaded => loaded),
+      filter((loaded) => loaded),
       take(1),
     );
   }

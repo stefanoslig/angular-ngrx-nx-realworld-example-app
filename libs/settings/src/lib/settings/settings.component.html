@@ -9,16 +9,12 @@
         <app-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
         </app-dynamic-form>
         <div class="edit-button-container">
-          <button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
-            Update Settings
-          </button>
+          <button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">Update Settings</button>
         </div>
 
         <hr />
 
-        <button class="btn btn-outline-danger" (click)="logout()">
-          Or click here to logout.
-        </button>
+        <button class="btn btn-outline-danger" (click)="logout()">Or click here to logout.</button>
       </div>
     </div>
   </div>

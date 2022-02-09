@@ -11,7 +11,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let token: string;
-    this.localStorage.getItem().subscribe(t => (token = t));
+    this.localStorage.getItem().subscribe((t) => (token = t));
     if (token) {
       request = request.clone({
         setHeaders: {

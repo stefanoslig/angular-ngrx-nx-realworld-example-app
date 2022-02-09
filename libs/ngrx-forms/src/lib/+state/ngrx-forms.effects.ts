@@ -8,7 +8,7 @@ export class NgrxFormsEffects {
   setData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(NgrxFormsActions.setData, NgrxFormsActions.updateData),
-      map(action => NgrxFormsActions.initializeErrors()),
+      map(() => NgrxFormsActions.initializeErrors()),
     ),
   );
 

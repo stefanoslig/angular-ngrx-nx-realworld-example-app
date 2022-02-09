@@ -11,14 +11,14 @@ export class ProfileEffects {
   getProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProfileActions.getProfile),
-      groupBy(action => action.id),
-      mergeMap(group =>
+      groupBy((action) => action.id),
+      mergeMap((group) =>
         group.pipe(
-          map(action => action.id),
-          switchMap(username =>
+          map((action) => action.id),
+          switchMap((username) =>
             this.profileService.getProfile(username).pipe(
-              map(profile => ProfileActions.getProfileSuccess({ profile })),
-              catchError(error => of(ProfileActions.getProfileFail({ error }))),
+              map((profile) => ProfileActions.getProfileSuccess({ profile })),
+              catchError((error) => of(ProfileActions.getProfileFail({ error }))),
             ),
           ),
         ),
@@ -29,11 +29,11 @@ export class ProfileEffects {
   follow$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProfileActions.follow),
-      map(action => action.id),
-      concatMap(slug =>
+      map((action) => action.id),
+      concatMap((slug) =>
         this.actionsService.followUser(slug).pipe(
-          map(response => ProfileActions.followSuccess({ profile: response.profile })),
-          catchError(error => of(ProfileActions.followFail({ error }))),
+          map((response) => ProfileActions.followSuccess({ profile: response.profile })),
+          catchError((error) => of(ProfileActions.followFail({ error }))),
         ),
       ),
     ),
@@ -42,11 +42,11 @@ export class ProfileEffects {
   unFollow$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProfileActions.unFollow),
-      map(action => action.id),
-      concatMap(slug =>
+      map((action) => action.id),
+      concatMap((slug) =>
         this.actionsService.unfollowUser(slug).pipe(
-          map(response => ProfileActions.unFollowSuccess({ profile: response.profile })),
-          catchError(error => of(ProfileActions.unFollowFail({ error }))),
+          map((response) => ProfileActions.unFollowSuccess({ profile: response.profile })),
+          catchError((error) => of(ProfileActions.unFollowFail({ error }))),
         ),
       ),
     ),
