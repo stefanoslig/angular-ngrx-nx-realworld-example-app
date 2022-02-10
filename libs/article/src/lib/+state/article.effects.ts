@@ -1,9 +1,9 @@
 import { ArticleService } from '../article.service';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 import * as ArticleActions from './article.actions';
 
 import { NgrxFormsFacade, setErrors, resetForm } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
@@ -51,7 +51,7 @@ export class ArticleEffects {
   addComment = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleActions.addComment),
-      withLatestFrom(this.ngrxFormsFacade.data$),
+      concatLatestFrom(() => this.ngrxFormsFacade.data$),
       exhaustMap(([{ slug }, data]) =>
         this.articleService.addComment(slug, data.comment).pipe(
           mergeMap((response) => [ArticleActions.addCommentSuccess({ comment: response.comment }), resetForm()]),

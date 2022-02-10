@@ -1,8 +1,8 @@
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { Injectable } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map } from 'rxjs/operators';
 
 import { ArticleListService } from '../article-list.service';
 import * as ArticleListActions from './article-list.actions';
@@ -28,7 +28,7 @@ export class ArticleListEffects {
   loadArticles = createEffect(() =>
     this.actions$.pipe(
       ofType(ArticleListActions.loadArticles),
-      withLatestFrom(this.facade.listConfig$),
+      concatLatestFrom(() => this.facade.listConfig$),
       concatMap(([_, config]) =>
         this.articleListService.query(config).pipe(
           map((results) =>

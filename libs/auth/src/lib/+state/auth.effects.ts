@@ -3,9 +3,9 @@ import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-a
 import * as fromNgrxForms from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 
 import * as AuthActions from './auth.actions';
 import { LocalStorageJwtService } from '../local-storage-jwt.service';
@@ -27,7 +27,7 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      withLatestFrom(this.ngrxFormsFacade.data$),
+      concatLatestFrom(() => this.ngrxFormsFacade.data$),
       exhaustMap(([, data]) =>
         this.authService.login(data).pipe(
           map((response) => AuthActions.loginSuccess({ user: response.user })),
@@ -52,7 +52,7 @@ export class AuthEffects {
   register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.register),
-      withLatestFrom(this.ngrxFormsFacade.data$),
+      concatLatestFrom(() => this.ngrxFormsFacade.data$),
       exhaustMap(([, data]) =>
         this.authService.register(data).pipe(
           map((response) => AuthActions.registerSuccess({ user: response.user })),

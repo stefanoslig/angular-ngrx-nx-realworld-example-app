@@ -2,9 +2,9 @@ import { AuthFacade, getUser } from '@angular-ngrx-nx-realworld-example-app/auth
 import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 
 import { SettingsService } from '../settings.service';
 import * as SettingsActions from './settings.actions';
@@ -14,7 +14,7 @@ export class SettingsEffects {
   editSettings = createEffect(() =>
     this.actions$.pipe(
       ofType(SettingsActions.editSettings),
-      withLatestFrom(this.ngrxFormsFacade.data$, this.authFacade.user$),
+      concatLatestFrom(() => [this.ngrxFormsFacade.data$, this.authFacade.user$]),
       map(([_, data, user]) => ({
         ...user,
         image: data.image,

@@ -1,9 +1,9 @@
 import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 
 import { EditorService } from '../editor.service';
 import * as EditorActions from './editor.actions';
@@ -13,7 +13,7 @@ export class EditorEffects {
   publishArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EditorActions.publishArticle),
-      withLatestFrom(this.ngrxFormsFacade.data$),
+      concatLatestFrom(() => this.ngrxFormsFacade.data$),
       concatMap(([_, data]) =>
         this.editorService.publishArticle(data).pipe(
           tap((result) => this.router.navigate(['article', result.article.slug])),
