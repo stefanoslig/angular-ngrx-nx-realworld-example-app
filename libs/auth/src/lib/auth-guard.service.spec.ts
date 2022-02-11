@@ -35,21 +35,21 @@ describe('AuthGuardService', () => {
     guard = TestBed.inject(AuthGuardService);
   });
 
-  it('should return false if the user state is not logged in', done => {
-    jest.spyOn(storage, 'getItem').mockReturnValueOnce(of(null))
+  it('should return false if the user state is not logged in', (done) => {
+    jest.spyOn(storage, 'getItem').mockReturnValueOnce(of(null));
 
-    guard.canActivate().subscribe(value => {
+    guard.canActivate().subscribe((value) => {
       expect(value).toBe(false);
       done();
-    })
+    });
   });
 
-  it('should return true if the user state is logged in', done => {
-    jest.spyOn(storage, 'getItem').mockReturnValueOnce(of('token'))
+  it('should return true if the user state is logged in', (done) => {
+    jest.spyOn(storage, 'getItem').mockReturnValueOnce(of('token'));
 
-    guard.canActivate().subscribe(value => {
+    guard.canActivate().subscribe((value) => {
       expect(value).toBe(true);
       done();
-    })
+    });
   });
 });
