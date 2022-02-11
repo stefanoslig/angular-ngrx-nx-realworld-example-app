@@ -5,6 +5,7 @@ import { DataPersistence } from '@nrwl/angular';
 
 import { NgrxErrorEffects } from './ngrx-error.effects';
 import { hot } from 'jasmine-marbles';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NgrxErrorEffects', () => {
   let actions;
@@ -12,7 +13,7 @@ describe('NgrxErrorEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
+      imports: [StoreModule.forRoot({}), RouterTestingModule.withRoutes([])],
       providers: [NgrxErrorEffects, DataPersistence, provideMockActions(() => actions)],
     });
 

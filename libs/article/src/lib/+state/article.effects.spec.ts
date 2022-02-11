@@ -9,6 +9,7 @@ import { ArticleEffects } from './article.effects';
 import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { hot } from 'jasmine-marbles';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ArticleEffects', () => {
   let actions;
@@ -16,7 +17,7 @@ describe('ArticleEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+      imports: [StoreModule.forRoot({}), HttpClientTestingModule, RouterTestingModule.withRoutes([])],
       providers: [
         ArticleEffects,
         provideMockActions(() => actions),

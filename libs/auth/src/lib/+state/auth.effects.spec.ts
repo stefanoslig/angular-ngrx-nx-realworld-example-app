@@ -1,5 +1,5 @@
 import { ApiService, User } from '@angular-ngrx-nx-realworld-example-app/api';
-import { Errors, NgrxFormsFacade, SetErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { Errors, NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule, Action } from '@ngrx/store';
-import { cold, getTestScheduler } from 'jasmine-marbles';
+import { cold } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 import * as AuthActions from './auth.actions';
 
@@ -90,12 +90,12 @@ xdescribe('AuthEffects', () => {
         },
       };
       const loginAction = AuthActions.login();
-      const setErrors = new SetErrors(result.error.errors);
+      const setErrorsAction = setErrors({ errors: result.error.errors });
 
       actions$ = hot('-a---', { a: loginAction });
       const response = cold('-#', {}, result);
       service.login = jest.fn(() => response);
-      const expected = cold('--b', { b: setErrors });
+      const expected = cold('--b', { b: setErrorsAction });
 
       expect(effects.login$).toBeObservable(expected);
     });
@@ -130,12 +130,12 @@ xdescribe('AuthEffects', () => {
         },
       };
       const registerAction = AuthActions.register();
-      const setErrors = new SetErrors(result.error.errors);
+      const setErrorsAction = setErrors({ errors: result.error.errors });
 
       actions$ = hot('-a---', { a: registerAction });
       const response = cold('-#', {}, result);
       service.register = jest.fn(() => response);
-      const expected = cold('--b', { b: setErrors });
+      const expected = cold('--b', { b: setErrorsAction });
 
       expect(effects.register$).toBeObservable(expected);
     });

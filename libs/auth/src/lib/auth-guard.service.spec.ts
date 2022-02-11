@@ -5,6 +5,8 @@ import { cold } from 'jasmine-marbles';
 import { AuthGuardService } from './auth-guard.service';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { Component } from '@angular/core';
+import { of } from 'rxjs';
+import { doesNotReject } from 'assert';
 
 @Component({
   selector: 'app-test-comp',
@@ -33,16 +35,21 @@ describe('AuthGuardService', () => {
     guard = TestBed.inject(AuthGuardService);
   });
 
-  it('should return false if the user state is not logged in', () => {
-    const expected = cold('(a|)', { a: false });
+  it('should return false if the user state is not logged in', done => {
+    jest.spyOn(storage, 'getItem').mockReturnValueOnce(of(null))
 
-    (expect(guard.canActivate()) as any).toBeObservable(expected);
+    guard.canActivate().subscribe(value => {
+      expect(value).toBe(false);
+      done();
+    })
   });
 
-  it('should return true if the user state is logged in', () => {
-    storage.setItem('token');
-    const expected = cold('(a|)', { a: true });
+  it('should return true if the user state is logged in', done => {
+    jest.spyOn(storage, 'getItem').mockReturnValueOnce(of('token'))
 
-    (expect(guard.canActivate()) as any).toBeObservable(expected);
+    guard.canActivate().subscribe(value => {
+      expect(value).toBe(true);
+      done();
+    })
   });
 });

@@ -10,6 +10,7 @@ import { SettingsEffects } from './settings.effects';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { hot } from 'jasmine-marbles';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SettingsEffects', () => {
   let actions;
@@ -17,7 +18,7 @@ describe('SettingsEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
+      imports: [StoreModule.forRoot({}), HttpClientTestingModule, RouterTestingModule.withRoutes([])],
       providers: [
         SettingsEffects,
         DataPersistence,

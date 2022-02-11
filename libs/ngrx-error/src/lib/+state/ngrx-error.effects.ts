@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import * as NgrxErrorActions from './ngrx-error.actions';
 
 @Injectable()
