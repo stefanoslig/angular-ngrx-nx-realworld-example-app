@@ -1,5 +1,5 @@
 import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { SharedModule } from '@angular-ngrx-nx-realworld-example-app/shared';
+import { PagerComponentModule } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -30,7 +30,7 @@ import { MarkdownPipe } from './markdown.pipe';
     StoreModule.forFeature(articleFeature),
     EffectsModule.forFeature([ArticleEffects]),
     NgrxFormsModule,
-    SharedModule,
+    PagerComponentModule,
   ],
   providers: [ArticleEffects, ArticleService, ArticleGuardService, ArticleFacade],
   declarations: [ArticleComponent, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent],

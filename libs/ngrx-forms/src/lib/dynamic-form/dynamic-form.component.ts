@@ -5,7 +5,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { debounceTime, map, takeUntil, tap, filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-UntilDestroy();
+@UntilDestroy()
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',

@@ -1,4 +1,3 @@
-import { SharedModule } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -11,11 +10,12 @@ import { articleListFeature } from './+state/article-list.reducer';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 import { ArticleListComponent } from './article-list.component';
 import { ArticleListService } from './article-list.service';
+import { PagerComponentModule } from '@angular-ngrx-nx-realworld-example-app/shared';
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    PagerComponentModule,
     RouterModule,
     StoreModule.forFeature(articleListFeature),
     EffectsModule.forFeature([ArticleListEffects]),

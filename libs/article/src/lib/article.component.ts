@@ -19,7 +19,7 @@ const structure: Field[] = [
   },
 ];
 
-UntilDestroy();
+@UntilDestroy()
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',

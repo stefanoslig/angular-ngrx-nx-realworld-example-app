@@ -1,6 +1,6 @@
 import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { SharedModule } from '@angular-ngrx-nx-realworld-example-app/shared';
+import { PagerComponentModule } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -23,7 +23,7 @@ import { ProfileService } from './profile.service';
   imports: [
     CommonModule,
     ArticleListModule,
-    SharedModule,
+    PagerComponentModule,
     RouterModule.forChild([
       {
         path: '',

@@ -34,7 +34,7 @@ const structure: Field[] = [
   },
 ];
 
-UntilDestroy();
+@UntilDestroy()
 @Component({
   selector: 'app-article-editor',
   templateUrl: './article-editor.component.html',

@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy, NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-pager',
@@ -11,3 +12,10 @@ export class PagerComponent {
   @Input() totalPages: number;
   @Output() setPage: EventEmitter<number> = new EventEmitter();
 }
+
+@NgModule({
+  imports: [CommonModule],
+  declarations: [PagerComponent],
+  exports: [PagerComponent],
+})
+export class PagerComponentModule {}

@@ -2,7 +2,7 @@ import { ApiService, ProfileResponse, SingleArticleResponse } from '@angular-ngr
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ActionsService {
   constructor(private apiService: ApiService) {}
 
