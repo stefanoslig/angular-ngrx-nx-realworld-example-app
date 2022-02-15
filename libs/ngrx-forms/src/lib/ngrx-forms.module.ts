@@ -8,11 +8,7 @@ import { NgrxFormsFacade } from './+state/ngrx-forms.facade';
 import { ngrxFormsFeature } from './+state/ngrx-forms.reducer';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    StoreModule.forFeature(ngrxFormsFeature),
-    EffectsModule.forFeature([NgrxFormsEffects]),
-  ],
+  imports: [CommonModule, StoreModule.forFeature(ngrxFormsFeature), EffectsModule.forFeature([NgrxFormsEffects])],
   providers: [NgrxFormsEffects, NgrxFormsFacade],
 })
 export class NgrxFormsModule {}
