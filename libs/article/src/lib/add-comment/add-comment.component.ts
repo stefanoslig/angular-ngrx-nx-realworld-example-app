@@ -1,6 +1,8 @@
 import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { DynamicFormComponentModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms/src/lib/dynamic-form/dynamic-form.component';
+import { ListErrorsComponentModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms/src/lib/list-errors/list-errors.component';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -18,3 +20,10 @@ export class AddCommentComponent {
   @Output() submitComment: EventEmitter<string> = new EventEmitter();
   @Output() updateForm: EventEmitter<any> = new EventEmitter();
 }
+
+@NgModule({
+  imports: [ListErrorsComponentModule, DynamicFormComponentModule],
+  declarations: [AddCommentComponent],
+  exports: [AddCommentComponent],
+})
+export class AddCommentComponentModule {}

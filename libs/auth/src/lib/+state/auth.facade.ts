@@ -5,7 +5,7 @@ import { AuthState } from './auth.reducer';
 import { authQuery } from './auth.selectors';
 import * as AuthActions from './auth.actions';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthFacade {
   auth$ = this.store.select(authQuery.selectAuthState);
   user$ = this.store.select(authQuery.selectUser);

@@ -1,4 +1,8 @@
-import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import {
+  DynamicFormComponentModule,
+  ListErrorsComponentModule,
+  NgrxFormsModule,
+} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -7,7 +11,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { AuthEffects } from './+state/auth.effects';
-import { AuthFacade } from './+state/auth.facade';
 import { authFeature } from './+state/auth.reducer';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -30,16 +33,16 @@ const authRouting = RouterModule.forChild([
 @NgModule({
   imports: [
     CommonModule,
-    NgrxFormsModule,
     authRouting,
     StoreModule.forFeature(authFeature),
     EffectsModule.forFeature([AuthEffects]),
+    ListErrorsComponentModule,
+    DynamicFormComponentModule,
   ],
   providers: [
     AuthEffects,
     AuthGuardService,
     AuthService,
-    AuthFacade,
     TokenInterceptorService,
     LocalStorageJwtService,
     {

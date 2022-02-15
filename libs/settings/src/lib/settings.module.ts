@@ -1,5 +1,8 @@
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import {
+  DynamicFormComponentModule,
+  ListErrorsComponentModule,
+} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { SettingsService } from './settings.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -12,7 +15,8 @@ import { SettingsComponent } from './settings/settings.component';
 @NgModule({
   imports: [
     CommonModule,
-    NgrxFormsModule,
+    ListErrorsComponentModule,
+    DynamicFormComponentModule,
     RouterModule.forChild([
       {
         path: '',

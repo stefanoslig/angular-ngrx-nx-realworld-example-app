@@ -3,6 +3,7 @@ import {
   ComponentRef,
   Directive,
   Input,
+  NgModule,
   OnChanges,
   OnInit,
   Type,
@@ -43,3 +44,9 @@ export class DynamicFieldDirective implements OnInit, OnChanges {
     this.component.instance.group = this.group;
   }
 }
+
+@NgModule({
+  declarations: [DynamicFieldDirective],
+  exports: [DynamicFieldDirective],
+})
+export class DynamicFieldDirectiveModule {}

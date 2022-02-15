@@ -1,9 +1,10 @@
 import { Field } from '../+state/ngrx-forms.interfaces';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { debounceTime, map, takeUntil, tap, filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @UntilDestroy()
 @Component({
@@ -62,3 +63,10 @@ export class DynamicFormComponent implements OnInit {
       .subscribe((changes: any) => this.updateForm.emit(changes));
   }
 }
+
+@NgModule({
+  imports: [ReactiveFormsModule],
+  declarations: [DynamicFormComponent],
+  exports: [DynamicFormComponent],
+})
+export class DynamicFormComponentModule {}

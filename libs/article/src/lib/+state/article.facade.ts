@@ -5,7 +5,7 @@ import * as ArticleActions from './article.actions';
 import { ArticleState } from './article.reducer';
 import { articleQuery } from './article.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ArticleFacade {
   article$ = this.store.select(articleQuery.selectData);
   comments$ = this.store.select(articleQuery.selectComments);
