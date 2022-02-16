@@ -1,14 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { NgrxFormsEffects } from './+state/ngrx-forms.effects';
-import { NgrxFormsFacade } from './+state/ngrx-forms.facade';
 import { ngrxFormsFeature } from './+state/ngrx-forms.reducer';
+import { InputComponent } from './fields/input/input.component';
+import { TextareaComponent } from './fields/textarea/textarea.component';
 
 @NgModule({
-  imports: [CommonModule, StoreModule.forFeature(ngrxFormsFeature), EffectsModule.forFeature([NgrxFormsEffects])],
-  providers: [NgrxFormsEffects, NgrxFormsFacade],
+  declarations: [InputComponent, TextareaComponent],
+  imports: [
+    CommonModule,
+    StoreModule.forFeature(ngrxFormsFeature),
+    EffectsModule.forFeature([NgrxFormsEffects]),
+    ReactiveFormsModule,
+  ],
 })
 export class NgrxFormsModule {}

@@ -2,8 +2,6 @@ import { Errors, Field } from './ngrx-forms.interfaces';
 import * as NgrxFormsActions from './ngrx-forms.actions';
 import { createFeature, createReducer, on } from '@ngrx/store';
 
-export const ngrxFormsFeatureKey = 'ngrxForms';
-
 export interface NgrxFormsState {
   data: any;
   structure: Field[];

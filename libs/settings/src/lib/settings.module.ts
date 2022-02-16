@@ -28,6 +28,6 @@ import { SettingsComponent } from './settings/settings.component';
     EffectsModule.forFeature([SettingsEffects]),
   ],
   declarations: [SettingsComponent],
-  providers: [SettingsEffects, SettingsService],
+  providers: [SettingsService],
 })
 export class SettingsModule {}

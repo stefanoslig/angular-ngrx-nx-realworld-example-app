@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiService, SingleArticleResponse } from '@angular-ngrx-nx-realworld-example-app/api';
 import { SingleCommentResponse, MultipleCommentsResponse } from './article.interfaces';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ArticleService {
   constructor(private apiService: ApiService) {}
 

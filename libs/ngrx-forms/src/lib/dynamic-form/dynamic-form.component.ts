@@ -2,9 +2,10 @@ import { Field } from '../+state/ngrx-forms.interfaces';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
-import { debounceTime, map, takeUntil, tap, filter } from 'rxjs/operators';
+import { debounceTime, map, tap, filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { CommonModule } from '@angular/common';
+import { DynamicFieldDirectiveModule } from './dynamic-field.directive';
 
 @UntilDestroy()
 @Component({
@@ -65,7 +66,7 @@ export class DynamicFormComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, DynamicFieldDirectiveModule],
   declarations: [DynamicFormComponent],
   exports: [DynamicFormComponent],
 })

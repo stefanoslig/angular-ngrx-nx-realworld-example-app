@@ -1,6 +1,7 @@
 import { ApiModule } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthModule } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxErrorModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-error';
+import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -66,6 +67,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
     NgrxErrorModule,
+    NgrxFormsModule,
   ],
   declarations: [AppComponent, FooterComponent, NavbarComponent],
   bootstrap: [AppComponent],
