@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, NgModule } from '@angular/core';
 import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-article-meta',
@@ -37,3 +39,10 @@ export class ArticleMetaComponent {
     this.delete.emit(this.article.slug);
   }
 }
+
+@NgModule({
+  imports: [RouterModule, CommonModule],
+  declarations: [ArticleMetaComponent],
+  exports: [ArticleMetaComponent],
+})
+export class ArticleMetaComponentModule {}

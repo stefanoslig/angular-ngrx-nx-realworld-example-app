@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Field } from '../../+state/ngrx-forms.interfaces';
 import { FormGroup } from '@angular/forms';
 

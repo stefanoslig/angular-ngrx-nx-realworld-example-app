@@ -4,7 +4,7 @@ import { NgrxFormsState } from './ngrx-forms.reducer';
 import { ngrxFormsQuery } from './ngrx-forms.selectors';
 import * as NgrxFormsActions from './ngrx-forms.actions';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NgrxFormsFacade {
   data$ = this.store.select(ngrxFormsQuery.selectData);
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
