@@ -55,7 +55,7 @@ export const articleListFeature = createFeature({
     on(ArticleListActions.setListPage, (state, { page }) => {
       const filters = {
         ...state.listConfig.filters,
-        offset: state.listConfig.filters.limit * (page - 1),
+        offset: state?.listConfig?.filters?.limit ?? 1 * (page - 1),
       };
       const listConfig = {
         ...state.listConfig,

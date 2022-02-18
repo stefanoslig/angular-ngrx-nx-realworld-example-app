@@ -11,9 +11,9 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleCommentComponent {
-  @Input() currentUser: User;
-  @Input() comment: Comment;
-  @Input() article: Article;
+  @Input() currentUser!: User;
+  @Input() comment!: Comment;
+  @Input() article!: Article;
   @Output() delete: EventEmitter<{
     commentId: number;
     slug: string;

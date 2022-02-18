@@ -8,6 +8,6 @@ import { User } from '@angular-ngrx-nx-realworld-example-app/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  @Input() user: User;
-  @Input() isLoggedIn: boolean;
+  @Input() user!: User;
+  @Input() isLoggedIn!: boolean;
 }

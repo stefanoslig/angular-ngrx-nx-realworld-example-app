@@ -8,7 +8,7 @@ import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {
-  @Input() article: Article;
+  @Input() article!: Article;
   @Output() favorite: EventEmitter<string> = new EventEmitter();
   @Output() unFavorite: EventEmitter<string> = new EventEmitter();
   @Output() navigateToArticle: EventEmitter<string> = new EventEmitter();

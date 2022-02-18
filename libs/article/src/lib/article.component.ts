@@ -1,10 +1,8 @@
-import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { ChangeDetectionStrategy, Component, NgModule, OnDestroy, OnInit } from '@angular/core';
-import { Observable, combineLatest } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Comment } from './article.interfaces';
 import { ArticleFacade } from './+state/article.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
@@ -31,14 +29,14 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
-  article$: Observable<Article>;
-  comments$: Observable<Comment[]>;
+  article$ = this.facade.article$;
+  comments$ = this.facade.comments$;
   canModify = false;
-  isAuthenticated$: Observable<boolean>;
-  structure$: Observable<Field[]>;
-  data$: Observable<any>;
-  currentUser$: Observable<User>;
-  touchedForm$: Observable<boolean>;
+  isAuthenticated$ = this.authFacade.isLoggedIn$;
+  structure$ = this.ngrxFormsFacade.structure$;
+  data$ = this.ngrxFormsFacade.data$;
+  currentUser$ = this.authFacade.user$;
+  touchedForm$ = this.ngrxFormsFacade.touched$;
 
   constructor(
     private ngrxFormsFacade: NgrxFormsFacade,
@@ -47,14 +45,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.article$ = this.facade.article$;
-    this.comments$ = this.facade.comments$;
-    this.isAuthenticated$ = this.authFacade.isLoggedIn$;
-    this.currentUser$ = this.authFacade.user$;
-    this.data$ = this.ngrxFormsFacade.data$;
-    this.structure$ = this.ngrxFormsFacade.structure$;
-    this.touchedForm$ = this.ngrxFormsFacade.touched$;
-
     this.ngrxFormsFacade.setStructure(structure);
     this.ngrxFormsFacade.setData('');
     this.authFacade.auth$

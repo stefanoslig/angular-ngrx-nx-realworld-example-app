@@ -10,9 +10,9 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleMetaComponent {
-  @Input() article: Article;
-  @Input() isAuthenticated: boolean;
-  @Input() canModify: boolean;
+  @Input() article!: Article;
+  @Input() isAuthenticated!: boolean;
+  @Input() canModify!: boolean;
   @Output() follow: EventEmitter<string> = new EventEmitter<string>();
   @Output() unfollow: EventEmitter<string> = new EventEmitter<string>();
   @Output() unfavorite: EventEmitter<string> = new EventEmitter();

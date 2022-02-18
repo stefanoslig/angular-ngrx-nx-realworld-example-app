@@ -1,11 +1,7 @@
-import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { withLatestFrom } from 'rxjs/operators';
 
 import { ArticleListFacade } from './+state/article-list.facade';
-import { ArticleListConfig } from './+state/article-list.reducer';
 
 @Component({
   selector: 'app-article-list',
@@ -13,20 +9,13 @@ import { ArticleListConfig } from './+state/article-list.reducer';
   styleUrls: ['./article-list.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ArticleListComponent implements OnInit {
-  totalPages$: Observable<number[]>;
-  articles$: Observable<Article[]>;
-  listConfig$: Observable<ArticleListConfig>;
-  isLoading$: Observable<boolean>;
+export class ArticleListComponent {
+  totalPages$ = this.facade.totalPages$;
+  articles$ = this.facade.articles$;
+  listConfig$ = this.facade.listConfig$;
+  isLoading$ = this.facade.isLoading$;
 
   constructor(private readonly facade: ArticleListFacade, private readonly router: Router) {}
-
-  ngOnInit() {
-    this.totalPages$ = this.facade.totalPages$;
-    this.articles$ = this.facade.articles$;
-    this.listConfig$ = this.facade.listConfig$;
-    this.isLoading$ = this.facade.isLoading$;
-  }
 
   favorite(slug: string) {
     this.facade.favorite(slug);

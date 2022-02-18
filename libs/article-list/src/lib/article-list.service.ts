@@ -16,7 +16,8 @@ export class ArticleListService {
     );
   }
 
-  private toHttpParams(params) {
+  // TODO: remove any
+  private toHttpParams(params: any) {
     return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());
   }
 }
