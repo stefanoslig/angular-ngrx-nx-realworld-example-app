@@ -7,6 +7,6 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagsListComponent {
-  @Input() tags: string[];
+  @Input() tags: string[] = [];
   @Output() setListTag: EventEmitter<string> = new EventEmitter();
 }

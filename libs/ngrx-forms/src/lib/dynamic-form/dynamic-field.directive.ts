@@ -15,9 +15,9 @@ const componentsMapper: { [key: string]: Type<any> } = {
   selector: '[appDynamicField]',
 })
 export class DynamicFieldDirective implements OnInit, OnChanges {
-  @Input() field: Field;
-  @Input() group: FormGroup;
-  component: ComponentRef<any>;
+  @Input() field!: Field;
+  @Input() group!: FormGroup;
+  component!: ComponentRef<any>;
 
   constructor(private container: ViewContainerRef) {}
 

@@ -43,7 +43,7 @@ export class ProfileFavoritesResolverService implements Resolve<Profile> {
   constructor(private store: Store<any>) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    const username = route.parent.params['username'];
+    const username = route?.parent?.params['username'];
     this.store.dispatch(
       fromArticleList.setListConfig({
         config: {

@@ -3,7 +3,6 @@ import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/n
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { editSettings } from '../+state/settings.actions';
@@ -52,16 +51,14 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit {
-  structure$: Observable<Field[]>;
-  data$: Observable<any>;
+  structure$ = this.ngrxFormsFacade.structure$;
+  data$ = this.ngrxFormsFacade.data$;
 
   constructor(private store: Store<any>, private authFacade: AuthFacade, private ngrxFormsFacade: NgrxFormsFacade) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
     this.authFacade.user$.pipe(untilDestroyed(this)).subscribe((user) => this.ngrxFormsFacade.setData(user));
-    this.data$ = this.ngrxFormsFacade.data$;
-    this.structure$ = this.ngrxFormsFacade.structure$;
   }
 
   updateForm(changes: any) {

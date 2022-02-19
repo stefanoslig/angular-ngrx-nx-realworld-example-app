@@ -9,6 +9,6 @@ import { FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
-  @Input() field: Field;
-  @Input() group: FormGroup;
+  @Input() field!: Field;
+  @Input() group!: FormGroup;
 }

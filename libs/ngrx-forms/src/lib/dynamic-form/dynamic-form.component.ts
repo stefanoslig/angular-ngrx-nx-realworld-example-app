@@ -15,11 +15,11 @@ import { DynamicFieldDirectiveModule } from './dynamic-field.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit {
-  @Input() structure$: Observable<Field[]>;
-  @Input() data$: Observable<any>;
-  @Input() touchedForm$: Observable<boolean>;
+  @Input() structure$!: Observable<Field[]>;
+  @Input() data$!: Observable<any>;
+  @Input() touchedForm$!: Observable<boolean>;
   @Output() updateForm: EventEmitter<any> = new EventEmitter();
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
@@ -54,7 +54,7 @@ export class DynamicFormComponent implements OnInit {
     return this.fb.control('', field.validator);
   };
 
-  private patchValue = ([form, data]) => {
+  private patchValue = ([form, data]: [FormGroup, any]) => {
     !!data ? form.patchValue(data, { emitEvent: false }) : form.patchValue({}, { emitEvent: false });
   };
 

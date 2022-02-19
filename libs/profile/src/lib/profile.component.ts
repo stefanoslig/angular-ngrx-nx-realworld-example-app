@@ -1,7 +1,6 @@
-import { User, Profile } from '@angular-ngrx-nx-realworld-example-app/api';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, Subject, combineLatest } from 'rxjs';
+import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ProfileFacade } from './+state/profile.facade';
@@ -14,17 +13,15 @@ import { ProfileFacade } from './+state/profile.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {
-  profile$: Observable<Profile>;
-  currentUser$: Observable<User>;
+  profile$ = this.facade.profile$;
+  currentUser$ = this.authFacade.user$;
   isUser$: Subject<boolean> = new Subject();
-  following: boolean;
-  username: string;
+  following!: boolean;
+  username!: string;
 
   constructor(private facade: ProfileFacade, private authFacade: AuthFacade) {}
 
   ngOnInit() {
-    this.profile$ = this.facade.profile$;
-    this.currentUser$ = this.authFacade.user$;
     combineLatest([this.profile$, this.currentUser$])
       .pipe(
         tap(([p, u]) => {

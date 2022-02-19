@@ -1,4 +1,4 @@
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { ArticleListConfig } from '@angular-ngrx-nx-realworld-example-app/article-list';
@@ -15,9 +15,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  listConfig$: Observable<ArticleListConfig>;
-  tags$: Observable<string[]>;
-  isAuthenticated: boolean;
+  listConfig$ = this.articleListFacade.listConfig$;
+  tags$ = this.facade.tags$;
+  isAuthenticated = false;
   unsubscribe$: Subject<void> = new Subject();
 
   constructor(
@@ -31,8 +31,6 @@ export class HomeComponent implements OnInit {
       this.isAuthenticated = isLoggedIn;
       this.getArticles();
     });
-    this.listConfig$ = this.articleListFacade.listConfig$;
-    this.tags$ = this.facade.tags$;
   }
 
   setListTo(type: string = 'ALL') {

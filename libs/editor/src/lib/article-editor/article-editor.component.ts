@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
 
 import { EditorFacade } from '../+state/editor.facade';
 
@@ -42,15 +41,13 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleEditorComponent implements OnInit, OnDestroy {
-  structure$: Observable<Field[]>;
-  data$: Observable<any>;
+  structure$ = this.ngrxFormsFacade.structure$;
+  data$ = this.ngrxFormsFacade.data$;
 
   constructor(private ngrxFormsFacade: NgrxFormsFacade, private facade: EditorFacade) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
-    this.data$ = this.ngrxFormsFacade.data$;
-    this.structure$ = this.ngrxFormsFacade.structure$;
     this.facade.article$.pipe(untilDestroyed(this)).subscribe((article) => this.ngrxFormsFacade.setData(article));
   }
 

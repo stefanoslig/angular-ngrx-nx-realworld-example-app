@@ -8,8 +8,8 @@ import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy, NgModu
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PagerComponent {
-  @Input() currentPage: number;
-  @Input() totalPages: number;
+  @Input() currentPage!: number;
+  @Input() totalPages!: number;
   @Output() setPage: EventEmitter<number> = new EventEmitter();
 }
 

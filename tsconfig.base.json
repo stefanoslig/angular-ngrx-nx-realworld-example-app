@@ -25,7 +25,8 @@
       "@angular-ngrx-nx-realworld-example-app/shared": ["libs/shared/src/index.ts"],
       "@default/*": ["apps/conduit/src/app/*"],
       "@env/*": ["apps/conduit/src/environments/*"]
-    }
+    },
+    "strict": true
   },
   "exclude": ["node_modules", "tmp"]
 }
