@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiService, User, UserResponse } from '@angular-ngrx-nx-realworld-example-app/api';
 import { UpdateUserRequest } from '@angular-ngrx-nx-realworld-example-app/settings/settings.interfaces';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SettingsService {
   constructor(private apiService: ApiService) {}
 
