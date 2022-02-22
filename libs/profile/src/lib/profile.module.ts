@@ -1,4 +1,5 @@
 import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { ArticleListComponent } from '@angular-ngrx-nx-realworld-example-app/article-list/src/lib/article-list.component';
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { PagerComponentModule } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { CommonModule } from '@angular/common';
@@ -10,20 +11,16 @@ import { StoreModule } from '@ngrx/store';
 import { ProfileEffects } from './+state/profile.effects';
 import { ProfileFacade } from './+state/profile.facade';
 import { profileFeature } from './+state/profile.reducer';
-import { ProfileArticlesComponent } from './profile-articles.component';
 import {
   ProfileArticlesResolverService,
   ProfileFavoritesResolverService,
   ProfileResolverService,
 } from './profile-resolver.service';
 import { ProfileComponent } from './profile.component';
-import { ProfileService } from './profile.service';
 
 @NgModule({
   imports: [
-    CommonModule,
     ArticleListModule,
-    PagerComponentModule,
     RouterModule.forChild([
       {
         path: '',
@@ -33,12 +30,12 @@ import { ProfileService } from './profile.service';
         children: [
           {
             path: '',
-            component: ProfileArticlesComponent,
+            component: ArticleListComponent,
             resolve: { ProfileArticlesResolverService },
           },
           {
             path: 'favorites',
-            component: ProfileArticlesComponent,
+            component: ArticleListComponent,
             resolve: { ProfileFavoritesResolverService },
           },
         ],
@@ -47,14 +44,6 @@ import { ProfileService } from './profile.service';
     StoreModule.forFeature(profileFeature),
     EffectsModule.forFeature([ProfileEffects]),
   ],
-  providers: [
-    ProfileEffects,
-    ProfileService,
-    ProfileResolverService,
-    ProfileArticlesResolverService,
-    ProfileFavoritesResolverService,
-    ProfileFacade,
-  ],
-  declarations: [ProfileComponent, ProfileArticlesComponent],
+  providers: [ProfileResolverService, ProfileArticlesResolverService, ProfileFavoritesResolverService, ProfileFacade],
 })
 export class ProfileModule {}

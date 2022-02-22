@@ -1,9 +1,11 @@
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ProfileFacade } from './+state/profile.facade';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -42,3 +44,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 }
+
+@NgModule({
+  imports: [CommonModule, RouterModule],
+  declarations: [ProfileComponent],
+  exports: [ProfileComponent],
+})
+export class ProfileComponentModule {}
+

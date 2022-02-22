@@ -9,8 +9,7 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/c
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-
-import { editSettings } from '../+state/settings.actions';
+import { editSettings } from './+state/settings.actions';
 
 const structure: Field[] = [
   {
