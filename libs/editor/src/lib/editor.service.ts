@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiService, Article, SingleArticleResponse } from '@angular-ngrx-nx-realworld-example-app/api';
 import { NewArticleRequest } from './editor.interfaces';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class EditorService {
   constructor(private apiService: ApiService) {}
 

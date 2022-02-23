@@ -1,9 +1,4 @@
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
-import {
-  DynamicFormComponentModule,
-  ListErrorsComponentModule,
-} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -14,13 +9,9 @@ import { EditorFacade } from './+state/editor.facade';
 import { editorFeature } from './+state/editor.reducer';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { EditorResolverService } from './editor-resolver.service';
-import { EditorService } from './editor.service';
 
 @NgModule({
   imports: [
-    CommonModule,
-    ListErrorsComponentModule,
-    DynamicFormComponentModule,
     RouterModule.forChild([
       {
         path: '',
@@ -38,7 +29,6 @@ import { EditorService } from './editor.service';
     StoreModule.forFeature(editorFeature),
     EffectsModule.forFeature([EditorEffects]),
   ],
-  declarations: [ArticleEditorComponent],
-  providers: [EditorEffects, EditorService, EditorResolverService, EditorFacade],
+  providers: [EditorResolverService, EditorFacade],
 })
 export class EditorModule {}

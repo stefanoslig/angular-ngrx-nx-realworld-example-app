@@ -51,4 +51,3 @@ export class ProfileComponent implements OnInit {
   exports: [ProfileComponent],
 })
 export class ProfileComponentModule {}
-
