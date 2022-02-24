@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { ArticleListConfig } from './+state/article-list.reducer';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ArticleListService {
   constructor(private apiService: ApiService) {}
 

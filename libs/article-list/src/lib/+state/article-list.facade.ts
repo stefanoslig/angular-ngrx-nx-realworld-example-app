@@ -5,7 +5,7 @@ import { ArticleListState, ArticleListConfig } from './article-list.reducer';
 import { articleListQuery } from './article-list.selectors';
 import * as ArticleListActions from './article-list.actions';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ArticleListFacade {
   articles$ = this.store.select(articleListQuery.selectArticleEntities);
   listConfig$ = this.store.select(articleListQuery.selectListConfig);

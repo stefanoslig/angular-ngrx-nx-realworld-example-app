@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-tags-list',
@@ -10,3 +11,10 @@ export class TagsListComponent {
   @Input() tags: string[] = [];
   @Output() setListTag: EventEmitter<string> = new EventEmitter();
 }
+
+@NgModule({
+  imports: [CommonModule],
+  declarations: [TagsListComponent],
+  exports: [TagsListComponent],
+})
+export class TagsListComponentModule {}

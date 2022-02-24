@@ -5,7 +5,9 @@ import { Observable, of } from 'rxjs';
 import { HomeFacade } from './+state/home.facade';
 import { HomeState } from './+state/home.reducer';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class HomeResolverService implements Resolve<HomeState> {
   constructor(private facade: HomeFacade) {}
 

@@ -5,7 +5,7 @@ import { homeQuery } from './home.selectors';
 import * as HomeActions from './home.actions';
 import { HomeState } from './home.reducer';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HomeFacade {
   home$ = this.store.select(homeQuery.selectHomeState);
   tags$ = this.store.select(homeQuery.selectTags);

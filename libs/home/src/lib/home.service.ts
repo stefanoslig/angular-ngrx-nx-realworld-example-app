@@ -2,7 +2,7 @@ import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HomeService {
   constructor(private apiService: ApiService) {}
 
