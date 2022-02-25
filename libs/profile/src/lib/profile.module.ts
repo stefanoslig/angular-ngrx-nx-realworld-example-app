@@ -1,8 +1,6 @@
 import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { ArticleListComponent } from '@angular-ngrx-nx-realworld-example-app/article-list/src/lib/article-list.component';
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { PagerComponentModule } from '@angular-ngrx-nx-realworld-example-app/shared';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';

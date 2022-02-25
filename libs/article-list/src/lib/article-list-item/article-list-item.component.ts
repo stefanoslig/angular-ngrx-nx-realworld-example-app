@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-article-list-item',
@@ -21,3 +23,10 @@ export class ArticleListItemComponent {
     }
   }
 }
+
+@NgModule({
+  imports: [CommonModule, RouterModule],
+  declarations: [ArticleListItemComponent],
+  exports: [ArticleListItemComponent],
+})
+export class ArticleListItemComponentModule {}

@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { PagerComponentModule } from '@angular-ngrx-nx-realworld-example-app/shared/src';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ArticleListFacade } from './+state/article-list.facade';
+import { ArticleListItemComponentModule } from './article-list-item/article-list-item.component';
 
 @Component({
   selector: 'app-article-list',
@@ -33,3 +36,10 @@ export class ArticleListComponent {
     this.facade.setPage(page);
   }
 }
+
+@NgModule({
+  imports: [CommonModule, PagerComponentModule, ArticleListItemComponentModule],
+  declarations: [ArticleListComponent],
+  exports: [ArticleListComponent],
+})
+export class ArticleListComponentModule {}

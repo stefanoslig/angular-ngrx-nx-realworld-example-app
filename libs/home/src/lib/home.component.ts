@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
 
-import { ArticleListConfig, ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { ArticleListComponentModule, ArticleListConfig } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { articleListInitialState, ArticleListFacade } from '@angular-ngrx-nx-realworld-example-app/article-list';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { HomeFacade } from './+state/home.facade';
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [CommonModule, ArticleListModule, TagsListComponentModule],
+  imports: [CommonModule, TagsListComponentModule, ArticleListComponentModule],
   declarations: [HomeComponent],
   exports: [HomeComponent],
 })
