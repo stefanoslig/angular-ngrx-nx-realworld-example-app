@@ -31,25 +31,16 @@ const authRouting = RouterModule.forChild([
 
 @NgModule({
   imports: [
-    CommonModule,
     authRouting,
     StoreModule.forFeature(authFeature),
     EffectsModule.forFeature([AuthEffects]),
-    ListErrorsComponentModule,
-    DynamicFormComponentModule,
   ],
   providers: [
-    AuthEffects,
-    AuthGuardService,
-    AuthService,
-    TokenInterceptorService,
-    LocalStorageJwtService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true,
     },
   ],
-  declarations: [LoginComponent, RegisterComponent],
 })
 export class AuthModule {}

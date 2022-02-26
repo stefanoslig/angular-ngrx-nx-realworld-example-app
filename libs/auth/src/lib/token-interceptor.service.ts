@@ -2,7 +2,6 @@ import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { HttpInterceptor } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 
 @Injectable()

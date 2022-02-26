@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LocalStorageJwtService {
   getItem(): Observable<string | null> {
     const data = localStorage.getItem('jwtToken');

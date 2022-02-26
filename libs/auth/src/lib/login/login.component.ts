@@ -1,6 +1,12 @@
-import { Field, NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  DynamicFormComponentModule,
+  Field,
+  ListErrorsComponentModule,
+  NgrxFormsFacade,
+} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { ChangeDetectionStrategy, Component, NgModule, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AuthFacade } from '../+state/auth.facade';
 
@@ -50,3 +56,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.ngrxFormsFacade.initializeForm();
   }
 }
+
+@NgModule({
+  imports: [ListErrorsComponentModule, DynamicFormComponentModule, RouterModule],
+  declarations: [LoginComponent],
+  exports: [LoginComponent],
+})
+export class LoginComponentModule {}

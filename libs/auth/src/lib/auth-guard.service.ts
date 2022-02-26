@@ -5,7 +5,7 @@ import { map, take } from 'rxjs/operators';
 
 import { LocalStorageJwtService } from './local-storage-jwt.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthGuardService implements CanActivate {
   constructor(private storage: LocalStorageJwtService, private router: Router) {}
 
