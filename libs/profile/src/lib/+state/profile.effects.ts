@@ -1,10 +1,10 @@
-import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
 import { ProfileService } from '../profile.service';
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, groupBy, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as ProfileActions from './profile.actions';
+import { ActionsService } from '@realworld/articles/data-access';
 
 @Injectable()
 export class ProfileEffects {

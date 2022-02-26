@@ -20,7 +20,6 @@
     "ngrx-forms": "libs/ngrx-forms",
     "profile": "libs/profile",
     "settings": "libs/settings",
-    "shared": "libs/shared",
     "ui-components": "libs/ui/components"
   }
 }

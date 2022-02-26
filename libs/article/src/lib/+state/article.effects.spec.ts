@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { ArticleService } from '../article.service';
 import { ArticleEffects } from './article.effects';
-import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
+import { ActionsService } from '@realworld/articles/data-access';
 import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { hot } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';

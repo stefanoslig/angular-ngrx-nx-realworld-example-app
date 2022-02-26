@@ -1,10 +1,10 @@
-import { PagerComponentModule } from '@angular-ngrx-nx-realworld-example-app/shared/src';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ArticleListFacade } from './+state/article-list.facade';
 import { ArticleListItemComponentModule } from './article-list-item/article-list-item.component';
+import { PagerComponentModule } from '@realworld/ui/components';
 
 @Component({
   selector: 'app-article-list',
