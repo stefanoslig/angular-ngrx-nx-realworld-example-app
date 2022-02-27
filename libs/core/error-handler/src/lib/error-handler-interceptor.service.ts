@@ -4,15 +4,15 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { NgrxErrorFacade } from './+state/ngrx-error.facade';
+import { ErrorHandlerFacade } from './+state/error-handler.facade';
 
 @Injectable()
-export class NgrxErrorInterceptorService implements HttpInterceptor {
-  constructor(private facade: NgrxErrorFacade) {}
+export class ErrorHandlerInterceptorService implements HttpInterceptor {
+  constructor(private facade: ErrorHandlerFacade) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError((error, caught) => {
+      catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           switch (error.status) {
             case 401:

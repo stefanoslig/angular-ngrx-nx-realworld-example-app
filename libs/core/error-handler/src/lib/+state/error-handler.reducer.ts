@@ -1,20 +1,20 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as NgrxErrorActions from './ngrx-error.actions';
+import * as NgrxErrorActions from './error-handler.actions';
 
-export interface NgrxErrorState {
+export interface ErrorHandlerState {
   code: number;
   message: string | undefined;
 }
 
-export const ngrxErrorInitialState: NgrxErrorState = {
+export const errorHandlerInitialState: ErrorHandlerState = {
   message: undefined,
   code: -1,
 };
 
-export const ngrxErrorFeature = createFeature({
-  name: 'ngrxError',
+export const errorHandlerFeature = createFeature({
+  name: 'errorHandler',
   reducer: createReducer(
-    ngrxErrorInitialState,
+    errorHandlerInitialState,
     on(NgrxErrorActions.throw401Error, (state, action) => ({
       code: action.error.status,
       message: action.error.message,

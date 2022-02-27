@@ -3,21 +3,21 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
 
-import { NgrxErrorEffects } from './ngrx-error.effects';
+import { ErrorHandlerEffects } from './error-handler.effects';
 import { hot } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NgrxErrorEffects', () => {
   let actions;
-  let effects: NgrxErrorEffects;
+  let effects: ErrorHandlerEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({}), RouterTestingModule.withRoutes([])],
-      providers: [NgrxErrorEffects, DataPersistence, provideMockActions(() => actions)],
+      providers: [ErrorHandlerEffects, DataPersistence, provideMockActions(() => actions)],
     });
 
-    effects = TestBed.inject(NgrxErrorEffects);
+    effects = TestBed.inject(ErrorHandlerEffects);
   });
 
   describe('someEffect', () => {

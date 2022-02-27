@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
-import * as NgrxErrorActions from './ngrx-error.actions';
+import * as NgrxErrorActions from './error-handler.actions';
 
 @Injectable()
-export class NgrxErrorEffects {
+export class ErrorHandlerEffects {
   error401$ = createEffect(
     () =>
       this.actions$.pipe(

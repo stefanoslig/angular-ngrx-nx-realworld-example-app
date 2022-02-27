@@ -16,7 +16,6 @@
     "core-http-client": "libs/core/http-client",
     "editor": "libs/editor",
     "home": "libs/home",
-    "ngrx-error": "libs/ngrx-error",
     "ngrx-forms": "libs/ngrx-forms",
     "profile": "libs/profile",
     "settings": "libs/settings",
