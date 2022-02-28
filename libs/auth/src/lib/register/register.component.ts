@@ -1,9 +1,4 @@
-import {
-  DynamicFormComponentModule,
-  Field,
-  ListErrorsComponentModule,
-  NgrxFormsFacade,
-} from '@realworld/core/forms';
+import { DynamicFormComponentModule, Field, ListErrorsComponentModule, NgrxFormsFacade } from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, NgModule, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
