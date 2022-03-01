@@ -7,8 +7,8 @@ stages:
   - deploy
 
 variables:
-  npm_config_cache: "$CI_PROJECT_DIR/.npm"
-  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+  npm_config_cache: '$CI_PROJECT_DIR/.npm'
+  CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -27,8 +27,7 @@ build:
       - $CI_COMMIT_MESSAGE =~ /skip-ci/
   artifacts:
     paths:
-        - dist/
-
+      - dist/
 
 linting:
   stage: linting
@@ -72,7 +71,7 @@ deploy_prod:
     name: production
     url: $FIREBASE_URL
   only:
-   - master
+    - master
   dependencies:
     - build
   cache:
@@ -85,4 +84,3 @@ deploy_prod:
   except:
     variables:
       - $CI_COMMIT_MESSAGE =~ /skip-ci/
-
