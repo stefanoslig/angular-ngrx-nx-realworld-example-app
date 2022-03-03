@@ -1,7 +1,7 @@
 import { ComponentRef, Directive, Input, NgModule, OnChanges, OnInit, Type, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { Field } from '../+state/ngrx-forms.interfaces';
+import { Field } from '../+state/forms.interfaces';
 import { InputComponent } from '../fields/input/input.component';
 import { TextareaComponent } from '../fields/textarea/textarea.component';
 

@@ -1,5 +1,5 @@
-import { Errors, Field } from './ngrx-forms.interfaces';
-import * as NgrxFormsActions from './ngrx-forms.actions';
+import { Errors, Field } from './forms.interfaces';
+import * as NgrxFormsActions from './forms.actions';
 import { createFeature, createReducer, on } from '@ngrx/store';
 
 export interface NgrxFormsState {

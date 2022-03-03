@@ -8,7 +8,7 @@ import { DataPersistence } from '@nrwl/angular';
 import { SettingsService } from '../settings.service';
 import { SettingsEffects } from './settings.effects';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade } from '@realworld/core/forms';
 import { hot } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';
 

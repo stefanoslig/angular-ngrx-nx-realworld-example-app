@@ -4,7 +4,7 @@ import {
   Field,
   ListErrorsComponentModule,
   NgrxFormsFacade,
-} from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+} from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';

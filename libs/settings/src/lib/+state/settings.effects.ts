@@ -1,5 +1,5 @@
 import { AuthFacade, getUser } from '@angular-ngrx-nx-realworld-example-app/auth';
-import { NgrxFormsFacade, setErrors } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade, setErrors } from '@realworld/core/forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';

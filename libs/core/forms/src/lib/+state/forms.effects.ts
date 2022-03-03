@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import * as NgrxFormsActions from './ngrx-forms.actions';
+import * as NgrxFormsActions from './forms.actions';
 import { map } from 'rxjs/operators';
 
 @Injectable()

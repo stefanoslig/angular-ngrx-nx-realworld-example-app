@@ -1,7 +1,7 @@
 import { Article, User } from '@realworld/core/api-types';
-import { Field } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
-import { DynamicFormComponentModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms/src/lib/dynamic-form/dynamic-form.component';
-import { ListErrorsComponentModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms/src/lib/list-errors/list-errors.component';
+import { Field } from '@realworld/core/forms';
+import { DynamicFormComponentModule } from '@realworld/core/forms/src/lib/dynamic-form/dynamic-form.component';
+import { ListErrorsComponentModule } from '@realworld/core/forms/src/lib/list-errors/list-errors.component';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 

@@ -1,4 +1,4 @@
-import { Field } from '../+state/ngrx-forms.interfaces';
+import { Field } from '../+state/forms.interfaces';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';

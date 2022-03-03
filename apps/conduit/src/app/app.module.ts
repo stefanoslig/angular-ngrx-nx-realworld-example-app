@@ -1,7 +1,7 @@
 import { CoreHttpClientModule } from '@realworld/core/http-client';
 import { AuthModule } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { CoreErrorHandlerModule } from '@realworld/core/error-handler';
-import { NgrxFormsModule } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { CoreFormsModule } from '@realworld/core/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -67,7 +67,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
-    NgrxFormsModule,
+    CoreFormsModule,
   ],
   declarations: [AppComponent, FooterComponent, NavbarComponent],
   bootstrap: [AppComponent],

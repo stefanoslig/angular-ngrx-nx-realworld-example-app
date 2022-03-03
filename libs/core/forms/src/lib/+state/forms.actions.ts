@@ -1,4 +1,4 @@
-import { Errors } from './ngrx-forms.interfaces';
+import { Errors } from './forms.interfaces';
 import { props, createAction } from '@ngrx/store';
 
 export const setData = createAction('[ngrxForms] SET_DATA', props<{ data: any }>());

@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 import * as ArticleActions from './article.actions';
 
-import { NgrxFormsFacade, setErrors, resetForm } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
+import { NgrxFormsFacade, setErrors, resetForm } from '@realworld/core/forms';
 import { Router } from '@angular/router';
 
 @Injectable()

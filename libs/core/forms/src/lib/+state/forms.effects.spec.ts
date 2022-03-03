@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
-import { NgrxFormsEffects } from './ngrx-forms.effects';
-import { NgrxFormsFacade } from './ngrx-forms.facade';
+import { NgrxFormsEffects } from './forms.effects';
+import { NgrxFormsFacade } from './forms.facade';
 import { hot } from 'jasmine-marbles';
 
 describe('NgrxFormsEffects', () => {

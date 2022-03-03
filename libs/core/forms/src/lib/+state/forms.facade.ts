@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NgrxFormsState } from './ngrx-forms.reducer';
-import { ngrxFormsQuery } from './ngrx-forms.selectors';
-import * as NgrxFormsActions from './ngrx-forms.actions';
+import { NgrxFormsState } from './forms.reducer';
+import { ngrxFormsQuery } from './forms.selectors';
+import * as NgrxFormsActions from './forms.actions';
 
 @Injectable({ providedIn: 'root' })
 export class NgrxFormsFacade {
