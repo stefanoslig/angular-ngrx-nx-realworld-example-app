@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService, User, UserResponse } from '@angular-ngrx-nx-realworld-example-app/api';
+import { User, UserResponse } from '@realworld/core/api-types';
+import { ApiService } from '@realworld/core/http-client';
 import { UpdateUserRequest } from '@angular-ngrx-nx-realworld-example-app/settings/settings.interfaces';
 
 @Injectable({ providedIn: 'root' })

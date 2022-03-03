@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { getProfile } from './+state/profile.actions';
-import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Profile } from '@realworld/core/api-types';
 
 @Injectable()
 export class ProfileResolverService implements Resolve<Profile> {

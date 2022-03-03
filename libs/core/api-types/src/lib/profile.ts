@@ -5,3 +5,7 @@ export interface Profile {
   following: boolean;
   loading: boolean;
 }
+
+export interface ProfileResponse {
+  profile: Profile;
+}

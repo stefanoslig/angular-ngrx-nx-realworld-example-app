@@ -1,4 +1,4 @@
-import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Profile } from '@realworld/core/api-types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as ProfileActions from './profile.actions';
 

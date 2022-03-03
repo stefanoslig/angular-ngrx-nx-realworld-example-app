@@ -1,6 +1,7 @@
-import { ApiService, ProfileResponse, SingleArticleResponse } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ProfileResponse, ArticleResponse } from '@realworld/core/api-types';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ApiService } from '@realworld/core/http-client';
 
 @Injectable({ providedIn: 'root' })
 export class ActionsService {
@@ -14,11 +15,11 @@ export class ActionsService {
     return this.apiService.delete<ProfileResponse>('/profiles/' + username + '/follow');
   }
 
-  favorite(slug: string): Observable<SingleArticleResponse> {
-    return this.apiService.post<SingleArticleResponse, void>('/articles/' + slug + '/favorite');
+  favorite(slug: string): Observable<ArticleResponse> {
+    return this.apiService.post<ArticleResponse, void>('/articles/' + slug + '/favorite');
   }
 
-  unfavorite(slug: string): Observable<SingleArticleResponse> {
-    return this.apiService.delete<SingleArticleResponse>('/articles/' + slug + '/favorite');
+  unfavorite(slug: string): Observable<ArticleResponse> {
+    return this.apiService.delete<ArticleResponse>('/articles/' + slug + '/favorite');
   }
 }

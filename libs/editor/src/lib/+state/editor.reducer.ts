@@ -1,4 +1,4 @@
-import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article } from '@realworld/core/api-types';
 
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as EditorActions from './editor.actions';

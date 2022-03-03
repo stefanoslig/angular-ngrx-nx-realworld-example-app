@@ -1,4 +1,4 @@
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ApiService } from '@realworld/core/http-client';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
