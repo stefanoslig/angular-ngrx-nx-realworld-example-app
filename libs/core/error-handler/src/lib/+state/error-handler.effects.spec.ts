@@ -7,7 +7,7 @@ import { ErrorHandlerEffects } from './error-handler.effects';
 import { hot } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('NgrxErrorEffects', () => {
+describe('ErrorHandlerEffects', () => {
   let actions;
   let effects: ErrorHandlerEffects;
 

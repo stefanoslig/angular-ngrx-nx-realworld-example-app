@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
-import * as NgrxErrorActions from './error-handler.actions';
+import * as ErrorHandlerActions from './error-handler.actions';
 
 @Injectable()
 export class ErrorHandlerEffects {
   error401$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NgrxErrorActions.throw401Error),
+        ofType(ErrorHandlerActions.throw401Error),
         tap(() => this.router.navigate(['/login'])),
       ),
     { dispatch: false },
@@ -18,7 +18,7 @@ export class ErrorHandlerEffects {
   error404$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(NgrxErrorActions.throw404Error),
+        ofType(ErrorHandlerActions.throw404Error),
         tap(() => this.router.navigate(['/'])),
       ),
     { dispatch: false },
