@@ -1,4 +1,4 @@
-import { User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { User } from '@realworld/core/api-types';
 import { createReducer, on, createFeature } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 

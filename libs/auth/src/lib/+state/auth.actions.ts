@@ -1,4 +1,4 @@
-import { User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { User } from '@realworld/core/api-types';
 import { createAction, props } from '@ngrx/store';
 
 export const getUser = createAction('[auth] GET_USER');

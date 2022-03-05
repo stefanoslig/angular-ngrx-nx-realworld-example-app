@@ -1,5 +1,5 @@
-import { Article } from '@angular-ngrx-nx-realworld-example-app/api';
-import { Action, createFeature, createReducer, on } from '@ngrx/store';
+import { Article } from '@realworld/core/api-types';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import * as ArticleListActions from './article-list.actions';
 
 export const articleListFeatureKey = 'articles-list';

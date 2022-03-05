@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, NgModule } from '@angular/core';
-import { Article, User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Article, User } from '@realworld/core/api-types';
 import { Comment } from '../article.interfaces';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

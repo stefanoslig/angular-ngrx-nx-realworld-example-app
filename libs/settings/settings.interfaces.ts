@@ -1,4 +1,4 @@
-import { User } from '@angular-ngrx-nx-realworld-example-app/api';
+import { User } from '@realworld/core/api-types';
 
 export interface UpdateUserRequest {
   user: User;

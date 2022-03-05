@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SettingsService } from './settings.service';
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ApiService } from '@realworld/core/api-types';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SettingsService', () => {

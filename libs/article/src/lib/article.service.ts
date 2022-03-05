@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService, SingleArticleResponse } from '@angular-ngrx-nx-realworld-example-app/api';
 import { SingleCommentResponse, MultipleCommentsResponse } from './article.interfaces';
+import { ApiService } from '@realworld/core/http-client';
+import { ArticleResponse } from '@realworld/core/api-types';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleService {
   constructor(private apiService: ApiService) {}
 
-  getArticle(slug: string): Observable<SingleArticleResponse> {
-    return this.apiService.get<SingleArticleResponse>('/articles/' + slug);
+  getArticle(slug: string): Observable<ArticleResponse> {
+    return this.apiService.get<ArticleResponse>('/articles/' + slug);
   }
 
   getComments(slug: string): Observable<MultipleCommentsResponse> {

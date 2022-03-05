@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/articles/feature-articles-list",
+  "sourceRoot": "libs/articles/feature-articles-list/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/articles/feature-articles-list"],
+      "options": {
+        "jestConfig": "libs/articles/feature-articles-list/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/articles/feature-articles-list/src/**/*.ts",
+          "libs/articles/feature-articles-list/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

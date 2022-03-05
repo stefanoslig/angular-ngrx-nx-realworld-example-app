@@ -1,5 +1,5 @@
 import { ArticleService } from '../article.service';
-import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
+import { ActionsService } from '@realworld/articles/data-access';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';

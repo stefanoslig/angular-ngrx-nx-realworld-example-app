@@ -1,4 +1,4 @@
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
+import { ApiService } from '@realworld/core/http-client';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { ArticleService } from '../article.service';
 import { ArticleEffects } from './article.effects';
-import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
+import { ActionsService } from '@realworld/articles/data-access';
 import { NgrxFormsFacade } from '@angular-ngrx-nx-realworld-example-app/ngrx-forms';
 import { hot } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';

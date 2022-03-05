@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Profile } from '@angular-ngrx-nx-realworld-example-app/api';
+import { Profile } from '@realworld/core/api-types';
 
 export const getProfile = createAction('[profile] GET_PROFILE', props<{ id: string }>());
 export const getProfileSuccess = createAction('[profile] GET_PROFILE_SUCCESS', props<{ profile: Profile }>());

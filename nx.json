@@ -32,11 +32,14 @@
   "defaultProject": "conduit",
   "generators": {
     "@nrwl/angular:application": {
+      "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
     "@nrwl/angular:library": {
+      "linter": "eslint",
       "unitTestRunner": "jest"
-    }
+    },
+    "@nrwl/angular:component": {}
   }
 }

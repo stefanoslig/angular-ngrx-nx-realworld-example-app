@@ -17,14 +17,20 @@
     "baseUrl": ".",
     "paths": {
       "@angular-ngrx-nx-realworld-example-app/*": ["libs/*"],
-      "@angular-ngrx-nx-realworld-example-app/api": ["libs/api/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/article-list": ["libs/article-list/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/auth": ["libs/auth/src/index.ts"],
-      "@angular-ngrx-nx-realworld-example-app/ngrx-error": ["libs/ngrx-error/src/index.ts"],
       "@angular-ngrx-nx-realworld-example-app/ngrx-forms": ["libs/ngrx-forms/src/index.ts"],
-      "@angular-ngrx-nx-realworld-example-app/shared": ["libs/shared/src/index.ts"],
       "@default/*": ["apps/conduit/src/app/*"],
-      "@env/*": ["apps/conduit/src/environments/*"]
+      "@env/*": ["apps/conduit/src/environments/*"],
+      "@realworld/articles/article": ["libs/articles/feature-article/src/index.ts"],
+      "@realworld/articles/article-edit": ["libs/articles/feature-article-edit/src/index.ts"],
+      "@realworld/articles/articles-list": ["libs/articles/feature-articles-list/src/index.ts"],
+      "@realworld/articles/data-access": ["libs/articles/data-access/src/index.ts"],
+      "@realworld/core/api-types": ["libs/core/api-types/src/index.ts"],
+      "@realworld/core/error-handler": ["libs/core/error-handler/src/index.ts"],
+      "@realworld/core/forms": ["libs/core/forms/src/index.ts"],
+      "@realworld/core/http-client": ["libs/core/http-client/src/index.ts"],
+      "@realworld/ui/components": ["libs/ui/components/src/index.ts"]
     },
     "strict": true
   },

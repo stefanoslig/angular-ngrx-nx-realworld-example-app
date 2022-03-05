@@ -1,4 +1,4 @@
-import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
+import { ActionsService } from '@realworld/articles/data-access';
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';

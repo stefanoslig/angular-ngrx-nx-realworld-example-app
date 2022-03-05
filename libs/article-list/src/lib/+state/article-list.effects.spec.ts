@@ -1,5 +1,5 @@
-import { ApiService } from '@angular-ngrx-nx-realworld-example-app/api';
-import { ActionsService } from '@angular-ngrx-nx-realworld-example-app/shared';
+import { ApiService } from '@realworld/core/http-client';
+import { ActionsService } from '@realworld/articles/data-access';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
