@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as ArticleActions from './articles.actions';
-import { ArticleState } from './articles.reducer';
-import { articleQuery } from './articles.selectors';
+import * as ArticleActions from './article/article.actions';
+import { articleQuery } from './article/article.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleFacade {
@@ -12,7 +11,7 @@ export class ArticleFacade {
   articleLoaded$ = this.store.select(articleQuery.selectLoaded);
   authorUsername$ = this.store.select(articleQuery.getAuthorUsername);
 
-  constructor(private store: Store<ArticleState>) {}
+  constructor(private store: Store) {}
 
   loadArticle(slug: string) {
     this.store.dispatch(ArticleActions.loadArticle({ slug }));

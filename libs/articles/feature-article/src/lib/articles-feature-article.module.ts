@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 import { ArticleComponent } from './article.component';
-import {articleFeature, ArticleEffects} from '@realworld/articles/data-access';
+import { articleFeature, ArticleEffects } from '@realworld/articles/data-access';
 
 @NgModule({
   imports: [

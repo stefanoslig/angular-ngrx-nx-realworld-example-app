@@ -1,34 +1,35 @@
 import { ApiService } from '@realworld/core/http-client';
+import { ActionsService } from '@realworld/articles/data-access';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import { DataPersistence } from '@nrwl/angular';
 
-import { ArticleService } from '../services/article.service';
-import { ArticleEffects } from './articles.effects';
-import { ActionsService } from '@realworld/articles/data-access';
-import { NgrxFormsFacade } from '@realworld/core/forms';
+import { ArticleListService } from '../article-list.service';
+import { ArticleListEffects } from './article-list.effects';
+import { ArticleListFacade } from './article-list.facade';
 import { hot } from 'jasmine-marbles';
-import { RouterTestingModule } from '@angular/router/testing';
 
-describe('ArticleEffects', () => {
+describe('ArticleListEffects', () => {
   let actions;
-  let effects: ArticleEffects;
+  let effects: ArticleListEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), HttpClientTestingModule, RouterTestingModule.withRoutes([])],
+      imports: [StoreModule.forRoot({}), HttpClientTestingModule],
       providers: [
-        ArticleEffects,
+        ArticleListEffects,
+        DataPersistence,
         provideMockActions(() => actions),
-        ArticleService,
-        ApiService,
         ActionsService,
-        NgrxFormsFacade,
+        ArticleListService,
+        ApiService,
+        ArticleListFacade,
       ],
     });
 
-    effects = TestBed.inject(ArticleEffects);
+    effects = TestBed.inject(ArticleListEffects);
   });
 
   describe('someEffect', () => {

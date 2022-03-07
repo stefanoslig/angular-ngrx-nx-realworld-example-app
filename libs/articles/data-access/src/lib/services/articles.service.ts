@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SingleCommentResponse, MultipleCommentsResponse } from './article.interfaces';
 import { ApiService } from '@realworld/core/http-client';
-import { ArticleResponse } from '@realworld/core/api-types';
+import { Article, ArticleResponse, MultipleCommentsResponse, SingleCommentResponse } from '@realworld/core/api-types';
+import { ArticleListConfig } from '../+state/article-list/article-list.reducer';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
-export class ArticleService {
+export class ArticlesService {
   constructor(private apiService: ApiService) {}
 
   getArticle(slug: string): Observable<ArticleResponse> {
@@ -28,5 +29,17 @@ export class ArticleService {
     return this.apiService.post<SingleCommentResponse, { comment: { body: string } }>(`/articles/${slug}/comments`, {
       comment: { body: payload },
     });
+  }
+
+  query(config: ArticleListConfig): Observable<{ articles: Article[]; articlesCount: number }> {
+    return this.apiService.get(
+      '/articles' + (config.type === 'FEED' ? '/feed' : ''),
+      this.toHttpParams(config.filters),
+    );
+  }
+
+  // TODO: remove any
+  private toHttpParams(params: any) {
+    return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());
   }
 }
