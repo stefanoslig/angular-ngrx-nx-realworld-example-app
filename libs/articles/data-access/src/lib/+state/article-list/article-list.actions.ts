@@ -15,15 +15,3 @@ export const loadArticlesSuccess = createAction(
 );
 
 export const loadArticlesFail = createAction('[article-list] LOAD_ARTICLES_FAIL', props<{ error: Error }>());
-
-export const favorite = createAction('[article-list] FAVORITE', props<{ slug: string }>());
-
-export const favoriteSuccess = createAction('[article-list] FAVORITE_SUCCESS', props<{ article: Article }>());
-
-export const favoriteFail = createAction('[article-list] FAVORITE_FAIL', props<{ error: Error }>());
-
-export const unFavorite = createAction('[article-list] UNFAVORITE', props<{ slug: string }>());
-
-export const unFavoriteSuccess = createAction('[article-list] UNFAVORITE_SUCCESS', props<{ article: Article }>());
-
-export const unFavoriteFail = createAction('[article-list] UNFAVORITE_FAIL', props<{ error: Error }>());

@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { articleListQuery } from './article-list/article-list.selectors';
 
 import * as ArticleActions from './article/article.actions';
 import { articleQuery } from './article/article.selectors';
 
 @Injectable({ providedIn: 'root' })
-export class ArticleFacade {
+export class ArticlesFacade {
   article$ = this.store.select(articleQuery.selectData);
   comments$ = this.store.select(articleQuery.selectComments);
   articleLoaded$ = this.store.select(articleQuery.selectLoaded);
   authorUsername$ = this.store.select(articleQuery.getAuthorUsername);
+  listConfig$ = this.store.select(articleListQuery.selectListConfig);
 
   constructor(private store: Store) {}
 

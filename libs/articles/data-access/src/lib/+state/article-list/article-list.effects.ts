@@ -7,7 +7,7 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { ArticlesService } from '../../services/articles.service';
 import * as ArticleListActions from './article-list.actions';
 
-import { ArticleListFacade } from './article-list.facade';
+import { ArticlesFacade } from '../articles.facade';
 
 @Injectable()
 export class ArticleListEffects {
@@ -71,6 +71,6 @@ export class ArticleListEffects {
     private actions$: Actions,
     private articlesService: ArticlesService,
     private actionsService: ActionsService,
-    private facade: ArticlesListFacade,
+    private facade: ArticlesFacade,
   ) {}
 }
