@@ -5,6 +5,7 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 import * as ArticleActions from './article.actions';
+import * as ArticlesActions from '../articles.actions';
 
 import { NgrxFormsFacade, setErrors, resetForm } from '@realworld/core/forms';
 import { Router } from '@angular/router';
@@ -99,11 +100,11 @@ export class ArticleEffects {
 
   favorite = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleActions.favorite),
+      ofType(ArticlesActions.favorite),
       concatMap(({ slug }) =>
         this.actionsService.favorite(slug).pipe(
-          map((response) => ArticleActions.favoriteSuccess({ article: response.article })),
-          catchError((error) => of(ArticleActions.favoriteFail(error))),
+          map((response) => ArticlesActions.favoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticlesActions.favoriteFail(error))),
         ),
       ),
     ),
@@ -111,11 +112,11 @@ export class ArticleEffects {
 
   unFavorite = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleActions.unFavorite),
+      ofType(ArticlesActions.unFavorite),
       concatMap(({ slug }) =>
         this.actionsService.unfavorite(slug).pipe(
-          map((response) => ArticleActions.unFavoriteSuccess({ article: response.article })),
-          catchError((error) => of(ArticleActions.unFavoriteFail(error))),
+          map((response) => ArticlesActions.unFavoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticlesActions.unFavoriteFail(error))),
         ),
       ),
     ),

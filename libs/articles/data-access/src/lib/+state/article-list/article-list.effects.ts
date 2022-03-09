@@ -6,6 +6,7 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 
 import { ArticlesService } from '../../services/articles.service';
 import * as ArticleListActions from './article-list.actions';
+import * as ArticlesActions from '../articles.actions';
 
 import { ArticlesFacade } from '../articles.facade';
 
@@ -45,11 +46,11 @@ export class ArticleListEffects {
 
   favorite = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleListActions.favorite),
+      ofType(ArticlesActions.favorite),
       concatMap(({ slug }) =>
         this.actionsService.favorite(slug).pipe(
-          map((response) => ArticleListActions.favoriteSuccess({ article: response.article })),
-          catchError((error) => of(ArticleListActions.favoriteFail(error))),
+          map((response) => ArticlesActions.favoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticlesActions.favoriteFail(error))),
         ),
       ),
     ),
@@ -57,11 +58,11 @@ export class ArticleListEffects {
 
   unFavorite = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleListActions.unFavorite),
+      ofType(ArticlesActions.unFavorite),
       concatMap(({ slug }) =>
         this.actionsService.unfavorite(slug).pipe(
-          map((response) => ArticleListActions.unFavoriteSuccess({ article: response.article })),
-          catchError((error) => of(ArticleListActions.unFavoriteFail(error))),
+          map((response) => ArticlesActions.unFavoriteSuccess({ article: response.article })),
+          catchError((error) => of(ArticlesActions.unFavoriteFail(error))),
         ),
       ),
     ),

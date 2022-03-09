@@ -38,6 +38,15 @@ export class ArticlesService {
     );
   }
 
+  publishArticle(article: Article): Observable<ArticleResponse> {
+    if (article.slug) {
+      return this.apiService.put<ArticleResponse, ArticleResponse>('/articles/' + article.slug, {
+        article: article,
+      });
+    }
+    return this.apiService.post<ArticleResponse, ArticleResponse>('/articles/', { article: article });
+  }
+
   // TODO: remove any
   private toHttpParams(params: any) {
     return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());

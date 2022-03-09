@@ -1,6 +1,7 @@
 import { Article } from '@realworld/core/api-types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as ArticleListActions from './article-list.actions';
+import * as ArticlesActions from '../articles.actions';
 
 export const articleListFeatureKey = 'articles-list';
 
@@ -92,7 +93,7 @@ export const articleListFeature = createFeature({
       };
       return { ...state, articles };
     }),
-    on(ArticleListActions.unFavoriteSuccess, ArticleListActions.favoriteSuccess, (state, { article }) => ({
+    on(ArticlesActions.unFavoriteSuccess, ArticlesActions.favoriteSuccess, (state, { article }) => ({
       ...state,
       articles: replaceArticle(state.articles, article),
     })),
