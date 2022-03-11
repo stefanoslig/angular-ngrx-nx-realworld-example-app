@@ -33,8 +33,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
         {
           path: 'article/:slug',
           loadChildren: () =>
-            import('@angular-ngrx-nx-realworld-example-app/article/src/lib/article.module').then(
-              (m) => m.ArticleModule,
+            import('@realworld/articles/article').then(
+              (m) => m.ArticleFeatureArticleModule,
             ),
         },
         {
@@ -47,7 +47,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
         {
           path: 'editor',
           loadChildren: () =>
-            import('@angular-ngrx-nx-realworld-example-app/editor/src/lib/editor.module').then((m) => m.EditorModule),
+            import('@realworld/articles/article-edit').then((m) => m.ArticlesFeatureArticleEditModule),
         },
         {
           path: 'profile/:username',

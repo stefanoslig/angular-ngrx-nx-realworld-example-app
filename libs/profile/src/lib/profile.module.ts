@@ -1,4 +1,4 @@
-import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { ArticlesFeatureArticlesListModule } from '@realworld/articles/articles-list';
 import { ArticleListComponent } from '@angular-ngrx-nx-realworld-example-app/article-list/src/lib/article-list.component';
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgModule } from '@angular/core';
@@ -18,7 +18,7 @@ import { ProfileComponent } from './profile.component';
 
 @NgModule({
   imports: [
-    ArticleListModule,
+    ArticlesFeatureArticlesListModule,
     RouterModule.forChild([
       {
         path: '',

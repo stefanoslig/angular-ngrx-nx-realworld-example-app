@@ -69,4 +69,4 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   declarations: [ArticleEditComponent],
   exports: [ArticleEditComponent],
 })
-export class ArticleEditorComponentModule {}
+export class ArticleEditComponentModule {}

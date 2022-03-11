@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 import { ArticleComponent } from './article.component';
-import { articleFeature, ArticleEffects } from '@realworld/articles/data-access';
+import { articleFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import { articleFeature, ArticleEffects } from '@realworld/articles/data-access'
       },
     ]),
     StoreModule.forFeature(articleFeature),
-    EffectsModule.forFeature([ArticleEffects]),
+    EffectsModule.forFeature(articlesFeatureEffects),
   ],
   providers: [ArticleGuardService],
 })
-export class ArticlesFeatureArticleModule {}
+export class ArticleFeatureArticleModule {}

@@ -10,7 +10,7 @@ import { Profile } from '@realworld/core/api-types';
 
 @Injectable()
 export class ProfileResolverService implements Resolve<Profile> {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     const username = route.params['username'];
@@ -20,7 +20,7 @@ export class ProfileResolverService implements Resolve<Profile> {
 
 @Injectable()
 export class ProfileArticlesResolverService implements Resolve<Profile> {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     const username = route.params['username'];
@@ -40,7 +40,7 @@ export class ProfileArticlesResolverService implements Resolve<Profile> {
 
 @Injectable()
 export class ProfileFavoritesResolverService implements Resolve<Profile> {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     const username = route?.parent?.params['username'];

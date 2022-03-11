@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ArticleMetaComponentModule } from './article-meta/article-meta.component';
 import { ArticleCommentComponentModule } from './article-comment/article-comment.component';
 import { MarkdownPipeModule } from './markdown.pipe';
-import { ArticleFacade } from '@realworld/articles/data-access';
+import { ArticlesFacade } from '@realworld/articles/data-access';
 
 const structure: Field[] = [
   {
@@ -40,7 +40,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   constructor(
     private ngrxFormsFacade: NgrxFormsFacade,
-    private facade: ArticleFacade,
+    private facade: ArticlesFacade,
     private authFacade: AuthFacade,
   ) {}
 

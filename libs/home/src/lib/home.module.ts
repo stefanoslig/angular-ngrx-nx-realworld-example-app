@@ -1,4 +1,4 @@
-import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { ArticlesFeatureArticlesListModule } from '@realworld/articles/articles-list';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -11,7 +11,7 @@ import { HomeComponent } from './home.component';
 
 @NgModule({
   imports: [
-    ArticleListModule,
+    ArticlesFeatureArticlesListModule,
     RouterModule.forChild([
       {
         path: '',

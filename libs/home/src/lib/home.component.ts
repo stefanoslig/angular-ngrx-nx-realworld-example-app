@@ -1,13 +1,12 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
-
-import { ArticleListComponentModule, ArticleListConfig } from '@angular-ngrx-nx-realworld-example-app/article-list';
-import { articleListInitialState, ArticleListFacade } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { ArticlesFeatureArticlesListModule } from '@realworld/articles/articles-list';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { HomeFacade } from './+state/home.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { TagsListComponentModule } from './tags-list/tags-list.component';
+import { ArticlesFacade, articleListInitialState, ArticleListConfig } from '@realworld/articles/data-access';
 
 @UntilDestroy()
 @Component({
@@ -17,16 +16,12 @@ import { TagsListComponentModule } from './tags-list/tags-list.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  listConfig$ = this.articleListFacade.listConfig$;
+  listConfig$ = this.articlesfacade.listConfig$;
   tags$ = this.facade.tags$;
   isAuthenticated = false;
   unsubscribe$: Subject<void> = new Subject();
 
-  constructor(
-    private facade: HomeFacade,
-    private articleListFacade: ArticleListFacade,
-    private authFacade: AuthFacade,
-  ) {}
+  constructor(private facade: HomeFacade, private articlesfacade: ArticlesFacade, private authFacade: AuthFacade) {}
 
   ngOnInit() {
     this.authFacade.isLoggedIn$.pipe(untilDestroyed(this)).subscribe((isLoggedIn) => {
@@ -36,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   setListTo(type: string = 'ALL') {
-    this.articleListFacade.setListConfig(<ArticleListConfig>{
+    this.articlesfacade.setListConfig(<ArticleListConfig>{
       ...articleListInitialState.listConfig,
       type,
     });
@@ -51,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   setListTag(tag: string) {
-    this.articleListFacade.setListConfig(<ArticleListConfig>{
+    this.articlesfacade.setListConfig(<ArticleListConfig>{
       ...articleListInitialState.listConfig,
       filters: {
         ...articleListInitialState.listConfig.filters,
@@ -62,7 +57,7 @@ export class HomeComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [CommonModule, TagsListComponentModule, ArticleListComponentModule],
+  imports: [CommonModule, TagsListComponentModule, ArticlesFeatureArticlesListModule],
   declarations: [HomeComponent],
   exports: [HomeComponent],
 })
