@@ -1,0 +1,18 @@
+<app-list-errors> </app-list-errors>
+
+<div class="card comment-form">
+  <app-dynamic-form
+    class="card-block"
+    (updateForm)="updateForm.emit($event)"
+    [data$]="data$"
+    [structure$]="structure$"
+    [touchedForm$]="touchedForm$"
+  >
+  </app-dynamic-form>
+  <div class="card-footer">
+    <img [src]="currentUser.image" class="comment-author-img" />
+    <button (click)="submitComment.emit(article.slug)" class="btn btn-sm btn-primary" type="submit">
+      Post Comment
+    </button>
+  </div>
+</div>

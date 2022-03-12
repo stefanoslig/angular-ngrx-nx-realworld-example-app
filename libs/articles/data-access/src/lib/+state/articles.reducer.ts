@@ -58,8 +58,7 @@ export const articleFeature = createFeature({
       const comments: Comment[] = state.comments.filter((item) => item.id !== action.commentId);
       return { ...state, comments };
     }),
-    on(ArticleActions.initializeArticle, (state) => articleInitialState),
-    on(ArticleActions.deleteArticleFail, (state) => articleInitialState),
+    on(ArticleActions.initializeArticle, ArticleActions.deleteArticleFail, () => articleInitialState),
     on(ArticleActions.loadCommentsSuccess, (state, action) => ({
       ...state,
       comments: action.comments,

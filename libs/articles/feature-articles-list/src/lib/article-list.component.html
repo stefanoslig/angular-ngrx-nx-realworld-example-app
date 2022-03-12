@@ -1,0 +1,27 @@
+<ng-container *ngIf="!(isLoading$ | async); else isLoading">
+  <ng-container *ngIf="[articles$ | async].length > 0; else noArticles">
+    <app-article-list-item
+      data-e2e-id="article-list"
+      (navigateToArticle)="navigateToArticle($event)"
+      (unFavorite)="unFavorite($event)"
+      (favorite)="favorite($event)"
+      *ngFor="let article of articles$ | async"
+      [article]="article"
+    >
+    </app-article-list-item>
+
+    <app-pager
+      (setPage)="setPage($event)"
+      [currentPage]="(listConfig$ | async).currentPage"
+      [totalPages]="totalPages$ | async"
+    ></app-pager>
+  </ng-container>
+
+  <ng-template #noArticles>
+    <div>No articles are here... yet.</div>
+  </ng-template>
+</ng-container>
+
+<ng-template #isLoading>
+  <div>Loading articles...</div>
+</ng-template>
