@@ -50,7 +50,7 @@ export const articleListInitialState: ArticleListState = {
 };
 
 export const articleListFeature = createFeature({
-  name: 'articleList',
+  name: 'articlesList',
   reducer: createReducer(
     articleListInitialState,
     on(ArticleListActions.setListPage, (state, { page }) => {

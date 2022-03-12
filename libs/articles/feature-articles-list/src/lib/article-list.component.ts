@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ArticleListFacade } from './+state/article-list.facade';
+import { ArticlesFacade } from '@realworld/articles/data-access';
 import { ArticleListItemComponentModule } from './article-list-item/article-list-item.component';
 import { PagerComponentModule } from '@realworld/ui/components';
 
@@ -18,14 +18,14 @@ export class ArticleListComponent {
   listConfig$ = this.facade.listConfig$;
   isLoading$ = this.facade.isLoading$;
 
-  constructor(private readonly facade: ArticleListFacade, private readonly router: Router) {}
+  constructor(private readonly facade: ArticlesFacade, private readonly router: Router) {}
 
   favorite(slug: string) {
     this.facade.favorite(slug);
   }
 
   unFavorite(slug: string) {
-    this.facade.unFavorite(slug);
+    this.facade.unfavorite(slug);
   }
 
   navigateToArticle(slug: string) {

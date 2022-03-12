@@ -32,10 +32,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
         },
         {
           path: 'article/:slug',
-          loadChildren: () =>
-            import('@realworld/articles/article').then(
-              (m) => m.ArticleFeatureArticleModule,
-            ),
+          loadChildren: () => import('@realworld/articles/article').then((m) => m.ArticleFeatureArticleModule),
         },
         {
           path: 'settings',
