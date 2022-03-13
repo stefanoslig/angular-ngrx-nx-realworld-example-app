@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { articleListFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [StoreModule.forFeature(articleListFeature), EffectsModule.forFeature(articlesFeatureEffects)],
 })
 export class ArticlesFeatureArticlesListModule {}

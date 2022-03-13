@@ -1,4 +1,4 @@
-import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
+import { ArticleListComponentModule } from '@realworld/articles/articles-list';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -8,10 +8,10 @@ import { HomeEffects } from './+state/home.effects';
 import { homeFeature } from './+state/home.reducer';
 import { HomeResolverService } from './home-resolver.service';
 import { HomeComponent } from './home.component';
+import { articleListFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
 
 @NgModule({
   imports: [
-    ArticleListModule,
     RouterModule.forChild([
       {
         path: '',
@@ -20,6 +20,8 @@ import { HomeComponent } from './home.component';
         resolve: { HomeResolverService },
       },
     ]),
+    StoreModule.forFeature(articleListFeature),
+    EffectsModule.forFeature(articlesFeatureEffects),
     StoreModule.forFeature(homeFeature),
     EffectsModule.forFeature([HomeEffects]),
   ],

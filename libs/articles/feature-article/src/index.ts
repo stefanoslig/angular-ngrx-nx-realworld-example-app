@@ -1,1 +1,1 @@
-export * from './lib/articles-feature-article.module';
+export * from './lib/article-feature-article.module';

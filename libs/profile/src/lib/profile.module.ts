@@ -1,10 +1,11 @@
-import { ArticleListModule } from '@angular-ngrx-nx-realworld-example-app/article-list';
-import { ArticleListComponent } from '@angular-ngrx-nx-realworld-example-app/article-list/src/lib/article-list.component';
+import { ArticlesFeatureArticlesListModule } from '@realworld/articles/articles-list';
+import { ArticleListComponent } from '@realworld/articles/articles-list';
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { articleListFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
 
 import { ProfileEffects } from './+state/profile.effects';
 import { ProfileFacade } from './+state/profile.facade';
@@ -18,7 +19,7 @@ import { ProfileComponent } from './profile.component';
 
 @NgModule({
   imports: [
-    ArticleListModule,
+    ArticlesFeatureArticlesListModule,
     RouterModule.forChild([
       {
         path: '',
@@ -39,6 +40,8 @@ import { ProfileComponent } from './profile.component';
         ],
       },
     ]),
+    StoreModule.forFeature(articleListFeature),
+    EffectsModule.forFeature(articlesFeatureEffects),
     StoreModule.forFeature(profileFeature),
     EffectsModule.forFeature([ProfileEffects]),
   ],
