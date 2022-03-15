@@ -7,7 +7,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { ArticleMetaComponentModule } from './article-meta/article-meta.component';
 import { ArticleCommentComponentModule } from './article-comment/article-comment.component';
-import { MarkdownPipeModule } from './markdown.pipe';
+import { MarkdownPipeModule } from './pipes/markdown.pipe';
 import { ArticlesFacade } from '@realworld/articles/data-access';
 
 const structure: Field[] = [
