@@ -46,10 +46,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
         },
         {
           path: 'profile/:username',
-          loadChildren: () =>
-            import('@angular-ngrx-nx-realworld-example-app/profile/src/lib/profile.module').then(
-              (m) => m.ProfileModule,
-            ),
+          loadChildren: () => import('@realworld/profile/feature-profile').then((m) => m.ProfileFeatureProfileModule),
         },
       ],
       {

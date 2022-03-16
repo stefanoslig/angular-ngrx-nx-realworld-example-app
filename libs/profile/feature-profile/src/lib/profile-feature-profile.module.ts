@@ -1,7 +1,40 @@
+import { ArticleListComponent } from '@realworld/articles/articles-list';
+import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ProfileComponent } from './profile.component';
+import { ArticlesDataAccessModule } from '@realworld/articles/data-access';
+import {
+  ProfileResolverService,
+  ProfileArticlesResolverService,
+  ProfileFavoritesResolverService,
+  ProfileDataAccessModule,
+} from '@realworld/profile/data-access';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    ProfileDataAccessModule,
+    ArticlesDataAccessModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ProfileComponent,
+        resolve: { ProfileResolverService },
+        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: ArticleListComponent,
+            resolve: { ProfileArticlesResolverService },
+          },
+          {
+            path: 'favorites',
+            component: ArticleListComponent,
+            resolve: { ProfileFavoritesResolverService },
+          },
+        ],
+      },
+    ]),
+  ],
 })
 export class ProfileFeatureProfileModule {}

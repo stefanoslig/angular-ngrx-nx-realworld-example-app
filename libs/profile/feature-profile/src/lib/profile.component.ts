@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/c
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ProfileFacade } from './+state/profile.facade';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ProfileFacade } from '@realworld/profile/data-access';
 
 @UntilDestroy()
 @Component({
