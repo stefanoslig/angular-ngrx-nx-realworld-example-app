@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/profile/data-access",
+  "sourceRoot": "libs/profile/data-access/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/profile/data-access"],
+      "options": {
+        "jestConfig": "libs/profile/data-access/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/profile/data-access/src/**/*.ts", "libs/profile/data-access/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}
