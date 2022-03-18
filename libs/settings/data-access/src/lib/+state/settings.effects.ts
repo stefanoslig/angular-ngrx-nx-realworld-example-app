@@ -6,8 +6,8 @@ import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 
-import { SettingsService } from '../settings.service';
 import * as SettingsActions from './settings.actions';
+import { SettingsService } from '../settings.service';
 
 @Injectable()
 export class SettingsEffects {

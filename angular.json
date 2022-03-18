@@ -14,8 +14,8 @@
     "core-http-client": "libs/core/http-client",
     "home": "libs/home",
     "profile": "libs/profile",
-    "settings": "libs/settings",
     "settings-data-access": "libs/settings/data-access",
+    "settings-feature-settings": "libs/settings/feature-settings",
     "ui-components": "libs/ui/components"
   }
 }

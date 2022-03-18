@@ -1,13 +1,13 @@
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { SettingsDataAccessModule } from '@realworld/settings/data-access';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
 
-import { SettingsEffects } from './+state/settings.effects';
 import { SettingsComponent } from './settings.component';
 
 @NgModule({
   imports: [
+    SettingsDataAccessModule,
     RouterModule.forChild([
       {
         path: '',
@@ -16,7 +16,6 @@ import { SettingsComponent } from './settings.component';
         canActivate: [AuthGuardService],
       },
     ]),
-    EffectsModule.forFeature([SettingsEffects]),
   ],
 })
-export class SettingsModule {}
+export class SettingsFeatureSettingsModule {}

@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/c
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { editSettings } from './+state/settings.actions';
+import { editSettings } from '@realworld/settings/data-access';
 
 const structure: Field[] = [
   {
@@ -53,7 +53,7 @@ export class SettingsComponent implements OnInit {
   structure$ = this.ngrxFormsFacade.structure$;
   data$ = this.ngrxFormsFacade.data$;
 
-  constructor(private store: Store<any>, private authFacade: AuthFacade, private ngrxFormsFacade: NgrxFormsFacade) {}
+  constructor(private store: Store, private authFacade: AuthFacade, private ngrxFormsFacade: NgrxFormsFacade) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);

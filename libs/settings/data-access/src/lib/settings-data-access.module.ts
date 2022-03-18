@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { EffectsModule } from '@ngrx/effects';
+
+import { SettingsEffects } from './+state/settings.effects';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [EffectsModule.forFeature([SettingsEffects])],
 })
 export class SettingsDataAccessModule {}

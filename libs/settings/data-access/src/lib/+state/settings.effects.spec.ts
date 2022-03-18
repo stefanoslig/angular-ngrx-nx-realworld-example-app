@@ -5,12 +5,12 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
 
-import { SettingsService } from '../settings.service';
 import { SettingsEffects } from './settings.effects';
 import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxFormsFacade } from '@realworld/core/forms';
 import { hot } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SettingsService } from '../settings.service';
 
 describe('SettingsEffects', () => {
   let actions;
