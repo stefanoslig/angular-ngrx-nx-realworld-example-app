@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { ArticleGuardService } from './article-guard.service';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 import { ArticleComponent } from './article.component';
-import { articleFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
+import { ArticlesDataAccessModule } from '@realworld/articles/data-access';
 
 @NgModule({
   imports: [
+    ArticlesDataAccessModule,
     RouterModule.forChild([
       {
         path: '',
@@ -15,8 +14,6 @@ import { articleFeature, articlesFeatureEffects } from '@realworld/articles/data
         canActivate: [ArticleGuardService],
       },
     ]),
-    StoreModule.forFeature(articleFeature),
-    EffectsModule.forFeature(articlesFeatureEffects),
   ],
   providers: [ArticleGuardService],
 })

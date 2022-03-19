@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { articleListFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
 
 import { ProfileEffects } from './+state/profile.effects';
 import { ProfileFacade } from './+state/profile.facade';
@@ -16,9 +15,11 @@ import {
   ProfileResolverService,
 } from './profile-resolver.service';
 import { ProfileComponent } from './profile.component';
+import { ArticlesDataAccessModule } from '@realworld/articles/data-access';
 
 @NgModule({
   imports: [
+    ArticlesDataAccessModule,
     ArticlesFeatureArticlesListModule,
     RouterModule.forChild([
       {
@@ -40,8 +41,6 @@ import { ProfileComponent } from './profile.component';
         ],
       },
     ]),
-    StoreModule.forFeature(articleListFeature),
-    EffectsModule.forFeature(articlesFeatureEffects),
     StoreModule.forFeature(profileFeature),
     EffectsModule.forFeature([ProfileEffects]),
   ],

@@ -1,14 +1,13 @@
 import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 import { ArticleEditResolverService } from './article-edit-resolver.service';
 import { ArticleEditComponent } from './article-edit.component';
-import { articleFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
+import { ArticlesDataAccessModule } from '@realworld/articles/data-access';
 
 @NgModule({
   imports: [
+    ArticlesDataAccessModule,
     RouterModule.forChild([
       {
         path: '',
@@ -23,8 +22,6 @@ import { articleFeature, articlesFeatureEffects } from '@realworld/articles/data
         resolve: { ArticleEditResolverService },
       },
     ]),
-    StoreModule.forFeature(articleFeature),
-    EffectsModule.forFeature(articlesFeatureEffects),
   ],
   providers: [ArticleEditResolverService],
 })
