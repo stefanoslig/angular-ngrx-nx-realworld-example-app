@@ -18,6 +18,7 @@
     "paths": {
       "@angular-ngrx-nx-realworld-example-app/*": ["libs/*"],
       "@angular-ngrx-nx-realworld-example-app/auth": ["libs/auth/src/index.ts"],
+      "@conduit/settings/data-access": ["libs/settings/data-access/src/index.ts"],
       "@default/*": ["apps/conduit/src/app/*"],
       "@env/*": ["apps/conduit/src/environments/*"],
       "@realworld/articles/article": ["libs/articles/feature-article/src/index.ts"],
