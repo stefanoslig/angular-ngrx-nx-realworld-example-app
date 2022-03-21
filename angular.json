@@ -6,6 +6,8 @@
     "articles-feature-article-edit": "libs/articles/feature-article-edit",
     "articles-feature-articles-list": "libs/articles/feature-articles-list",
     "auth": "libs/auth",
+    "auth-data-access": "libs/auth/data-access",
+    "auth-feature-auth": "libs/auth/feature-auth",
     "conduit": "apps/conduit",
     "conduit-e2e": "apps/conduit-e2e",
     "core-api-types": "libs/core/api-types",

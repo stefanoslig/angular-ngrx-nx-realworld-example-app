@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/auth/feature-auth",
+  "sourceRoot": "libs/auth/feature-auth/src",
+  "prefix": "conduit",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/auth/feature-auth"],
+      "options": {
+        "jestConfig": "libs/auth/feature-auth/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/auth/feature-auth/src/**/*.ts", "libs/auth/feature-auth/src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}
