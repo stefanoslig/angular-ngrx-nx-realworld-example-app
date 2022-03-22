@@ -1,9 +1,9 @@
-import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { SettingsDataAccessModule } from '@realworld/settings/data-access';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SettingsComponent } from './settings.component';
+import { AuthGuardService } from '@realworld/auth/data-access';
 
 @NgModule({
   imports: [

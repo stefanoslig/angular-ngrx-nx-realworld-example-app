@@ -1,4 +1,3 @@
-import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { Field, NgrxFormsFacade } from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, NgModule, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
@@ -9,6 +8,7 @@ import { ArticleMetaComponentModule } from './article-meta/article-meta.componen
 import { ArticleCommentComponentModule } from './article-comment/article-comment.component';
 import { MarkdownPipeModule } from './pipes/markdown.pipe';
 import { ArticlesFacade } from '@realworld/articles/data-access';
+import { AuthFacade } from '@realworld/auth/data-access';
 
 const structure: Field[] = [
   {

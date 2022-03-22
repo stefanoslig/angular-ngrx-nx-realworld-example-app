@@ -1,4 +1,3 @@
-import { AuthFacade, getUser } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgrxFormsFacade, setErrors } from '@realworld/core/forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { catchError, concatMap, map, tap } from 'rxjs/operators';
 
 import * as SettingsActions from './settings.actions';
 import { SettingsService } from '../settings.service';
+import { AuthFacade, getUser } from '@realworld/auth/data-access';
 
 @Injectable()
 export class SettingsEffects {

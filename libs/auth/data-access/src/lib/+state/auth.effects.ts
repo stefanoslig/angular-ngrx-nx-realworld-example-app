@@ -1,4 +1,4 @@
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { NgrxFormsFacade, setErrors } from '@realworld/core/forms';
 import * as fromNgrxForms from '@realworld/core/forms';
 import { Injectable } from '@angular/core';
@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 
 import * as AuthActions from './auth.actions';
-import { LocalStorageJwtService } from '../local-storage-jwt.service';
+import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
 
 @Injectable()
 export class AuthEffects {

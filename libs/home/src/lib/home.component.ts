@@ -1,12 +1,12 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { ArticleListComponentModule, ArticlesFeatureArticlesListModule } from '@realworld/articles/articles-list';
-import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { HomeFacade } from './+state/home.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { TagsListComponentModule } from './tags-list/tags-list.component';
 import { ArticlesFacade, articleListInitialState, ArticleListConfig } from '@realworld/articles/data-access';
+import { AuthFacade } from '@realworld/auth/data-access';
 
 @UntilDestroy()
 @Component({

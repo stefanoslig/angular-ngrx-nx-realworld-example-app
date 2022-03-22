@@ -2,8 +2,7 @@ import { DynamicFormComponentModule, Field, ListErrorsComponentModule, NgrxForms
 import { ChangeDetectionStrategy, Component, NgModule, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
-import { AuthFacade } from '../+state/auth.facade';
+import { AuthFacade } from '@realworld/auth/data-access';
 
 const structure: Field[] = [
   {

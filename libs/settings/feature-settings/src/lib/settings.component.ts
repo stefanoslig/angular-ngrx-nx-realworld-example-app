@@ -1,10 +1,10 @@
-import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { DynamicFormComponentModule, Field, ListErrorsComponentModule, NgrxFormsFacade } from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { editSettings } from '@realworld/settings/data-access';
+import { AuthFacade } from '@realworld/auth/data-access';
 
 const structure: Field[] = [
   {

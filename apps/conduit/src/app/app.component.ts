@@ -1,7 +1,6 @@
-import { AuthFacade } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AuthFacade, LocalStorageJwtService } from '@realworld/auth/data-access';
 import { filter, take } from 'rxjs/operators';
-import { LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/auth';
 
 @Component({
   selector: 'conduit-root',

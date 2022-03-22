@@ -1,5 +1,4 @@
 import { ArticleListComponent } from '@realworld/articles/articles-list';
-import { AuthGuardService } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
@@ -10,6 +9,7 @@ import {
   ProfileFavoritesResolverService,
   ProfileDataAccessModule,
 } from '@realworld/profile/data-access';
+import { AuthGuardService } from '@realworld/auth/data-access';
 
 @NgModule({
   imports: [

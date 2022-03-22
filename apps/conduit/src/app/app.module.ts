@@ -1,5 +1,4 @@
 import { CoreHttpClientModule } from '@realworld/core/http-client';
-import { AuthModule } from '@angular-ngrx-nx-realworld-example-app/auth';
 import { CoreErrorHandlerModule } from '@realworld/core/error-handler';
 import { CoreFormsModule } from '@realworld/core/forms';
 import { NgModule } from '@angular/core';
@@ -15,20 +14,22 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { AuthFeatureAuthModule } from '@realworld/auth/feature-auth';
+import { AuthDataAccessModule } from '@realworld/auth/data-access';
 
 @NgModule({
   imports: [
     CoreHttpClientModule,
     CoreErrorHandlerModule,
-    AuthModule,
+    AuthFeatureAuthModule,
+    AuthDataAccessModule,
     BrowserModule,
     NxModule.forRoot(),
     RouterModule.forRoot(
       [
         {
           path: '',
-          loadChildren: () =>
-            import('@angular-ngrx-nx-realworld-example-app/home/src/lib/home.module').then((m) => m.HomeModule),
+          loadChildren: () => import('@realworld/home/src/lib/home.module').then((m) => m.HomeModule),
         },
         {
           path: 'article/:slug',
