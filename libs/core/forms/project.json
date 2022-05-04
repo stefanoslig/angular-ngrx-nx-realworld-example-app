@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/core/forms",
   "sourceRoot": "libs/core/forms/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/core/forms"],
       "options": {
-        "jestConfig": "libs/core/forms/jest.config.js",
+        "jestConfig": "libs/core/forms/jest.config.ts",
         "passWithNoTests": true
       }
     },

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/core/error-handler",
   "sourceRoot": "libs/core/error-handler/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/core/error-handler"],
       "options": {
-        "jestConfig": "libs/core/error-handler/jest.config.js",
+        "jestConfig": "libs/core/error-handler/jest.config.ts",
         "passWithNoTests": true
       }
     },

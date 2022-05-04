@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/auth/feature-auth",
   "sourceRoot": "libs/auth/feature-auth/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/auth/feature-auth"],
       "options": {
-        "jestConfig": "libs/auth/feature-auth/jest.config.js",
+        "jestConfig": "libs/auth/feature-auth/jest.config.ts",
         "passWithNoTests": true
       }
     },

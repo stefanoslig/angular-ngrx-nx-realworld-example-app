@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/settings/feature-settings",
   "sourceRoot": "libs/settings/feature-settings/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/settings/feature-settings"],
       "options": {
-        "jestConfig": "libs/settings/feature-settings/jest.config.js",
+        "jestConfig": "libs/settings/feature-settings/jest.config.ts",
         "passWithNoTests": true
       }
     },
