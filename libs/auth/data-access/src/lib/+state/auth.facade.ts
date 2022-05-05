@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { authQuery } from './auth.selectors';
-import * as AuthActions from './auth.actions';
+import { authActions } from './auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
@@ -13,18 +13,18 @@ export class AuthFacade {
   constructor(private store: Store) {}
 
   login() {
-    this.store.dispatch(AuthActions.login());
+    this.store.dispatch(authActions.login());
   }
 
   logout() {
-    this.store.dispatch(AuthActions.logout());
+    this.store.dispatch(authActions.logout());
   }
 
   register() {
-    this.store.dispatch(AuthActions.register());
+    this.store.dispatch(authActions.register());
   }
 
   user() {
-    this.store.dispatch(AuthActions.getUser());
+    this.store.dispatch(authActions.getUser());
   }
 }

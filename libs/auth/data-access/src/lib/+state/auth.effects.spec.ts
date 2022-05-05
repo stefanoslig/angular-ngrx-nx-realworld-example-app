@@ -10,7 +10,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule, Action } from '@ngrx/store';
 import { cold } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
-import * as AuthActions from './auth.actions';
+import { authActions } from './auth.actions';
 
 import { AuthService } from '../auth.service';
 import { LocalStorageJwtService } from '../local-storage-jwt.service';
@@ -73,8 +73,8 @@ xdescribe('AuthEffects', () => {
         bio: '',
         image: '',
       };
-      const loginAction = AuthActions.login();
-      const loginSuccessAction = AuthActions.loginSuccess({ user: result });
+      const loginAction = authActions.login();
+      const loginSuccessAction = authActions.loginSuccess({ user: result });
 
       actions$ = hot('-a---', { a: loginAction });
       const response = cold('-a|', { a: result });
@@ -90,7 +90,7 @@ xdescribe('AuthEffects', () => {
           errors: { invalid: 'Invalid username or password' } as Errors,
         },
       };
-      const loginAction = AuthActions.login();
+      const loginAction = authActions.login();
       const setErrorsAction = setErrors({ errors: result.error.errors });
 
       actions$ = hot('-a---', { a: loginAction });
@@ -111,8 +111,8 @@ xdescribe('AuthEffects', () => {
         bio: '',
         image: '',
       };
-      const registerAction = AuthActions.register();
-      const registerSuccessAction = AuthActions.registerSuccess({
+      const registerAction = authActions.register();
+      const registerSuccessAction = authActions.registerSuccess({
         user: result,
       });
 
@@ -130,7 +130,7 @@ xdescribe('AuthEffects', () => {
           errors: { invalid: 'Invalid data' } as Errors,
         },
       };
-      const registerAction = AuthActions.register();
+      const registerAction = authActions.register();
       const setErrorsAction = setErrors({ errors: result.error.errors });
 
       actions$ = hot('-a---', { a: registerAction });
@@ -152,7 +152,7 @@ xdescribe('AuthEffects', () => {
         image: '',
       };
 
-      const loginSuccessAction = AuthActions.loginSuccess({ user: result });
+      const loginSuccessAction = authActions.loginSuccess({ user: result });
       actions$ = of(loginSuccessAction);
 
       effects.loginOrRegisterSuccess$.subscribe((a) => {
@@ -170,7 +170,7 @@ xdescribe('AuthEffects', () => {
         image: '',
       };
 
-      const registerSuccessAction = AuthActions.registerSuccess({
+      const registerSuccessAction = authActions.registerSuccess({
         user: result,
       });
       actions$ = of(registerSuccessAction);
@@ -193,8 +193,8 @@ xdescribe('AuthEffects', () => {
         image: '',
       };
 
-      const getUserAction = AuthActions.getUser();
-      const getUserActionSuccess = AuthActions.getUserSuccess({ user });
+      const getUserAction = authActions.getUser();
+      const getUserActionSuccess = authActions.getUserSuccess({ user });
 
       actions$ = hot('-a---', { a: getUserAction });
       const response = cold('-a|', { a: { user } });
@@ -206,13 +206,13 @@ xdescribe('AuthEffects', () => {
 
     it('should return a GetUserFail action when user call throws', () => {
       const error = new Error('error');
-      const getUserAction = AuthActions.getUser();
-      const getUserFail = AuthActions.getUserFail({ error });
+      const getUserAction = authActions.getUser();
+      const getUserFailure = authActions.getUserFailure({ error });
 
       actions$ = hot('-a---', { a: getUserAction });
       const response = cold('-#', {}, error);
       service.user = jest.fn(() => response);
-      const expected = cold('--b', { b: getUserFail });
+      const expected = cold('--b', { b: getUserFailure });
 
       expect(effects.getUser$).toBeObservable(expected);
     });

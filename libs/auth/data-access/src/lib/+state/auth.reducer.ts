@@ -1,6 +1,6 @@
 import { User } from '@realworld/core/api-types';
 import { createReducer, on, createFeature } from '@ngrx/store';
-import * as AuthActions from './auth.actions';
+import { authActions } from './auth.actions';
 
 export interface AuthState {
   loggedIn: boolean;
@@ -29,23 +29,23 @@ export const authFeature = createFeature({
   name: 'auth',
   reducer: createReducer(
     authInitialState,
-    on(AuthActions.getUserSuccess, (state, action) => ({
+    on(authActions.getUserSuccess, (state, action) => ({
       ...state,
       loggedIn: true,
       user: action.user,
     })),
-    on(AuthActions.getUserFail, AuthActions.logout, () => authInitialState),
-    on(AuthActions.login, AuthActions.register, (state) => ({
+    on(authActions.getUserFailure, authActions.logout, () => authInitialState),
+    on(authActions.login, authActions.register, (state) => ({
       ...state,
       status: Status.IN_PROGRESS,
     })),
-    on(AuthActions.registerSuccess, AuthActions.loginSuccess, (state, action) => ({
+    on(authActions.registerSuccess, authActions.loginSuccess, (state, action) => ({
       ...state,
       loggedIn: true,
       status: Status.INIT,
       user: action.user,
     })),
-    on(AuthActions.registerFail, AuthActions.loginFail, (state) => ({
+    on(authActions.registerFailure, authActions.loginFailure, (state) => ({
       ...state,
       status: Status.INIT,
     })),

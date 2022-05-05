@@ -1,22 +1,18 @@
 import { User } from '@realworld/core/api-types';
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, props, emptyProps } from '@ngrx/store';
 
-export const getUser = createAction('[auth] GET_USER');
-
-export const getUserSuccess = createAction('[auth] GET_USER_SUCCESS', props<{ user: User }>());
-
-export const getUserFail = createAction('[auth] GET_USER_FAIL', props<{ error: Error }>());
-
-export const login = createAction('[auth] LOGIN');
-
-export const loginSuccess = createAction('[auth] LOGIN_SUCCESS', props<{ user: User }>());
-
-export const loginFail = createAction('[auth] LOGIN_FAIL');
-
-export const register = createAction('[auth] REGISTER');
-
-export const registerSuccess = createAction('[auth] REGISTER_SUCCESS', props<{ user: User }>());
-
-export const registerFail = createAction('[auth] REGISTER_FAIL');
-
-export const logout = createAction('[auth] LOGOUT');
+export const authActions = createActionGroup({
+  source: 'Auth',
+  events: {
+    'Get User': emptyProps(),
+    'Get User Failure': props<{ error: Error }>(),
+    'Get User Success': props<{ user: User }>(),
+    Login: emptyProps(),
+    'Login Failure': props<{ error: Error }>(),
+    'Login Success': props<{ user: User }>(),
+    Register: emptyProps(),
+    'Register Failure': props<{ error: Error }>(),
+    'Register Success': props<{ user: User }>(),
+    Logout: emptyProps(),
+  },
+});

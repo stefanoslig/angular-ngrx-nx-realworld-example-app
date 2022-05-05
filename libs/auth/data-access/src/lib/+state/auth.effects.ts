@@ -7,18 +7,18 @@ import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 
-import * as AuthActions from './auth.actions';
+import { authActions } from './auth.actions';
 import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
 
 @Injectable()
 export class AuthEffects {
   getUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.getUser),
+      ofType(authActions.getUser),
       switchMap(() =>
         this.authService.user().pipe(
-          map((data) => AuthActions.getUserSuccess({ user: data.user })),
-          catchError((error) => of(AuthActions.getUserFail(error))),
+          map((data) => authActions.getUserSuccess({ user: data.user })),
+          catchError((error) => of(authActions.getUserFailure(error))),
         ),
       ),
     ),
@@ -26,11 +26,11 @@ export class AuthEffects {
 
   login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.login),
+      ofType(authActions.login),
       concatLatestFrom(() => this.ngrxFormsFacade.data$),
       exhaustMap(([, data]) =>
         this.authService.login(data).pipe(
-          map((response) => AuthActions.loginSuccess({ user: response.user })),
+          map((response) => authActions.loginSuccess({ user: response.user })),
           catchError((result) => of(fromNgrxForms.setErrors({ errors: result.error.errors }))),
         ),
       ),
@@ -40,7 +40,7 @@ export class AuthEffects {
   loginOrRegisterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.loginSuccess, AuthActions.registerSuccess),
+        ofType(authActions.loginSuccess, authActions.registerSuccess),
         tap((action) => {
           this.localStorageJwtService.setItem(action.user.token);
           this.router.navigateByUrl('/');
@@ -51,11 +51,11 @@ export class AuthEffects {
 
   register$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.register),
+      ofType(authActions.register),
       concatLatestFrom(() => this.ngrxFormsFacade.data$),
       exhaustMap(([, data]) =>
         this.authService.register(data).pipe(
-          map((response) => AuthActions.registerSuccess({ user: response.user })),
+          map((response) => authActions.registerSuccess({ user: response.user })),
           catchError((result) => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
@@ -65,7 +65,7 @@ export class AuthEffects {
   logout$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.logout),
+        ofType(authActions.logout),
         tap(() => {
           this.localStorageJwtService.removeItem();
           this.router.navigateByUrl('login');

@@ -7,7 +7,7 @@ import { catchError, concatMap, map, tap } from 'rxjs/operators';
 
 import * as SettingsActions from './settings.actions';
 import { SettingsService } from '../settings.service';
-import { AuthFacade, getUser } from '@realworld/auth/data-access';
+import { AuthFacade, authActions } from '@realworld/auth/data-access';
 
 @Injectable()
 export class SettingsEffects {
@@ -26,7 +26,7 @@ export class SettingsEffects {
       concatMap((data) =>
         this.settingsService.update(data).pipe(
           tap((result) => this.router.navigate(['profile', result.user.username])),
-          map(() => getUser()),
+          map(() => authActions.getUser()),
           catchError((result) => of(setErrors({ errors: result.error.errors }))),
         ),
       ),
