@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { articleListQuery } from './article-list/article-list.selectors';
 
 import * as ArticleActions from './article/article.actions';
-import * as ArticlesActions from './articles.actions';
+import { articlesActions } from './articles.actions';
 import * as ArticleListActions from './article-list/article-list.actions';
 import * as ArticleEditActions from './article-edit/article-edit.actions';
 import { articleQuery } from './article/article.selectors';
@@ -36,10 +36,10 @@ export class ArticlesFacade {
     this.store.dispatch(ArticleActions.unFollow({ username }));
   }
   favorite(slug: string) {
-    this.store.dispatch(ArticlesActions.favorite({ slug }));
+    this.store.dispatch(articlesActions.favorite({ slug }));
   }
   unfavorite(slug: string) {
-    this.store.dispatch(ArticlesActions.unFavorite({ slug }));
+    this.store.dispatch(articlesActions.unfavorite({ slug }));
   }
   delete(slug: string) {
     this.store.dispatch(ArticleActions.deleteArticle({ slug }));

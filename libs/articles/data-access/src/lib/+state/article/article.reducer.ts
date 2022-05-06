@@ -1,7 +1,7 @@
 import { Article, Comment } from '@realworld/core/api-types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as ArticleActions from './article.actions';
-import * as ArticlesActions from '../articles.actions';
+import { articlesActions } from '../articles.actions';
 
 export interface ArticleState {
   data: Article;
@@ -72,7 +72,7 @@ export const articleFeature = createFeature({
       const data: Article = { ...state.data, author: action.profile };
       return { ...state, data };
     }),
-    on(ArticlesActions.favoriteSuccess, ArticlesActions.unFavoriteSuccess, (state, action) => ({
+    on(articlesActions.favoriteSuccess, articlesActions.unfavoriteSuccess, (state, action) => ({
       ...state,
       data: action.article,
     })),
