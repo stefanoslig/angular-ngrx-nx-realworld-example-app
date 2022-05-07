@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/ui/components",
   "sourceRoot": "libs/ui/components/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/ui/components"],
       "options": {
-        "jestConfig": "libs/ui/components/jest.config.js",
+        "jestConfig": "libs/ui/components/jest.config.ts",
         "passWithNoTests": true
       }
     },

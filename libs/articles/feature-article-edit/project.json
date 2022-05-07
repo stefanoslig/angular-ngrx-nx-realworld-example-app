@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/articles/feature-article-edit",
   "sourceRoot": "libs/articles/feature-article-edit/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/articles/feature-article-edit"],
       "options": {
-        "jestConfig": "libs/articles/feature-article-edit/jest.config.js",
+        "jestConfig": "libs/articles/feature-article-edit/jest.config.ts",
         "passWithNoTests": true
       }
     },

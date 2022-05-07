@@ -1,12 +1,11 @@
 {
-  "root": "libs/home",
   "sourceRoot": "libs/home/src",
   "projectType": "library",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "libs/home/jest.config.js",
+        "jestConfig": "libs/home/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/libs/home"]

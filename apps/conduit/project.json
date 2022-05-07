@@ -5,7 +5,6 @@
       "style": "scss"
     }
   },
-  "root": "apps/conduit",
   "sourceRoot": "apps/conduit/src",
   "prefix": "conduit",
   "targets": {
@@ -89,7 +88,7 @@
     "test": {
       "executor": "@nrwl/jest:jest",
       "options": {
-        "jestConfig": "apps/conduit/jest.config.js",
+        "jestConfig": "apps/conduit/jest.config.ts",
         "passWithNoTests": true
       },
       "outputs": ["coverage/apps/conduit"]

@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/articles/data-access",
   "sourceRoot": "libs/articles/data-access/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/articles/data-access"],
       "options": {
-        "jestConfig": "libs/articles/data-access/jest.config.js",
+        "jestConfig": "libs/articles/data-access/jest.config.ts",
         "passWithNoTests": true
       }
     },

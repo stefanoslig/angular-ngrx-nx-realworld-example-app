@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/profile/feature-profile",
   "sourceRoot": "libs/profile/feature-profile/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/profile/feature-profile"],
       "options": {
-        "jestConfig": "libs/profile/feature-profile/jest.config.js",
+        "jestConfig": "libs/profile/feature-profile/jest.config.ts",
         "passWithNoTests": true
       }
     },

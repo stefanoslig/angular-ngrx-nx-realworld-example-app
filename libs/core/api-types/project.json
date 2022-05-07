@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/core/api-types",
   "sourceRoot": "libs/core/api-types/src",
   "prefix": "conduit",
   "targets": {
@@ -8,7 +7,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/core/api-types"],
       "options": {
-        "jestConfig": "libs/core/api-types/jest.config.js",
+        "jestConfig": "libs/core/api-types/jest.config.ts",
         "passWithNoTests": true
       }
     },
