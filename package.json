@@ -44,7 +44,7 @@
     "@ngrx/effects": "13.0.2",
     "@ngrx/router-store": "13.0.2",
     "@ngrx/store": "13.0.2",
-    "@nrwl/angular": "14.1.1",
+    "@nrwl/angular": "14.1.4",
     "core-js": "^2.5.4",
     "eslint-plugin-ngrx": "^2.0.3",
     "marked": "4.0.12",
@@ -61,12 +61,12 @@
     "@angular/compiler-cli": "13.3.6",
     "@angular/language-service": "13.3.6",
     "@ngrx/store-devtools": "13.0.2",
-    "@nrwl/cli": "14.1.1",
-    "@nrwl/cypress": "14.1.1",
-    "@nrwl/eslint-plugin-nx": "14.1.1",
-    "@nrwl/jest": "14.1.1",
-    "@nrwl/linter": "14.1.1",
-    "@nrwl/workspace": "14.1.1",
+    "@nrwl/cli": "14.1.4",
+    "@nrwl/cypress": "14.1.4",
+    "@nrwl/eslint-plugin-nx": "14.1.4",
+    "@nrwl/jest": "14.1.4",
+    "@nrwl/linter": "14.1.4",
+    "@nrwl/workspace": "14.1.4",
     "@types/jest": "27.4.1",
     "@types/marked": "^4.0.2",
     "@types/node": "14.14.33",
@@ -87,7 +87,7 @@
     "ts-jest": "27.1.4",
     "ts-node": "9.1.1",
     "typescript": "4.6.4",
-    "nx": "14.1.1"
+    "nx": "14.1.4"
   },
   "husky": {
     "hooks": {
