@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 
 import { ArticlesService } from '../../services/articles.service';
-import * as ArticleListActions from './article-list.actions';
+import { articleListActions } from './article-list.actions';
 import { articlesActions } from '../articles.actions';
 
 import { ArticlesFacade } from '../articles.facade';
@@ -14,31 +14,31 @@ import { ArticlesFacade } from '../articles.facade';
 export class ArticleListEffects {
   setListPage = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleListActions.setListPage),
-      map(() => ArticleListActions.loadArticles()),
+      ofType(articleListActions.setListPage),
+      map(() => articleListActions.loadArticles()),
     ),
   );
 
   setListTag = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleListActions.setListConfig),
-      map(() => ArticleListActions.loadArticles()),
+      ofType(articleListActions.setListConfig),
+      map(() => articleListActions.loadArticles()),
     ),
   );
 
   loadArticles = createEffect(() =>
     this.actions$.pipe(
-      ofType(ArticleListActions.loadArticles),
+      ofType(articleListActions.loadArticles),
       concatLatestFrom(() => this.facade.listConfig$),
       concatMap(([_, config]) =>
         this.articlesService.query(config).pipe(
           map((results) =>
-            ArticleListActions.loadArticlesSuccess({
+            articleListActions.loadArticlesSuccess({
               articles: results.articles,
               articlesCount: results.articlesCount,
             }),
           ),
-          catchError((error) => of(ArticleListActions.loadArticlesFail({ error }))),
+          catchError((error) => of(articleListActions.loadArticlesFailure({ error }))),
         ),
       ),
     ),

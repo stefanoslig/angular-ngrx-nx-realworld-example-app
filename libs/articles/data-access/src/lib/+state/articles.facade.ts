@@ -4,7 +4,7 @@ import { articleListQuery } from './article-list/article-list.selectors';
 
 import * as ArticleActions from './article/article.actions';
 import { articlesActions } from './articles.actions';
-import * as ArticleListActions from './article-list/article-list.actions';
+import { articleListActions } from './article-list/article-list.actions';
 import * as ArticleEditActions from './article-edit/article-edit.actions';
 import { articleQuery } from './article/article.selectors';
 import { ArticleListConfig } from './article-list/article-list.reducer';
@@ -54,10 +54,10 @@ export class ArticlesFacade {
     this.store.dispatch(ArticleActions.initializeArticle());
   }
   setPage(page: number) {
-    this.store.dispatch(ArticleListActions.setListPage({ page }));
+    this.store.dispatch(articleListActions.setListPage({ page }));
   }
   setListConfig(config: ArticleListConfig) {
-    this.store.dispatch(ArticleListActions.setListConfig({ config }));
+    this.store.dispatch(articleListActions.setListConfig({ config }));
   }
   publishArticle() {
     this.store.dispatch(ArticleEditActions.publishArticle());

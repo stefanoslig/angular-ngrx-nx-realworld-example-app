@@ -1,6 +1,6 @@
 import { Article } from '@realworld/core/api-types';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as ArticleListActions from './article-list.actions';
+import { articleListActions } from './article-list.actions';
 import { articlesActions } from '../articles.actions';
 
 export const articleListFeatureKey = 'articles-list';
@@ -53,7 +53,7 @@ export const articleListFeature = createFeature({
   name: 'articlesList',
   reducer: createReducer(
     articleListInitialState,
-    on(ArticleListActions.setListPage, (state, { page }) => {
+    on(articleListActions.setListPage, (state, { page }) => {
       const filters = {
         ...state.listConfig.filters,
         offset: state?.listConfig?.filters?.limit ?? 1 * (page - 1),
@@ -65,15 +65,15 @@ export const articleListFeature = createFeature({
       };
       return { ...state, listConfig };
     }),
-    on(ArticleListActions.setListConfig, (state, { config }) => ({
+    on(articleListActions.setListConfig, (state, { config }) => ({
       ...state,
       listConfig: config,
     })),
-    on(ArticleListActions.loadArticles, (state) => {
+    on(articleListActions.loadArticles, (state) => {
       const articles = { ...state.articles, loading: true };
       return { ...state, articles };
     }),
-    on(ArticleListActions.loadArticlesSuccess, (state, action) => {
+    on(articleListActions.loadArticlesSuccess, (state, action) => {
       const articles = {
         ...state.articles,
         entities: action.articles,
@@ -83,7 +83,7 @@ export const articleListFeature = createFeature({
       };
       return { ...state, articles };
     }),
-    on(ArticleListActions.loadArticlesFail, (state, _) => {
+    on(articleListActions.loadArticlesFailure, (state, _) => {
       const articles = {
         ...state.articles,
         entities: [],
