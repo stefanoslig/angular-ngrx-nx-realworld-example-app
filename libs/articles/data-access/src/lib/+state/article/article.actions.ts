@@ -1,46 +1,30 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Article, Profile, Comment } from '@realworld/core/api-types';
 
-export const loadArticle = createAction('[article] LOAD_ARTICLE', props<{ slug: string }>());
-
-export const loadArticleSuccess = createAction('[article] LOAD_ARTICLE_SUCCESS', props<{ article: Article }>());
-
-export const loadArticleFail = createAction('[article] LOAD_ARTICLE_FAIL', props<{ error: Error }>());
-
-export const deleteArticle = createAction('[article] DELETE_ARTICLE', props<{ slug: string }>());
-
-export const deleteArticleFail = createAction('[article] DELETE_ARTICLE_FAIL', props<{ error: Error }>());
-
-export const deleteArticleSuccess = createAction('[article] DELETE_ARTICLE_SUCCESS');
-
-export const initializeArticle = createAction('[article] INITIALIZE_ARTICLE');
-
-export const loadComments = createAction('[article] LOAD_COMMENTS', props<{ slug: string }>());
-
-export const loadCommentsSuccess = createAction('[article] LOAD_COMMENTS_SUCCESS', props<{ comments: Comment[] }>());
-
-export const loadCommentsFail = createAction('[article] LOAD_COMMENTS_FAIL', props<{ error: Error }>());
-
-export const follow = createAction('[article] FOLLOW', props<{ username: string }>());
-
-export const followSuccess = createAction('[article] FOLLOW_SUCCESS', props<{ profile: Profile }>());
-
-export const followFail = createAction('[article] FOLLOW_FAIL', props<{ error: Error }>());
-
-export const unFollow = createAction('[article] UNFOLLOW', props<{ username: string }>());
-
-export const unFollowSuccess = createAction('[article] UNFOLLOW_SUCCESS', props<{ profile: Profile }>());
-
-export const unFollowFail = createAction('[article] UNFOLLOW_FAIL', props<{ error: Error }>());
-
-export const addComment = createAction('[article] ADD_COMMENT', props<{ slug: string }>());
-
-export const addCommentFail = createAction('[article] ADD_COMMENT_FAIL', props<{ error: Error }>());
-
-export const addCommentSuccess = createAction('[article] ADD_COMMENT_SUCCESS', props<{ comment: Comment }>());
-
-export const deleteComment = createAction('[article] DELETE_COMMENT', props<{ commentId: number; slug: string }>());
-
-export const deleteCommentFail = createAction('[article] DELETE_COMMENT_FAIL', props<{ error: Error }>());
-
-export const deleteCommentSuccess = createAction('[article] DELETE_COMMENT_SUCCESS', props<{ commentId: number }>());
+export const articleActions = createActionGroup({
+  source: 'Article',
+  events: {
+    'Load Article': props<{ slug: string }>(),
+    'Load Article Failure': props<{ error: Error }>(),
+    'Load Article Success': props<{ article: Article }>(),
+    'Delete Article': props<{ slug: string }>(),
+    'Delete Article Failure': props<{ error: Error }>(),
+    'Delete Article Success': emptyProps(),
+    'Initialize Article': emptyProps(),
+    'Load Comments': props<{ slug: string }>(),
+    'Load Comments Failure': props<{ error: Error }>(),
+    'Load Comments Success': props<{ comments: Comment[] }>(),
+    Follow: props<{ username: string }>(),
+    'Follow Failure': props<{ error: Error }>(),
+    'Follow Success': props<{ profile: Profile }>(),
+    Unfollow: props<{ username: string }>(),
+    'Unfollow Failure': props<{ error: Error }>(),
+    'Unfollow Success': props<{ profile: Profile }>(),
+    'Add Comment': props<{ slug: string }>(),
+    'Add Comment Failure': props<{ error: Error }>(),
+    'Add Comment Success': props<{ comment: Comment }>(),
+    'Delete Comment': props<{ commentId: number; slug: string }>(),
+    'Delete Comment Failure': props<{ error: Error }>(),
+    'Delete Comment Success': props<{ commentId: number }>(),
+  },
+});

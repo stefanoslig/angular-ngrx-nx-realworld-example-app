@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { articleListQuery } from './article-list/article-list.selectors';
 
-import * as ArticleActions from './article/article.actions';
+import { articleActions } from './article/article.actions';
 import { articlesActions } from './articles.actions';
 import { articleListActions } from './article-list/article-list.actions';
-import * as ArticleEditActions from './article-edit/article-edit.actions';
+import { articleEditActions } from './article-edit/article-edit.actions';
 import { articleQuery } from './article/article.selectors';
 import { ArticleListConfig } from './article-list/article-list.reducer';
 
@@ -24,16 +24,16 @@ export class ArticlesFacade {
   constructor(private store: Store) {}
 
   loadArticle(slug: string) {
-    this.store.dispatch(ArticleActions.loadArticle({ slug }));
+    this.store.dispatch(articleActions.loadArticle({ slug }));
   }
   loadComments(slug: string) {
-    this.store.dispatch(ArticleActions.loadComments({ slug }));
+    this.store.dispatch(articleActions.loadComments({ slug }));
   }
   follow(username: string) {
-    this.store.dispatch(ArticleActions.follow({ username }));
+    this.store.dispatch(articleActions.follow({ username }));
   }
   unfollow(username: string) {
-    this.store.dispatch(ArticleActions.unFollow({ username }));
+    this.store.dispatch(articleActions.unfollow({ username }));
   }
   favorite(slug: string) {
     this.store.dispatch(articlesActions.favorite({ slug }));
@@ -42,16 +42,16 @@ export class ArticlesFacade {
     this.store.dispatch(articlesActions.unfavorite({ slug }));
   }
   delete(slug: string) {
-    this.store.dispatch(ArticleActions.deleteArticle({ slug }));
+    this.store.dispatch(articleActions.deleteArticle({ slug }));
   }
   deleteComment(data: { commentId: number; slug: string }) {
-    this.store.dispatch(ArticleActions.deleteComment(data));
+    this.store.dispatch(articleActions.deleteComment(data));
   }
   submit(slug: string) {
-    this.store.dispatch(ArticleActions.addComment({ slug }));
+    this.store.dispatch(articleActions.addComment({ slug }));
   }
   initializeArticle() {
-    this.store.dispatch(ArticleActions.initializeArticle());
+    this.store.dispatch(articleActions.initializeArticle());
   }
   setPage(page: number) {
     this.store.dispatch(articleListActions.setListPage({ page }));
@@ -60,6 +60,6 @@ export class ArticlesFacade {
     this.store.dispatch(articleListActions.setListConfig({ config }));
   }
   publishArticle() {
-    this.store.dispatch(ArticleEditActions.publishArticle());
+    this.store.dispatch(articleEditActions.publishArticle());
   }
 }

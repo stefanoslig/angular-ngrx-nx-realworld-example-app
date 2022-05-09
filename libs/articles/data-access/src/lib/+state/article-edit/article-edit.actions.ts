@@ -1,4 +1,9 @@
-import { createAction } from '@ngrx/store';
+import { createActionGroup, emptyProps } from '@ngrx/store';
 
-export const publishArticle = createAction('[article-edit] PUBLISH_ARTICLE');
-export const publishArticleSuccess = createAction('[article-edit] PUBLISH_ARTICLE_SUCCESS');
+export const articleEditActions = createActionGroup({
+  source: 'Article Edit',
+  events: {
+    'Publish Article': emptyProps(),
+    'Publish Article Success': emptyProps(),
+  },
+});
