@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as ProfileActions from './profile.actions';
+import { profileActions } from './profile.actions';
 
 import { ProfileState } from './profile.reducer';
 import { profileQuery } from './profile.selectors';
@@ -12,10 +12,10 @@ export class ProfileFacade {
   constructor(private store: Store<ProfileState>) {}
 
   follow(id: string) {
-    this.store.dispatch(ProfileActions.follow({ id }));
+    this.store.dispatch(profileActions.follow({ id }));
   }
 
   unfollow(id: string) {
-    this.store.dispatch(ProfileActions.unFollow({ id }));
+    this.store.dispatch(profileActions.unfollow({ id }));
   }
 }

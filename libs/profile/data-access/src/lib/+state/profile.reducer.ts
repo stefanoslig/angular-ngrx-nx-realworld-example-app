@@ -1,6 +1,6 @@
 import { Profile } from '@realworld/core/api-types';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as ProfileActions from './profile.actions';
+import { profileActions } from './profile.actions';
 
 export type ProfileState = Profile;
 
@@ -16,9 +16,9 @@ export const profileFeature = createFeature({
   name: 'profile',
   reducer: createReducer(
     profileInitialState,
-    on(ProfileActions.getProfile, (state) => ({ ...state, loading: true })),
-    on(ProfileActions.getProfileSuccess, (state, action) => ({ ...action.profile, loading: false })),
-    on(ProfileActions.getProfileFail, () => profileInitialState),
-    on(ProfileActions.followSuccess, ProfileActions.unFollowSuccess, (state, action) => action.profile),
+    on(profileActions.loadProfile, (state) => ({ ...state, loading: true })),
+    on(profileActions.loadProfileSuccess, (state, action) => ({ ...action.profile, loading: false })),
+    on(profileActions.loadProfileFailure, () => profileInitialState),
+    on(profileActions.followSuccess, profileActions.unfollowSuccess, (state, action) => action.profile),
   ),
 });
