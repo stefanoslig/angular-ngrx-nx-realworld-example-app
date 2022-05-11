@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/c
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { editSettings } from '@realworld/settings/data-access';
+import { editSettingsActions } from '@realworld/settings/data-access';
 import { AuthFacade } from '@realworld/auth/data-access';
 
 const structure: Field[] = [
@@ -65,7 +65,7 @@ export class SettingsComponent implements OnInit {
   }
 
   submit() {
-    this.store.dispatch(editSettings());
+    this.store.dispatch(editSettingsActions.editSettings());
   }
 
   logout() {

@@ -1,3 +1,8 @@
-import { createAction } from '@ngrx/store';
+import { createActionGroup, emptyProps } from '@ngrx/store';
 
-export const editSettings = createAction('[settings] EDIT_SETTINGS');
+export const editSettingsActions = createActionGroup({
+  source: 'Settings',
+  events: {
+    'Edit Settings': emptyProps(),
+  },
+});

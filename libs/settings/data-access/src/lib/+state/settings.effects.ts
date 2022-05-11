@@ -5,7 +5,7 @@ import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 
-import * as SettingsActions from './settings.actions';
+import { editSettingsActions } from './settings.actions';
 import { SettingsService } from '../settings.service';
 import { AuthFacade, authActions } from '@realworld/auth/data-access';
 
@@ -13,7 +13,7 @@ import { AuthFacade, authActions } from '@realworld/auth/data-access';
 export class SettingsEffects {
   editSettings = createEffect(() =>
     this.actions$.pipe(
-      ofType(SettingsActions.editSettings),
+      ofType(editSettingsActions.editSettings),
       concatLatestFrom(() => [this.ngrxFormsFacade.data$, this.authFacade.user$]),
       map(([_, data, user]) => ({
         ...user,
