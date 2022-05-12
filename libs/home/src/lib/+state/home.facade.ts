@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { homeQuery } from './home.selectors';
-import * as HomeActions from './home.actions';
+import { homeActions } from './home.actions';
 
 @Injectable({ providedIn: 'root' })
 export class HomeFacade {
@@ -12,6 +12,6 @@ export class HomeFacade {
   constructor(private store: Store) {}
 
   loadTags() {
-    this.store.dispatch(HomeActions.loadTags());
+    this.store.dispatch(homeActions.loadTags());
   }
 }
