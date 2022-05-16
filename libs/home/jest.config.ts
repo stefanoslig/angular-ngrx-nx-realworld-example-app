@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   coverageDirectory: '../../coverage/libs/home',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -14,5 +14,5 @@ module.exports = {
   },
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 };

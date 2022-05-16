@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   coverageDirectory: '../../coverage/apps/conduit',
 
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
@@ -20,5 +20,5 @@ module.exports = {
   },
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
   transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
-  preset: '../../jest.preset.ts',
+  preset: '../../jest.preset.js',
 };
