@@ -51,7 +51,7 @@ import { AuthDataAccessModule } from '@realworld/auth/data-access';
         },
       ],
       {
-        initialNavigation: 'enabled',
+        initialNavigation: 'enabledBlocking',
         useHash: true,
         relativeLinkResolution: 'legacy',
       },
