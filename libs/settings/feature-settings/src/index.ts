@@ -1,1 +1,1 @@
-export * from './lib/settings-feature-settings.module';
+export * from './lib/settings.component';

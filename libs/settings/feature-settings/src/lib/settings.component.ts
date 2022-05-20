@@ -1,5 +1,5 @@
 import { DynamicFormComponentModule, Field, ListErrorsComponentModule, NgrxFormsFacade } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -44,9 +44,11 @@ const structure: Field[] = [
 
 @UntilDestroy()
 @Component({
+  standalone: true,
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
+  imports: [DynamicFormComponentModule, ListErrorsComponentModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit {
@@ -72,10 +74,3 @@ export class SettingsComponent implements OnInit {
     this.authFacade.logout();
   }
 }
-
-@NgModule({
-  imports: [DynamicFormComponentModule, ListErrorsComponentModule],
-  declarations: [SettingsComponent],
-  exports: [SettingsComponent],
-})
-export class SettingsComponentModule {}
