@@ -1,7 +1,7 @@
 import { CoreHttpClientModule } from '@realworld/core/http-client';
 import { CoreErrorHandlerModule } from '@realworld/core/error-handler';
 import { CoreFormsModule } from '@realworld/core/forms';
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -15,7 +15,8 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { AuthFeatureAuthModule } from '@realworld/auth/feature-auth';
-import { AuthDataAccessModule } from '@realworld/auth/data-access';
+import { AuthDataAccessModule, AuthGuardService } from '@realworld/auth/data-access';
+import { SettingsEffects } from '@realworld/settings/data-access';
 
 @NgModule({
   imports: [
@@ -37,8 +38,10 @@ import { AuthDataAccessModule } from '@realworld/auth/data-access';
         },
         {
           path: 'settings',
-          loadChildren: () =>
-            import('@realworld/settings/feature-settings').then((m) => m.SettingsFeatureSettingsModule),
+          loadComponent: () =>
+            import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
+          canActivate: [AuthGuardService],
+          providers: [importProvidersFrom(EffectsModule.forFeature([SettingsEffects]))],
         },
         {
           path: 'editor',
@@ -51,7 +54,7 @@ import { AuthDataAccessModule } from '@realworld/auth/data-access';
         },
       ],
       {
-        initialNavigation: 'enabled',
+        initialNavigation: 'enabledBlocking',
         useHash: true,
         relativeLinkResolution: 'legacy',
       },

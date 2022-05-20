@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { ArticlesFacade } from '@realworld/articles/data-access';
 import { ArticleListItemComponentModule } from './article-list-item/article-list-item.component';
-import { PagerComponentModule } from '@realworld/ui/components';
 
 @Component({
   selector: 'app-article-list',
@@ -38,7 +37,7 @@ export class ArticleListComponent {
 }
 
 @NgModule({
-  imports: [CommonModule, PagerComponentModule, ArticleListItemComponentModule],
+  imports: [CommonModule, ArticleListItemComponentModule],
   declarations: [ArticleListComponent],
   exports: [ArticleListComponent],
 })
