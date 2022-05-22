@@ -5,7 +5,7 @@ import { profileActions } from './profile.actions';
 import { ProfileState } from './profile.reducer';
 import { profileQuery } from './profile.selectors';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProfileFacade {
   profile$ = this.store.select(profileQuery.selectProfileState);
 

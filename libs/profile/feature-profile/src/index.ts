@@ -1,1 +1,1 @@
-export * from './lib/profile-feature-profile.module';
+export * from './lib/profile.component';

@@ -17,6 +17,14 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { AuthFeatureAuthModule } from '@realworld/auth/feature-auth';
 import { AuthDataAccessModule, AuthGuardService } from '@realworld/auth/data-access';
 import { SettingsEffects } from '@realworld/settings/data-access';
+import {
+  ProfileArticlesResolverService,
+  ProfileEffects,
+  ProfileFavoritesResolverService,
+  ProfileResolverService,
+} from '@realworld/profile/data-access';
+import { ArticleListComponent } from '@realworld/articles/articles-list';
+import { profileFeature } from '@realworld/profile/data-access';
 
 @NgModule({
   imports: [
@@ -50,7 +58,24 @@ import { SettingsEffects } from '@realworld/settings/data-access';
         },
         {
           path: 'profile/:username',
-          loadChildren: () => import('@realworld/profile/feature-profile').then((m) => m.ProfileFeatureProfileModule),
+          loadComponent: () => import('@realworld/profile/feature-profile').then((profile) => profile.ProfileComponent),
+          providers: [
+            importProvidersFrom(EffectsModule.forFeature([ProfileEffects]), StoreModule.forFeature(profileFeature)),
+          ],
+          resolve: { ProfileResolverService },
+          canActivate: [AuthGuardService],
+          children: [
+            {
+              path: '',
+              component: ArticleListComponent,
+              resolve: { ProfileArticlesResolverService },
+            },
+            {
+              path: 'favorites',
+              component: ArticleListComponent,
+              resolve: { ProfileFavoritesResolverService },
+            },
+          ],
         },
       ],
       {

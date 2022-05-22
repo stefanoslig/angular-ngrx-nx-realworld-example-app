@@ -1,17 +1,19 @@
-import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { ProfileFacade } from '@realworld/profile/data-access';
 import { AuthFacade } from '@realworld/auth/data-access';
+import { RouterModule } from '@angular/router';
 
 @UntilDestroy()
 @Component({
+  standalone: true,
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  imports: [CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {
@@ -44,10 +46,3 @@ export class ProfileComponent implements OnInit {
     }
   }
 }
-
-@NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [ProfileComponent],
-  exports: [ProfileComponent],
-})
-export class ProfileComponentModule {}
