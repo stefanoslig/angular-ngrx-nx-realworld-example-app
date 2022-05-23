@@ -1,17 +1,20 @@
-import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, importProvidersFrom, OnInit } from '@angular/core';
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { ProfileFacade } from '@realworld/profile/data-access';
 import { AuthFacade } from '@realworld/auth/data-access';
+import { RouterModule } from '@angular/router';
+import { profileRoutes } from './profile.routes';
 
 @UntilDestroy()
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  providers: importProvidersFrom(RouterModule.forChild(profileRoutes)),
+  imports: [CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {

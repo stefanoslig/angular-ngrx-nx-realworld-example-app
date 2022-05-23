@@ -4,7 +4,7 @@ import { Resolve } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ArticlesFacade } from '@realworld/articles/data-access';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ArticleEditResolverService implements Resolve<Observable<boolean>> {
   constructor(private facade: ArticlesFacade) {}
 

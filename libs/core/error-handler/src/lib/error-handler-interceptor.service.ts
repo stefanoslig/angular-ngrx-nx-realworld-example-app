@@ -6,11 +6,11 @@ import { catchError } from 'rxjs/operators';
 
 import { ErrorHandlerFacade } from './+state/error-handler.facade';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ErrorHandlerInterceptorService implements HttpInterceptor {
   constructor(private facade: ErrorHandlerFacade) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {

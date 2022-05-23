@@ -1,1 +1,2 @@
-export * from './lib/core-error-handler.module';
+export * from './lib/+state/error-handler.reducer';
+export * from './lib/+state/error-handler.effects';

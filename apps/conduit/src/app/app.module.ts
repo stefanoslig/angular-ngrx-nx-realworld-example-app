@@ -1,5 +1,4 @@
 import { CoreHttpClientModule } from '@realworld/core/http-client';
-import { CoreErrorHandlerModule } from '@realworld/core/error-handler';
 import { CoreFormsModule } from '@realworld/core/forms';
 import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,11 +16,13 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { AuthFeatureAuthModule } from '@realworld/auth/feature-auth';
 import { AuthDataAccessModule, AuthGuardService } from '@realworld/auth/data-access';
 import { SettingsEffects } from '@realworld/settings/data-access';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandlerInterceptorService } from '@realworld/core/error-handler/src/lib/error-handler-interceptor.service';
+import { ErrorHandlerEffects, errorHandlerFeature } from '@realworld/core/error-handler';
 
 @NgModule({
   imports: [
     CoreHttpClientModule,
-    CoreErrorHandlerModule,
     AuthFeatureAuthModule,
     AuthDataAccessModule,
     BrowserModule,
@@ -50,7 +51,7 @@ import { SettingsEffects } from '@realworld/settings/data-access';
         },
         {
           path: 'profile/:username',
-          loadChildren: () => import('@realworld/profile/feature-profile').then((m) => m.ProfileFeatureProfileModule),
+          loadComponent: () => import('@realworld/profile/feature-profile').then((profile) => profile.ProfileComponent),
         },
       ],
       {
@@ -64,8 +65,17 @@ import { SettingsEffects } from '@realworld/settings/data-access';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
     CoreFormsModule,
+    StoreModule.forFeature(errorHandlerFeature),
+    EffectsModule.forFeature([ErrorHandlerEffects]),
   ],
   declarations: [AppComponent, FooterComponent, NavbarComponent],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptorService,
+      multi: true,
+    },
+  ],
 })
 export class AppModule {}
