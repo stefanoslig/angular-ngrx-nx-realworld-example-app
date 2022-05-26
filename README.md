@@ -2,7 +2,7 @@
 
 <!-- [![pipeline status](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/badges/master/pipeline.svg)](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/commits/master) -->
 
-***This project is gradually moving to standalone components and typed forms. This is a work in progress. Part of the code is not how I expect to be at the end of this migration (e.g app.module.ts) ***
+***This project is gradually moving to standalone components and typed forms. This is a work in progress. Part of the code is not how I expect to be at the end of this migration (e.g app.module.ts)***
 
 > ### Angular, ngrx/platform, nrwl/nx codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
