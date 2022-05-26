@@ -30,8 +30,10 @@ const structure: Field[] = [
 
 @Component({
   selector: 'app-register',
+  standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  imports: [ListErrorsComponentModule, DynamicFormComponentModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent implements OnInit, OnDestroy {
@@ -58,10 +60,3 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.ngrxFormsFacade.initializeForm();
   }
 }
-
-@NgModule({
-  imports: [ListErrorsComponentModule, DynamicFormComponentModule, RouterModule],
-  declarations: [RegisterComponent],
-  exports: [RegisterComponent],
-})
-export class RegisterComponentModule {}

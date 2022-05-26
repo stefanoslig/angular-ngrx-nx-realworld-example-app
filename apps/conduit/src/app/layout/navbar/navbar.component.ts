@@ -3,6 +3,7 @@ import { User } from '@realworld/core/api-types';
 
 @Component({
   selector: 'conduit-navbar',
+  standalone: true,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

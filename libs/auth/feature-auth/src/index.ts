@@ -1,1 +1,2 @@
-export * from './lib/auth-feature-auth.module';
+export * from './lib/login/login.component';
+export * from './lib/register/register.component';

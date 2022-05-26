@@ -1,13 +1,107 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app/app.component';
 
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NxModule } from '@nrwl/angular';
+
+import { AuthEffects, authFeature, AuthGuardService, TokenInterceptorService } from '@realworld/auth/data-access';
+import { SettingsEffects } from '@realworld/settings/data-access';
+import {
+  ProfileArticlesResolverService,
+  ProfileEffects,
+  ProfileFavoritesResolverService,
+  ProfileResolverService,
+} from '@realworld/profile/data-access';
+import { ArticleListComponent } from '@realworld/articles/articles-list';
+import { profileFeature } from '@realworld/profile/data-access';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  ErrorHandlerEffects,
+  errorHandlerFeature,
+  ErrorHandlerInterceptorService,
+} from '@realworld/core/error-handler';
+import { CoreFormsModule } from '@realworld/core/forms';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.log(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(
+      BrowserModule,
+      HttpClientModule,
+      NxModule.forRoot(),
+      RouterModule.forRoot(
+        [
+          {
+            path: '',
+            loadChildren: () => import('@realworld/home/src/lib/home.module').then((m) => m.HomeModule),
+          },
+          {
+            path: 'login',
+            loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.LoginComponent),
+          },
+          {
+            path: 'register',
+            loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.RegisterComponent),
+          },
+          {
+            path: 'article/:slug',
+            loadChildren: () => import('@realworld/articles/article').then((m) => m.ArticleFeatureArticleModule),
+          },
+          {
+            path: 'settings',
+            loadComponent: () =>
+              import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
+            canActivate: [AuthGuardService],
+            providers: [importProvidersFrom(EffectsModule.forFeature([SettingsEffects]))],
+          },
+          {
+            path: 'editor',
+            loadChildren: () =>
+              import('@realworld/articles/article-edit').then((m) => m.ArticlesFeatureArticleEditModule),
+          },
+          {
+            path: 'profile/:username',
+            loadComponent: () =>
+              import('@realworld/profile/feature-profile').then((profile) => profile.ProfileComponent),
+            providers: [
+              importProvidersFrom(EffectsModule.forFeature([ProfileEffects]), StoreModule.forFeature(profileFeature)),
+            ],
+            resolve: { ProfileResolverService },
+            canActivate: [AuthGuardService],
+            loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.profileRoutes),
+          },
+        ],
+        {
+          initialNavigation: 'enabledBlocking',
+          useHash: true,
+          relativeLinkResolution: 'legacy',
+        },
+      ),
+      StoreModule.forRoot({ auth: authFeature.reducer, errorHandler: errorHandlerFeature.reducer }),
+      EffectsModule.forRoot([ErrorHandlerEffects, AuthEffects]),
+      !environment.production ? StoreDevtoolsModule.instrument() : [],
+      StoreRouterConnectingModule.forRoot(),
+      CoreFormsModule,
+    ),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
+}).catch((err) => console.log(err));
