@@ -13,13 +13,7 @@ import { NxModule } from '@nrwl/angular';
 
 import { AuthEffects, authFeature, AuthGuardService, TokenInterceptorService } from '@realworld/auth/data-access';
 import { SettingsEffects } from '@realworld/settings/data-access';
-import {
-  ProfileArticlesResolverService,
-  ProfileEffects,
-  ProfileFavoritesResolverService,
-  ProfileResolverService,
-} from '@realworld/profile/data-access';
-import { ArticleListComponent } from '@realworld/articles/articles-list';
+import { ProfileEffects, ProfileResolverService } from '@realworld/profile/data-access';
 import { profileFeature } from '@realworld/profile/data-access';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
@@ -28,6 +22,8 @@ import {
   ErrorHandlerInterceptorService,
 } from '@realworld/core/error-handler';
 import { CoreFormsModule } from '@realworld/core/forms';
+import { ArticleEditComponent, ArticleEditResolverService } from '@realworld/articles/article-edit';
+import { ArticleEditEffects, articleFeature } from '@realworld/articles/data-access';
 
 if (environment.production) {
   enableProdMode();
@@ -66,8 +62,27 @@ bootstrapApplication(AppComponent, {
           },
           {
             path: 'editor',
-            loadChildren: () =>
-              import('@realworld/articles/article-edit').then((m) => m.ArticlesFeatureArticleEditModule),
+            loadComponent: () =>
+              import('@realworld/articles/article-edit').then((article) => article.ArticleEditComponent),
+            providers: [
+              importProvidersFrom(
+                StoreModule.forFeature(articleFeature),
+                EffectsModule.forFeature([ArticleEditEffects]),
+              ),
+            ],
+            children: [
+              {
+                path: '',
+                pathMatch: 'full',
+                component: ArticleEditComponent,
+                canActivate: [AuthGuardService],
+              },
+              {
+                path: ':slug',
+                component: ArticleEditComponent,
+                resolve: { ArticleEditResolverService },
+              },
+            ],
           },
           {
             path: 'profile/:username',

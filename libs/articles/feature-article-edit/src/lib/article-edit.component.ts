@@ -35,8 +35,10 @@ const structure: Field[] = [
 @UntilDestroy()
 @Component({
   selector: 'app-article-edit',
+  standalone: true,
   templateUrl: './article-edit.component.html',
   styleUrls: ['./article-edit.component.css'],
+  imports: [DynamicFormComponentModule, ListErrorsComponentModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleEditComponent implements OnInit, OnDestroy {
@@ -63,10 +65,3 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
     this.facade.initializeArticle();
   }
 }
-
-@NgModule({
-  imports: [DynamicFormComponentModule, ListErrorsComponentModule],
-  declarations: [ArticleEditComponent],
-  exports: [ArticleEditComponent],
-})
-export class ArticleEditComponentModule {}

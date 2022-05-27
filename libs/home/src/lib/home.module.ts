@@ -1,14 +1,13 @@
-import { ArticleListComponentModule } from '@realworld/articles/articles-list';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { articleListFeature, ArticleListEffects } from '@realworld/articles/data-access';
 
 import { HomeEffects } from './+state/home.effects';
 import { homeFeature } from './+state/home.reducer';
 import { HomeResolverService } from './home-resolver.service';
 import { HomeComponent } from './home.component';
-import { articleListFeature, articlesFeatureEffects } from '@realworld/articles/data-access';
 
 @NgModule({
   imports: [
@@ -21,7 +20,7 @@ import { articleListFeature, articlesFeatureEffects } from '@realworld/articles/
       },
     ]),
     StoreModule.forFeature(articleListFeature),
-    EffectsModule.forFeature(articlesFeatureEffects),
+    EffectsModule.forFeature([ArticleListEffects]),
     StoreModule.forFeature(homeFeature),
     EffectsModule.forFeature([HomeEffects]),
   ],
