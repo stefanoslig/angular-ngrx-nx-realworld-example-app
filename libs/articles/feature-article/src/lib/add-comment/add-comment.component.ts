@@ -2,13 +2,15 @@ import { Article, User } from '@realworld/core/api-types';
 import { Field } from '@realworld/core/forms';
 import { DynamicFormComponentModule } from '@realworld/core/forms/src/lib/dynamic-form/dynamic-form.component';
 import { ListErrorsComponentModule } from '@realworld/core/forms/src/lib/list-errors/list-errors.component';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-comment',
+  standalone: true,
   templateUrl: './add-comment.component.html',
   styleUrls: ['./add-comment.component.css'],
+  imports: [ListErrorsComponentModule, DynamicFormComponentModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddCommentComponent {
@@ -20,10 +22,3 @@ export class AddCommentComponent {
   @Output() submitComment: EventEmitter<string> = new EventEmitter();
   @Output() updateForm: EventEmitter<any> = new EventEmitter();
 }
-
-@NgModule({
-  imports: [ListErrorsComponentModule, DynamicFormComponentModule],
-  declarations: [AddCommentComponent],
-  exports: [AddCommentComponent],
-})
-export class AddCommentComponentModule {}

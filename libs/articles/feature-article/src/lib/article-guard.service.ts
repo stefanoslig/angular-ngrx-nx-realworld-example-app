@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { ArticlesFacade } from '@realworld/articles/data-access';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ArticleGuardService implements CanActivate {
   constructor(private facade: ArticlesFacade) {}
 

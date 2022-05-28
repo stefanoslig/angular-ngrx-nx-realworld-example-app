@@ -23,7 +23,16 @@ import {
 } from '@realworld/core/error-handler';
 import { CoreFormsModule } from '@realworld/core/forms';
 import { ArticleEditComponent, ArticleEditResolverService } from '@realworld/articles/article-edit';
-import { ArticleEditEffects, articleFeature } from '@realworld/articles/data-access';
+import {
+  ArticleEditEffects,
+  ArticleEffects,
+  articleFeature,
+  ArticleListEffects,
+  articleListFeature,
+} from '@realworld/articles/data-access';
+import { homeFeature } from '@realworld/home/src/lib/+state/home.reducer';
+import { HomeEffects } from '@realworld/home/src/lib/+state/home.effects';
+import { ArticleGuardService } from '@realworld/articles/article';
 
 if (environment.production) {
   enableProdMode();
@@ -39,7 +48,15 @@ bootstrapApplication(AppComponent, {
         [
           {
             path: '',
-            loadChildren: () => import('@realworld/home/src/lib/home.module').then((m) => m.HomeModule),
+            loadComponent: () => import('@realworld/home/src/lib/home.component').then((home) => home.HomeComponent),
+            providers: [
+              importProvidersFrom(
+                StoreModule.forFeature(articleListFeature),
+                EffectsModule.forFeature([ArticleListEffects]),
+                StoreModule.forFeature(homeFeature),
+                EffectsModule.forFeature([HomeEffects]),
+              ),
+            ],
           },
           {
             path: 'login',
@@ -51,7 +68,11 @@ bootstrapApplication(AppComponent, {
           },
           {
             path: 'article/:slug',
-            loadChildren: () => import('@realworld/articles/article').then((m) => m.ArticleFeatureArticleModule),
+            loadComponent: () => import('@realworld/articles/article').then((m) => m.ArticleComponent),
+            providers: [
+              importProvidersFrom(StoreModule.forFeature(articleFeature), EffectsModule.forFeature([ArticleEffects])),
+            ],
+            canActivate: [ArticleGuardService],
           },
           {
             path: 'settings',
