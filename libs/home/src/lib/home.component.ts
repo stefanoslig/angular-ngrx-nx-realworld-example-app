@@ -1,12 +1,15 @@
 import { Subject } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
-import { ArticleListComponentModule, ArticlesFeatureArticlesListModule } from '@realworld/articles/articles-list';
+import { ArticleListComponentModule } from '@realworld/articles/articles-list';
+import { articleListFeature, ArticleListEffects } from '@realworld/articles/data-access';
 import { HomeFacade } from './+state/home.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { TagsListComponentModule } from './tags-list/tags-list.component';
 import { ArticlesFacade, articleListInitialState, ArticleListConfig } from '@realworld/articles/data-access';
 import { AuthFacade } from '@realworld/auth/data-access';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @UntilDestroy()
 @Component({
@@ -57,7 +60,13 @@ export class HomeComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [CommonModule, TagsListComponentModule, ArticlesFeatureArticlesListModule, ArticleListComponentModule],
+  imports: [
+    CommonModule,
+    TagsListComponentModule,
+    StoreModule.forFeature(articleListFeature),
+    EffectsModule.forFeature([ArticleListEffects]),
+    ArticleListComponentModule,
+  ],
   declarations: [HomeComponent],
   exports: [HomeComponent],
 })
