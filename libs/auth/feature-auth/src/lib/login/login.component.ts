@@ -24,8 +24,10 @@ const structure: Field[] = [
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  imports: [ListErrorsComponentModule, DynamicFormComponentModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -50,10 +52,3 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.ngrxFormsFacade.initializeForm();
   }
 }
-
-@NgModule({
-  imports: [ListErrorsComponentModule, DynamicFormComponentModule, RouterModule],
-  declarations: [LoginComponent],
-  exports: [LoginComponent],
-})
-export class LoginComponentModule {}

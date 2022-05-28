@@ -1,14 +1,14 @@
 import { Field, NgrxFormsFacade } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, NgModule, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CommonModule } from '@angular/common';
-import { ArticleMetaComponentModule } from './article-meta/article-meta.component';
-import { ArticleCommentComponentModule } from './article-comment/article-comment.component';
-import { MarkdownPipeModule } from './pipes/markdown.pipe';
 import { ArticlesFacade } from '@realworld/articles/data-access';
 import { AuthFacade } from '@realworld/auth/data-access';
+import { ArticleMetaComponent } from './article-meta/article-meta.component';
+import { CommonModule } from '@angular/common';
+import { MarkdownPipe } from './pipes/markdown.pipe';
+import { ArticleCommentComponent } from './article-comment/article-comment.component';
 
 const structure: Field[] = [
   {
@@ -24,8 +24,10 @@ const structure: Field[] = [
 @UntilDestroy()
 @Component({
   selector: 'app-article',
+  standalone: true,
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
+  imports: [CommonModule, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
@@ -87,10 +89,3 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.facade.initializeArticle();
   }
 }
-
-@NgModule({
-  imports: [CommonModule, ArticleMetaComponentModule, ArticleCommentComponentModule, MarkdownPipeModule],
-  declarations: [ArticleComponent],
-  exports: [ArticleComponent],
-})
-export class ArticleComponentModule {}

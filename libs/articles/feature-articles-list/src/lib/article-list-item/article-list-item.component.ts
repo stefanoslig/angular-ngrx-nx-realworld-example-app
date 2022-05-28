@@ -1,11 +1,13 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'app-article-list-item',
+  standalone: true,
   templateUrl: './article-list-item.component.html',
   styleUrls: ['./article-list-item.component.css'],
+  imports: [CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {
@@ -22,10 +24,3 @@ export class ArticleListItemComponent {
     }
   }
 }
-
-@NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [ArticleListItemComponent],
-  exports: [ArticleListItemComponent],
-})
-export class ArticleListItemComponentModule {}

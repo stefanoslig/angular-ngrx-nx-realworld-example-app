@@ -1,14 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ArticlesFacade } from '@realworld/articles/data-access';
-import { ArticleListItemComponentModule } from './article-list-item/article-list-item.component';
+import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 
 @Component({
   selector: 'app-article-list',
+  standalone: true,
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
+  imports: [CommonModule, ArticleListItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {
@@ -35,10 +37,3 @@ export class ArticleListComponent {
     this.facade.setPage(page);
   }
 }
-
-@NgModule({
-  imports: [CommonModule, ArticleListItemComponentModule],
-  declarations: [ArticleListComponent],
-  exports: [ArticleListComponent],
-})
-export class ArticleListComponentModule {}

@@ -1,11 +1,13 @@
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output, NgModule } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'app-article-meta',
+  standalone: true,
   templateUrl: './article-meta.component.html',
   styleUrls: ['./article-meta.component.css'],
+  imports: [RouterModule, CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleMetaComponent {
@@ -38,10 +40,3 @@ export class ArticleMetaComponent {
     this.delete.emit(this.article.slug);
   }
 }
-
-@NgModule({
-  imports: [RouterModule, CommonModule],
-  declarations: [ArticleMetaComponent],
-  exports: [ArticleMetaComponent],
-})
-export class ArticleMetaComponentModule {}

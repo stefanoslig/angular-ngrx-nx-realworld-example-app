@@ -1,1 +1,2 @@
-export * from './lib/article-feature-article.module';
+export * from './lib/article-guard.service';
+export * from './lib/article.component';
