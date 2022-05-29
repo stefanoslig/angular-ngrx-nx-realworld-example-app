@@ -1,5 +1,5 @@
-import { DynamicFormComponentModule, Field, ListErrorsComponentModule, NgrxFormsFacade } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, NgModule, OnDestroy, OnInit } from '@angular/core';
+import { DynamicFormComponentModule, Field, ListErrorsComponent, NgrxFormsFacade } from '@realworld/core/forms';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthFacade } from '@realworld/auth/data-access';
@@ -33,7 +33,7 @@ const structure: Field[] = [
   standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [ListErrorsComponentModule, DynamicFormComponentModule, RouterModule],
+  imports: [ListErrorsComponent, DynamicFormComponentModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent implements OnInit, OnDestroy {

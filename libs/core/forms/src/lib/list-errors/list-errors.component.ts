@@ -6,8 +6,10 @@ import { CommonModule } from '@angular/common';
 @UntilDestroy()
 @Component({
   selector: 'app-list-errors',
+  standalone: true,
   templateUrl: './list-errors.component.html',
   styleUrls: ['./list-errors.component.css'],
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListErrorsComponent implements OnInit, OnDestroy {
@@ -26,10 +28,3 @@ export class ListErrorsComponent implements OnInit, OnDestroy {
     this.ngrxFormsFacade.initializeErrors();
   }
 }
-
-@NgModule({
-  imports: [CommonModule],
-  declarations: [ListErrorsComponent],
-  exports: [ListErrorsComponent],
-})
-export class ListErrorsComponentModule {}

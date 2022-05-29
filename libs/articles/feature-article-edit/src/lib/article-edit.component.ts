@@ -1,5 +1,5 @@
-import { DynamicFormComponentModule, Field, ListErrorsComponentModule, NgrxFormsFacade } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, NgModule, OnInit } from '@angular/core';
+import { DynamicFormComponentModule, Field, ListErrorsComponent, NgrxFormsFacade } from '@realworld/core/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -38,7 +38,7 @@ const structure: Field[] = [
   standalone: true,
   templateUrl: './article-edit.component.html',
   styleUrls: ['./article-edit.component.css'],
-  imports: [DynamicFormComponentModule, ListErrorsComponentModule],
+  imports: [DynamicFormComponentModule, ListErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleEditComponent implements OnInit, OnDestroy {

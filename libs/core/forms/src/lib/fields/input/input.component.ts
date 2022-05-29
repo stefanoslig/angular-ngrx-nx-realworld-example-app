@@ -1,11 +1,13 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Field } from '../../+state/forms.interfaces';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
+  standalone: true,
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css'],
+  imports: [ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {

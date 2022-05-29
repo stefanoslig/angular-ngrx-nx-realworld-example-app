@@ -21,7 +21,7 @@ import {
   errorHandlerFeature,
   ErrorHandlerInterceptorService,
 } from '@realworld/core/error-handler';
-import { CoreFormsModule } from '@realworld/core/forms';
+import { NgrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
 import { ArticleEditComponent, ArticleEditResolverService } from '@realworld/articles/article-edit';
 import {
   ArticleEditEffects,
@@ -123,11 +123,14 @@ bootstrapApplication(AppComponent, {
           relativeLinkResolution: 'legacy',
         },
       ),
-      StoreModule.forRoot({ auth: authFeature.reducer, errorHandler: errorHandlerFeature.reducer }),
-      EffectsModule.forRoot([ErrorHandlerEffects, AuthEffects]),
+      StoreModule.forRoot({
+        auth: authFeature.reducer,
+        errorHandler: errorHandlerFeature.reducer,
+        ngrxForms: ngrxFormsFeature.reducer,
+      }),
+      EffectsModule.forRoot([ErrorHandlerEffects, AuthEffects, NgrxFormsEffects]),
       !environment.production ? StoreDevtoolsModule.instrument() : [],
       StoreRouterConnectingModule.forRoot(),
-      CoreFormsModule,
     ),
     {
       provide: HTTP_INTERCEPTORS,
