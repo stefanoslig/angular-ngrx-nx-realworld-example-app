@@ -18,7 +18,7 @@
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
-    "format": "nx format:write",
+    "format": "nx format:write --base=main",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
