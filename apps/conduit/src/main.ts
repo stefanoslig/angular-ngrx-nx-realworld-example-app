@@ -33,6 +33,7 @@ import {
 import { homeFeature } from '@realworld/home/src/lib/+state/home.reducer';
 import { HomeEffects } from '@realworld/home/src/lib/+state/home.effects';
 import { ArticleGuardService } from '@realworld/articles/article';
+import { API_URL } from '@realworld/core/http-client';
 
 if (environment.production) {
   enableProdMode();
@@ -40,6 +41,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    { provide: API_URL, useValue: environment.api_url },
     importProvidersFrom(
       BrowserModule,
       HttpClientModule,
