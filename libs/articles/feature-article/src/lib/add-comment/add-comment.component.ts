@@ -1,6 +1,6 @@
 import { Article, User } from '@realworld/core/api-types';
 import { Field } from '@realworld/core/forms';
-import { DynamicFormComponentModule } from '@realworld/core/forms/src/lib/dynamic-form/dynamic-form.component';
+import { DynamicFormComponent } from '@realworld/core/forms/src/lib/dynamic-form/dynamic-form.component';
 import { ListErrorsComponentModule } from '@realworld/core/forms/src/lib/list-errors/list-errors.component';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   templateUrl: './add-comment.component.html',
   styleUrls: ['./add-comment.component.css'],
-  imports: [ListErrorsComponentModule, DynamicFormComponentModule],
+  imports: [ListErrorsComponentModule, DynamicFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddCommentComponent {

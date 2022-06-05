@@ -1,23 +1,25 @@
-import { ComponentRef, Directive, Input, NgModule, OnChanges, OnInit, Type, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Field } from '../+state/forms.interfaces';
 import { InputComponent } from '../fields/input/input.component';
 import { TextareaComponent } from '../fields/textarea/textarea.component';
 
-// TODO: remove any
-const componentsMapper: { [key: string]: Type<any> } = {
+type Components = InputComponent | TextareaComponent;
+
+const componentsMapper: { [key: string]: Type<Components> } = {
   INPUT: InputComponent,
   TEXTAREA: TextareaComponent,
 };
 
 @Directive({
   selector: '[appDynamicField]',
+  standalone: true,
 })
 export class DynamicFieldDirective implements OnInit, OnChanges {
   @Input() field!: Field;
   @Input() group!: FormGroup;
-  component!: ComponentRef<any>;
+  component!: ComponentRef<Components>;
 
   constructor(private container: ViewContainerRef) {}
 
@@ -34,9 +36,3 @@ export class DynamicFieldDirective implements OnInit, OnChanges {
     this.component.instance.group = this.group;
   }
 }
-
-@NgModule({
-  declarations: [DynamicFieldDirective],
-  exports: [DynamicFieldDirective],
-})
-export class DynamicFieldDirectiveModule {}

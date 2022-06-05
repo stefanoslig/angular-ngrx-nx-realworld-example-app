@@ -1,17 +1,19 @@
 import { Field } from '../+state/forms.interfaces';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, NgModule, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { debounceTime, map, tap, filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
-import { DynamicFieldDirectiveModule } from './dynamic-field.directive';
+import { DynamicFieldDirective } from './dynamic-field.directive';
 
 @UntilDestroy()
 @Component({
   selector: 'app-dynamic-form',
+  standalone: true,
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
+  imports: [CommonModule, ReactiveFormsModule, DynamicFieldDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit {
@@ -55,7 +57,7 @@ export class DynamicFormComponent implements OnInit {
   };
 
   private patchValue = ([form, data]: [FormGroup, any]) => {
-    !!data ? form.patchValue(data, { emitEvent: false }) : form.patchValue({}, { emitEvent: false });
+    data ? form.patchValue(data, { emitEvent: false }) : form.patchValue({}, { emitEvent: false });
   };
 
   private listenFormChanges(form: FormGroup) {
@@ -64,10 +66,3 @@ export class DynamicFormComponent implements OnInit {
       .subscribe((changes: any) => this.updateForm.emit(changes));
   }
 }
-
-@NgModule({
-  imports: [CommonModule, ReactiveFormsModule, DynamicFieldDirectiveModule],
-  declarations: [DynamicFormComponent],
-  exports: [DynamicFormComponent],
-})
-export class DynamicFormComponentModule {}
