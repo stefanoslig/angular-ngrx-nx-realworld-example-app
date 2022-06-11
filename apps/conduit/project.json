@@ -92,6 +92,35 @@
         "passWithNoTests": true
       },
       "outputs": ["coverage/apps/conduit"]
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "apps/conduit/.storybook",
+        "browserTarget": "conduit:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputDir": "dist/storybook/conduit",
+        "configDir": "apps/conduit/.storybook",
+        "browserTarget": "conduit:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
     }
   }
 }
