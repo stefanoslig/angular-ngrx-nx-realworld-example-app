@@ -1,12 +1,17 @@
-import { Subject } from 'rxjs';
+import { pipe, switchMap } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { HomeFacade } from './+state/home.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ArticlesFacade, articleListInitialState, ArticleListConfig } from '@realworld/articles/data-access';
 import { AuthFacade } from '@realworld/auth/data-access';
 import { CommonModule } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
+import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { HomeService } from './home.service';
+
+export interface HomeState {
+  tags: string[];
+}
 
 @UntilDestroy()
 @Component({
@@ -17,19 +22,24 @@ import { ArticleListComponent } from '@realworld/articles/feature-articles-list/
   imports: [CommonModule, TagsListComponent, ArticleListComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends ComponentStore<HomeState> implements OnInit {
   listConfig$ = this.articlesfacade.listConfig$;
-  tags$ = this.facade.tags$;
+  tags$ = this.select((store) => store.tags);
   isAuthenticated = false;
-  unsubscribe$: Subject<void> = new Subject();
 
-  constructor(private facade: HomeFacade, private articlesfacade: ArticlesFacade, private authFacade: AuthFacade) {}
+  constructor(
+    private readonly articlesfacade: ArticlesFacade,
+    private readonly authFacade: AuthFacade,
+    private readonly homeService: HomeService,
+  ) {
+    super({ tags: [] });
+  }
 
   ngOnInit() {
-    this.facade.loadTags();
     this.authFacade.isLoggedIn$.pipe(untilDestroyed(this)).subscribe((isLoggedIn) => {
       this.isAuthenticated = isLoggedIn;
       this.getArticles();
+      this.getTags();
     });
   }
 
@@ -57,4 +67,21 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
+  readonly getTags = this.effect<void>(
+    pipe(
+      switchMap(() =>
+        this.homeService.getTags().pipe(
+          tapResponse(
+            (response) => {
+              this.patchState({ tags: response.tags });
+            },
+            (error) => {
+              console.error('error getting tags: ', error);
+            },
+          ),
+        ),
+      ),
+    ),
+  );
 }
