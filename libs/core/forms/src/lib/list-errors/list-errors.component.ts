@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-list-errors',
+  selector: 'cdt-list-errors',
   standalone: true,
   templateUrl: './list-errors.component.html',
   styleUrls: ['./list-errors.component.css'],

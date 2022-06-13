@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 @UntilDestroy()
 @Component({
   standalone: true,
-  selector: 'app-profile',
+  selector: 'cdt-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
   imports: [CommonModule, RouterModule],

@@ -3,7 +3,7 @@ import { Field } from '../../+state/forms.interfaces';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-textarea',
+  selector: 'cdt-textarea',
   standalone: true,
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.css'],

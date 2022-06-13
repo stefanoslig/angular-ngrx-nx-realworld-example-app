@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-test-comp',
+  selector: 'cdt-test-comp',
   template: '',
 })
 class TestComponent {}

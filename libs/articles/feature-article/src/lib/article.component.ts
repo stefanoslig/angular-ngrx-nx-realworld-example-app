@@ -24,7 +24,7 @@ const structure: Field[] = [
 
 @UntilDestroy()
 @Component({
-  selector: 'app-article',
+  selector: 'cdt-article',
   standalone: true,
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],

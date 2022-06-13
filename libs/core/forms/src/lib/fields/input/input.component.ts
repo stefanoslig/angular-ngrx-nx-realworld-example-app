@@ -3,7 +3,7 @@ import { Field } from '../../+state/forms.interfaces';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
+  selector: 'cdt-input',
   standalone: true,
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css'],

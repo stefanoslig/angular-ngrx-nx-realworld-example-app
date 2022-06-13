@@ -9,7 +9,7 @@ import { DynamicFieldDirective } from './dynamic-field.directive';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-dynamic-form',
+  selector: 'cdt-dynamic-form',
   standalone: true,
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],

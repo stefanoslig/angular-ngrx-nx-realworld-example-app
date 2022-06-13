@@ -2,10 +2,10 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-10 offset-md-1 col-xs-12">
-        <app-list-errors></app-list-errors>
+        <cdt-list-errors></cdt-list-errors>
 
-        <app-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
-        </app-dynamic-form>
+        <cdt-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
+        </cdt-dynamic-form>
 
         <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submit()">Publish Article</button>
       </div>

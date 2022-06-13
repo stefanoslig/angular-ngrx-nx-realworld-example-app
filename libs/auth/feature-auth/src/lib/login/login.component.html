@@ -7,10 +7,10 @@
           <a [routerLink]="['/register']">Need an account?</a>
         </p>
 
-        <app-list-errors></app-list-errors>
+        <cdt-list-errors></cdt-list-errors>
 
-        <app-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
-        </app-dynamic-form>
+        <cdt-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
+        </cdt-dynamic-form>
         <button data-e2e-id="sign-in" (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
           Sign in
         </button>

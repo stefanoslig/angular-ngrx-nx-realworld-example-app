@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'app-tags-list',
+  selector: 'cdt-tags-list',
   standalone: true,
   templateUrl: './tags-list.component.html',
   styleUrls: ['./tags-list.component.css'],

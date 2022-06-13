@@ -23,7 +23,7 @@ const structure: Field[] = [
 ];
 
 @Component({
-  selector: 'app-login',
+  selector: 'cdt-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
