@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
 @Component({
-  selector: 'app-article-list-item',
+  selector: 'cdt-article-list-item',
   standalone: true,
   templateUrl: './article-list-item.component.html',
   styleUrls: ['./article-list-item.component.css'],

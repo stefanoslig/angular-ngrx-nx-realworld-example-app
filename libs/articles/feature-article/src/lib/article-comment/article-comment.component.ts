@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-article-comment',
+  selector: 'cdt-article-comment',
   standalone: true,
   templateUrl: './article-comment.component.html',
   styleUrls: ['./article-comment.component.css'],

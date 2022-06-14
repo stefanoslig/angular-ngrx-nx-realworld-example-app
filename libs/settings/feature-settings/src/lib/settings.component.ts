@@ -45,7 +45,7 @@ const structure: Field[] = [
 @UntilDestroy()
 @Component({
   standalone: true,
-  selector: 'app-settings',
+  selector: 'cdt-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
   imports: [DynamicFormComponent, ListErrorsComponent],

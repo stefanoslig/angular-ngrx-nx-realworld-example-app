@@ -6,7 +6,7 @@ import { ArticlesFacade } from '@realworld/articles/data-access';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 
 @Component({
-  selector: 'app-article-list',
+  selector: 'cdt-article-list',
   standalone: true,
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],

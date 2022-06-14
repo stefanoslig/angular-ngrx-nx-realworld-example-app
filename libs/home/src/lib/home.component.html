@@ -39,12 +39,12 @@
           </ul>
         </div>
 
-        <app-article-list></app-article-list>
+        <cdt-article-list></cdt-article-list>
       </div>
 
       <div class="col-md-3">
         <div class="sidebar">
-          <app-tags-list (setListTag)="setListTag($event)" [tags]="tags$ | async"></app-tags-list>
+          <cdt-tags-list (setListTag)="setListTag($event)" [tags]="tags$ | async"></cdt-tags-list>
         </div>
       </div>
     </div>

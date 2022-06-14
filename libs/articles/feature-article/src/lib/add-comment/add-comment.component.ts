@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-add-comment',
+  selector: 'cdt-add-comment',
   standalone: true,
   templateUrl: './add-comment.component.html',
   styleUrls: ['./add-comment.component.css'],

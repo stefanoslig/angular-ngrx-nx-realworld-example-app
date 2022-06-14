@@ -3,7 +3,7 @@ import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from 
 
 @Component({
   standalone: true,
-  selector: 'app-pager',
+  selector: 'cdt-pager',
   templateUrl: './pager.component.html',
   styleUrls: ['./pager.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

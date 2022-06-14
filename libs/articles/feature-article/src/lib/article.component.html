@@ -2,7 +2,7 @@
   <div class="banner">
     <div class="container">
       <h1 data-e2e-id="article-title">{{ (article$ | async).title }}</h1>
-      <app-article-meta
+      <cdt-article-meta
         [article]="article$ | async"
         (follow)="follow($event)"
         (unfollow)="unfollow($event)"
@@ -11,7 +11,7 @@
         (delete)="delete($event)"
         [canModify]="canModify"
       >
-      </app-article-meta>
+      </cdt-article-meta>
     </div>
   </div>
 
@@ -23,7 +23,7 @@
     </div>
     <hr />
     <div class="article-actions">
-      <app-article-meta
+      <cdt-article-meta
         [article]="article$ | async"
         (follow)="follow($event)"
         (unfollow)="unfollow($event)"
@@ -31,12 +31,12 @@
         (unfavorite)="unfavorite($event)"
         (delete)="delete($event)"
         [canModify]="canModify"
-      ></app-article-meta>
+      ></cdt-article-meta>
     </div>
 
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
-        <app-add-comment
+        <cdt-add-comment
           *ngIf="isAuthenticated$ | async"
           [article]="article$ | async"
           [data$]="data$"
@@ -46,20 +46,20 @@
           (submitComment)="submit($event)"
           (updateForm)="updateForm($event)"
         >
-        </app-add-comment>
+        </cdt-add-comment>
 
         <div *ngIf="(isAuthenticated$ | async) === false">
           <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
           this article.
         </div>
 
-        <app-article-comment
+        <cdt-article-comment
           *ngFor="let comment of comments$ | async"
           [currentUser]="currentUser$ | async"
           (delete)="deleteComment($event)"
           [article]="article$ | async"
           [comment]="comment"
-        ></app-article-comment>
+        ></cdt-article-comment>
       </div>
     </div>
   </div>

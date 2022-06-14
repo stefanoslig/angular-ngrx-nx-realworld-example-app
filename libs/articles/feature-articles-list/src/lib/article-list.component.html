@@ -1,6 +1,6 @@
 <ng-container *ngIf="!(isLoading$ | async); else isLoading">
   <ng-container *ngIf="[articles$ | async].length > 0; else noArticles">
-    <app-article-list-item
+    <cdt-article-list-item
       data-e2e-id="article-list"
       (navigateToArticle)="navigateToArticle($event)"
       (unFavorite)="unFavorite($event)"
@@ -8,13 +8,13 @@
       *ngFor="let article of articles$ | async"
       [article]="article"
     >
-    </app-article-list-item>
+    </cdt-article-list-item>
 
-    <app-pager
+    <cdt-pager
       (setPage)="setPage($event)"
       [currentPage]="(listConfig$ | async).currentPage"
       [totalPages]="totalPages$ | async"
-    ></app-pager>
+    ></cdt-pager>
   </ng-container>
 
   <ng-template #noArticles>

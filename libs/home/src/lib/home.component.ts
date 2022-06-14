@@ -15,7 +15,7 @@ export interface HomeState {
 
 @UntilDestroy()
 @Component({
-  selector: 'app-home',
+  selector: 'cdt-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
