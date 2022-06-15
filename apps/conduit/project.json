@@ -6,7 +6,7 @@
     }
   },
   "sourceRoot": "apps/conduit/src",
-  "prefix": "conduit",
+  "prefix": "cdt",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",

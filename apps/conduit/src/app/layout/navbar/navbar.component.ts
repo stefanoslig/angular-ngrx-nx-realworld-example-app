@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { User } from '@realworld/core/api-types';
 
 @Component({
-  selector: 'conduit-navbar',
+  selector: 'cdt-navbar',
   standalone: true,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],

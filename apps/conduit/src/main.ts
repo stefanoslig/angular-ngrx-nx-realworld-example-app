@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthEffects, authFeature, TokenInterceptorService } from '@realworld/auth/data-access';
+import { AuthEffects, authFeature, AuthGuardService, TokenInterceptorService } from '@realworld/auth/data-access';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   ErrorHandlerEffects,
@@ -64,13 +64,14 @@ bootstrapApplication(AppComponent, {
           },
           {
             path: 'settings',
-            loadChildren: () =>
-              import('@realworld/settings/feature-settings').then((settings) => settings.SETTINGS_ROUTES),
+            loadComponent: () =>
+              import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
           },
           {
             path: 'editor',
             loadChildren: () =>
               import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),
+            canActivate: [AuthGuardService],
           },
           {
             path: 'profile',

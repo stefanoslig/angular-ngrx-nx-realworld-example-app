@@ -7,7 +7,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @Component({
-  selector: 'conduit-root',
+  selector: 'cdt-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -27,6 +27,6 @@ export class AppComponent implements OnInit {
         take(1),
         filter((token) => !!token),
       )
-      .subscribe(() => this.authFacade.user());
+      .subscribe(() => this.authFacade.getUser());
   }
 }
