@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SettingsService } from './settings.service';
-import { ApiService } from '@realworld/core/api-types';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ApiService } from '@realworld/core/http-client';
 
 describe('SettingsService', () => {
   beforeEach(() => {
