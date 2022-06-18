@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'conduit-footer',
+  selector: 'cdt-footer',
   standalone: true,
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],

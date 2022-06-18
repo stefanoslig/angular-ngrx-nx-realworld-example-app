@@ -1,7 +1,7 @@
 {
   "projectType": "library",
   "sourceRoot": "libs/auth/data-access/src",
-  "prefix": "conduit",
+  "prefix": "cdt",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

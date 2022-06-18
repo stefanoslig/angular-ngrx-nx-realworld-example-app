@@ -1,7 +1,7 @@
 {
   "projectType": "library",
   "sourceRoot": "libs/core/error-handler/src",
-  "prefix": "conduit",
+  "prefix": "cdt",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

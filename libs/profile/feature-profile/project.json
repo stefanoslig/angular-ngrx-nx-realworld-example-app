@@ -1,7 +1,7 @@
 {
   "projectType": "library",
   "sourceRoot": "libs/profile/feature-profile/src",
-  "prefix": "conduit",
+  "prefix": "cdt",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

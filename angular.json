@@ -16,7 +16,6 @@
     "home": "libs/home",
     "profile-data-access": "libs/profile/data-access",
     "profile-feature-profile": "libs/profile/feature-profile",
-    "settings-data-access": "libs/settings/data-access",
     "settings-feature-settings": "libs/settings/feature-settings",
     "ui-components": "libs/ui/components"
   }
