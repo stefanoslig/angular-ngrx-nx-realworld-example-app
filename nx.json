@@ -18,14 +18,6 @@
       }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
@@ -41,5 +33,10 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {}
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    }
   }
 }
