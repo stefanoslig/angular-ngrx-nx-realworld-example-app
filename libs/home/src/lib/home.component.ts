@@ -1,4 +1,3 @@
-import { pipe, switchMap } from 'rxjs';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ArticlesFacade, articleListInitialState, ArticleListConfig } from '@realworld/articles/data-access';
@@ -6,12 +5,8 @@ import { AuthFacade } from '@realworld/auth/data-access';
 import { CommonModule } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { HomeService } from './home.service';
-
-export interface HomeState {
-  tags: string[];
-}
+import { HomeStoreService } from './home.store';
+import { provideComponentStore } from '@ngrx/component-store';
 
 @UntilDestroy()
 @Component({
@@ -20,26 +15,24 @@ export interface HomeState {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   imports: [CommonModule, TagsListComponent, ArticleListComponent],
+  providers: [provideComponentStore(HomeStoreService)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent extends ComponentStore<HomeState> implements OnInit {
+export class HomeComponent implements OnInit {
   listConfig$ = this.articlesfacade.listConfig$;
-  tags$ = this.select((store) => store.tags);
+  tags$ = this.homeStore.tags$;
   isAuthenticated = false;
 
   constructor(
     private readonly articlesfacade: ArticlesFacade,
     private readonly authFacade: AuthFacade,
-    private readonly homeService: HomeService,
-  ) {
-    super({ tags: [] });
-  }
+    private readonly homeStore: HomeStoreService,
+  ) {}
 
   ngOnInit() {
     this.authFacade.isLoggedIn$.pipe(untilDestroyed(this)).subscribe((isLoggedIn) => {
       this.isAuthenticated = isLoggedIn;
       this.getArticles();
-      this.getTags();
     });
   }
 
@@ -67,21 +60,4 @@ export class HomeComponent extends ComponentStore<HomeState> implements OnInit {
       },
     });
   }
-
-  readonly getTags = this.effect<void>(
-    pipe(
-      switchMap(() =>
-        this.homeService.getTags().pipe(
-          tapResponse(
-            (response) => {
-              this.patchState({ tags: response.tags });
-            },
-            (error) => {
-              console.error('error getting tags: ', error);
-            },
-          ),
-        ),
-      ),
-    ),
-  );
 }
