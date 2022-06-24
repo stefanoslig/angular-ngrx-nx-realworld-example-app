@@ -3,11 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AuthFacade } from '@realworld/auth/data-access';
-import { ComponentStore } from '@ngrx/component-store';
-import { SettingsService } from './settings.service';
-import { concatMap, map, pipe, tap } from 'rxjs';
-import { concatLatestFrom } from '@ngrx/effects';
-import { Router } from '@angular/router';
+import { SettingsStoreService } from './settings.store';
 
 const structure: Field[] = [
   {
@@ -52,32 +48,18 @@ const structure: Field[] = [
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
   imports: [DynamicFormComponent, ListErrorsComponent],
+  providers: [SettingsStoreService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsComponent extends ComponentStore<Record<string, unknown>> implements OnInit {
+export class SettingsComponent implements OnInit {
   structure$ = this.ngrxFormsFacade.structure$;
   data$ = this.ngrxFormsFacade.data$;
 
   constructor(
     private readonly authFacade: AuthFacade,
     private readonly ngrxFormsFacade: NgrxFormsFacade,
-    private readonly settingsService: SettingsService,
-    private readonly router: Router,
-  ) {
-    super({});
-  }
-
-  readonly updateSettings = this.effect<void>(
-    pipe(
-      concatLatestFrom(() => [this.ngrxFormsFacade.data$]),
-      concatMap(([, data]) =>
-        this.settingsService.update(data).pipe(
-          tap((result) => this.router.navigate(['profile', result.user.username])),
-          map(() => this.authFacade.getUser()),
-        ),
-      ),
-    ),
-  );
+    private readonly settingsStoreService: SettingsStoreService,
+  ) {}
 
   ngOnInit() {
     this.authFacade.getUser();
@@ -90,7 +72,7 @@ export class SettingsComponent extends ComponentStore<Record<string, unknown>> i
   }
 
   submit() {
-    this.updateSettings();
+    this.settingsStoreService.updateSettings();
   }
 
   logout() {
