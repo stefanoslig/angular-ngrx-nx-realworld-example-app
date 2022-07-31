@@ -2,11 +2,27 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "14.3.4-beta.1",
-      "description": "Replace targetDependencies with targetDefaults",
-      "implementation": "./src/migrations/update-14-3-4/create-target-defaults",
-      "package": "nx",
-      "name": "14.3.4-create-target-defaults"
+      "version": "14.4.4",
+      "description": "Adds @typescript-eslint/utils as a dev dep",
+      "factory": "./src/migrations/update-14-4-4/experimental-to-utils-deps",
+      "package": "@nrwl/linter",
+      "name": "experimental-to-utils-deps"
+    },
+    {
+      "cli": "nx",
+      "version": "14.4.4",
+      "description": "Switch from  @typescript-eslint/experimental-utils to @typescript-eslint/utils in all rules and rules.spec files",
+      "factory": "./src/migrations/update-14-4-4/experimental-to-utils-rules",
+      "package": "@nrwl/linter",
+      "name": "experimental-to-utils-rules"
+    },
+    {
+      "cli": "nx",
+      "version": "14.5.0-beta.0",
+      "description": "Update any references of MFE to MF.",
+      "factory": "./src/migrations/update-14-5-0/migrate-mfe-to-mf",
+      "package": "@nrwl/angular",
+      "name": "migrate-mfe-to-mf"
     }
   ]
 }
