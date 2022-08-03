@@ -31,14 +31,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "14.1.0",
-    "@angular/common": "14.1.0",
-    "@angular/compiler": "14.1.0",
-    "@angular/core": "14.1.0",
-    "@angular/forms": "14.1.0",
-    "@angular/platform-browser": "14.1.0",
-    "@angular/platform-browser-dynamic": "14.1.0",
-    "@angular/router": "14.1.0",
+    "@angular/animations": "14.1.1",
+    "@angular/common": "14.1.1",
+    "@angular/compiler": "14.1.1",
+    "@angular/core": "14.1.1",
+    "@angular/forms": "14.1.1",
+    "@angular/platform-browser": "14.1.1",
+    "@angular/platform-browser-dynamic": "14.1.1",
+    "@angular/router": "14.1.1",
     "@ngneat/until-destroy": "^9.0.0",
     "@ngrx/component-store": "14.0.2",
     "@ngrx/effects": "14.0.2",
@@ -53,13 +53,13 @@
     "zone.js": "0.11.7"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "14.1.0",
+    "@angular-devkit/build-angular": "14.1.1",
     "@angular-eslint/eslint-plugin": "14.0.2",
     "@angular-eslint/eslint-plugin-template": "14.0.2",
     "@angular-eslint/template-parser": "14.0.2",
-    "@angular/cli": "14.1.0",
-    "@angular/compiler-cli": "14.1.0",
-    "@angular/language-service": "14.1.0",
+    "@angular/cli": "~14.1.0",
+    "@angular/compiler-cli": "14.1.1",
+    "@angular/language-service": "14.1.1",
     "@ngrx/store-devtools": "14.0.2",
     "@nrwl/cli": "14.5.2",
     "@nrwl/cypress": "14.5.2",
@@ -102,4 +102,3 @@
     }
   }
 }
-
