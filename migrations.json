@@ -1,12 +1,12 @@
 {
   "migrations": [
     {
+      "version": "14.5.5-beta.0",
       "cli": "nx",
-      "version": "14.5.2-beta.0",
-      "description": "Update the @angular/cli package version to ~14.1.0.",
-      "factory": "./src/migrations/update-14-5-2/update-angular-cli",
-      "package": "@nrwl/angular",
-      "name": "update-angular-cli-version-14-1-0"
+      "description": "Exclude jest.config.ts from tsconfig where missing.",
+      "factory": "./src/migrations/update-14-0-0/update-jest-config-ext",
+      "package": "@nrwl/jest",
+      "name": "exclude-jest-config-from-ts-config"
     }
   ]
 }
