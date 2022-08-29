@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { StoreModule } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects, authFeature, AuthGuardService, TokenInterceptorService } from '@realworld/auth/data-access';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -73,15 +73,15 @@ bootstrapApplication(AppComponent, {
         loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
       },
     ]),
+    provideStore({
+      auth: authFeature.reducer,
+      errorHandler: errorHandlerFeature.reducer,
+      ngrxForms: ngrxFormsFeature.reducer,
+    }),
     importProvidersFrom(
       BrowserModule,
       HttpClientModule,
       EffectsModule.forRoot([ErrorHandlerEffects, AuthEffects, NgrxFormsEffects]),
-      StoreModule.forRoot({
-        auth: authFeature.reducer,
-        errorHandler: errorHandlerFeature.reducer,
-        ngrxForms: ngrxFormsFeature.reducer,
-      }),
       !environment.production ? StoreDevtoolsModule.instrument() : [],
       StoreRouterConnectingModule.forRoot(),
     ),
