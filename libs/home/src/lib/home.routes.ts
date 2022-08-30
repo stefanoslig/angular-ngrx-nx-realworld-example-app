@@ -1,6 +1,5 @@
-import { importProvidersFrom } from '@angular/core';
 import { Routes } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
+import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { ArticleListEffects, articleListFeature } from '@realworld/articles/data-access';
 import { HomeComponent } from './home.component';
@@ -9,6 +8,6 @@ export const HOME_ROUTES: Routes = [
   {
     path: '',
     component: HomeComponent,
-    providers: [provideState(articleListFeature), importProvidersFrom(EffectsModule.forFeature([ArticleListEffects]))],
+    providers: [provideState(articleListFeature), provideEffects([ArticleListEffects])],
   },
 ];

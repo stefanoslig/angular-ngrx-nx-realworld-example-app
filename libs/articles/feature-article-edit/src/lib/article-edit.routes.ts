@@ -1,6 +1,5 @@
-import { importProvidersFrom } from '@angular/core';
 import { Routes } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
+import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { ArticleEditEffects, articleFeature } from '@realworld/articles/data-access';
 import { AuthGuardService } from '@realworld/auth/data-access';
@@ -11,7 +10,7 @@ export const ARTICLE_EDIT_ROUTES: Routes = [
   {
     path: '',
     component: ArticleEditComponent,
-    providers: [provideState(articleFeature), importProvidersFrom(EffectsModule.forFeature([ArticleEditEffects]))],
+    providers: [provideState(articleFeature), provideEffects([ArticleEditEffects])],
     children: [
       {
         path: '',

@@ -15,7 +15,7 @@ import {
 } from '@realworld/core/error-handler';
 import { NgrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
 import { API_URL } from '@realworld/core/http-client';
-import { EffectsModule } from '@ngrx/effects';
+import { provideEffects } from '@ngrx/effects';
 
 if (environment.production) {
   enableProdMode();
@@ -78,10 +78,10 @@ bootstrapApplication(AppComponent, {
       errorHandler: errorHandlerFeature.reducer,
       ngrxForms: ngrxFormsFeature.reducer,
     }),
+    provideEffects([ErrorHandlerEffects, AuthEffects, NgrxFormsEffects]),
     importProvidersFrom(
       BrowserModule,
       HttpClientModule,
-      EffectsModule.forRoot([ErrorHandlerEffects, AuthEffects, NgrxFormsEffects]),
       !environment.production ? StoreDevtoolsModule.instrument() : [],
       StoreRouterConnectingModule.forRoot(),
     ),
