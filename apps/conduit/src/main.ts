@@ -3,9 +3,9 @@ import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { provideRouterStore, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { provideStoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects, authFeature, AuthGuardService, TokenInterceptorService } from '@realworld/auth/data-access';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
@@ -79,12 +79,9 @@ bootstrapApplication(AppComponent, {
       ngrxForms: ngrxFormsFeature.reducer,
     }),
     provideEffects([ErrorHandlerEffects, AuthEffects, NgrxFormsEffects]),
-    importProvidersFrom(
-      BrowserModule,
-      HttpClientModule,
-      !environment.production ? StoreDevtoolsModule.instrument() : [],
-      StoreRouterConnectingModule.forRoot(),
-    ),
+    provideRouterStore(),
+    !environment.production ? provideStoreDevtools() : [],
+    importProvidersFrom(BrowserModule, HttpClientModule),
     { provide: API_URL, useValue: environment.api_url },
     ...rootInterceptors,
   ],
