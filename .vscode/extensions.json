@@ -1,9 +1,14 @@
 {
   "recommendations": [
-    "nrwl.angular-console",
-    "ms-vscode.vscode-typescript-tslint-plugin",
-    "esbenp.prettier-vscode",
     "angular.ng-template",
+    "cyrilletuzi.angular-schematics",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "ghaschel.vscode-angular-html",
+    "dbaeumer.vscode-eslint",
+    "nrwl.angular-console",
+    "stylelint.vscode-stylelint",
     "firsttris.vscode-jest-runner"
-  ]
+  ],
+  "unwantedRecommendations": []
 }
