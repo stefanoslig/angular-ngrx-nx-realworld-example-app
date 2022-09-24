@@ -1,12 +1,44 @@
 {
   "migrations": [
     {
-      "version": "14.5.5-beta.0",
       "cli": "nx",
-      "description": "Exclude jest.config.ts from tsconfig where missing.",
-      "factory": "./src/migrations/update-14-0-0/update-jest-config-ext",
+      "version": "14.6.0-beta.0",
+      "description": "Update the @angular/cli package version to ~14.2.0.",
+      "factory": "./src/migrations/update-14-6-0/update-angular-cli",
+      "package": "@nrwl/angular",
+      "name": "update-angular-cli-version-14-2-0"
+    },
+    {
+      "cli": "nx",
+      "version": "14.6.1-beta.0",
+      "description": "Change Cypress e2e and component testing presets to use __filename instead of __dirname and include a devServerTarget for component testing.",
+      "factory": "./src/migrations/update-14-6-1/update-cypress-configs-presets",
+      "package": "@nrwl/cypress",
+      "name": "update-cypress-configs-preset"
+    },
+    {
+      "cli": "nx",
+      "version": "14.7.0-beta.0",
+      "description": "Update Cypress if using v10 to support latest component testing features",
+      "factory": "./src/migrations/update-14-7-0/update-cypress-version-if-10",
+      "package": "@nrwl/cypress",
+      "name": "update-cypress-if-v10"
+    },
+    {
+      "version": "14.6.0-beta.0",
+      "cli": "nx",
+      "description": "Update jest configs to support jest 28 changes (https://jestjs.io/docs/upgrading-to-jest28#configuration-options)",
+      "factory": "./src/migrations/update-14-6-0/update-configs-jest-28",
       "package": "@nrwl/jest",
-      "name": "exclude-jest-config-from-ts-config"
+      "name": "update-configs-jest-28"
+    },
+    {
+      "version": "14.6.0-beta.0",
+      "cli": "nx",
+      "description": "Update jest test files  to support jest 28 changes (https://jestjs.io/docs/upgrading-to-jest28)",
+      "factory": "./src/migrations/update-14-6-0/update-tests-jest-28",
+      "package": "@nrwl/jest",
+      "name": "update-tests-jest-28"
     }
   ]
 }
