@@ -81,7 +81,7 @@
     "cypress": "^6.5.0",
     "cypress-cucumber-preprocessor": "^4.0.1",
     "dotenv": "10.0.0",
-    "eslint": "8.23.0",
+    "eslint": "8.24.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-cypress": "^2.10.3",
     "firebase-tools": "^7.11.0",
