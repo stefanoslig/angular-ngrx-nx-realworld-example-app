@@ -11,9 +11,9 @@ import { StoreModule, Action } from '@ngrx/store';
 import { cold } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 import { authActions } from './auth.actions';
-
-import { AuthService } from '../auth.service';
-import { LocalStorageJwtService } from '../local-storage-jwt.service';
+import { MockProvider } from 'ng-mocks';
+import { AuthService } from '../services/auth.service';
+import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
 import { AuthEffects } from './auth.effects';
 import { hot } from 'jasmine-marbles';
 
@@ -21,7 +21,6 @@ xdescribe('AuthEffects', () => {
   let actions$: Observable<Action>;
   let effects: AuthEffects;
   let service: AuthService;
-  let ngrxFormsFacade: NgrxFormsFacade;
   let router: Router;
   let storage: LocalStorageJwtService;
 
@@ -33,14 +32,7 @@ xdescribe('AuthEffects', () => {
         provideMockActions(() => actions$),
         LocalStorageJwtService,
         ApiService,
-        {
-          provide: AuthService,
-          useValue: {
-            login: jest.fn(),
-            register: jest.fn(),
-            user: jest.fn(),
-          },
-        },
+        MockProvider(AuthService),
         {
           provide: NgrxFormsFacade,
           useValue: { data$: jest.fn(() => cold('a', {})) },
@@ -55,7 +47,6 @@ xdescribe('AuthEffects', () => {
     effects = TestBed.inject(AuthEffects);
     actions$ = TestBed.inject(Actions);
     service = TestBed.inject(AuthService);
-    ngrxFormsFacade = TestBed.inject(NgrxFormsFacade);
     router = TestBed.inject(Router);
     storage = TestBed.inject(LocalStorageJwtService);
 
