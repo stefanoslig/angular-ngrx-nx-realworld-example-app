@@ -1,18 +1,18 @@
 import { ApiService } from '@realworld/core/http-client';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
+import { ArticlesService } from './articles.service';
+import { MockProvider } from 'ng-mocks';
 
-import { ArticleService } from './article.service';
-
-describe('ArticleService', () => {
+describe('ArticlesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ArticleService, ApiService],
+      providers: [ArticlesService, MockProvider(ApiService)],
     });
   });
 
-  it('should be created', inject([ArticleService], (service: ArticleService) => {
+  it('should be created', inject([ArticlesService], (service: ArticlesService) => {
     expect(service).toBeTruthy();
   }));
 });

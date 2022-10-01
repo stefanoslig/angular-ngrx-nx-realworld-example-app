@@ -1,18 +1,18 @@
-import { ApiService } from '@realworld/core/http-client';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { StoreModule } from '@ngrx/store';
-
-import { ArticleService } from '../article.service';
+import { Action, StoreModule } from '@ngrx/store';
+import { ArticlesService } from '../../services/articles.service';
 import { ArticleEffects } from './article.effects';
-import { ActionsService } from '@realworld/articles/data-access';
 import { NgrxFormsFacade } from '@realworld/core/forms';
 import { hot } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ActionsService } from '../../services/actions.service';
+import { Observable } from 'rxjs';
+import { MockProvider } from 'ng-mocks';
 
 describe('ArticleEffects', () => {
-  let actions;
+  let actions$: Observable<Action>;
   let effects: ArticleEffects;
 
   beforeEach(() => {
@@ -20,10 +20,9 @@ describe('ArticleEffects', () => {
       imports: [StoreModule.forRoot({}), HttpClientTestingModule, RouterTestingModule.withRoutes([])],
       providers: [
         ArticleEffects,
-        provideMockActions(() => actions),
-        ArticleService,
-        ApiService,
-        ActionsService,
+        provideMockActions(() => actions$),
+        MockProvider(ArticlesService),
+        MockProvider(ActionsService),
         NgrxFormsFacade,
       ],
     });
@@ -33,7 +32,7 @@ describe('ArticleEffects', () => {
 
   describe('someEffect', () => {
     it('should work', async () => {
-      actions = hot('-a-|', { a: { type: 'LOAD_DATA' } });
+      actions$ = hot('-a-|', { a: { type: 'LOAD_DATA' } });
       expect(true).toBeTruthy();
     });
   });
