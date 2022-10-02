@@ -18,7 +18,7 @@ export class AuthEffects {
       switchMap(() =>
         this.authService.user().pipe(
           map((data) => authActions.getUserSuccess({ user: data.user })),
-          catchError((error) => of(authActions.getUserFailure(error))),
+          catchError((error) => of(authActions.getUserFailure({error}))),
         ),
       ),
     ),

@@ -5,7 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Actions } from '@ngrx/effects';
+import { Actions, getEffectsMetadata } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule, Action } from '@ngrx/store';
 import { cold } from 'jasmine-marbles';
@@ -17,7 +17,7 @@ import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
 import { AuthEffects } from './auth.effects';
 import { hot } from 'jasmine-marbles';
 
-xdescribe('AuthEffects', () => {
+describe('AuthEffects', () => {
   let actions$: Observable<Action>;
   let effects: AuthEffects;
   let service: AuthService;
@@ -35,7 +35,7 @@ xdescribe('AuthEffects', () => {
         MockProvider(AuthService),
         {
           provide: NgrxFormsFacade,
-          useValue: { data$: jest.fn(() => cold('a', {})) },
+          useValue: { data$: of({}) },
         },
         {
           provide: Router,
@@ -50,9 +50,9 @@ xdescribe('AuthEffects', () => {
     router = TestBed.inject(Router);
     storage = TestBed.inject(LocalStorageJwtService);
 
-    spyOn(storage, 'setItem').and.callThrough();
-    spyOn(storage, 'removeItem').and.callThrough();
-    spyOn(router, 'navigateByUrl').and.callThrough();
+    jest.spyOn(storage, 'setItem');
+    jest.spyOn(storage, 'removeItem');
+    jest.spyOn(router, 'navigateByUrl');
   });
 
   describe('login$', () => {
@@ -64,13 +64,13 @@ xdescribe('AuthEffects', () => {
         bio: '',
         image: '',
       };
+      jest.spyOn(service, 'login').mockReturnValueOnce(of({ user: result }));
+
       const loginAction = authActions.login();
       const loginSuccessAction = authActions.loginSuccess({ user: result });
 
-      actions$ = hot('-a---', { a: loginAction });
-      const response = cold('-a|', { a: result });
-      const expected = cold('--b', { b: loginSuccessAction });
-      service.login = jest.fn(() => response);
+      actions$ = hot('-a', { a: loginAction });
+      const expected = cold('-b', { b: loginSuccessAction });
 
       expect(effects.login$).toBeObservable(expected);
     });
@@ -84,7 +84,7 @@ xdescribe('AuthEffects', () => {
       const loginAction = authActions.login();
       const setErrorsAction = setErrors({ errors: result.error.errors });
 
-      actions$ = hot('-a---', { a: loginAction });
+      actions$ = hot('-a', { a: loginAction });
       const response = cold('-#', {}, result);
       service.login = jest.fn(() => response);
       const expected = cold('--b', { b: setErrorsAction });
@@ -107,12 +107,11 @@ xdescribe('AuthEffects', () => {
         user: result,
       });
 
-      actions$ = hot('-a---', { a: registerAction });
-      const response = cold('-a|', { a: result });
-      const expected = cold('--b', { b: registerSuccessAction });
-      service.register = jest.fn(() => response);
+      actions$ = hot('-a', { a: registerAction });
+      const expected = cold('-b', { b: registerSuccessAction });
+      service.register = jest.fn(() => of({ user: result }));
 
-      (expect(effects.register$) as any).toBeObservable(expected);
+      expect(effects.register$).toBeObservable(expected);
     });
 
     it('should return a [ngrx-forms] SetErrors action if the register service throws', () => {
@@ -187,10 +186,9 @@ xdescribe('AuthEffects', () => {
       const getUserAction = authActions.getUser();
       const getUserActionSuccess = authActions.getUserSuccess({ user });
 
-      actions$ = hot('-a---', { a: getUserAction });
-      const response = cold('-a|', { a: { user } });
-      const expected = cold('--b', { b: getUserActionSuccess });
-      service.user = jest.fn(() => response);
+      actions$ = hot('-a', { a: getUserAction });
+      const expected = cold('-b', { b: getUserActionSuccess });
+      service.user = jest.fn(() => of({ user }));
 
       expect(effects.getUser$).toBeObservable(expected);
     });
@@ -206,6 +204,19 @@ xdescribe('AuthEffects', () => {
       const expected = cold('--b', { b: getUserFailure });
 
       expect(effects.getUser$).toBeObservable(expected);
+    });
+  });
+
+  describe('logout$', () => {
+    it('should remove the access token from the local storage and navigate to the login page', () => {
+      const logoutAction = authActions.logout();
+      actions$ = hot('-a', { a: logoutAction });
+
+      expect(effects.logout$).toBeObservable(actions$ as any);
+
+      expect(getEffectsMetadata(effects).logout$?.dispatch).toBe(false);
+      expect(storage.removeItem).toHaveBeenCalled();
+      expect(router.navigateByUrl).toHaveBeenCalledWith('login');
     });
   });
 });
