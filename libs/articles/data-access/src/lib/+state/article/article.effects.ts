@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class ArticleEffects {
-  loadArticle = createEffect(() =>
+  loadArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.loadArticle),
       concatMap((action) =>
