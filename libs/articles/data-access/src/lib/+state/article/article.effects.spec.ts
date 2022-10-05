@@ -11,7 +11,7 @@ import { ActionsService } from '../../services/actions.service';
 import { Observable, of } from 'rxjs';
 import { MockProvider } from 'ng-mocks';
 import { articleActions } from './article.actions';
-import { Article } from '@realworld/core/api-types';
+import { Article, Comment } from '@realworld/core/api-types';
 
 const mockArticle: Article = {
   slug: 'Create-a-new-implementation-1',
@@ -31,6 +31,33 @@ const mockArticle: Article = {
     loading: false,
   },
 };
+
+const mockComments: Array<Comment> = [
+  {
+    id: 5,
+    createdAt: '2021-11-24T12:11:08.480Z',
+    body: 'If someone else has started working on an implementation, consider jumping in and helping them! by contacting the author.',
+    author: {
+      username: 'Gerome',
+      bio: '',
+      image: 'https://api.realworld.io/images/demo-avatar.png',
+      following: false,
+      loading: false,
+    },
+  },
+  {
+    id: 4,
+    createdAt: '2021-11-24T12:11:08.340Z',
+    body: 'Before starting a new implementation, please check if there is any work in progress for the stack you want to work on.',
+    author: {
+      username: 'Gerome',
+      bio: '',
+      image: 'https://api.realworld.io/images/demo-avatar.png',
+      following: false,
+      loading: false,
+    },
+  },
+];
 
 describe('ArticleEffects', () => {
   let actions$: Observable<Action>;
@@ -83,6 +110,39 @@ describe('ArticleEffects', () => {
       const expected = cold('--b', { b: loadArticleFailureAction });
 
       expect(effects.loadArticle$).toBeObservable(expected);
+    });
+  });
+
+  describe('loadComments$', () => {
+    it('should return a loadComments action when we dispatch the getComments request is succesful', () => {
+      const loadCommentsAction = articleActions.loadComments({ slug: 'Create-a-new-implementation-1' });
+      const loadCommentsSuccessAction = articleActions.loadCommentsSuccess({
+        comments: mockComments,
+      });
+
+      actions$ = hot('-a', { a: loadCommentsAction });
+      const expected = cold('-b', { b: loadCommentsSuccessAction });
+      articlesService.getComments = jest.fn(() => of({ comments: mockComments }));
+
+      expect(effects.loadComments$).toBeObservable(expected);
+    });
+
+    it('should return a loadCommentsFailure action if the getComments request throws an error', () => {
+      const error = {
+        name: 'error',
+        message: 'error message ',
+      };
+      const loadCommentsAction = articleActions.loadComments({ slug: 'Create-a-new-implementation-1' });
+      const loadCommentsfailureAction = articleActions.loadCommentsFailure({
+        error,
+      });
+
+      actions$ = hot('-a---', { a: loadCommentsAction });
+      const response = cold('-#', {}, { error });
+      articlesService.getComments = jest.fn(() => response);
+      const expected = cold('--b', { b: loadCommentsfailureAction });
+
+      expect(effects.loadComments$).toBeObservable(expected);
     });
   });
 });

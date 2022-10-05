@@ -24,7 +24,7 @@ export class ArticleEffects {
     ),
   );
 
-  loadComments = createEffect(() =>
+  loadComments$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.loadComments),
       concatMap((action) =>
