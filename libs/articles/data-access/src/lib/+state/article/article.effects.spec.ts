@@ -12,6 +12,7 @@ import { Observable, of } from 'rxjs';
 import { MockProvider } from 'ng-mocks';
 import { articleActions } from './article.actions';
 import { Article, Comment } from '@realworld/core/api-types';
+import { Router } from '@angular/router';
 
 const mockArticle: Article = {
   slug: 'Create-a-new-implementation-1',
@@ -63,6 +64,7 @@ describe('ArticleEffects', () => {
   let actions$: Observable<Action>;
   let effects: ArticleEffects;
   let articlesService: ArticlesService;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -77,6 +79,7 @@ describe('ArticleEffects', () => {
     });
 
     effects = TestBed.inject(ArticleEffects);
+    router = TestBed.inject(Router);
     articlesService = TestBed.inject(ArticlesService);
   });
 
@@ -143,6 +146,49 @@ describe('ArticleEffects', () => {
       const expected = cold('--b', { b: loadCommentsfailureAction });
 
       expect(effects.loadComments$).toBeObservable(expected);
+    });
+  });
+
+  describe('deleteArticle$', () => {
+    it('should return a deleteArticleSuccess action when delete an article succesfully', () => {
+      const deleteArticleAction = articleActions.deleteArticle({ slug: 'Create-a-new-implementation-1' });
+      const deleteArticleSuccessAction = articleActions.deleteArticleSuccess();
+
+      actions$ = hot('-a', { a: deleteArticleAction });
+      const expected = cold('-b', { b: deleteArticleSuccessAction });
+      articlesService.deleteArticle = jest.fn(() => of({} as unknown as void));
+
+      expect(effects.deleteArticle$).toBeObservable(expected);
+    });
+
+    xit('should navigate to the home page when an article is deleted', (done) => {
+      const deleteArticleSuccessAction = articleActions.deleteArticleSuccess();
+      const navigateSpy = jest.spyOn(router, 'navigate');
+
+      actions$ = hot('-a', { a: deleteArticleSuccessAction });
+
+      effects.deleteArticleSuccess$.subscribe(() => {
+        expect(navigateSpy).toHaveBeenCalledWith(['']);
+        done();
+      });
+    });
+
+    it('should return a deleteArticleFailure action if the delete article request fails', () => {
+      const error = {
+        name: 'error',
+        message: 'error message ',
+      };
+      const deleteArticleAction = articleActions.deleteArticle({ slug: 'Create-a-new-implementation-1' });
+      const deleteArticleFailureAction = articleActions.deleteArticleFailure({
+        error,
+      });
+
+      actions$ = hot('-a---', { a: deleteArticleAction });
+      const response = cold('-#', {}, { error });
+      articlesService.deleteArticle = jest.fn(() => response);
+      const expected = cold('--b', { b: deleteArticleFailureAction });
+
+      expect(effects.deleteArticle$).toBeObservable(expected);
     });
   });
 });

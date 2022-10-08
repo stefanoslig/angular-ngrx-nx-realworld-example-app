@@ -36,17 +36,25 @@ export class ArticleEffects {
     ),
   );
 
-  deleteArticle = createEffect(() =>
+  deleteArticle$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.deleteArticle),
       concatMap((action) =>
         this.articlesService.deleteArticle(action.slug).pipe(
-          tap((_) => this.router.navigate(['/'])),
-          map((_) => articleActions.deleteArticleSuccess()),
+          map(() => articleActions.deleteArticleSuccess()),
           catchError((error) => of(articleActions.deleteArticleFailure(error))),
         ),
       ),
     ),
+  );
+
+  deleteArticleSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(articleActions.deleteArticleSuccess),
+        tap(() => this.router.navigate(['/'])),
+      ),
+    { dispatch: false },
   );
 
   addComment = createEffect(() =>
