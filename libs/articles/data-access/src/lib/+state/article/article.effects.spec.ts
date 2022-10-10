@@ -191,4 +191,35 @@ describe('ArticleEffects', () => {
       expect(effects.deleteArticle$).toBeObservable(expected);
     });
   });
+
+  describe('deleteComment$', () => {
+    it('should return a deleteCommentSuccess action when delete a comment succesfully', () => {
+      const deleteCommentAction = articleActions.deleteComment({ commentId: 5, slug: 'Create-a-new-implementation-1' });
+      const deleteCommentSuccessAction = articleActions.deleteCommentSuccess({ commentId: 5 });
+
+      actions$ = hot('-a', { a: deleteCommentAction });
+      const expected = cold('-b', { b: deleteCommentSuccessAction });
+      articlesService.deleteComment = jest.fn(() => of({} as unknown as void));
+
+      expect(effects.deleteComment$).toBeObservable(expected);
+    });
+
+    it('should return a deleteCommentFailure action if the delete comment request fails', () => {
+      const error = {
+        name: 'error',
+        message: 'error message ',
+      };
+      const deleteCommentAction = articleActions.deleteComment({ commentId: 5, slug: 'Create-a-new-implementation-1' });
+      const deleteCommentFailureAction = articleActions.deleteCommentFailure({
+        error,
+      });
+
+      actions$ = hot('-a---', { a: deleteCommentAction });
+      const response = cold('-#', {}, { error });
+      articlesService.deleteComment = jest.fn(() => response);
+      const expected = cold('--b', { b: deleteCommentFailureAction });
+
+      expect(effects.deleteComment$).toBeObservable(expected);
+    });
+  });
 });

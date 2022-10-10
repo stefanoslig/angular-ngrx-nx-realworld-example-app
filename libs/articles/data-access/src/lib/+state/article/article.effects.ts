@@ -70,7 +70,7 @@ export class ArticleEffects {
     ),
   );
 
-  deleteComment = createEffect(() =>
+  deleteComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.deleteComment),
       concatMap((action) =>
