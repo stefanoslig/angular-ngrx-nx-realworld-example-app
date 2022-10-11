@@ -4,7 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, StoreModule } from '@ngrx/store';
 import { ArticlesService } from '../../services/articles.service';
 import { ArticleEffects } from './article.effects';
-import { NgrxFormsFacade } from '@realworld/core/forms';
+import { NgrxFormsFacade, setErrors } from '@realworld/core/forms';
 import { hot, cold } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActionsService } from '../../services/actions.service';
@@ -74,7 +74,7 @@ describe('ArticleEffects', () => {
         provideMockActions(() => actions$),
         MockProvider(ArticlesService),
         MockProvider(ActionsService),
-        NgrxFormsFacade,
+        { provide: NgrxFormsFacade, useValue: { data$: of('') } },
       ],
     });
 
@@ -220,6 +220,33 @@ describe('ArticleEffects', () => {
       const expected = cold('--b', { b: deleteCommentFailureAction });
 
       expect(effects.deleteComment$).toBeObservable(expected);
+    });
+  });
+
+  describe('addComment$', () => {
+    it('should return a addCommentSuccess action when a comment is added succesfully', () => {
+      const addCommentAction = articleActions.addComment({ slug: 'Create-a-new-implementation-1' });
+      const addCommentSuccessAction = articleActions.addCommentSuccess({ comment: mockComments[1] });
+
+      actions$ = hot('-a', { a: addCommentAction });
+      const expected = cold('-b', { b: addCommentSuccessAction });
+      articlesService.addComment = jest.fn(() => of({ comment: mockComments[1] }));
+
+      expect(effects.addComment$).toBeObservable(expected);
+    });
+
+    it('should return a addCommentFailure action if the add comment request fails', () => {
+      const addCommentAction = articleActions.addComment({ slug: 'Create-a-new-implementation-1' });
+      const setErrorsAction = setErrors({
+        errors: { error: 'error' },
+      });
+
+      actions$ = hot('-a---', { a: addCommentAction });
+      const response = cold('-#', {}, { error: { errors: { error: 'error' } } });
+      articlesService.addComment = jest.fn(() => response);
+      const expected = cold('--b', { b: setErrorsAction });
+
+      expect(effects.addComment$).toBeObservable(expected);
     });
   });
 });

@@ -57,16 +57,23 @@ export class ArticleEffects {
     { dispatch: false },
   );
 
-  addComment = createEffect(() =>
+  addComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.addComment),
       concatLatestFrom(() => this.ngrxFormsFacade.data$),
       exhaustMap(([{ slug }, data]) =>
         this.articlesService.addComment(slug, data.comment).pipe(
-          mergeMap((response) => [articleActions.addCommentSuccess({ comment: response.comment }), resetForm()]),
-          catchError((result) => of(setErrors({ errors: result.error.errors }))),
+          map((response) => articleActions.addCommentSuccess({ comment: response.comment })),
+          catchError(({ error }) => of(setErrors({ errors: error.errors }))),
         ),
       ),
+    ),
+  );
+
+  addCommentSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(articleActions.addCommentSuccess),
+      map(() => resetForm()),
     ),
   );
 
