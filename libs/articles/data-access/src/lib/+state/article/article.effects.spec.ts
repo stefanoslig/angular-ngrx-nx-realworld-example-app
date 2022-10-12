@@ -4,7 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Action, StoreModule } from '@ngrx/store';
 import { ArticlesService } from '../../services/articles.service';
 import { ArticleEffects } from './article.effects';
-import { NgrxFormsFacade, setErrors } from '@realworld/core/forms';
+import { NgrxFormsFacade, resetForm, setErrors } from '@realworld/core/forms';
 import { hot, cold } from 'jasmine-marbles';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActionsService } from '../../services/actions.service';
@@ -247,6 +247,18 @@ describe('ArticleEffects', () => {
       const expected = cold('--b', { b: setErrorsAction });
 
       expect(effects.addComment$).toBeObservable(expected);
+    });
+  });
+
+  describe('addCommentSuccess$', () => {
+    it('should return a resetForm action when a comment is added succesfully', () => {
+      const addCommentSuccessAction = articleActions.addCommentSuccess({ comment: mockComments[1] });
+      const resetFormAction = resetForm();
+
+      actions$ = hot('-a', { a: addCommentSuccessAction });
+      const expected = cold('-b', { b: resetFormAction });
+
+      expect(effects.addCommentSuccess$).toBeObservable(expected);
     });
   });
 });
