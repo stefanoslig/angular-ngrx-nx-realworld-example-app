@@ -89,7 +89,7 @@ export class ArticleEffects {
     ),
   );
 
-  follow = createEffect(() =>
+  follow$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.follow),
       concatMap(({ username }) =>

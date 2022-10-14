@@ -11,7 +11,7 @@ import { ActionsService } from '../../services/actions.service';
 import { Observable, of } from 'rxjs';
 import { MockProvider } from 'ng-mocks';
 import { articleActions } from './article.actions';
-import { Article, Comment } from '@realworld/core/api-types';
+import { Article, Comment, Profile } from '@realworld/core/api-types';
 import { Router } from '@angular/router';
 
 const mockArticle: Article = {
@@ -60,10 +60,19 @@ const mockComments: Array<Comment> = [
   },
 ];
 
+const mockProfile: Profile = {
+  username: 'Stef',
+  bio: 'Bio',
+  image: '',
+  following: false,
+  loading: false,
+};
+
 describe('ArticleEffects', () => {
   let actions$: Observable<Action>;
   let effects: ArticleEffects;
   let articlesService: ArticlesService;
+  let actionsService: ActionsService;
   let router: Router;
 
   beforeEach(() => {
@@ -81,6 +90,7 @@ describe('ArticleEffects', () => {
     effects = TestBed.inject(ArticleEffects);
     router = TestBed.inject(Router);
     articlesService = TestBed.inject(ArticlesService);
+    actionsService = TestBed.inject(ActionsService);
   });
 
   describe('loadArticle$', () => {
@@ -259,6 +269,37 @@ describe('ArticleEffects', () => {
       const expected = cold('-b', { b: resetFormAction });
 
       expect(effects.addCommentSuccess$).toBeObservable(expected);
+    });
+  });
+
+  describe('follow$', () => {
+    it('should return a followSuccess action when we follow a user', () => {
+      const followAction = articleActions.follow({ username: 'Stef' });
+      const followSuccessAction = articleActions.followSuccess({ profile: mockProfile });
+
+      actions$ = hot('-a', { a: followAction });
+      const expected = cold('-b', { b: followSuccessAction });
+      actionsService.followUser = jest.fn(() => of({ profile: mockProfile }));
+
+      expect(effects.follow$).toBeObservable(expected);
+    });
+
+    it('should return a followFailure action if the follow API request fails', () => {
+      const error = {
+        name: 'error',
+        message: 'error message ',
+      };
+      const followAction = articleActions.follow({ username: 'Stef' });
+      const followFailureAction = articleActions.followFailure({
+        error,
+      });
+
+      actions$ = hot('-a---', { a: followAction });
+      const response = cold('-#', {}, { error });
+      actionsService.followUser = jest.fn(() => response);
+      const expected = cold('--b', { b: followFailureAction });
+
+      expect(effects.follow$).toBeObservable(expected)
     });
   });
 });
