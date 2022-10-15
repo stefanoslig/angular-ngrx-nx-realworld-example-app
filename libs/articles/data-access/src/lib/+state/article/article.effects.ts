@@ -101,7 +101,7 @@ export class ArticleEffects {
     ),
   );
 
-  unFollow = createEffect(() =>
+  unFollow$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.unfollow),
       concatMap(({ username }) =>

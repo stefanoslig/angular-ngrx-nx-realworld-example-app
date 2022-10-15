@@ -299,7 +299,38 @@ describe('ArticleEffects', () => {
       actionsService.followUser = jest.fn(() => response);
       const expected = cold('--b', { b: followFailureAction });
 
-      expect(effects.follow$).toBeObservable(expected)
+      expect(effects.follow$).toBeObservable(expected);
+    });
+  });
+
+  describe('unfollow$', () => {
+    it('should return a unfollowSuccess action when we unfollow a user', () => {
+      const unfollowAction = articleActions.unfollow({ username: 'Stef' });
+      const unfollowSuccessAction = articleActions.unfollowSuccess({ profile: mockProfile });
+
+      actions$ = hot('-a', { a: unfollowAction });
+      const expected = cold('-b', { b: unfollowSuccessAction });
+      actionsService.unfollowUser = jest.fn(() => of({ profile: mockProfile }));
+
+      expect(effects.unFollow$).toBeObservable(expected);
+    });
+
+    it('should return a unfollowFailure action if the unfollow API request fails', () => {
+      const error = {
+        name: 'error',
+        message: 'error message ',
+      };
+      const unfollowAction = articleActions.unfollow({ username: 'Stef' });
+      const unfollowFailureAction = articleActions.unfollowFailure({
+        error,
+      });
+
+      actions$ = hot('-a---', { a: unfollowAction });
+      const response = cold('-#', {}, { error });
+      actionsService.unfollowUser = jest.fn(() => response);
+      const expected = cold('--b', { b: unfollowFailureAction });
+
+      expect(effects.unFollow$).toBeObservable(expected);
     });
   });
 });
