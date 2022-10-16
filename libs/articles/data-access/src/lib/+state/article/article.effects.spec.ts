@@ -13,6 +13,7 @@ import { MockProvider } from 'ng-mocks';
 import { articleActions } from './article.actions';
 import { Article, Comment, Profile } from '@realworld/core/api-types';
 import { Router } from '@angular/router';
+import { articlesActions } from '../articles.actions';
 
 const mockArticle: Article = {
   slug: 'Create-a-new-implementation-1',
@@ -331,6 +332,36 @@ describe('ArticleEffects', () => {
       const expected = cold('--b', { b: unfollowFailureAction });
 
       expect(effects.unFollow$).toBeObservable(expected);
+    });
+  });
+
+  describe('favorite$', () => {
+    it('should return a favoriteSuccess action when we favorite a user', () => {
+      const favoriteAction = articlesActions.favorite({ slug: 'article title' });
+      const favoriteSuccessAction = articlesActions.favoriteSuccess({ article: mockArticle });
+
+      actions$ = hot('-a', { a: favoriteAction });
+      const expected = cold('-b', { b: favoriteSuccessAction });
+      actionsService.favorite = jest.fn(() => of({ article: mockArticle }));
+
+      expect(effects.favorite$).toBeObservable(expected);
+    });
+
+    it('should return a favoriteFailure action if the favorite API request fails', () => {
+      const error = {
+        name: 'error',
+        message: 'error message ',
+      };
+      const favoriteAction = articlesActions.favorite({ slug: 'article title' });
+      const favoriteSuccessAction = articlesActions.favoriteFailure({ error });
+
+
+      actions$ = hot('-a---', { a: favoriteAction });
+      const response = cold('-#', {}, { error });
+      actionsService.favorite = jest.fn(() => response);
+      const expected = cold('--b', { b: favoriteSuccessAction });
+
+      expect(effects.favorite$).toBeObservable(expected);
     });
   });
 });

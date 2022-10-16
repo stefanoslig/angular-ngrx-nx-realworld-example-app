@@ -113,7 +113,7 @@ export class ArticleEffects {
     ),
   );
 
-  favorite = createEffect(() =>
+  favorite$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articlesActions.favorite),
       concatMap(({ slug }) =>
