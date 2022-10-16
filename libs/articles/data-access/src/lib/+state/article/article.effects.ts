@@ -125,7 +125,7 @@ export class ArticleEffects {
     ),
   );
 
-  unFavorite = createEffect(() =>
+  unFavorite$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articlesActions.unfavorite),
       concatMap(({ slug }) =>

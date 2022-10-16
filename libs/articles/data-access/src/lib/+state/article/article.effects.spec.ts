@@ -355,13 +355,41 @@ describe('ArticleEffects', () => {
       const favoriteAction = articlesActions.favorite({ slug: 'article title' });
       const favoriteSuccessAction = articlesActions.favoriteFailure({ error });
 
-
       actions$ = hot('-a---', { a: favoriteAction });
       const response = cold('-#', {}, { error });
       actionsService.favorite = jest.fn(() => response);
       const expected = cold('--b', { b: favoriteSuccessAction });
 
       expect(effects.favorite$).toBeObservable(expected);
+    });
+  });
+
+  describe('unFavorite$', () => {
+    it('should return a unFavoriteSuccess action when we unFavorite a user', () => {
+      const unFavoriteAction = articlesActions.unfavorite({ slug: 'article title' });
+      const unFavoriteSuccessAction = articlesActions.unfavoriteSuccess({ article: mockArticle });
+
+      actions$ = hot('-a', { a: unFavoriteAction });
+      const expected = cold('-b', { b: unFavoriteSuccessAction });
+      actionsService.unfavorite = jest.fn(() => of({ article: mockArticle }));
+
+      expect(effects.unFavorite$).toBeObservable(expected);
+    });
+
+    it('should return a unFavoriteFailure action if the unfavorite API request fails', () => {
+      const error = {
+        name: 'error',
+        message: 'error message ',
+      };
+      const unfavoriteAction = articlesActions.unfavorite({ slug: 'article title' });
+      const unfavoriteSuccessAction = articlesActions.unfavoriteFailure({ error });
+
+      actions$ = hot('-a---', { a: unfavoriteAction });
+      const response = cold('-#', {}, { error });
+      actionsService.unfavorite = jest.fn(() => response);
+      const expected = cold('--b', { b: unfavoriteSuccessAction });
+
+      expect(effects.unFavorite$).toBeObservable(expected);
     });
   });
 });
