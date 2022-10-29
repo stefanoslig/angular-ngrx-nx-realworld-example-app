@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/auth/data-access"],
+      "outputs": ["{workspaceRoot}/coverage/libs/auth/data-access"],
       "options": {
         "jestConfig": "libs/auth/data-access/jest.config.ts",
         "passWithNoTests": true

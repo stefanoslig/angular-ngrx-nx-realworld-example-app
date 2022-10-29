@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/auth/feature-auth"],
+      "outputs": ["{workspaceRoot}/coverage/libs/auth/feature-auth"],
       "options": {
         "jestConfig": "libs/auth/feature-auth/jest.config.ts",
         "passWithNoTests": true

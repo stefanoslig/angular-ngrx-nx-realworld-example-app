@@ -1,5 +1,4 @@
 {
-  "root": "apps/conduit-e2e",
   "sourceRoot": "apps/conduit-e2e/src",
   "projectType": "application",
   "targets": {

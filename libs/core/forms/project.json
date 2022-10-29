@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/core/forms"],
+      "outputs": ["{workspaceRoot}/coverage/libs/core/forms"],
       "options": {
         "jestConfig": "libs/core/forms/jest.config.ts",
         "passWithNoTests": true

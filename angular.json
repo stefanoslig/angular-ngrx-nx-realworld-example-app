@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 1,
   "projects": {
     "articles-data-access": "libs/articles/data-access",
     "articles-feature-article": "libs/articles/feature-article",

@@ -5,7 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/core/error-handler"],
+      "outputs": ["{workspaceRoot}/coverage/libs/core/error-handler"],
       "options": {
         "jestConfig": "libs/core/error-handler/jest.config.ts",
         "passWithNoTests": true

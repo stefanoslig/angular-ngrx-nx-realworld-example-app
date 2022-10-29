@@ -91,7 +91,7 @@
         "jestConfig": "apps/conduit/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/apps/conduit"]
+      "outputs": ["{workspaceRoot}/coverage/apps/conduit"]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",

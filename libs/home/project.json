@@ -8,7 +8,7 @@
         "jestConfig": "libs/home/jest.config.ts",
         "passWithNoTests": true
       },
-      "outputs": ["coverage/libs/home"]
+      "outputs": ["{workspaceRoot}/coverage/libs/home"]
     }
   },
   "prefix": "app"
