@@ -1,33 +1,32 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
-import { HttpInterceptor } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { ErrorHandlerFacade } from './+state/error-handler.facade';
 
-@Injectable()
-export class ErrorHandlerInterceptorService implements HttpInterceptor {
-  constructor(private facade: ErrorHandlerFacade) {}
+export const errorHandlingInterceptor = (
+  request: HttpRequest<any>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<any>> => {
+  const errorHandlerFacade = inject(ErrorHandlerFacade);
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(
-      catchError((error) => {
-        if (error instanceof HttpErrorResponse) {
-          switch (error.status) {
-            case 401:
-              this.facade.throw401Error(error);
-              break;
-            case 404:
-              this.facade.throw404Error(error);
-              break;
-            default:
-              throwError(error);
-              break;
-          }
+  return next(request).pipe(
+    catchError((error) => {
+      if (error instanceof HttpErrorResponse) {
+        switch (error.status) {
+          case 401:
+            errorHandlerFacade.throw401Error(error);
+            break;
+          case 404:
+            errorHandlerFacade.throw404Error(error);
+            break;
+          default:
+            throwError(error);
+            break;
         }
-        return throwError(error);
-      }),
-    );
-  }
-}
+      }
+      return throwError(error);
+    }),
+  );
+};

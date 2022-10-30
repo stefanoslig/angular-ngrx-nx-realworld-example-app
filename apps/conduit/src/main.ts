@@ -1,18 +1,14 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { enableProdMode } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
-import { provideRouterStore, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
-import { provideStoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthEffects, authFeature, AuthGuardService, TokenInterceptorService } from '@realworld/auth/data-access';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {
-  ErrorHandlerEffects,
-  errorHandlerFeature,
-  ErrorHandlerInterceptorService,
-} from '@realworld/core/error-handler';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { AuthEffects, authFeature, AuthGuardService, tokenInterceptor } from '@realworld/auth/data-access';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ErrorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@realworld/core/error-handler';
 import { NgrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
 import { API_URL } from '@realworld/core/http-client';
 import { provideEffects } from '@ngrx/effects';
@@ -20,19 +16,6 @@ import { provideEffects } from '@ngrx/effects';
 if (environment.production) {
   enableProdMode();
 }
-
-const rootInterceptors = [
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: ErrorHandlerInterceptorService,
-    multi: true,
-  },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true,
-  },
-];
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -80,9 +63,8 @@ bootstrapApplication(AppComponent, {
     }),
     provideEffects([ErrorHandlerEffects, AuthEffects, NgrxFormsEffects]),
     provideRouterStore(),
+    provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],
-    importProvidersFrom(BrowserModule, HttpClientModule),
     { provide: API_URL, useValue: environment.api_url },
-    ...rootInterceptors,
   ],
 }).catch((err) => console.log(err));
