@@ -51,7 +51,7 @@ test:unit:
 
 test:e2e:
   stage: test
-  image: cypress/base:10
+  image: cypress/base:16
   dependencies:
     - build
   script:
