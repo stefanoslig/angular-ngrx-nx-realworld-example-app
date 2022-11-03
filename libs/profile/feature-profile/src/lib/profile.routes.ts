@@ -20,7 +20,7 @@ export const PROFILE_ROUTES: Routes = [
     providers: [
       provideState(profileFeature),
       provideState(articleListFeature),
-      provideEffects([ProfileEffects, ArticleListEffects]),
+      provideEffects(ProfileEffects, ArticleListEffects),
     ],
     resolve: { ProfileResolverService },
     canActivate: [AuthGuardService],

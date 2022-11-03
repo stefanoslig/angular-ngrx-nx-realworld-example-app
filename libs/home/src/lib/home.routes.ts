@@ -8,6 +8,6 @@ export const HOME_ROUTES: Routes = [
   {
     path: '',
     component: HomeComponent,
-    providers: [provideState(articleListFeature), provideEffects([ArticleListEffects])],
+    providers: [provideState(articleListFeature), provideEffects(ArticleListEffects)],
   },
 ];

@@ -61,7 +61,7 @@ bootstrapApplication(AppComponent, {
       errorHandler: errorHandlerFeature.reducer,
       ngrxForms: ngrxFormsFeature.reducer,
     }),
-    provideEffects([ErrorHandlerEffects, AuthEffects, NgrxFormsEffects]),
+    provideEffects(ErrorHandlerEffects, AuthEffects, NgrxFormsEffects),
     provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],
