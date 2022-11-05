@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
           <img [src]="(profile$ | async)?.image" class="user-img" />
-          <h4 data-e2e-id="article-author-profile" [hidden]="(profile$ | async).loading">
+          <h4 data-e2e-id="article-author-profile" [hidden]="(profile$ | async)?.loading">
             {{ (profile$ | async)?.username }}
           </h4>
           <p>{{ (profile$ | async)?.bio }}</p>
@@ -12,14 +12,14 @@
             [hidden]="isUser$ | async"
             class="btn btn-sm action-btn"
             [ngClass]="{
-              'btn-outline-secondary': !(profile$ | async).following,
-              'btn-secondary': (profile$ | async).following
+              'btn-outline-secondary': !(profile$ | async)?.following,
+              'btn-secondary': (profile$ | async)?.following
             }"
             (click)="toggleFollowing()"
           >
             <i class="ion-plus-round"></i>
-            &nbsp; {{ (profile$ | async).following ? 'Unfollow' : 'Follow' }}
-            {{ (profile$ | async).username }}
+            &nbsp; {{ (profile$ | async)?.following ? 'Unfollow' : 'Follow' }}
+            {{ (profile$ | async)?.username }}
           </button>
           <a
             [routerLink]="['/settings']"
@@ -41,7 +41,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                [routerLink]="['/profile', (profile$ | async).username]"
+                [routerLink]="['/profile', (profile$ | async)?.username]"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 >My Articles</a
@@ -50,7 +50,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                [routerLink]="['/profile', (profile$ | async).username, 'favorites']"
+                [routerLink]="['/profile', (profile$ | async)?.username, 'favorites']"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 >Favorited Articles</a

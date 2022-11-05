@@ -3,9 +3,10 @@ import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
-import { ProfileFacade } from '@realworld/profile/data-access';
 import { AuthFacade } from '@realworld/auth/data-access';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { profileActions, selectProfileState } from '@realworld/profile/data-access';
 
 @UntilDestroy()
 @Component({
@@ -17,18 +18,18 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {
-  profile$ = this.facade.profile$;
+  profile$ = this.store.select(selectProfileState);
   currentUser$ = this.authFacade.user$;
   isUser$: Subject<boolean> = new Subject();
   following!: boolean;
   username!: string;
 
-  constructor(private facade: ProfileFacade, private authFacade: AuthFacade) {}
+  constructor(private readonly store: Store, private readonly authFacade: AuthFacade) {}
 
   ngOnInit() {
     combineLatest([this.profile$, this.currentUser$])
       .pipe(
-        tap(([p, u]) => {
+        tap(([p]) => {
           this.username = p.username;
           this.following = p.following;
         }),
@@ -40,9 +41,9 @@ export class ProfileComponent implements OnInit {
 
   toggleFollowing() {
     if (this.following) {
-      this.facade.unfollow(this.username);
+      this.store.dispatch(profileActions.unfollow({ id: this.username }));
     } else {
-      this.facade.follow(this.username);
+      this.store.dispatch(profileActions.follow({ id: this.username }));
     }
   }
 }
