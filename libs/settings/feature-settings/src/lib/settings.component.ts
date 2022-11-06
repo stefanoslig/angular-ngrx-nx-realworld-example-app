@@ -2,8 +2,9 @@ import { DynamicFormComponent, Field, ListErrorsComponent, NgrxFormsFacade } fro
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { AuthFacade } from '@realworld/auth/data-access';
+import { authActions, selectUser } from '@realworld/auth/data-access';
 import { SettingsStoreService } from './settings.store';
+import { Store } from '@ngrx/store';
 
 const structure: Field[] = [
   {
@@ -56,15 +57,18 @@ export class SettingsComponent implements OnInit {
   data$ = this.ngrxFormsFacade.data$;
 
   constructor(
-    private readonly authFacade: AuthFacade,
+    private readonly store: Store,
     private readonly ngrxFormsFacade: NgrxFormsFacade,
     private readonly settingsStoreService: SettingsStoreService,
   ) {}
 
   ngOnInit() {
-    this.authFacade.getUser();
+    this.store.dispatch(authActions.getUser());
     this.ngrxFormsFacade.setStructure(structure);
-    this.authFacade.user$.pipe(untilDestroyed(this)).subscribe((user) => this.ngrxFormsFacade.setData(user));
+    this.store
+      .select(selectUser)
+      .pipe(untilDestroyed(this))
+      .subscribe((user) => this.ngrxFormsFacade.setData(user));
   }
 
   updateForm(changes: any) {
@@ -76,6 +80,6 @@ export class SettingsComponent implements OnInit {
   }
 
   logout() {
-    this.authFacade.logout();
+    this.store.dispatch(authActions.logout());
   }
 }

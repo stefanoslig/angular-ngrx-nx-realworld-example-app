@@ -3,7 +3,7 @@ import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
-import { AuthFacade } from '@realworld/auth/data-access';
+import { selectUser } from '@realworld/auth/data-access';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { profileActions, selectProfileState } from '@realworld/profile/data-access';
@@ -19,12 +19,12 @@ import { profileActions, selectProfileState } from '@realworld/profile/data-acce
 })
 export class ProfileComponent implements OnInit {
   profile$ = this.store.select(selectProfileState);
-  currentUser$ = this.authFacade.user$;
+  currentUser$ = this.store.select(selectUser);
   isUser$: Subject<boolean> = new Subject();
   following!: boolean;
   username!: string;
 
-  constructor(private readonly store: Store, private readonly authFacade: AuthFacade) {}
+  constructor(private readonly store: Store) {}
 
   ngOnInit() {
     combineLatest([this.profile$, this.currentUser$])

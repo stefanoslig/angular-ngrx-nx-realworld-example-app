@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AuthFacade, LocalStorageJwtService } from '@realworld/auth/data-access';
+import { Store } from '@ngrx/store';
+import { authActions, LocalStorageJwtService, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
 import { filter, take } from 'rxjs/operators';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -15,10 +16,10 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  user$ = this.authFacade.user$;
-  isLoggedIn$ = this.authFacade.isLoggedIn$;
+  user$ = this.store.select(selectUser);
+  isLoggedIn$ = this.store.select(selectLoggedIn);
 
-  constructor(private authFacade: AuthFacade, private localStorageJwtService: LocalStorageJwtService) {}
+  constructor(private readonly store: Store, private readonly localStorageJwtService: LocalStorageJwtService) {}
 
   ngOnInit() {
     this.localStorageJwtService
@@ -27,6 +28,6 @@ export class AppComponent implements OnInit {
         take(1),
         filter((token) => !!token),
       )
-      .subscribe(() => this.authFacade.getUser());
+      .subscribe(() => this.store.dispatch(authActions.getUser()));
   }
 }

@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 
 import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
-import { AuthFacade } from '@realworld/auth/data-access';
+import { Store } from '@ngrx/store';
+import { authActions } from '@realworld/auth/data-access';
 import { NgrxFormsFacade } from '@realworld/core/forms';
 import { pipe } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
@@ -15,7 +16,7 @@ export class SettingsStoreService extends ComponentStore<Record<string, unknown>
     private readonly ngrxFormsFacade: NgrxFormsFacade,
     private readonly settingsService: SettingsService,
     private readonly router: Router,
-    private readonly authFacade: AuthFacade,
+    private readonly store: Store,
   ) {
     super({});
   }
@@ -27,7 +28,7 @@ export class SettingsStoreService extends ComponentStore<Record<string, unknown>
       concatMap(([, data]) =>
         this.settingsService.update(data).pipe(
           tap((result) => this.router.navigate(['profile', result.user.username])),
-          map(() => this.authFacade.getUser()),
+          map(() => this.store.dispatch(authActions.getUser())),
         ),
       ),
     ),

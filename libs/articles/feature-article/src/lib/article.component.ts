@@ -4,12 +4,13 @@ import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ArticlesFacade } from '@realworld/articles/data-access';
-import { AuthFacade } from '@realworld/auth/data-access';
+import { selectAuthState, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { CommonModule } from '@angular/common';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
+import { Store } from '@ngrx/store';
 
 const structure: Field[] = [
   {
@@ -35,22 +36,23 @@ export class ArticleComponent implements OnInit, OnDestroy {
   article$ = this.facade.article$;
   comments$ = this.facade.comments$;
   canModify = false;
-  isAuthenticated$ = this.authFacade.isLoggedIn$;
+  isAuthenticated$ = this.store.select(selectLoggedIn);
   structure$ = this.ngrxFormsFacade.structure$;
   data$ = this.ngrxFormsFacade.data$;
-  currentUser$ = this.authFacade.user$;
+  currentUser$ = this.store.select(selectUser);
   touchedForm$ = this.ngrxFormsFacade.touched$;
 
   constructor(
-    private ngrxFormsFacade: NgrxFormsFacade,
-    private facade: ArticlesFacade,
-    private authFacade: AuthFacade,
+    private readonly ngrxFormsFacade: NgrxFormsFacade,
+    private readonly facade: ArticlesFacade,
+    private readonly store: Store,
   ) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
     this.ngrxFormsFacade.setData('');
-    this.authFacade.auth$
+    this.store
+      .select(selectAuthState)
       .pipe(
         filter((auth) => auth.loggedIn),
         (auth$) => combineLatest([auth$, this.facade.authorUsername$]),

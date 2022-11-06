@@ -2,7 +2,8 @@ import { DynamicFormComponent, Field, ListErrorsComponent, NgrxFormsFacade } fro
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AuthFacade } from '@realworld/auth/data-access';
+import { authActions } from '@realworld/auth/data-access';
+import { Store } from '@ngrx/store';
 
 const structure: Field[] = [
   {
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   structure$ = this.ngrxFormsFacade.structure$;
   data$ = this.ngrxFormsFacade.data$;
 
-  constructor(private ngrxFormsFacade: NgrxFormsFacade, private facade: AuthFacade) {}
+  constructor(private readonly ngrxFormsFacade: NgrxFormsFacade, private readonly store: Store) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
@@ -53,7 +54,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.facade.register();
+    this.store.dispatch(authActions.register());
   }
 
   ngOnDestroy() {

@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ArticlesFacade, articleListInitialState, ArticleListConfig } from '@realworld/articles/data-access';
-import { AuthFacade } from '@realworld/auth/data-access';
+import { selectLoggedIn } from '@realworld/auth/data-access';
 import { CommonModule } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { HomeStoreService } from './home.store';
 import { provideComponentStore } from '@ngrx/component-store';
+import { Store } from '@ngrx/store';
 
 @UntilDestroy()
 @Component({
@@ -25,15 +26,18 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private readonly articlesfacade: ArticlesFacade,
-    private readonly authFacade: AuthFacade,
+    private readonly store: Store,
     private readonly homeStore: HomeStoreService,
   ) {}
 
   ngOnInit() {
-    this.authFacade.isLoggedIn$.pipe(untilDestroyed(this)).subscribe((isLoggedIn) => {
-      this.isAuthenticated = isLoggedIn;
-      this.getArticles();
-    });
+    this.store
+      .select(selectLoggedIn)
+      .pipe(untilDestroyed(this))
+      .subscribe((isLoggedIn) => {
+        this.isAuthenticated = isLoggedIn;
+        this.getArticles();
+      });
   }
 
   setListTo(type: string = 'ALL') {
