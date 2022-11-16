@@ -44,7 +44,7 @@
     "@ngrx/effects": "15.0.0-beta.0",
     "@ngrx/router-store": "15.0.0-beta.0",
     "@ngrx/store": "15.0.0-beta.0",
-    "@nrwl/angular": "15.0.4",
+    "@nrwl/angular": "15.1.1",
     "core-js": "3.23.2",
     "eslint-plugin-ngrx": "^2.0.3",
     "marked": "4.0.18",
@@ -53,7 +53,7 @@
     "zone.js": "0.12.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "15.0.0-rc.3",
+    "@angular-devkit/build-angular": "15.0.0",
     "@angular-eslint/eslint-plugin": "14.0.4",
     "@angular-eslint/eslint-plugin-template": "14.0.4",
     "@angular-eslint/template-parser": "14.0.4",
