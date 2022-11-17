@@ -47,5 +47,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "name": "ui-components"
 }

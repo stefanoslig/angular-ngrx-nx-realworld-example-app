@@ -11,5 +11,6 @@
       "outputs": ["{workspaceRoot}/coverage/libs/home"]
     }
   },
-  "prefix": "app"
+  "prefix": "app",
+  "name": "home"
 }

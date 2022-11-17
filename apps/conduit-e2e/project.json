@@ -23,5 +23,6 @@
       "outputs": ["{options.outputFile}"]
     }
   },
-  "prefix": "app"
+  "prefix": "app",
+  "name": "conduit-e2e"
 }
