@@ -7,8 +7,8 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { ArticlesService } from '../../services/articles.service';
 import { articleListActions } from './article-list.actions';
 import { articlesActions } from '../articles.actions';
-
-import { ArticlesFacade } from '../articles.facade';
+import { Store } from '@ngrx/store';
+import { articleListQuery } from './article-list.selectors';
 
 @Injectable()
 export class ArticleListEffects {
@@ -29,7 +29,7 @@ export class ArticleListEffects {
   loadArticles = createEffect(() =>
     this.actions$.pipe(
       ofType(articleListActions.loadArticles),
-      concatLatestFrom(() => this.facade.listConfig$),
+      concatLatestFrom(() => this.store.select(articleListQuery.selectListConfig)),
       concatMap(([_, config]) =>
         this.articlesService.query(config).pipe(
           map((results) =>
@@ -72,6 +72,6 @@ export class ArticleListEffects {
     private actions$: Actions,
     private articlesService: ArticlesService,
     private actionsService: ActionsService,
-    private facade: ArticlesFacade,
+    private store: Store,
   ) {}
 }
