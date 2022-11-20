@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ArticlesFacade } from '@realworld/articles/data-access';
+import { Store } from '@ngrx/store';
+import { articleActions, articleEditActions, articleQuery } from '@realworld/articles/data-access';
 
 const structure: Field[] = [
   {
@@ -45,11 +46,14 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   structure$ = this.ngrxFormsFacade.structure$;
   data$ = this.ngrxFormsFacade.data$;
 
-  constructor(private ngrxFormsFacade: NgrxFormsFacade, private facade: ArticlesFacade) {}
+  constructor(private readonly ngrxFormsFacade: NgrxFormsFacade, private readonly store: Store) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
-    this.facade.article$.pipe(untilDestroyed(this)).subscribe((article) => this.ngrxFormsFacade.setData(article));
+    this.store
+      .select(articleQuery.selectData)
+      .pipe(untilDestroyed(this))
+      .subscribe((article) => this.ngrxFormsFacade.setData(article));
   }
 
   updateForm(changes: any) {
@@ -57,11 +61,11 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.facade.publishArticle();
+    this.store.dispatch(articleEditActions.publishArticle());
   }
 
   ngOnDestroy() {
     this.ngrxFormsFacade.initializeForm();
-    this.facade.initializeArticle();
+    this.store.dispatch(articleActions.initializeArticle());
   }
 }

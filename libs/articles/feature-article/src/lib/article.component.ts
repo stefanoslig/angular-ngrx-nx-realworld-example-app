@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ArticlesFacade } from '@realworld/articles/data-access';
+import { articleActions, articleQuery, articlesActions } from '@realworld/articles/data-access';
 import { selectAuthState, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { CommonModule } from '@angular/common';
@@ -33,8 +33,8 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
-  article$ = this.facade.article$;
-  comments$ = this.facade.comments$;
+  article$ = this.store.select(articleQuery.selectData);
+  comments$ = this.store.select(articleQuery.selectComments);
   canModify = false;
   isAuthenticated$ = this.store.select(selectLoggedIn);
   structure$ = this.ngrxFormsFacade.structure$;
@@ -42,11 +42,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   currentUser$ = this.store.select(selectUser);
   touchedForm$ = this.ngrxFormsFacade.touched$;
 
-  constructor(
-    private readonly ngrxFormsFacade: NgrxFormsFacade,
-    private readonly facade: ArticlesFacade,
-    private readonly store: Store,
-  ) {}
+  constructor(private readonly ngrxFormsFacade: NgrxFormsFacade, private readonly store: Store) {}
 
   ngOnInit() {
     this.ngrxFormsFacade.setStructure(structure);
@@ -55,7 +51,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .select(selectAuthState)
       .pipe(
         filter((auth) => auth.loggedIn),
-        (auth$) => combineLatest([auth$, this.facade.authorUsername$]),
+        (auth$) => combineLatest([auth$, this.store.select(articleQuery.getAuthorUsername)]),
         untilDestroyed(this),
       )
       .subscribe(([auth, username]) => {
@@ -64,31 +60,31 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   follow(username: string) {
-    this.facade.follow(username);
+    this.store.dispatch(articleActions.follow({ username }));
   }
   unfollow(username: string) {
-    this.facade.unfollow(username);
+    this.store.dispatch(articleActions.unfollow({ username }));
   }
   favorite(slug: string) {
-    this.facade.favorite(slug);
+    this.store.dispatch(articlesActions.favorite({ slug }));
   }
   unfavorite(slug: string) {
-    this.facade.unfavorite(slug);
+    this.store.dispatch(articlesActions.unfavorite({ slug }));
   }
   delete(slug: string) {
-    this.facade.delete(slug);
+    this.store.dispatch(articleActions.deleteArticle({ slug }));
   }
   deleteComment(data: { commentId: number; slug: string }) {
-    this.facade.deleteComment(data);
+    this.store.dispatch(articleActions.deleteComment(data));
   }
   submit(slug: string) {
-    this.facade.submit(slug);
+    this.store.dispatch(articleActions.addComment({ slug }));
   }
   updateForm(changes: any) {
     this.ngrxFormsFacade.updateData(changes);
   }
 
   ngOnDestroy() {
-    this.facade.initializeArticle();
+    this.store.dispatch(articleActions.initializeArticle());
   }
 }
