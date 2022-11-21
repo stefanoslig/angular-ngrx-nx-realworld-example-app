@@ -8,5 +8,6 @@ export * from './lib/+state/articles.actions';
 export * from './lib/+state/article/article.actions';
 export * from './lib/+state/article-list/article-list.effects';
 export * from './lib/+state/article-list/article-list.actions';
+export * from './lib/+state/article-list/article-list.selectors';
 export * from './lib/+state/article-edit/article-edit.effects';
 export * from './lib/+state/article-edit/article-edit.actions';

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { ArticlesFacade } from '@realworld/articles/data-access';
+import { Store } from '@ngrx/store';
+import { articleListActions, articleListQuery, articlesActions } from '@realworld/articles/data-access';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 
 @Component({
@@ -14,19 +14,19 @@ import { ArticleListItemComponent } from './article-list-item/article-list-item.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {
-  totalPages$ = this.facade.totalPages$;
-  articles$ = this.facade.articles$;
-  listConfig$ = this.facade.listConfig$;
-  isLoading$ = this.facade.isLoading$;
+  totalPages$ = this.store.select(articleListQuery.selectTotalPages);
+  articles$ = this.store.select(articleListQuery.selectArticleEntities);
+  listConfig$ = this.store.select(articleListQuery.selectListConfig);
+  isLoading$ = this.store.select(articleListQuery.isLoading);
 
-  constructor(private readonly facade: ArticlesFacade, private readonly router: Router) {}
+  constructor(private readonly store: Store, private readonly router: Router) {}
 
   favorite(slug: string) {
-    this.facade.favorite(slug);
+    this.store.dispatch(articlesActions.favorite({ slug }));
   }
 
   unFavorite(slug: string) {
-    this.facade.unfavorite(slug);
+    this.store.dispatch(articlesActions.unfavorite({ slug }));
   }
 
   navigateToArticle(slug: string) {
@@ -34,6 +34,6 @@ export class ArticleListComponent {
   }
 
   setPage(page: number) {
-    this.facade.setPage(page);
+    this.store.dispatch(articleListActions.setListPage({ page }));
   }
 }

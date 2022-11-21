@@ -1,6 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ArticlesFacade, articleListInitialState, ArticleListConfig } from '@realworld/articles/data-access';
+import {
+  articleListInitialState,
+  articleListQuery,
+  articleListActions,
+  ListType,
+} from '@realworld/articles/data-access';
 import { selectLoggedIn } from '@realworld/auth/data-access';
 import { CommonModule } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
@@ -20,15 +25,11 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-  listConfig$ = this.articlesfacade.listConfig$;
+  listConfig$ = this.store.select(articleListQuery.selectListConfig);
   tags$ = this.homeStore.tags$;
   isAuthenticated = false;
 
-  constructor(
-    private readonly articlesfacade: ArticlesFacade,
-    private readonly store: Store,
-    private readonly homeStore: HomeStoreService,
-  ) {}
+  constructor(private readonly store: Store, private readonly homeStore: HomeStoreService) {}
 
   ngOnInit() {
     this.store
@@ -40,11 +41,8 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  setListTo(type: string = 'ALL') {
-    this.articlesfacade.setListConfig(<ArticleListConfig>{
-      ...articleListInitialState.listConfig,
-      type,
-    });
+  setListTo(type: ListType = 'ALL') {
+    this.store.dispatch(articleListActions.setListConfig({ config: { ...articleListInitialState.listConfig, type } }));
   }
 
   getArticles() {
@@ -56,12 +54,16 @@ export class HomeComponent implements OnInit {
   }
 
   setListTag(tag: string) {
-    this.articlesfacade.setListConfig(<ArticleListConfig>{
-      ...articleListInitialState.listConfig,
-      filters: {
-        ...articleListInitialState.listConfig.filters,
-        tag,
-      },
-    });
+    this.store.dispatch(
+      articleListActions.setListConfig({
+        config: {
+          ...articleListInitialState.listConfig,
+          filters: {
+            ...articleListInitialState.listConfig.filters,
+            tag,
+          },
+        },
+      }),
+    );
   }
 }
