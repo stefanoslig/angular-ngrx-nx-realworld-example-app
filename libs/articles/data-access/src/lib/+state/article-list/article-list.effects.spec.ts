@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Action, StoreModule } from '@ngrx/store';
 
 import { ArticleListEffects } from './article-list.effects';
@@ -8,7 +9,6 @@ import { hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 import { ActionsService } from '../../services/actions.service';
 import { ArticlesService } from '../../services/articles.service';
-import { ArticlesFacade } from '../articles.facade';
 import { MockProvider } from 'ng-mocks';
 
 describe('ArticleListEffects', () => {
@@ -20,10 +20,10 @@ describe('ArticleListEffects', () => {
       imports: [StoreModule.forRoot({}), HttpClientTestingModule],
       providers: [
         ArticleListEffects,
+        provideMockStore({}),
         provideMockActions(() => actions$),
         MockProvider(ActionsService),
         MockProvider(ArticlesService),
-        ArticlesFacade,
       ],
     });
 

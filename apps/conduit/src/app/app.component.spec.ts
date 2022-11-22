@@ -5,21 +5,20 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { StoreModule } from '@ngrx/store';
-import { AuthFacade, LocalStorageJwtService } from '@angular-ngrx-nx-realworld-example-app/auth';
+import { LocalStorageJwtService } from '@realworld/auth/data-access';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [RouterTestingModule, StoreModule.forRoot({})],
-        declarations: [AppComponent, FooterComponent, NavbarComponent],
-        providers: [AuthFacade, LocalStorageJwtService],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, StoreModule.forRoot({})],
+      declarations: [AppComponent, FooterComponent, NavbarComponent],
+      providers: [LocalStorageJwtService, provideMockStore({}),],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
