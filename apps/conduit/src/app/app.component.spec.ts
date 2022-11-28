@@ -16,7 +16,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, StoreModule.forRoot({})],
       declarations: [AppComponent, FooterComponent, NavbarComponent],
-      providers: [LocalStorageJwtService, provideMockStore({}),],
+      providers: [LocalStorageJwtService, provideMockStore({})],
     }).compileComponents();
   }));
 
