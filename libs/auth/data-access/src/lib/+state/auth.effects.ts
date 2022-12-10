@@ -1,5 +1,5 @@
 import { AuthService } from '../services/auth.service';
-import { NgrxFormsFacade, setErrors } from '@realworld/core/forms';
+import { setErrors } from '@realworld/core/forms';
 import * as fromNgrxForms from '@realworld/core/forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
 
 import { authActions } from './auth.actions';
 import { LocalStorageJwtService } from '../services/local-storage-jwt.service';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
@@ -77,7 +78,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private localStorageJwtService: LocalStorageJwtService,
-    private ngrxFormsFacade: NgrxFormsFacade,
+    private store: Store,
     private authService: AuthService,
     private router: Router,
   ) {}
