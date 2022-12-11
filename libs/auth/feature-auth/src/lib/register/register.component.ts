@@ -1,4 +1,4 @@
-import { DynamicFormComponent, Field, ListErrorsComponent, NgrxFormsFacade } from '@realworld/core/forms';
+import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -38,19 +38,17 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  structure$ = this.ngrxFormsFacade.structure$;
-  data$ = this.ngrxFormsFacade.data$;
+  structure$ = this.store.select(ngrxFormsQuery.selectStructure);
+  data$ = this.store.select(ngrxFormsQuery.selectData);
 
-  constructor(private readonly ngrxFormsFacade: NgrxFormsFacade, private readonly store: Store) {}
+  constructor(private readonly store: Store) {}
 
   ngOnInit() {
-    this.ngrxFormsFacade.setStructure(structure);
-    this.data$ = this.ngrxFormsFacade.data$;
-    this.structure$ = this.ngrxFormsFacade.structure$;
+    this.store.dispatch(formsActions.setStructure({ structure }));
   }
 
   updateForm(changes: any) {
-    this.ngrxFormsFacade.updateData(changes);
+    this.store.dispatch(formsActions.updateData({ data: changes }));
   }
 
   submit() {
@@ -58,6 +56,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ngrxFormsFacade.initializeForm();
+    this.store.dispatch(formsActions.initializeForm());
   }
 }

@@ -5,7 +5,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { authActions } from '@realworld/auth/data-access';
-import { NgrxFormsFacade } from '@realworld/core/forms';
+import { ngrxFormsQuery } from '@realworld/core/forms';
 import { pipe } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
 import { SettingsService } from './settings.service';
@@ -13,7 +13,6 @@ import { SettingsService } from './settings.service';
 @Injectable()
 export class SettingsStoreService extends ComponentStore<Record<string, unknown>> {
   constructor(
-    private readonly ngrxFormsFacade: NgrxFormsFacade,
     private readonly settingsService: SettingsService,
     private readonly router: Router,
     private readonly store: Store,
@@ -24,7 +23,7 @@ export class SettingsStoreService extends ComponentStore<Record<string, unknown>
   // EFFECTS
   readonly updateSettings = this.effect<void>(
     pipe(
-      concatLatestFrom(() => [this.ngrxFormsFacade.data$]),
+      concatLatestFrom(() => [this.store.select(ngrxFormsQuery.selectData)]),
       concatMap(([, data]) =>
         this.settingsService.update(data).pipe(
           tap((result) => this.router.navigate(['profile', result.user.username])),

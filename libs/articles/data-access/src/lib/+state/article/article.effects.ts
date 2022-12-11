@@ -6,9 +6,9 @@ import { of } from 'rxjs';
 import { catchError, concatMap, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 import { articleActions } from './article.actions';
 import { articlesActions } from '../articles.actions';
-
-import { NgrxFormsFacade, setErrors, resetForm } from '@realworld/core/forms';
 import { Router } from '@angular/router';
+import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ArticleEffects {
@@ -60,11 +60,11 @@ export class ArticleEffects {
   addComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.addComment),
-      concatLatestFrom(() => this.ngrxFormsFacade.data$),
+      concatLatestFrom(() => this.store.select(ngrxFormsQuery.selectData)),
       exhaustMap(([{ slug }, data]) =>
         this.articlesService.addComment(slug, data.comment).pipe(
           map((response) => articleActions.addCommentSuccess({ comment: response.comment })),
-          catchError(({ error }) => of(setErrors({ errors: error.errors }))),
+          catchError(({ error }) => of(formsActions.setErrors({ errors: error.errors }))),
         ),
       ),
     ),
@@ -73,7 +73,7 @@ export class ArticleEffects {
   addCommentSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(articleActions.addCommentSuccess),
-      map(() => resetForm()),
+      map(() => formsActions.resetForm()),
     ),
   );
 
@@ -141,7 +141,7 @@ export class ArticleEffects {
     private readonly actions$: Actions,
     private readonly articlesService: ArticlesService,
     private readonly actionsService: ActionsService,
-    private readonly ngrxFormsFacade: NgrxFormsFacade,
+    private readonly store: Store,
     private readonly router: Router,
   ) {}
 }
