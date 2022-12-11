@@ -1,6 +1,6 @@
 import { AuthService } from '../services/auth.service';
-import { setErrors } from '@realworld/core/forms';
-import * as fromNgrxForms from '@realworld/core/forms';
+import { ngrxFormsQuery } from '@realworld/core/forms';
+import { formsActions } from '@realworld/core/forms';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
@@ -28,11 +28,11 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.login),
-      concatLatestFrom(() => this.ngrxFormsFacade.data$),
+      concatLatestFrom(() => this.store.select(ngrxFormsQuery.selectData)),
       exhaustMap(([, data]) =>
         this.authService.login(data).pipe(
           map((response) => authActions.loginSuccess({ user: response.user })),
-          catchError((result) => of(fromNgrxForms.setErrors({ errors: result.error.errors }))),
+          catchError((result) => of(formsActions.setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),
@@ -53,11 +53,11 @@ export class AuthEffects {
   register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.register),
-      concatLatestFrom(() => this.ngrxFormsFacade.data$),
+      concatLatestFrom(() => this.store.select(ngrxFormsQuery.selectData)),
       exhaustMap(([, data]) =>
         this.authService.register(data).pipe(
           map((response) => authActions.registerSuccess({ user: response.user })),
-          catchError((result) => of(setErrors({ errors: result.error.errors }))),
+          catchError((result) => of(formsActions.setErrors({ errors: result.error.errors }))),
         ),
       ),
     ),

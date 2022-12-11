@@ -1,4 +1,4 @@
-import { Field, NgrxFormsFacade } from '@realworld/core/forms';
+import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -37,16 +37,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
   comments$ = this.store.select(articleQuery.selectComments);
   canModify = false;
   isAuthenticated$ = this.store.select(selectLoggedIn);
-  structure$ = this.ngrxFormsFacade.structure$;
-  data$ = this.ngrxFormsFacade.data$;
+  structure$ = this.store.select(ngrxFormsQuery.selectStructure);
+  data$ = this.store.select(ngrxFormsQuery.selectData);
   currentUser$ = this.store.select(selectUser);
-  touchedForm$ = this.ngrxFormsFacade.touched$;
+  touchedForm$ = this.store.select(ngrxFormsQuery.selectTouched);
 
-  constructor(private readonly ngrxFormsFacade: NgrxFormsFacade, private readonly store: Store) {}
+  constructor(private readonly store: Store) {}
 
   ngOnInit() {
-    this.ngrxFormsFacade.setStructure(structure);
-    this.ngrxFormsFacade.setData('');
+    this.store.dispatch(formsActions.setStructure({ structure }));
+    this.store.dispatch(formsActions.setData({ data: '' }));
     this.store
       .select(selectAuthState)
       .pipe(
@@ -81,7 +81,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.store.dispatch(articleActions.addComment({ slug }));
   }
   updateForm(changes: any) {
-    this.ngrxFormsFacade.updateData(changes);
+    this.store.dispatch(formsActions.updateData({ data: changes }));
   }
 
   ngOnDestroy() {
