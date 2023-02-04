@@ -1,7 +1,7 @@
 import { AuthService } from '../services/auth.service';
 import { ngrxFormsQuery } from '@realworld/core/forms';
 import { formsActions } from '@realworld/core/forms';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -61,18 +61,6 @@ export class AuthEffects {
         ),
       ),
     ),
-  );
-
-  logout$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(authActions.logout),
-        tap(() => {
-          this.localStorageJwtService.removeItem();
-          this.router.navigateByUrl('login');
-        }),
-      ),
-    { dispatch: false },
   );
 
   constructor(
