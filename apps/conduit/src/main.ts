@@ -7,7 +7,6 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import {
-  AuthEffects,
   authFeature,
   AuthGuardService,
   tokenInterceptor,
@@ -67,7 +66,7 @@ bootstrapApplication(AppComponent, {
       errorHandler: errorHandlerFeature.reducer,
       ngrxForms: ngrxFormsFeature.reducer,
     }),
-    provideEffects(ErrorHandlerEffects, AuthEffects, NgrxFormsEffects, authFunctionalEffects),
+    provideEffects(ErrorHandlerEffects, NgrxFormsEffects, authFunctionalEffects),
     provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],
