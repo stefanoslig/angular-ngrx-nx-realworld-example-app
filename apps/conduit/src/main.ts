@@ -6,12 +6,7 @@ import { environment } from './environments/environment';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import {
-  authFeature,
-  AuthGuardService,
-  tokenInterceptor,
-  authFunctionalEffects,
-} from '@realworld/auth/data-access';
+import { authFeature, AuthGuardService, tokenInterceptor, authFunctionalEffects } from '@realworld/auth/data-access';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ErrorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@realworld/core/error-handler';
 import { NgrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';

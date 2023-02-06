@@ -9,6 +9,7 @@ import {
   ProfileEffects,
   ProfileFavoritesResolverService,
   profileFeature,
+  profileFunctionalEffects,
   ProfileResolverService,
 } from '@realworld/profile/data-access';
 import { ProfileComponent } from './profile.component';
@@ -20,7 +21,7 @@ export const PROFILE_ROUTES: Routes = [
     providers: [
       provideState(profileFeature),
       provideState(articleListFeature),
-      provideEffects(ProfileEffects, ArticleListEffects),
+      provideEffects(ProfileEffects, profileFunctionalEffects, ArticleListEffects),
     ],
     resolve: { ProfileResolverService },
     canActivate: [AuthGuardService],

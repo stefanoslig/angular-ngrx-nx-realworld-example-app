@@ -39,19 +39,6 @@ export class ProfileEffects {
     ),
   );
 
-  unFollow$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(profileActions.unfollow),
-      map((action) => action.id),
-      concatMap((slug) =>
-        this.actionsService.unfollowUser(slug).pipe(
-          map((response) => profileActions.unfollowSuccess({ profile: response.profile })),
-          catchError((error) => of(profileActions.unfollowFailure({ error }))),
-        ),
-      ),
-    ),
-  );
-
   constructor(
     private actions$: Actions,
     private actionsService: ActionsService,

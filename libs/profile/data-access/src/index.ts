@@ -6,3 +6,5 @@ export * from './lib/+state/profile.effects';
 export * from './lib/+state/profile.reducer';
 export * from './lib/+state/profile.selectors';
 export * from './lib/+state/profile.actions';
+
+export * as profileFunctionalEffects from './lib/+state/profile-functional.effects';
