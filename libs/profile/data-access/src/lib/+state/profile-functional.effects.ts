@@ -19,3 +19,19 @@ export const unFollow$ = createEffect(
   },
   { functional: true },
 );
+
+export const follow$ = createEffect(
+  (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
+    return actions$.pipe(
+      ofType(profileActions.follow),
+      map((action) => action.id),
+      concatMap((slug) =>
+        actionsService.followUser(slug).pipe(
+          map((response) => profileActions.followSuccess({ profile: response.profile })),
+          catchError((error) => of(profileActions.followFailure({ error }))),
+        ),
+      ),
+    );
+  },
+  { functional: true },
+);

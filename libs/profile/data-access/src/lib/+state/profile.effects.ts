@@ -26,22 +26,5 @@ export class ProfileEffects {
     ),
   );
 
-  follow$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(profileActions.follow),
-      map((action) => action.id),
-      concatMap((slug) =>
-        this.actionsService.followUser(slug).pipe(
-          map((response) => profileActions.followSuccess({ profile: response.profile })),
-          catchError((error) => of(profileActions.followFailure({ error }))),
-        ),
-      ),
-    ),
-  );
-
-  constructor(
-    private actions$: Actions,
-    private actionsService: ActionsService,
-    private profileService: ProfileService,
-  ) {}
+  constructor(private actions$: Actions, private profileService: ProfileService) {}
 }
