@@ -1,30 +1,59 @@
-import { ProfileService } from '../profile.service';
-import { Injectable } from '@angular/core';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, concatMap, groupBy, map, mergeMap, switchMap } from 'rxjs/operators';
-import { profileActions } from './profile.actions';
+import { inject } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ActionsService } from '@realworld/articles/data-access';
+import { catchError, concatMap, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
+import { ProfileService } from '../profile.service';
+import { profileActions } from './profile.actions';
 
-@Injectable()
-export class ProfileEffects {
-  getProfile$ = createEffect(() =>
-    this.actions$.pipe(
+export const unFollow$ = createEffect(
+  (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
+    return actions$.pipe(
+      ofType(profileActions.unfollow),
+      map((action) => action.id),
+      concatMap((slug) =>
+        actionsService.unfollowUser(slug).pipe(
+          map((response) => profileActions.unfollowSuccess({ profile: response.profile })),
+          catchError((error) => of(profileActions.unfollowFailure({ error }))),
+        ),
+      ),
+    );
+  },
+  { functional: true },
+);
+
+export const follow$ = createEffect(
+  (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
+    return actions$.pipe(
+      ofType(profileActions.follow),
+      map((action) => action.id),
+      concatMap((slug) =>
+        actionsService.followUser(slug).pipe(
+          map((response) => profileActions.followSuccess({ profile: response.profile })),
+          catchError((error) => of(profileActions.followFailure({ error }))),
+        ),
+      ),
+    );
+  },
+  { functional: true },
+);
+
+export const getProfile$ = createEffect(
+  (actions$ = inject(Actions), profileService = inject(ProfileService)) => {
+    return actions$.pipe(
       ofType(profileActions.loadProfile),
       groupBy((action) => action.id),
       mergeMap((group) =>
         group.pipe(
           map((action) => action.id),
           switchMap((username) =>
-            this.profileService.getProfile(username).pipe(
+            profileService.getProfile(username).pipe(
               map((profile) => profileActions.loadProfileSuccess({ profile })),
               catchError((error) => of(profileActions.loadProfileFailure({ error }))),
             ),
           ),
         ),
       ),
-    ),
-  );
-
-  constructor(private actions$: Actions, private profileService: ProfileService) {}
-}
+    );
+  },
+  { functional: true },
+);

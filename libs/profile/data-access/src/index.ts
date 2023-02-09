@@ -7,4 +7,4 @@ export * from './lib/+state/profile.reducer';
 export * from './lib/+state/profile.selectors';
 export * from './lib/+state/profile.actions';
 
-export * as profileFunctionalEffects from './lib/+state/profile-functional.effects';
+export * as profileEffects from './lib/+state/profile.effects';
