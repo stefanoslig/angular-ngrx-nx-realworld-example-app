@@ -1,33 +1,30 @@
-import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, concatMap, map, tap } from 'rxjs/operators';
-import { articleEditActions } from './article-edit.actions';
-import { ArticlesService } from '../../services/articles.service';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
+import { catchError, concatMap, map, of, tap } from 'rxjs';
+import { ArticlesService } from '../../services/articles.service';
+import { articleEditActions } from './article-edit.actions';
 
-@Injectable()
-export class ArticleEditEffects {
-  publishArticle$ = createEffect(() =>
-    this.actions$.pipe(
+export const publishArticle$ = createEffect(
+  (
+    actions$ = inject(Actions),
+    articlesService = inject(ArticlesService),
+    store = inject(Store),
+    router = inject(Router),
+  ) => {
+    return actions$.pipe(
       ofType(articleEditActions.publishArticle),
-      concatLatestFrom(() => this.store.select(ngrxFormsQuery.selectData)),
+      concatLatestFrom(() => store.select(ngrxFormsQuery.selectData)),
       concatMap(([_, data]) =>
-        this.articlesService.publishArticle(data).pipe(
-          tap((result) => this.router.navigate(['article', result.article.slug])),
+        articlesService.publishArticle(data).pipe(
+          tap((result) => router.navigate(['article', result.article.slug])),
           map(() => articleEditActions.publishArticleSuccess()),
           catchError((result) => of(formsActions.setErrors({ errors: result.error.errors }))),
         ),
       ),
-    ),
-  );
-
-  constructor(
-    private actions$: Actions,
-    private store: Store,
-    private articlesService: ArticlesService,
-    private router: Router,
-  ) {}
-}
+    );
+  },
+  { functional: true },
+);
