@@ -12,20 +12,6 @@ import { articleListQuery } from './article-list.selectors';
 
 @Injectable()
 export class ArticleListEffects {
-  setListPage = createEffect(() =>
-    this.actions$.pipe(
-      ofType(articleListActions.setListPage),
-      map(() => articleListActions.loadArticles()),
-    ),
-  );
-
-  setListTag = createEffect(() =>
-    this.actions$.pipe(
-      ofType(articleListActions.setListConfig),
-      map(() => articleListActions.loadArticles()),
-    ),
-  );
-
   loadArticles = createEffect(() =>
     this.actions$.pipe(
       ofType(articleListActions.loadArticles),
