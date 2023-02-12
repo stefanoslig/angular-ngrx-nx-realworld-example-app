@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
-import { ArticleListEffects, articleListFeature } from '@realworld/articles/data-access/src';
+import { articleListEffects, articleListFeature } from '@realworld/articles/data-access/src';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { AuthGuardService } from '@realworld/auth/data-access';
 import {
@@ -20,7 +20,7 @@ export const PROFILE_ROUTES: Routes = [
     providers: [
       provideState(profileFeature),
       provideState(articleListFeature),
-      provideEffects(profileEffects, ArticleListEffects),
+      provideEffects(profileEffects, articleListEffects),
     ],
     resolve: { ProfileResolverService },
     canActivate: [AuthGuardService],

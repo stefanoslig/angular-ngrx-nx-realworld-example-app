@@ -1,23 +1,40 @@
-import { ActionsService } from '@realworld/articles/data-access';
-import { Injectable } from '@angular/core';
-import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, concatMap, map } from 'rxjs/operators';
-
-import { ArticlesService } from '../../services/articles.service';
+import { inject } from '@angular/core';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { articleListActions } from './article-list.actions';
-import { articlesActions } from '../articles.actions';
+import { catchError, concatMap, map, of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { ArticlesService } from '../../services/articles.service';
 import { articleListQuery } from './article-list.selectors';
+import { articlesActions } from '../articles.actions';
+import { ActionsService } from '../../services/actions.service';
 
-@Injectable()
-export class ArticleListEffects {
-  loadArticles = createEffect(() =>
-    this.actions$.pipe(
+export const setListPage$ = createEffect(
+  (actions$ = inject(Actions)) => {
+    return actions$.pipe(
+      ofType(articleListActions.setListPage),
+      map(() => articleListActions.loadArticles()),
+    );
+  },
+  { functional: true },
+);
+
+export const setListTag$ = createEffect(
+  (actions$ = inject(Actions)) => {
+    return actions$.pipe(
+      ofType(articleListActions.setListConfig),
+      map(() => articleListActions.loadArticles()),
+    );
+  },
+  { functional: true },
+);
+
+export const loadArticles$ = createEffect(
+  (actions$ = inject(Actions), store = inject(Store), articlesService = inject(ArticlesService)) => {
+    return actions$.pipe(
       ofType(articleListActions.loadArticles),
-      concatLatestFrom(() => this.store.select(articleListQuery.selectListConfig)),
+      concatLatestFrom(() => store.select(articleListQuery.selectListConfig)),
       concatMap(([_, config]) =>
-        this.articlesService.query(config).pipe(
+        articlesService.query(config).pipe(
           map((results) =>
             articleListActions.loadArticlesSuccess({
               articles: results.articles,
@@ -27,37 +44,37 @@ export class ArticleListEffects {
           catchError((error) => of(articleListActions.loadArticlesFailure({ error }))),
         ),
       ),
-    ),
-  );
+    );
+  },
+  { functional: true },
+);
 
-  favorite = createEffect(() =>
-    this.actions$.pipe(
+export const favorite$ = createEffect(
+  (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
+    return actions$.pipe(
       ofType(articlesActions.favorite),
       concatMap(({ slug }) =>
-        this.actionsService.favorite(slug).pipe(
+        actionsService.favorite(slug).pipe(
           map((response) => articlesActions.favoriteSuccess({ article: response.article })),
           catchError((error) => of(articlesActions.favoriteFailure(error))),
         ),
       ),
-    ),
-  );
+    );
+  },
+  { functional: true },
+);
 
-  unFavorite = createEffect(() =>
-    this.actions$.pipe(
+export const unFavorite$ = createEffect(
+  (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
+    return actions$.pipe(
       ofType(articlesActions.unfavorite),
       concatMap(({ slug }) =>
-        this.actionsService.unfavorite(slug).pipe(
+        actionsService.unfavorite(slug).pipe(
           map((response) => articlesActions.unfavoriteSuccess({ article: response.article })),
           catchError((error) => of(articlesActions.unfavoriteFailure(error))),
         ),
       ),
-    ),
-  );
-
-  constructor(
-    private actions$: Actions,
-    private articlesService: ArticlesService,
-    private actionsService: ActionsService,
-    private store: Store,
-  ) {}
-}
+    );
+  },
+  { functional: true },
+);
