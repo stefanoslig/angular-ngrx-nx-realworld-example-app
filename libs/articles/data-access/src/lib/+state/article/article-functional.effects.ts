@@ -1,9 +1,13 @@
 import { inject } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, map, of } from 'rxjs';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { catchError, concatMap, exhaustMap, map, of, tap } from 'rxjs';
 import { articlesActions } from '../articles.actions';
 import { ActionsService } from '../../services/actions.service';
 import { articleActions } from './article.actions';
+import { ArticlesService } from '../../services/articles.service';
+import { formsActions, ngrxFormsQuery } from '@realworld/core/forms/src';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 export const favorite$ = createEffect(
   (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
@@ -63,4 +67,71 @@ export const follow$ = createEffect(
     );
   },
   { functional: true },
+);
+
+export const deleteComment$ = createEffect(
+  (actions$ = inject(Actions), articlesService = inject(ArticlesService)) => {
+    return actions$.pipe(
+      ofType(articleActions.deleteComment),
+      concatMap(({ commentId, slug }) =>
+        articlesService.deleteComment(commentId, slug).pipe(
+          map((_) => articleActions.deleteCommentSuccess({ commentId })),
+          catchError((error) => of(articleActions.deleteCommentFailure(error))),
+        ),
+      ),
+    );
+  },
+  { functional: true },
+);
+
+export const addComment$ = createEffect(
+  (actions$ = inject(Actions), articlesService = inject(ArticlesService), store = inject(Store)) => {
+    return actions$.pipe(
+      ofType(articleActions.addComment),
+      concatLatestFrom(() => store.select(ngrxFormsQuery.selectData)),
+      exhaustMap(([{ slug }, data]) =>
+        articlesService.addComment(slug, data.comment).pipe(
+          map((response) => articleActions.addCommentSuccess({ comment: response.comment })),
+          catchError(({ error }) => of(formsActions.setErrors({ errors: error.errors }))),
+        ),
+      ),
+    );
+  },
+  { functional: true },
+);
+
+export const addCommentSuccess$ = createEffect(
+  (actions$ = inject(Actions)) => {
+    return actions$.pipe(
+      ofType(articleActions.addCommentSuccess),
+      map(() => formsActions.resetForm()),
+    );
+  },
+  { functional: true },
+);
+
+export const deleteArticle$ = createEffect(
+  (actions$ = inject(Actions), articlesService = inject(ArticlesService), store = inject(Store)) => {
+    return actions$.pipe(
+      ofType(articleActions.deleteArticle),
+      concatLatestFrom(() => store.select(ngrxFormsQuery.selectData)),
+      concatMap((action) =>
+        articlesService.deleteArticle(action.slug).pipe(
+          map(() => articleActions.deleteArticleSuccess()),
+          catchError((error) => of(articleActions.deleteArticleFailure(error))),
+        ),
+      ),
+    );
+  },
+  { functional: true },
+);
+
+export const deleteArticleSuccess$ = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(articleActions.deleteArticleSuccess),
+      tap(() => router.navigate(['/'])),
+    );
+  },
+  { functional: true, dispatch: false },
 );
