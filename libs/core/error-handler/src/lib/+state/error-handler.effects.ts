@@ -1,28 +1,29 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
-import * as ErrorHandlerActions from './error-handler.actions';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { tap } from 'rxjs';
+import { throw401Error, throw404Error } from './error-handler.actions';
 
-@Injectable()
-export class ErrorHandlerEffects {
-  error401$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ErrorHandlerActions.throw401Error),
-        tap(() => this.router.navigate(['/login'])),
-      ),
-    { dispatch: false },
-  );
+export const error401$ = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(throw401Error),
+      tap(() => {
+        router.navigate(['/login']);
+      }),
+    );
+  },
+  { functional: true, dispatch: false },
+);
 
-  error404$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ErrorHandlerActions.throw404Error),
-        tap(() => this.router.navigate(['/'])),
-      ),
-    { dispatch: false },
-  );
-
-  constructor(private readonly actions$: Actions, private readonly router: Router) {}
-}
+export const error404$ = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(throw404Error),
+      tap(() => {
+        router.navigate(['/']);
+      }),
+    );
+  },
+  { functional: true, dispatch: false },
+);
