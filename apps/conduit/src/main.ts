@@ -9,7 +9,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authFeature, AuthGuardService, tokenInterceptor, authFunctionalEffects } from '@realworld/auth/data-access';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@realworld/core/error-handler';
-import { NgrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
+import { ngrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
 import { API_URL } from '@realworld/core/http-client';
 import { provideEffects } from '@ngrx/effects';
 
@@ -61,7 +61,7 @@ bootstrapApplication(AppComponent, {
       errorHandler: errorHandlerFeature.reducer,
       ngrxForms: ngrxFormsFeature.reducer,
     }),
-    provideEffects(errorHandlerEffects, NgrxFormsEffects, authFunctionalEffects),
+    provideEffects(errorHandlerEffects, ngrxFormsEffects, authFunctionalEffects),
     provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],
