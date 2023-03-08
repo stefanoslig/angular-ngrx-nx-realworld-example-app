@@ -3,8 +3,8 @@ import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { articleEditEffects, articleFeature } from '@realworld/articles/data-access';
 import { AuthGuardService } from '@realworld/auth/data-access';
-import { ArticleEditResolverService } from './article-edit-resolver.service';
 import { ArticleEditComponent } from './article-edit.component';
+import { articleEditResolver } from './resolvers/article-edit-resolver';
 
 export const ARTICLE_EDIT_ROUTES: Routes = [
   {
@@ -21,7 +21,7 @@ export const ARTICLE_EDIT_ROUTES: Routes = [
       {
         path: ':slug',
         component: ArticleEditComponent,
-        resolve: { ArticleEditResolverService },
+        resolve: { articleEditResolver },
       },
     ],
   },
