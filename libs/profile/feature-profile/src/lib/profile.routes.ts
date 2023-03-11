@@ -5,11 +5,11 @@ import { articleListEffects, articleListFeature } from '@realworld/articles/data
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { AuthGuardService } from '@realworld/auth/data-access';
 import {
-  ProfileArticlesResolverService,
+  profileArticlesResolver,
   profileEffects,
-  ProfileFavoritesResolverService,
+  profileFavoritesResolver,
   profileFeature,
-  ProfileResolverService,
+  profileResolver,
 } from '@realworld/profile/data-access';
 import { ProfileComponent } from './profile.component';
 
@@ -22,18 +22,18 @@ export const PROFILE_ROUTES: Routes = [
       provideState(articleListFeature),
       provideEffects(profileEffects, articleListEffects),
     ],
-    resolve: { ProfileResolverService },
+    resolve: { profileResolver },
     canActivate: [AuthGuardService],
     children: [
       {
         path: '',
         component: ArticleListComponent,
-        resolve: { ProfileArticlesResolverService },
+        resolve: { profileArticlesResolver },
       },
       {
         path: 'favorites',
         component: ArticleListComponent,
-        resolve: { ProfileFavoritesResolverService },
+        resolve: { profileFavoritesResolver },
       },
     ],
   },
