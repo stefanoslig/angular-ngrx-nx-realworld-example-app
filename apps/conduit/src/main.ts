@@ -6,7 +6,7 @@ import { environment } from './environments/environment';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { authFeature, AuthGuardService, tokenInterceptor, authFunctionalEffects } from '@realworld/auth/data-access';
+import { authFeature, authGuard, tokenInterceptor, authFunctionalEffects } from '@realworld/auth/data-access';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@realworld/core/error-handler';
 import { ngrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
@@ -49,7 +49,7 @@ bootstrapApplication(AppComponent, {
       {
         path: 'editor',
         loadChildren: () => import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),
-        canActivate: [AuthGuardService],
+        canActivate: [authGuard],
       },
       {
         path: 'profile',

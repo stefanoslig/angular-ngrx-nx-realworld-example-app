@@ -3,7 +3,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { articleListEffects, articleListFeature } from '@realworld/articles/data-access/src';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
-import { AuthGuardService } from '@realworld/auth/data-access';
+import { authGuard } from '@realworld/auth/data-access';
 import {
   profileArticlesResolver,
   profileEffects,
@@ -23,7 +23,7 @@ export const PROFILE_ROUTES: Routes = [
       provideEffects(profileEffects, articleListEffects),
     ],
     resolve: { profileResolver },
-    canActivate: [AuthGuardService],
+    canActivate: [authGuard],
     children: [
       {
         path: '',
