@@ -42,7 +42,7 @@ export class DynamicFormComponent implements OnInit {
           filter((t) => !t && !!this.form),
           untilDestroyed(this),
         )
-        .subscribe((_) => this.form.reset());
+        .subscribe(() => this.form.reset());
     }
   }
 
