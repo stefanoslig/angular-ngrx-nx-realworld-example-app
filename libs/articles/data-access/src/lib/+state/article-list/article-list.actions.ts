@@ -6,10 +6,10 @@ import { ArticleListConfig } from './article-list.reducer';
 export const articleListActions = createActionGroup({
   source: 'Article List',
   events: {
-    'Set List Page': props<{ page: number }>(),
-    'Set List Config': props<{ config: ArticleListConfig }>(),
-    'Load Articles': emptyProps(),
-    'Load Articles Failure': props<{ error: Error }>(),
-    'Load Articles Success': props<{ articles: Article[]; articlesCount: number }>(),
+    setListPage: props<{ page: number }>(),
+    setListConfig: props<{ config: ArticleListConfig }>(),
+    loadArticles: emptyProps(),
+    loadArticlesFailure: props<{ error: Error }>(),
+    loadArticlesSuccess: props<{ articles: Article[]; articlesCount: number }>(),
   },
 });

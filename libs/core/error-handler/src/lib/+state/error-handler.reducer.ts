@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as ErrorHandlerActions from './error-handler.actions';
+import { errorHandlerActions } from './error-handler.actions';
 
 export interface ErrorHandlerState {
   code: number;
@@ -15,11 +15,11 @@ export const errorHandlerFeature = createFeature({
   name: 'errorHandler',
   reducer: createReducer(
     errorHandlerInitialState,
-    on(ErrorHandlerActions.throw401Error, (state, action) => ({
+    on(errorHandlerActions.throw401Error, (_, action) => ({
       code: action.error.status,
       message: action.error.message,
     })),
-    on(ErrorHandlerActions.throw404Error, (state, action) => ({
+    on(errorHandlerActions.throw404Error, (_, action) => ({
       code: action.error.status,
       message: action.error.message,
     })),

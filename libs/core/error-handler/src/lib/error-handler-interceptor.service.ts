@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { throw401Error, throw404Error } from './+state/error-handler.actions';
+import { errorHandlerActions } from './+state/error-handler.actions';
 
 export const errorHandlingInterceptor = (
   request: HttpRequest<any>,
@@ -16,10 +16,10 @@ export const errorHandlingInterceptor = (
       if (error instanceof HttpErrorResponse) {
         switch (error.status) {
           case 401:
-            store.dispatch(throw401Error({ error }));
+            store.dispatch(errorHandlerActions.throw401Error({ error }));
             break;
           case 404:
-            store.dispatch(throw404Error({ error }));
+            store.dispatch(errorHandlerActions.throw404Error({ error }));
             break;
           default:
             throwError(error);

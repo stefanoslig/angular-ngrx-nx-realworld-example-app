@@ -1,5 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, props } from '@ngrx/store';
 
-export const throw401Error = createAction('[ngrx-error] THROW_401_ERROR', props<{ error: HttpErrorResponse }>());
-export const throw404Error = createAction('[ngrx-error] THROW_404_ERROR', props<{ error: HttpErrorResponse }>());
+export const errorHandlerActions = createActionGroup({
+  source: 'Error Handler',
+  events: {
+    throw401Error: props<{ error: HttpErrorResponse }>(),
+    throw404Error: props<{ error: HttpErrorResponse }>(),
+  },
+});
