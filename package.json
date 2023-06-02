@@ -69,7 +69,7 @@
     "@nrwl/linter": "16.1.1",
     "@nrwl/storybook": "16.1.1",
     "@nrwl/workspace": "16.1.1",
-    "@schematics/angular": "~15.2.0",
+    "@schematics/angular": "~16.0.0",
     "@storybook/addon-essentials": "7.0.9",
     "@storybook/angular": "7.0.9",
     "@storybook/builder-webpack5": "6.5.16",
