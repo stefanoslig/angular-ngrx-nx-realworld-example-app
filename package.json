@@ -98,7 +98,7 @@
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
     "typescript": "5.0.4",
-    "webpack": "^5.76.0",
+    "webpack": "^5.85.0",
     "@nx/linter": "16.3.2",
     "@nx/eslint-plugin": "16.3.2",
     "@nx/jest": "16.3.2"
