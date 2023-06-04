@@ -1,10 +1,12 @@
 {
+  "name": "profile-data-access",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/profile/data-access/src",
   "prefix": "cdt",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/profile/data-access"],
       "options": {
         "jestConfig": "libs/profile/data-access/jest.config.ts",
@@ -12,12 +14,11 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/profile/data-access/src/**/*.ts", "libs/profile/data-access/src/**/*.html"]
       }
     }
   },
-  "tags": [],
-  "name": "profile-data-access"
+  "tags": []
 }

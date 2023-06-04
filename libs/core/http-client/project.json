@@ -1,10 +1,12 @@
 {
+  "name": "core-http-client",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/core/http-client/src",
   "prefix": "cdt",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/core/http-client"],
       "options": {
         "jestConfig": "libs/core/http-client/jest.config.ts",
@@ -12,12 +14,11 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/core/http-client/src/**/*.ts", "libs/core/http-client/src/**/*.html"]
       }
     }
   },
-  "tags": [],
-  "name": "core-http-client"
+  "tags": []
 }

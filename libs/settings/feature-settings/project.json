@@ -1,10 +1,12 @@
 {
+  "name": "settings-feature-settings",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/settings/feature-settings/src",
   "prefix": "cdt",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/settings/feature-settings"],
       "options": {
         "jestConfig": "libs/settings/feature-settings/jest.config.ts",
@@ -12,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/settings/feature-settings/src/**/*.ts",
@@ -21,6 +23,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "settings-feature-settings"
+  "tags": []
 }

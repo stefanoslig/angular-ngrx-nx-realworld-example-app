@@ -1,9 +1,11 @@
 {
+  "name": "home",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/home/src",
   "projectType": "library",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "libs/home/jest.config.ts",
         "passWithNoTests": true
@@ -11,6 +13,5 @@
       "outputs": ["{workspaceRoot}/coverage/libs/home"]
     }
   },
-  "prefix": "app",
-  "name": "home"
+  "prefix": "app"
 }

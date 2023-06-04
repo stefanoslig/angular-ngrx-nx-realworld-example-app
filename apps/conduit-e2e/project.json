@@ -1,9 +1,11 @@
 {
+  "name": "conduit-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/conduit-e2e/src",
   "projectType": "application",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/cypress:cypress",
+      "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "apps/conduit-e2e/cypress.json",
         "devServerTarget": "conduit:serve",
@@ -16,13 +18,12 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["apps/conduit-e2e/**/*.{js,ts}"]
       },
       "outputs": ["{options.outputFile}"]
     }
   },
-  "prefix": "app",
-  "name": "conduit-e2e"
+  "prefix": "app"
 }

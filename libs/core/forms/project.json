@@ -1,10 +1,12 @@
 {
+  "name": "core-forms",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/core/forms/src",
   "prefix": "cdt",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/core/forms"],
       "options": {
         "jestConfig": "libs/core/forms/jest.config.ts",
@@ -12,12 +14,11 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/core/forms/src/**/*.ts", "libs/core/forms/src/**/*.html"]
       }
     }
   },
-  "tags": [],
-  "name": "core-forms"
+  "tags": []
 }

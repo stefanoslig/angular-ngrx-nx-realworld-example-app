@@ -1,7 +1,9 @@
 {
+  "name": "conduit",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "generators": {
-    "@nrwl/angular:component": {
+    "@nx/angular:component": {
       "style": "scss"
     }
   },
@@ -79,14 +81,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["apps/conduit/src/**/*.ts", "apps/conduit/src/**/*.html"]
       },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/conduit/jest.config.ts",
         "passWithNoTests": true
@@ -122,6 +124,5 @@
         }
       }
     }
-  },
-  "name": "conduit"
+  }
 }

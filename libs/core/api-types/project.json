@@ -1,10 +1,12 @@
 {
+  "name": "core-api-types",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/core/api-types/src",
   "prefix": "cdt",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/core/api-types"],
       "options": {
         "jestConfig": "libs/core/api-types/jest.config.ts",
@@ -12,12 +14,11 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["libs/core/api-types/src/**/*.ts", "libs/core/api-types/src/**/*.html"]
       }
     }
   },
-  "tags": [],
-  "name": "core-api-types"
+  "tags": []
 }

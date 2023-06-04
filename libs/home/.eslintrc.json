@@ -28,7 +28,7 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@nrwl/nx/angular-template"],
+      "extends": ["plugin:@nx/angular-template"],
       "rules": {}
     }
   ]

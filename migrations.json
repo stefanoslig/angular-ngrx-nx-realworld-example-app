@@ -27,9 +27,9 @@
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/workspace with @nx/workspace",
+      "description": "Replace @nx/workspace with @nx/workspace",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/workspace",
+      "package": "@nx/workspace",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
@@ -37,7 +37,7 @@
       "description": "Generates a plugin called 'workspace-plugin' containing your workspace generators.",
       "cli": "nx",
       "implementation": "./src/migrations/update-16-0-0/move-workspace-generators-to-local-plugin",
-      "package": "@nrwl/workspace",
+      "package": "@nx/workspace",
       "name": "16-0-0-move-workspace-generators-into-local-plugin"
     },
     {
@@ -45,23 +45,23 @@
       "description": "Fix .babelrc presets if it contains an invalid entry for @nx/web/babel.",
       "cli": "nx",
       "implementation": "./src/migrations/update-16-0-0/fix-invalid-babelrc",
-      "package": "@nrwl/workspace",
+      "package": "@nx/workspace",
       "name": "16-0-0-fix-invalid-babelrc"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/cypress with @nx/cypress",
+      "description": "Replace @nx/cypress with @nx/cypress",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/cypress",
+      "package": "@nx/cypress",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/storybook with @nx/storybook",
+      "description": "Replace @nx/storybook with @nx/storybook",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/storybook",
+      "package": "@nx/storybook",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
@@ -69,7 +69,7 @@
       "version": "16.0.0-beta.1",
       "description": "Update workspace to use Storybook v7",
       "implementation": "./src/migrations/update-16-0-0/update-sb-7",
-      "package": "@nrwl/storybook",
+      "package": "@nx/storybook",
       "name": "update-16-0-0-migrate-7"
     },
     {
@@ -77,31 +77,31 @@
       "version": "16.1.0-beta.0",
       "description": "Ignore @nx/react/plugins/storybook in Storybook eslint rules.",
       "factory": "./src/migrations/update-16-1-0/eslint-ignore-react-plugin",
-      "package": "@nrwl/storybook",
+      "package": "@nx/storybook",
       "name": "update-16-1-0"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/linter with @nx/linter",
+      "description": "Replace @nx/linter with @nx/linter",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/linter",
+      "package": "@nx/linter",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/eslint-plugin-nx with @nx/eslint-plugin",
+      "description": "Replace @nx/eslint-plugin with @nx/eslint-plugin",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/eslint-plugin-nx",
+      "package": "@nx/eslint-plugin",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/jest with @nx/jest",
+      "description": "Replace @nx/jest with @nx/jest",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/jest",
+      "package": "@nx/jest",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
@@ -109,15 +109,15 @@
       "version": "16.0.0-beta.1",
       "description": "Replace the deprecated library generator 'simpleModuleName' option from generator defaults with 'simpleName'",
       "factory": "./src/migrations/update-16-0-0/remove-library-generator-simple-module-name-option",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "remove-library-generator-simple-module-name-option"
     },
     {
       "cli": "nx",
       "version": "16.0.0-beta.1",
-      "description": "Replace @nrwl/angular with @nx/angular",
+      "description": "Replace @nx/angular with @nx/angular",
       "implementation": "./src/migrations/update-16-0-0-add-nx-packages/update-16-0-0-add-nx-packages",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "update-16-0-0-add-nx-packages"
     },
     {
@@ -125,7 +125,7 @@
       "version": "16.0.0-beta.6",
       "description": "Remove protractor as default e2eTestRunner from nxJson and project configurations",
       "implementation": "./src/migrations/update-16-0-0/remove-protractor-defaults",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "remove-protractor-defaults-from-generators"
     },
     {
@@ -133,7 +133,7 @@
       "version": "16.0.0-beta.6",
       "description": "Remove karma as default unitTestRunner from nxJson and project configurations",
       "implementation": "./src/migrations/update-16-0-0/remove-karma-defaults",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "remove-karma-defaults-from-generators"
     },
     {
@@ -144,7 +144,7 @@
       },
       "description": "Remove exported `@angular/platform-server` `renderModule` method. The `renderModule` method is now exported by the Angular CLI.",
       "factory": "./src/migrations/update-16-1-0/remove-render-module-platform-server-exports",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "remove-render-module-platform-server-exports"
     },
     {
@@ -155,7 +155,7 @@
       },
       "description": "Remove 'ngcc' invocation if exists from the 'postinstall' script in package.json.",
       "factory": "./src/migrations/update-16-1-0/remove-ngcc-invocation",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "remove-ngcc-invocation"
     },
     {
@@ -166,7 +166,7 @@
       },
       "description": "Extract the app config for standalone apps",
       "factory": "./src/migrations/update-16-1-0/extract-standalone-config-from-bootstrap",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "extract-app-config-for-standalone"
     },
     {
@@ -177,7 +177,7 @@
       },
       "description": "Update server executors' configuration to disable 'buildOptimizer' for non optimized builds.",
       "factory": "./src/migrations/update-16-1-0/update-server-executor-config",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "update-server-executor-config"
     },
     {
@@ -188,7 +188,7 @@
       },
       "description": "Update the @angular/cli package version to ~16.0.0.",
       "factory": "./src/migrations/update-16-1-0/update-angular-cli",
-      "package": "@nrwl/angular",
+      "package": "@nx/angular",
       "name": "update-angular-cli-version-16-0-0"
     }
   ]

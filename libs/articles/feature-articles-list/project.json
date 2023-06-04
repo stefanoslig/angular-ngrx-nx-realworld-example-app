@@ -1,10 +1,12 @@
 {
+  "name": "articles-feature-articles-list",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/articles/feature-articles-list/src",
   "prefix": "cdt",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/articles/feature-articles-list"],
       "options": {
         "jestConfig": "libs/articles/feature-articles-list/jest.config.ts",
@@ -12,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/articles/feature-articles-list/src/**/*.ts",
@@ -21,6 +23,5 @@
       }
     }
   },
-  "tags": [],
-  "name": "articles-feature-articles-list"
+  "tags": []
 }

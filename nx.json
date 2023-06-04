@@ -13,20 +13,20 @@
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@nx/angular"
   },
   "defaultProject": "conduit",
   "generators": {
-    "@nrwl/angular:application": {
+    "@nx/angular:application": {
       "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
     },
-    "@nrwl/angular:library": {
+    "@nx/angular:library": {
       "linter": "eslint",
       "unitTestRunner": "jest"
     },
-    "@nrwl/angular:component": {}
+    "@nx/angular:component": {}
   },
   "targetDefaults": {
     "build": {
