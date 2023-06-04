@@ -1,8 +1,6 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideRouterStore } from '@ngrx/router-store';
-import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
 import { ngrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
 import { authFeature, authGuard, tokenInterceptor, authFunctionalEffects } from '@realworld/auth/data-access';
 import { provideStore } from '@ngrx/store';
@@ -10,6 +8,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { errorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@realworld/core/error-handler';
 import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { API_URL } from '@realworld/core/http-client';
+import { environment } from '@env/environment';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter([

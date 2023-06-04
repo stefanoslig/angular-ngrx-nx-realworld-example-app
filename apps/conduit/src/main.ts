@@ -1,8 +1,8 @@
 import { appConfig } from './app/app.config';
 import { enableProdMode } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-
-import { API_URL } from '@realworld/core/http-client';
+import { AppComponent } from '@default/app.component';
+import { environment } from '@env/environment';
 
 if (environment.production) {
   enableProdMode();
