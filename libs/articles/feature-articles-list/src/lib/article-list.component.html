@@ -12,7 +12,7 @@
 
     <cdt-pager
       (setPage)="setPage($event)"
-      [currentPage]="(listConfig$ | async).currentPage"
+      [currentPage]="(listConfig$ | async)?.currentPage"
       [totalPages]="totalPages$ | async"
     ></cdt-pager>
   </ng-container>

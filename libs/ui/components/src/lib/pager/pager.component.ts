@@ -10,7 +10,7 @@ import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from 
   imports: [CommonModule],
 })
 export class PagerComponent {
-  @Input() currentPage!: number;
-  @Input() totalPages!: number;
+  @Input() currentPage: number | undefined | null;
+  @Input() totalPages: number[] | undefined | null;
   @Output() setPage: EventEmitter<number> = new EventEmitter();
 }
