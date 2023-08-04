@@ -12,7 +12,7 @@ Given('I am registered user', () => {
 });
 
 And('I open Login page', () => {
-  cy.visit('#/login');
+  cy.visit('/login');
 });
 
 When('I input a correct username', () => {
@@ -20,7 +20,7 @@ When('I input a correct username', () => {
 });
 
 And('I input a correct password', () => {
-  cy.get("[placeholder='Password']").clear().type(userId);
+  cy.get("[placeholder='Password']").clear().type(userId).blur();
 });
 
 And('I click Login button', () => {
@@ -32,7 +32,11 @@ Then('my information is displayed in the header', () => {
 });
 
 And('I input incorrect password', () => {
-  cy.get("[placeholder='Password']").clear().type('111111111');
+  cy.get("[placeholder='Password']").clear().type('111111111').blur();
+});
+
+And('I click Login button', () => {
+  cy.getByE2eId('sign-in').click();
 });
 
 Then('I see an error message', () => {

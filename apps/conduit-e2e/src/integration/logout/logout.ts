@@ -12,7 +12,7 @@ Given('I am logged in to the system', () => {
 });
 
 And('I open Settings page', () => {
-  cy.visit('#/settings');
+  cy.visit('/settings');
 });
 
 When('I press on Logout button', () => {
