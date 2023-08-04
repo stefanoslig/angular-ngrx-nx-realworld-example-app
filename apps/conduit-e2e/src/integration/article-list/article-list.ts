@@ -12,7 +12,7 @@ Given('I am logged in to the system', () => {
 });
 
 And('I am on Home page', () => {
-  cy.visit('#/');
+  cy.visit('/');
 });
 
 And('I select the Global feed', () => {

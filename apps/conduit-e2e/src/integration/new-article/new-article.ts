@@ -14,7 +14,7 @@ Given('I am logged in to the system', () => {
 });
 
 And('I am on New Post page', () => {
-  cy.visit('#/editor');
+  cy.visit('/editor');
 });
 
 When('I input the title of the article', () => {
@@ -30,7 +30,7 @@ And('I input the body of the article', () => {
 });
 
 And('I input tags of the article', () => {
-  cy.get("[placeholder='Enter Tags']").clear().type('testing');
+  cy.get("[placeholder='Enter Tags']").clear().type('testing').blur();
 });
 
 And('I click Publish button', () => {

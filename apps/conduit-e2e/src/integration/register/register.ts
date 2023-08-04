@@ -8,7 +8,7 @@ beforeEach(() => {
 });
 
 Given('I open Register page', () => {
-  cy.visit('#/register');
+  cy.visit('/register');
 });
 
 When('I input correct username', () => {
@@ -20,7 +20,7 @@ And('I input correct email', () => {
 });
 
 And('I input correct password', () => {
-  cy.get("[placeholder='Password']").clear().type(userId);
+  cy.get("[placeholder='Password']").clear().type(userId).blur();
 });
 
 And('I click Sign up button', () => {
@@ -37,7 +37,11 @@ When('I input username that already exists', () => {
 });
 
 And('I input email that already exists', () => {
-  cy.get("[placeholder='Email']").clear().type(`${userId}@example.com`);
+  cy.get("[placeholder='Email']").clear().type(`${userId}@example.com`).blur();
+});
+
+And('I click Sign up button', () => {
+  cy.getByE2eId('sign-up').click();
 });
 
 Then(`an error message {string} is displayed`, (error: string) => {

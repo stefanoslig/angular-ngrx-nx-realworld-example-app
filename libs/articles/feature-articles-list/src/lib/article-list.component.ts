@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { articleListActions, articleListQuery, articlesActions } from '@realworld/articles/data-access';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
+import { PagerComponent } from '@realworld/ui/components';
 
 @Component({
   selector: 'cdt-article-list',
   standalone: true,
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.css'],
-  imports: [CommonModule, ArticleListItemComponent],
+  imports: [CommonModule, ArticleListItemComponent, PagerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {

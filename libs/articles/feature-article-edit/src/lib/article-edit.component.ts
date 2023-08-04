@@ -67,6 +67,5 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.store.dispatch(formsActions.initializeForm());
-    this.store.dispatch(articleActions.initializeArticle());
   }
 }
