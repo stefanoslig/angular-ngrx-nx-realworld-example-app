@@ -2,6 +2,7 @@ import { Article, Comment } from '@realworld/core/api-types';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { articleActions } from './article.actions';
 import { articlesActions } from '../articles.actions';
+import { articleEditActions } from '../article-edit/article-edit.actions';
 
 export interface ArticleState {
   data: Article;
@@ -58,8 +59,12 @@ export const articleFeature = createFeature({
       const comments: Comment[] = state.comments.filter((item) => item.id !== action.commentId);
       return { ...state, comments };
     }),
-    on(articleActions.initializeArticle, (state) => articleInitialState),
-    on(articleActions.deleteArticleFailure, (state) => articleInitialState),
+    on(
+      articleActions.initializeArticle,
+      articleEditActions.publishArticleSuccess,
+      articleActions.deleteArticleFailure,
+      (state) => articleInitialState,
+    ),
     on(articleActions.loadCommentsSuccess, (state, action) => ({
       ...state,
       comments: action.comments,
