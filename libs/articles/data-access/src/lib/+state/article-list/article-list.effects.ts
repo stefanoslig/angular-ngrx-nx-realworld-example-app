@@ -5,8 +5,6 @@ import { catchError, concatMap, map, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ArticlesService } from '../../services/articles.service';
 import { articleListQuery } from './article-list.selectors';
-import { articlesActions } from '../articles.actions';
-import { ActionsService } from '../../services/actions.service';
 
 export const setListPage$ = createEffect(
   (actions$ = inject(Actions)) => {
@@ -42,36 +40,6 @@ export const loadArticles$ = createEffect(
             }),
           ),
           catchError((error) => of(articleListActions.loadArticlesFailure({ error }))),
-        ),
-      ),
-    );
-  },
-  { functional: true },
-);
-
-export const favorite$ = createEffect(
-  (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
-    return actions$.pipe(
-      ofType(articlesActions.favorite),
-      concatMap(({ slug }) =>
-        actionsService.favorite(slug).pipe(
-          map((response) => articlesActions.favoriteSuccess({ article: response.article })),
-          catchError((error) => of(articlesActions.favoriteFailure(error))),
-        ),
-      ),
-    );
-  },
-  { functional: true },
-);
-
-export const unFavorite$ = createEffect(
-  (actions$ = inject(Actions), actionsService = inject(ActionsService)) => {
-    return actions$.pipe(
-      ofType(articlesActions.unfavorite),
-      concatMap(({ slug }) =>
-        actionsService.unfavorite(slug).pipe(
-          map((response) => articlesActions.unfavoriteSuccess({ article: response.article })),
-          catchError((error) => of(articlesActions.unfavoriteFailure(error))),
         ),
       ),
     );

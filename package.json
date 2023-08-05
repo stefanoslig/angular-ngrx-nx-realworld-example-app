@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "nx",
     "nx": "nx",
-    "start": "ng serve",
+    "start": "nx run conduit:serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
@@ -43,13 +43,13 @@
     "@ngrx/effects": "16.0.1",
     "@ngrx/router-store": "16.0.1",
     "@ngrx/store": "16.0.1",
+    "@nx/angular": "16.3.2",
     "core-js": "3.31.0",
     "eslint-plugin-ngrx": "2.1.4",
     "marked": "5.0.1",
     "rxjs": "7.8.1",
     "tslib": "2.5.3",
-    "zone.js": "0.13.0",
-    "@nx/angular": "16.3.2"
+    "zone.js": "0.13.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "16.0.5",
@@ -63,6 +63,9 @@
     "@angular/language-service": "16.0.5",
     "@ngrx/store-devtools": "16.0.1",
     "@nx/cypress": "16.3.2",
+    "@nx/eslint-plugin": "16.3.2",
+    "@nx/jest": "16.3.2",
+    "@nx/linter": "16.3.2",
     "@nx/storybook": "16.3.2",
     "@nx/workspace": "16.3.2",
     "@schematics/angular": "~16.0.5",
@@ -82,6 +85,7 @@
     "eslint": "8.42.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-cypress": "^2.10.3",
+    "eslint-plugin-rxjs": "^5.0.3",
     "eslint-plugin-storybook": "^0.6.12",
     "firebase-tools": "^9.0.0",
     "husky": "1.3.1",
@@ -98,10 +102,7 @@
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
     "typescript": "5.0.4",
-    "webpack": "^5.76.0",
-    "@nx/linter": "16.3.2",
-    "@nx/eslint-plugin": "16.3.2",
-    "@nx/jest": "16.3.2"
+    "webpack": "^5.76.0"
   },
   "husky": {
     "hooks": {

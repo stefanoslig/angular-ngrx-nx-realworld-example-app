@@ -13,3 +13,4 @@ export * from './lib/+state/article-edit/article-edit.actions';
 export * as articleEditEffects from './lib/+state/article-edit/article-edit.effects';
 export * as articleListEffects from './lib/+state/article-list/article-list.effects';
 export * as articleEffects from './lib/+state/article/article.effects';
+export * as articlesEffects from './lib/+state/articles.effects';
