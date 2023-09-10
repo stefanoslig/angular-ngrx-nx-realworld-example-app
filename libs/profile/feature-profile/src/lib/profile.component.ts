@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -18,13 +18,13 @@ import { profileActions, selectProfileState } from '@realworld/profile/data-acce
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {
+  private readonly store = inject(Store);
+
   profile$ = this.store.select(selectProfileState);
   currentUser$ = this.store.select(selectUser);
   isUser$: Subject<boolean> = new Subject();
   following!: boolean;
   username!: string;
-
-  constructor(private readonly store: Store) {}
 
   ngOnInit() {
     combineLatest([this.profile$, this.currentUser$])

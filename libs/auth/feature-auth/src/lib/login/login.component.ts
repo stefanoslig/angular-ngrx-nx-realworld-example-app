@@ -1,5 +1,5 @@
 import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { authActions } from '@realworld/auth/data-access';
@@ -32,10 +32,10 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private readonly store = inject(Store);
+
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
-
-  constructor(private readonly store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(formsActions.setStructure({ structure }));

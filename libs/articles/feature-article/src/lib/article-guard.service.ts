@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { articleActions, articleQuery } from '@realworld/articles/data-access';
@@ -7,7 +7,7 @@ import { filter, take, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ArticleGuardService implements CanActivate {
-  constructor(private readonly store: Store) {}
+  private readonly store = inject(Store);
 
   waitForArticleToLoad(): Observable<boolean> {
     return this.store.select(articleQuery.selectLoaded).pipe(

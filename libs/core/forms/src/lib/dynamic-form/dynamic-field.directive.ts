@@ -1,4 +1,4 @@
-import { ComponentRef, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Field } from '../+state/forms.interfaces';
@@ -17,11 +17,11 @@ const componentsMapper: { [key: string]: Type<Components> } = {
   standalone: true,
 })
 export class DynamicFieldDirective implements OnInit, OnChanges {
+  private readonly container = inject(ViewContainerRef);
+
   @Input() field!: Field;
   @Input() group!: FormGroup;
   component!: ComponentRef<Components>;
-
-  constructor(private container: ViewContainerRef) {}
 
   ngOnChanges() {
     if (this.component) {

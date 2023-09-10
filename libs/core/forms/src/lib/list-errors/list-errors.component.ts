@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -15,9 +15,10 @@ import { formsActions } from '../..';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListErrorsComponent implements OnInit, OnDestroy {
-  errors: string[] = [];
+  private readonly store = inject(Store);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  constructor(private readonly store: Store, private readonly changeDetectorRef: ChangeDetectorRef) {}
+  errors: string[] = [];
 
   ngOnInit() {
     this.store

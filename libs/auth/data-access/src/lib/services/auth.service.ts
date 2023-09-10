@@ -1,12 +1,12 @@
 import { ApiService } from '@realworld/core/http-client';
 import { UserResponse } from '@realworld/core/api-types';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginUser, LoginUserRequest, NewUserRequest, NewUser } from '@realworld/core/api-types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private apiService: ApiService) {}
+  private readonly apiService = inject(ApiService);
 
   user(): Observable<UserResponse> {
     return this.apiService.get<UserResponse>('/user');

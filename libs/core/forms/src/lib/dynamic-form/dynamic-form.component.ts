@@ -1,5 +1,5 @@
 import { Field } from '../+state/forms.interfaces';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { debounceTime, map, tap, filter } from 'rxjs/operators';
@@ -17,13 +17,13 @@ import { DynamicFieldDirective } from './dynamic-field.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit {
+  private readonly fb = inject(FormBuilder);
+
   @Input() structure$!: Observable<Field[]>;
   @Input() data$!: Observable<any>;
   @Input() touchedForm$!: Observable<boolean>;
   @Output() updateForm: EventEmitter<any> = new EventEmitter();
   form!: FormGroup;
-
-  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.structure$

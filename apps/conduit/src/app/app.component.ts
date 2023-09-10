@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { authActions, LocalStorageJwtService, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
@@ -16,10 +16,11 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+  private readonly store = inject(Store);
+  private readonly localStorageJwtService = inject(LocalStorageJwtService);
+
   user$ = this.store.select(selectUser);
   isLoggedIn$ = this.store.select(selectLoggedIn);
-
-  constructor(private readonly store: Store, private readonly localStorageJwtService: LocalStorageJwtService) {}
 
   ngOnInit() {
     this.localStorageJwtService

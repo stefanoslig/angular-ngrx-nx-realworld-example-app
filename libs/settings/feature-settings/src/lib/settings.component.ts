@@ -1,5 +1,5 @@
 import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { authActions, selectUser } from '@realworld/auth/data-access';
@@ -53,10 +53,11 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit {
+  private readonly store = inject(Store);
+  private readonly settingsStoreService = inject(SettingsStoreService);
+
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
-
-  constructor(private readonly store: Store, private readonly settingsStoreService: SettingsStoreService) {}
 
   ngOnInit() {
     this.store.dispatch(authActions.getUser());

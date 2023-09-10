@@ -1,5 +1,5 @@
 import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -33,6 +33,8 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
+  private readonly store = inject(Store);
+
   article$ = this.store.select(articleQuery.selectData);
   comments$ = this.store.select(articleQuery.selectComments);
   canModify = false;
@@ -41,8 +43,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   data$ = this.store.select(ngrxFormsQuery.selectData);
   currentUser$ = this.store.select(selectUser);
   touchedForm$ = this.store.select(ngrxFormsQuery.selectTouched);
-
-  constructor(private readonly store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(formsActions.setStructure({ structure }));

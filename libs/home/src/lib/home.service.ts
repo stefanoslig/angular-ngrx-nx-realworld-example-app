@@ -1,10 +1,10 @@
 import { ApiService } from '@realworld/core/http-client';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class HomeService {
-  constructor(private apiService: ApiService) {}
+  private readonly apiService = inject(ApiService);
 
   getTags(): Observable<{ tags: string[] }> {
     return this.apiService.get('/tags');

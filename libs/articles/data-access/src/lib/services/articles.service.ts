@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '@realworld/core/http-client';
 import { Article, ArticleResponse, MultipleCommentsResponse, SingleCommentResponse } from '@realworld/core/api-types';
@@ -7,7 +7,7 @@ import { HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {
-  constructor(private apiService: ApiService) {}
+  private readonly apiService = inject(ApiService);
 
   getArticle(slug: string): Observable<ArticleResponse> {
     return this.apiService.get<ArticleResponse>('/articles/' + slug);

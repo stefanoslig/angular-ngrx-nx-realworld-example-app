@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   articleListInitialState,
@@ -25,11 +25,12 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
+  private readonly store = inject(Store);
+  private readonly homeStore = inject(HomeStoreService);
+
   listConfig$ = this.store.select(articleListQuery.selectListConfig);
   tags$ = this.homeStore.tags$;
   isAuthenticated = false;
-
-  constructor(private readonly store: Store, private readonly homeStore: HomeStoreService) {}
 
   ngOnInit() {
     this.store

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { articleListActions, articleListQuery, articlesActions } from '@realworld/articles/data-access';
@@ -15,12 +15,13 @@ import { PagerComponent } from '@realworld/ui/components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {
+  private readonly store = inject(Store);
+  private readonly router = inject(Router);
+
   totalPages$ = this.store.select(articleListQuery.selectTotalPages);
   articles$ = this.store.select(articleListQuery.selectArticleEntities);
   listConfig$ = this.store.select(articleListQuery.selectListConfig);
   isLoading$ = this.store.select(articleListQuery.isLoading);
-
-  constructor(private readonly store: Store, private readonly router: Router) {}
 
   favorite(slug: string) {
     this.store.dispatch(articlesActions.favorite({ slug }));
