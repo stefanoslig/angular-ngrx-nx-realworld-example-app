@@ -44,7 +44,7 @@
     "@ngrx/router-store": "16.2.0",
     "@ngrx/store": "16.2.0",
     "@nx/angular": "16.8.1",
-    "core-js": "3.31.0",
+    "core-js": "3.33.0",
     "eslint-plugin-ngrx": "2.1.4",
     "marked": "5.0.1",
     "rxjs": "7.8.1",
