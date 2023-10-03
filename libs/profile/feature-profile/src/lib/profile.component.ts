@@ -1,14 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { selectUser } from '@realworld/auth/data-access';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { profileActions, selectProfileState } from '@realworld/profile/data-access';
 
-@UntilDestroy()
 @Component({
   standalone: true,
   selector: 'cdt-profile',
@@ -19,6 +18,7 @@ import { profileActions, selectProfileState } from '@realworld/profile/data-acce
 })
 export class ProfileComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly destroyRef = inject(DestroyRef);
 
   profile$ = this.store.select(selectProfileState);
   currentUser$ = this.store.select(selectUser);
@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
           this.following = p.following;
         }),
         map(([p, u]) => p.username === u.username),
-        untilDestroyed(this),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((isUser) => this.isUser$.next(isUser));
   }
