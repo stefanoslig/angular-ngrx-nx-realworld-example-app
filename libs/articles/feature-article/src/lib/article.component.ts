@@ -1,8 +1,8 @@
 import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { articleActions, articleQuery, articlesActions } from '@realworld/articles/data-access';
 import { selectAuthState, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
@@ -23,7 +23,6 @@ const structure: Field[] = [
   },
 ];
 
-@UntilDestroy()
 @Component({
   selector: 'cdt-article',
   standalone: true,
@@ -34,7 +33,8 @@ const structure: Field[] = [
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
-
+  private readonly destroyRef = inject(DestroyRef);
+  
   article$ = this.store.select(articleQuery.selectData);
   comments$ = this.store.select(articleQuery.selectComments);
   canModify = false;
@@ -52,7 +52,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .pipe(
         filter((auth) => auth.loggedIn),
         (auth$) => combineLatest([auth$, this.store.select(articleQuery.getAuthorUsername)]),
-        untilDestroyed(this),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(([auth, username]) => {
         this.canModify = auth.user.username === username;

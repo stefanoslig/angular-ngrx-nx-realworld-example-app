@@ -5,7 +5,6 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   selector: 'cdt-tags-list',
   standalone: true,
   templateUrl: './tags-list.component.html',
-  styleUrls: ['./tags-list.component.css'],
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

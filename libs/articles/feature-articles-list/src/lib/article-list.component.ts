@@ -10,7 +10,6 @@ import { PagerComponent } from '@realworld/ui/components';
   selector: 'cdt-article-list',
   standalone: true,
   templateUrl: './article-list.component.html',
-  styleUrls: ['./article-list.component.css'],
   imports: [CommonModule, ArticleListItemComponent, PagerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

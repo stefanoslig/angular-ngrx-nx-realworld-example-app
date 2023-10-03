@@ -1,10 +1,10 @@
 import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
-import { articleActions, articleEditActions, articleQuery } from '@realworld/articles/data-access';
+import { articleEditActions, articleQuery } from '@realworld/articles/data-access';
 
 const structure: Field[] = [
   {
@@ -33,7 +33,6 @@ const structure: Field[] = [
   },
 ];
 
-@UntilDestroy()
 @Component({
   selector: 'cdt-article-edit',
   standalone: true,
@@ -44,6 +43,7 @@ const structure: Field[] = [
 })
 export class ArticleEditComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
+  private readonly destroyRef = inject(DestroyRef);
 
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
@@ -53,7 +53,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
 
     this.store
       .select(articleQuery.selectData)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((article) => this.store.dispatch(formsActions.setData({ data: article })));
   }
 
