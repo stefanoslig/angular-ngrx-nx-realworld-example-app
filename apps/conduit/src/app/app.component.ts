@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -12,7 +12,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [FooterComponent, NavbarComponent, RouterModule, CommonModule],
+  imports: [FooterComponent, NavbarComponent, RouterModule, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {

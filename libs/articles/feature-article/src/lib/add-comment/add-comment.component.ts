@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
   selector: 'cdt-add-comment',
   standalone: true,
   templateUrl: './add-comment.component.html',
-  styleUrls: ['./add-comment.component.css'],
   imports: [ListErrorsComponent, DynamicFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

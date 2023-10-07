@@ -1,3 +1,5 @@
 <form class="dynamic-form" [formGroup]="form" autocomplete="off">
-  <ng-container *ngFor="let field of structure$ | async" appDynamicField [field]="field" [group]="form"> </ng-container>
+  @for (field of structure$ | async; track field.name) {
+    <ng-container appDynamicField [field]="field" [group]="form"> </ng-container>
+  }
 </form>

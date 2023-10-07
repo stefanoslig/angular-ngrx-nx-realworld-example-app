@@ -7,8 +7,7 @@ import { User } from '@realworld/core/api-types';
   selector: 'cdt-navbar',
   standalone: true,
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
