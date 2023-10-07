@@ -43,8 +43,10 @@
       </div>
 
       <div class="col-md-3">
-        <div class="sidebar">
+        <div class="sidebar" #trigger>
+          @defer (on viewport(trigger)) {
           <cdt-tags-list (setListTag)="setListTag($event)" [tags]="tags$ | async"></cdt-tags-list>
+          }
         </div>
       </div>
     </div>

@@ -71,7 +71,7 @@ export class DynamicFormComponent implements OnInit {
 
   private listenFormChanges(form: FormGroup) {
     form.valueChanges
-      .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef),)
+      .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef))
       .subscribe((changes: any) => this.updateForm.emit(changes));
   }
 }
