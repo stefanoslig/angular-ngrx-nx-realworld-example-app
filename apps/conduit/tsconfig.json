@@ -1,8 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "types": ["node", "jest"]
-  },
   "include": [],
   "files": [],
   "references": [
@@ -18,5 +15,11 @@
     {
       "path": "./.storybook/tsconfig.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "types": ["node", "jest"],
+  },
+  "angularCompilerOptions": {
+    "_enabledBlockTypes": ["if", "for", "switch", "defer"]
+  }
 }

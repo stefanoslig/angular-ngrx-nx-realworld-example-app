@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
   selector: 'cdt-article-comment',
   standalone: true,
   templateUrl: './article-comment.component.html',
-  styleUrls: ['./article-comment.component.css'],
   imports: [CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
