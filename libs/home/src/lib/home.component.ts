@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly homeStore = inject(HomeStoreService);
   private readonly destroyRef = inject(DestroyRef);
-  
+
   listConfig$ = this.store.select(articleListQuery.selectListConfig);
   tags$ = this.homeStore.tags$;
   isAuthenticated = false;

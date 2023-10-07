@@ -36,8 +36,8 @@
 
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
+        @if(isAuthenticated$ | async) {
         <cdt-add-comment
-          *ngIf="isAuthenticated$ | async"
           [article]="article$ | async"
           [data$]="data$"
           [structure$]="structure$"
@@ -47,19 +47,18 @@
           (updateForm)="updateForm($event)"
         >
         </cdt-add-comment>
-
-        <div *ngIf="(isAuthenticated$ | async) === false">
-          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
-          this article.
-        </div>
-
+        } @else {
+        <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
+        article. }
+        
+        @for (comment of comments$ | async; track comment.id) {
         <cdt-article-comment
-          *ngFor="let comment of comments$ | async"
           [currentUser]="currentUser$ | async"
           (delete)="deleteComment($event)"
           [article]="article$ | async"
           [comment]="comment"
         ></cdt-article-comment>
+        }
       </div>
     </div>
   </div>

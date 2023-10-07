@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,7 @@ import { PagerComponent } from '@realworld/ui/components';
   selector: 'cdt-article-list',
   standalone: true,
   templateUrl: './article-list.component.html',
-  imports: [CommonModule, ArticleListItemComponent, PagerComponent],
+  imports: [ArticleListItemComponent, PagerComponent, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {
