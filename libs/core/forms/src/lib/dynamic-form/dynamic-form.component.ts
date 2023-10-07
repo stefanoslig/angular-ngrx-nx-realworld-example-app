@@ -20,7 +20,6 @@ import { DynamicFieldDirective } from './dynamic-field.directive';
   selector: 'cdt-dynamic-form',
   standalone: true,
   templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.css'],
   imports: [CommonModule, ReactiveFormsModule, DynamicFieldDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

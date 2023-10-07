@@ -37,27 +37,27 @@
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
         @if(isAuthenticated$ | async) {
-        <cdt-add-comment
-          [article]="article$ | async"
-          [data$]="data$"
-          [structure$]="structure$"
-          [currentUser]="currentUser$ | async"
-          [touchedForm$]="touchedForm$"
-          (submitComment)="submit($event)"
-          (updateForm)="updateForm($event)"
-        >
-        </cdt-add-comment>
+          <cdt-add-comment
+            [article]="article$ | async"
+            [data$]="data$"
+            [structure$]="structure$"
+            [currentUser]="currentUser$ | async"
+            [touchedForm$]="touchedForm$"
+            (submitComment)="submit($event)"
+            (updateForm)="updateForm($event)"
+          >
+          </cdt-add-comment>
         } @else {
-        <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
+          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
         article. }
         
         @for (comment of comments$ | async; track comment.id) {
-        <cdt-article-comment
-          [currentUser]="currentUser$ | async"
-          (delete)="deleteComment($event)"
-          [article]="article$ | async"
-          [comment]="comment"
-        ></cdt-article-comment>
+          <cdt-article-comment
+            [currentUser]="currentUser$ | async"
+            (delete)="deleteComment($event)"
+            [article]="article$ | async"
+            [comment]="comment"
+          ></cdt-article-comment>
         }
       </div>
     </div>

@@ -17,8 +17,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'cdt-list-errors',
   standalone: true,
   templateUrl: './list-errors.component.html',
-  styleUrls: ['./list-errors.component.css'],
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListErrorsComponent implements OnInit, OnDestroy {
