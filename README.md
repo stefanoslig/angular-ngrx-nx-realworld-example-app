@@ -1,5 +1,7 @@
 # ![RealWorld Example App](logo.png)
 
+I'm migrating this project to the new control flow and defer block (Angular 17). Check the progress [here](https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app/pull/264)
+
 <!-- [![pipeline status](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/badges/master/pipeline.svg)](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/commits/master) -->
 
 > ### Angular, ngrx/platform, nrwl/nx codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
@@ -11,95 +13,6 @@ This codebase was created to demonstrate a fully fledged fullstack application b
 We've gone to great lengths to adhere to the Angular community styleguides & best practices.
 
 For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
-
-# Getting started
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5 using [Nrwl Nx](https://nrwl.io/nx).
-
-## Nx - Smart, Fast and Extensible Build System
-
-<p style="text-align: center;"><a href="https://nx.dev"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="180"></a></p>
-
-Nx is a smart, fast and extensible build system with first class monorepo support and powerful integrations. It helps you architect, test, and build at any scale, integrating seamlessly with modern technologies and libraries while providing a robust CLI, caching, dependency management, and more.
-
-## Quick Start & Documentation
-
-[Nx Documentation](https://nx.dev/angular)
-
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
-
-[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
-
-## Adding capabilities to your workspace
-
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
-
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
-
-- [Angular](https://angular.io)
-  - `ng add @nx/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
-
-There are also many [community plugins](https://nx.dev/community) you could add.
-
-## Generate an application
-
-Run `ng g @nx/angular:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nx/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@test/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
 
 ## Functionality overview
 
@@ -134,3 +47,113 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
 - Profile page (URL: /#/profile/:username, /#/profile/:username/favorites )
   - Show basic user info
   - List of articles populated from author's created articles or author's favorited articles
+ 
+## Commands
+
+### Run the application
+
+`npm run start`
+
+### Unit tests
+
+Run all the tests: `nx run-many -t test`
+
+### Lint
+
+`nx run-many -t lint`
+
+### Architecture
+
+#### Folders/Libs structure
+For this project I created a monorepo. There is one app for the moment (conduit) which consumes the libraries under the libs folder. 
+
+The folder structure is:
+~~~
+├── libs
+│   ├── articles
+│   │   ├── data-access
+│   │   ├── feature-article-edit
+│   │   ├── feature-article
+│   │   ├── feature-articles-list
+│   ├── auth
+│   │   ├── data-access
+│   │   ├── feature-auth
+│   ├── core
+│   │   ├── api-types
+│   │   ├── error-handler
+│   │   ├── http-client
+│   │   ├── forms
+│   ├── profile
+│   │   ├── data-access
+│   │   ├── feature-profile
+│   ├── ui
+│   │   ├── components
+~~~
+
+I used two classifiers to name my libraries. The first classifier is the `scope` and the second the `type`. The main reason is that I want every developer when he looks a library to understand where this library can be used and which kind of services/components/etc contains. 
+
+The `scope` is the section (domain) of the app the library can be used.  It gives a clear indication that a feature belongs to a specific domain. For example the libraries under `users` scope, are used in the users and favourite users pages. The ibraries under the `core` scope can be reused between all the sections of the app. ***The `core` scope will be rename soon to `shared`***.
+
+The `type` indicates the purpose of a library. I have used a number of different types (feature, data-access, ui, api-types) The `feature-...` type contains smart components. These are components which enable the communication with the data-sources (most likely they inject api services). The `data-access` type contains  code for interacting with the server. The `ui` type contains dumb (presentational) components. These components are reusable in the scope of this library
+
+#### Standalone components 
+
+I have used only standalone components. You won't see any modules in the app.
+
+#### Lazy loaded components
+
+As you can see from the route configuration, the two main pages in the app are loaded lazily. This will make the initial loading time of the app faster.
+
+```ts
+ {
+  path: '',
+  redirectTo: 'home',
+  pathMatch: 'full',
+},
+{
+  path: 'home',
+  loadChildren: () => import('@realworld/home/src/lib/home.routes').then((home) => home.HOME_ROUTES),
+},
+{
+  path: 'login',
+  loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.LoginComponent),
+},
+{
+  path: 'register',
+  loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.RegisterComponent),
+},
+{
+  path: 'article',
+  loadChildren: () => import('@realworld/articles/article').then((m) => m.ARTICLE_ROUTES),
+},
+{
+  path: 'settings',
+  loadComponent: () =>
+    import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
+},
+{
+  path: 'editor',
+  loadChildren: () => import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),
+  canActivate: [authGuard],
+},
+{
+  path: 'profile',
+  loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
+},
+```
+
+#### State management
+**TBD**
+
+#### The smart-dumb components design pattern for the components:
+
+There is a clear distinction in the codebase between the smart and dumb components. The main reason behind this decision is that I want most of my components to be reusable and easier to be tested. That means that they should not have dependencies and they just consume the data they get from the smart component. Also it makes clearer a compoenent's responsibility.
+
+#### Avoid using external dependencies
+As you can see in the package.json, we didn't include external libraries, like `angular-material`, libs for the ui components, state management,etc.  The reason is that it might be tempting to use a library like this in the short term to develop something fast, but in the long term they can introduce many problems:
+* opinionated styles
+* make the migration to newer versions of Angular more difficult
+* not full control on them
+
+#### Testing
+**TBD**
