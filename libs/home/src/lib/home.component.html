@@ -43,10 +43,10 @@
       </div>
 
       <div class="col-md-3">
-        <div class="sidebar" #trigger>
-          @defer (on viewport(trigger)) {
+        <div class="sidebar">
+          @defer (when (tags$ | async).length>0) {
           <cdt-tags-list (setListTag)="setListTag($event)" [tags]="tags$ | async"></cdt-tags-list>
-          }
+          } @placeholder { loading... }
         </div>
       </div>
     </div>

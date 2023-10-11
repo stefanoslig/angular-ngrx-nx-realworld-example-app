@@ -1,5 +1,3 @@
-<span hidden>{{isLoading$ | async}}</span> <!-- workaround - @if is not working with the async pipe if I don't do this -->
-
 @if(!(isLoading$ | async)) {
   @for (article of articles$ | async; track article.slug) {
     <cdt-article-list-item
