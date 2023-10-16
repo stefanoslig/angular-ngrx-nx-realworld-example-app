@@ -43,7 +43,7 @@
     "@ngrx/effects": "16.3.0",
     "@ngrx/router-store": "16.3.0",
     "@ngrx/store": "16.3.0",
-    "@nx/angular": "16.8.1",
+    "@nx/angular": "16.10.0",
     "core-js": "3.31.0",
     "eslint-plugin-ngrx": "2.1.4",
     "marked": "5.0.1",
@@ -62,12 +62,12 @@
     "@angular/compiler-cli": "16.2.4",
     "@angular/language-service": "16.2.4",
     "@ngrx/store-devtools": "16.3.0",
-    "@nx/cypress": "16.8.1",
-    "@nx/eslint-plugin": "16.8.1",
-    "@nx/jest": "16.8.1",
-    "@nx/linter": "16.8.1",
-    "@nx/storybook": "16.8.1",
-    "@nx/workspace": "16.8.1",
+    "@nx/cypress": "16.10.0",
+    "@nx/eslint-plugin": "16.10.0",
+    "@nx/jest": "16.10.0",
+    "@nx/linter": "16.10.0",
+    "@nx/storybook": "16.10.0",
+    "@nx/workspace": "16.10.0",
     "@schematics/angular": "16.2.1",
     "@storybook/addon-essentials": "7.4.1",
     "@storybook/angular": "7.4.1",
@@ -94,7 +94,7 @@
     "jest-environment-jsdom": "29.6.4",
     "jest-preset-angular": "13.1.1",
     "ng-mocks": "^14.10.0",
-    "nx": "16.8.1",
+    "nx": "16.10.0",
     "prettier": "2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -110,3 +110,4 @@
     }
   }
 }
+
