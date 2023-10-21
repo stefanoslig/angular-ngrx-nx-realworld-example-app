@@ -2,37 +2,33 @@
   "migrations": [
     {
       "cli": "nx",
-      "version": "16.8.0-beta.3",
-      "description": "Escape $ in env variables",
-      "implementation": "./src/migrations/update-16-8-0/escape-dollar-sign-env-variables",
+      "version": "17.0.0-beta.1",
+      "description": "Updates the default cache directory to .nx/cache",
+      "implementation": "./src/migrations/update-17-0-0/move-cache-directory",
       "package": "nx",
-      "name": "16.8.0-escape-dollar-sign-env"
+      "name": "17.0.0-move-cache-directory"
     },
     {
       "cli": "nx",
-      "version": "16.7.0-beta.6",
-      "requires": {
-        "@angular/core": ">=16.2.0"
-      },
-      "description": "Update the @angular/cli package version to ~16.2.0.",
-      "factory": "./src/migrations/update-16-7-0/update-angular-cli",
-      "package": "@nx/angular",
-      "name": "update-angular-cli-version-16-2-0"
+      "version": "17.0.0-beta.3",
+      "description": "Use minimal config for tasksRunnerOptions",
+      "implementation": "./src/migrations/update-17-0-0/use-minimal-config-for-tasks-runner-options",
+      "package": "nx",
+      "name": "17.0.0-use-minimal-config-for-tasks-runner-options"
     },
     {
-      "cli": "nx",
-      "version": "16.8.0-beta.4",
-      "description": "Update to Cypress v13. Most noteable change is video recording is off by default. This migration will only update if the workspace is already on Cypress v12. https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-130",
-      "implementation": "./src/migrations/update-16-8-0/cypress-13",
-      "package": "@nx/cypress",
-      "name": "update-16-8-0-cypress-13"
+      "version": "17.0.0-rc.1",
+      "description": "Migration for v17.0.0-rc.1",
+      "implementation": "./src/migrations/update-17-0-0/rm-default-collection-npm-scope",
+      "package": "nx",
+      "name": "rm-default-collection-npm-scope"
     },
     {
-      "version": "16.8.0",
-      "description": "update-16-8-0-add-ignored-files",
-      "implementation": "./src/migrations/update-16-8-0-add-ignored-files/update-16-8-0-add-ignored-files",
-      "package": "@nx/linter",
-      "name": "update-16-8-0-add-ignored-files"
+      "version": "17.0.0-beta.7",
+      "description": "update-17-0-0-rename-to-eslint",
+      "implementation": "./src/migrations/update-17-0-0-rename-to-eslint/update-17-0-0-rename-to-eslint",
+      "package": "@nx/eslint",
+      "name": "update-17-0-0-rename-to-eslint"
     }
   ]
 }

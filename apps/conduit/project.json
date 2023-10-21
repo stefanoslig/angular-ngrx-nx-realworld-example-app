@@ -65,10 +65,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "conduit:build:production"
+          "buildTarget": "conduit:build:production"
         },
         "development": {
-          "browserTarget": "conduit:build:development"
+          "buildTarget": "conduit:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -76,11 +76,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "conduit:build"
+        "buildTarget": "conduit:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": ["apps/conduit/src/**/*.ts", "apps/conduit/src/**/*.html"]
       },
@@ -99,7 +99,7 @@
       "options": {
         "port": 4400,
         "configDir": "apps/conduit/.storybook",
-        "browserTarget": "conduit:build",
+        "buildTarget": "conduit:build",
         "compodoc": false
       },
       "configurations": {
@@ -114,7 +114,7 @@
       "options": {
         "outputDir": "dist/storybook/conduit",
         "configDir": "apps/conduit/.storybook",
-        "browserTarget": "conduit:build",
+        "buildTarget": "conduit:build",
         "compodoc": false
       },
       "configurations": {

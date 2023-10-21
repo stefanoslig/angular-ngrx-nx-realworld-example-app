@@ -14,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": ["libs/ui/components/src/**/*.ts", "libs/ui/components/src/**/*.html"]
       }
@@ -24,7 +24,7 @@
       "options": {
         "port": 4400,
         "configDir": "libs/ui/components/.storybook",
-        "browserTarget": "ui-components:build-storybook",
+        "buildTarget": "ui-components:build-storybook",
         "compodoc": false
       },
       "configurations": {
@@ -39,7 +39,7 @@
       "options": {
         "outputDir": "dist/storybook/ui-components",
         "configDir": "libs/ui/components/.storybook",
-        "browserTarget": "ui-components:build-storybook",
+        "buildTarget": "ui-components:build-storybook",
         "compodoc": false
       },
       "configurations": {
