@@ -6,7 +6,6 @@ import { Article } from '@realworld/core/api-types';
   selector: 'cdt-article-meta',
   standalone: true,
   templateUrl: './article-meta.component.html',
-  styleUrls: ['./article-meta.component.css'],
   imports: [RouterModule, CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

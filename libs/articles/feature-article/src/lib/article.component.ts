@@ -1,8 +1,8 @@
 import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { articleActions, articleQuery, articlesActions } from '@realworld/articles/data-access';
 import { selectAuthState, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
@@ -11,6 +11,7 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { Store } from '@ngrx/store';
+import { RouterLink } from '@angular/router';
 
 const structure: Field[] = [
   {
@@ -23,17 +24,17 @@ const structure: Field[] = [
   },
 ];
 
-@UntilDestroy()
 @Component({
   selector: 'cdt-article',
   standalone: true,
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
-  imports: [CommonModule, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent],
+  imports: [CommonModule, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
+  private readonly destroyRef = inject(DestroyRef);
 
   article$ = this.store.select(articleQuery.selectData);
   comments$ = this.store.select(articleQuery.selectComments);
@@ -52,7 +53,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .pipe(
         filter((auth) => auth.loggedIn),
         (auth$) => combineLatest([auth$, this.store.select(articleQuery.getAuthorUsername)]),
-        untilDestroyed(this),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(([auth, username]) => {
         this.canModify = auth.user.username === username;

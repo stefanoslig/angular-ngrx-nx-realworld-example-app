@@ -1,5 +1,10 @@
-<ul class="error-messages" *ngIf="errors?.length > 0">
-  <li data-e2e-id="error" *ngFor="let error of errors">
-    {{ error }}
-  </li>
-</ul>
+@if (errors?.length > 0) {
+  <ul class="error-messages">
+  @for (error of errors; track error) {
+    <li data-e2e-id="error">
+      {{ error }}
+    </li>
+  }
+  </ul>
+}
+

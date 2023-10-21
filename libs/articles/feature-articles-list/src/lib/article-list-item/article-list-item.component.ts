@@ -1,13 +1,12 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { NgClass, DatePipe } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'cdt-article-list-item',
   standalone: true,
   templateUrl: './article-list-item.component.html',
-  styleUrls: ['./article-list-item.component.css'],
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule, NgClass, DatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {

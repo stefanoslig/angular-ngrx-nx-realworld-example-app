@@ -1,23 +1,31 @@
 import { Field } from '../+state/forms.interfaces';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { debounceTime, map, tap, filter } from 'rxjs/operators';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CommonModule } from '@angular/common';
 import { DynamicFieldDirective } from './dynamic-field.directive';
 
-@UntilDestroy()
 @Component({
   selector: 'cdt-dynamic-form',
   standalone: true,
   templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.css'],
   imports: [CommonModule, ReactiveFormsModule, DynamicFieldDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly destroyRef = inject(DestroyRef);
 
   @Input() structure$!: Observable<Field[]>;
   @Input() data$!: Observable<any>;
@@ -32,7 +40,7 @@ export class DynamicFormComponent implements OnInit {
         tap((f) => (this.form = f)),
         tap((f) => this.listenFormChanges(f)),
         (f$) => combineLatest([f$, this.data$]),
-        untilDestroyed(this),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(this.patchValue);
 
@@ -40,7 +48,7 @@ export class DynamicFormComponent implements OnInit {
       this.touchedForm$
         .pipe(
           filter((t) => !t && !!this.form),
-          untilDestroyed(this),
+          takeUntilDestroyed(this.destroyRef),
         )
         .subscribe(() => this.form.reset());
     }
@@ -62,7 +70,7 @@ export class DynamicFormComponent implements OnInit {
 
   private listenFormChanges(form: FormGroup) {
     form.valueChanges
-      .pipe(debounceTime(100), untilDestroyed(this))
+      .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef))
       .subscribe((changes: any) => this.updateForm.emit(changes));
   }
 }

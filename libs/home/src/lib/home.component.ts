@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   articleListInitialState,
   articleListQuery,
@@ -13,8 +13,8 @@ import { ArticleListComponent } from '@realworld/articles/feature-articles-list/
 import { HomeStoreService } from './home.store';
 import { provideComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
+import { delay } from 'rxjs';
 
-@UntilDestroy()
 @Component({
   selector: 'cdt-home',
   standalone: true,
@@ -27,6 +27,7 @@ import { Store } from '@ngrx/store';
 export class HomeComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly homeStore = inject(HomeStoreService);
+  private readonly destroyRef = inject(DestroyRef);
 
   listConfig$ = this.store.select(articleListQuery.selectListConfig);
   tags$ = this.homeStore.tags$;
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.store
       .select(selectLoggedIn)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((isLoggedIn) => {
         this.isAuthenticated = isLoggedIn;
         this.getArticles();

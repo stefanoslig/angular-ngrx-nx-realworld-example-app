@@ -1,7 +1,7 @@
 import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Validators } from '@angular/forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { authActions, selectUser } from '@realworld/auth/data-access';
 import { SettingsStoreService } from './settings.store';
 import { Store } from '@ngrx/store';
@@ -42,7 +42,6 @@ const structure: Field[] = [
   },
 ];
 
-@UntilDestroy()
 @Component({
   standalone: true,
   selector: 'cdt-settings',
@@ -55,6 +54,7 @@ const structure: Field[] = [
 export class SettingsComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly settingsStoreService = inject(SettingsStoreService);
+  private readonly destroyRef = inject(DestroyRef);
 
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
@@ -64,7 +64,7 @@ export class SettingsComponent implements OnInit {
     this.store.dispatch(formsActions.setStructure({ structure }));
     this.store
       .select(selectUser)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((user) => this.store.dispatch(formsActions.setData({ data: user })));
   }
 

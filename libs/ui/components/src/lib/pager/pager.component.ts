@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
@@ -7,7 +7,7 @@ import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from 
   templateUrl: './pager.component.html',
   styleUrls: ['./pager.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
+  imports: [NgClass],
 })
 export class PagerComponent {
   @Input() currentPage: number | undefined | null;
