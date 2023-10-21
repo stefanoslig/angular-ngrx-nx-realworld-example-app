@@ -1,6 +1,6 @@
 # ![RealWorld Example App](logo.png)
 
-I'm migrating this project to the new control flow and defer block (Angular 17). Check the progress [here](https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app/pull/264)
+### This project is already migrated to Angular v17 and to the new Control Flow and Deferred Loading.
 
 <!-- [![pipeline status](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/badges/master/pipeline.svg)](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/commits/master) -->
 
