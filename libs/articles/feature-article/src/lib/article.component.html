@@ -1,9 +1,9 @@
-<div class="article-page">
+<div class="article-page" *ngIf="article$ | async as article">
   <div class="banner">
     <div class="container">
-      <h1 data-e2e-id="article-title">{{ (article$ | async).title }}</h1>
+      <h1 data-e2e-id="article-title">{{ article.title }}</h1>
       <cdt-article-meta
-        [article]="article$ | async"
+        [article]="article"
         (follow)="follow($event)"
         (unfollow)="unfollow($event)"
         (favorite)="favorite($event)"
@@ -18,7 +18,7 @@
   <div class="container page">
     <div class="row article-content">
       <div class="col-md-12">
-        <div [innerHTML]="(article$ | async)?.body | markdown"></div>
+        <div [innerHTML]="article.body | markdown"></div>
       </div>
     </div>
     <hr />
@@ -50,7 +50,7 @@
         } @else {
           <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
         article. }
-        
+
         @for (comment of comments$ | async; track comment.id) {
           <cdt-article-comment
             [currentUser]="currentUser$ | async"
