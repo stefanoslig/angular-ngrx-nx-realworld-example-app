@@ -52,10 +52,10 @@
     "zone.js": "0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1602.7",
-    "@angular-devkit/build-angular": "17.0.0-rc.2",
-    "@angular-devkit/core": "17.0.0-rc.2",
-    "@angular-devkit/schematics": "17.0.0-rc.2",
+    "@angular-devkit/architect": "0.1700.0",
+    "@angular-devkit/build-angular": "17.0.0",
+    "@angular-devkit/core": "17.0.0",
+    "@angular-devkit/schematics": "17.0.0",
     "@angular-eslint/eslint-plugin": "16.2.0",
     "@angular-eslint/eslint-plugin-template": "16.2.0",
     "@angular-eslint/template-parser": "16.2.0",
@@ -68,7 +68,7 @@
     "@nx/jest": "17.0.3",
     "@nx/storybook": "17.0.3",
     "@nx/workspace": "17.0.3",
-    "@schematics/angular": "16.2.1",
+    "@schematics/angular": "16.2.10",
     "@storybook/addon-essentials": "7.5.1",
     "@storybook/angular": "7.5.1",
     "@storybook/builder-webpack5": "7.0.18",
