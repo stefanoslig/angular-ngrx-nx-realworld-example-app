@@ -71,7 +71,7 @@
     "@schematics/angular": "17.0.0",
     "@storybook/addon-essentials": "7.5.3",
     "@storybook/angular": "7.5.3",
-    "@storybook/builder-webpack5": "7.0.18",
+    "@storybook/builder-webpack5": "7.5.3",
     "@storybook/core-server": "7.5.3",
     "@storybook/manager-webpack5": "6.5.16",
     "@types/jest": "29.5.4",
