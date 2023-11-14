@@ -5,6 +5,7 @@ import { LocalStorageJwtService } from './local-storage-jwt.service';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cdt-test-comp',
@@ -14,6 +15,7 @@ class TestComponent {}
 
 describe('authGuard', () => {
   let storage: LocalStorageJwtService;
+  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,6 +31,7 @@ describe('authGuard', () => {
     });
 
     storage = TestBed.inject(LocalStorageJwtService);
+    router = TestBed.inject(Router);
   });
 
   it('should return true if the user is logged in', () => {
@@ -37,11 +40,11 @@ describe('authGuard', () => {
     expect(result).toBeObservable(cold('(a|)', { a: true }));
   });
 
-  it('should return false if the user is not logged in', () => {
+  it('should return login urlTree if the user is not logged in', () => {
     jest.spyOn(storage, 'getItem').mockImplementationOnce(() => of(null));
 
     const result = TestBed.runInInjectionContext(() => authGuard());
 
-    expect(result).toBeObservable(cold('(a|)', { a: false }));
+    expect(result).toBeObservable(cold('(a|)', { a: router.parseUrl('/login') }));
   });
 });
