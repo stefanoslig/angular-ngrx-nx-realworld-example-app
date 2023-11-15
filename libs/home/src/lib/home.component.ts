@@ -31,24 +31,20 @@ export class HomeComponent implements OnInit {
 
   listConfig$ = this.store.select(articleListQuery.selectListConfig);
   tags$ = this.homeStore.tags$;
-  isAuthenticated = false;
 
   ngOnInit() {
     this.store
       .select(selectLoggedIn)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((isLoggedIn) => {
-        this.isAuthenticated = isLoggedIn;
-        this.getArticles();
-      });
+      .subscribe((isLoggedIn) => this.getArticles(isLoggedIn));
   }
 
   setListTo(type: ListType = 'ALL') {
     this.store.dispatch(articleListActions.setListConfig({ config: { ...articleListInitialState.listConfig, type } }));
   }
 
-  getArticles() {
-    if (this.isAuthenticated) {
+  getArticles(isLoggedIn: boolean) {
+    if (isLoggedIn) {
       this.setListTo('FEED');
     } else {
       this.setListTo('ALL');
