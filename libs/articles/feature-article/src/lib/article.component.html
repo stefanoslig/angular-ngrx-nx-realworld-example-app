@@ -36,7 +36,7 @@
 
     <div class="row">
       <div class="col-xs-12 col-md-8 offset-md-2">
-        @if(isAuthenticated$ | async) {
+        @if (isAuthenticated$ | async) {
           <cdt-add-comment
             [article]="article$ | async"
             [data$]="data$"
@@ -48,8 +48,9 @@
           >
           </cdt-add-comment>
         } @else {
-          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
-        article. }
+          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
+          this article.
+        }
 
         @for (comment of comments$ | async; track comment.id) {
           <cdt-article-comment

@@ -1,6 +1,7 @@
 # ![RealWorld Example App](logo.png)
 
-### This project is already migrated to Angular v17 and to the new Control Flow and Deferred Loading. 
+### This project is already migrated to Angular v17 and to the new Control Flow and Deferred Loading.
+
 #### Run `npm i --legacy-peer-deps` to install the dependencies until Angular 17 is released.
 
 <!-- [![pipeline status](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/badges/master/pipeline.svg)](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/commits/master) -->
@@ -48,7 +49,7 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
 - Profile page (URL: /#/profile/:username, /#/profile/:username/favorites )
   - Show basic user info
   - List of articles populated from author's created articles or author's favorited articles
- 
+
 ## Commands
 
 ### Run the application
@@ -66,10 +67,12 @@ Run all the tests: `nx run-many -t test`
 ### Architecture
 
 #### Folders/Libs structure
-For this project I created a monorepo. There is one app for the moment (conduit) which consumes the libraries under the libs folder. 
+
+For this project I created a monorepo. There is one app for the moment (conduit) which consumes the libraries under the libs folder.
 
 The folder structure is:
-~~~
+
+```
 ├── libs
 │   ├── articles
 │   │   ├── data-access
@@ -89,15 +92,15 @@ The folder structure is:
 │   │   ├── feature-profile
 │   ├── ui
 │   │   ├── components
-~~~
+```
 
-I used two classifiers to name my libraries. The first classifier is the `scope` and the second the `type`. The main reason is that I want every developer when he looks a library to understand where this library can be used and which kind of services/components/etc contains. 
+I used two classifiers to name my libraries. The first classifier is the `scope` and the second the `type`. The main reason is that I want every developer when he looks a library to understand where this library can be used and which kind of services/components/etc contains.
 
-The `scope` is the section (domain) of the app the library can be used.  It gives a clear indication that a feature belongs to a specific domain. For example the libraries under `users` scope, are used in the users and favourite users pages. The ibraries under the `core` scope can be reused between all the sections of the app. ***The `core` scope will be rename soon to `shared`***.
+The `scope` is the section (domain) of the app the library can be used. It gives a clear indication that a feature belongs to a specific domain. For example the libraries under `users` scope, are used in the users and favourite users pages. The ibraries under the `core` scope can be reused between all the sections of the app. **_The `core` scope will be rename soon to `shared`_**.
 
-The `type` indicates the purpose of a library. I have used a number of different types (feature, data-access, ui, api-types) The `feature-...` type contains smart components. These are components which enable the communication with the data-sources (most likely they inject api services). The `data-access` type contains  code for interacting with the server. The `ui` type contains dumb (presentational) components. These components are reusable in the scope of this library
+The `type` indicates the purpose of a library. I have used a number of different types (feature, data-access, ui, api-types) The `feature-...` type contains smart components. These are components which enable the communication with the data-sources (most likely they inject api services). The `data-access` type contains code for interacting with the server. The `ui` type contains dumb (presentational) components. These components are reusable in the scope of this library
 
-#### Standalone components 
+#### Standalone components
 
 I have used only standalone components. You won't see any modules in the app.
 
@@ -144,6 +147,7 @@ As you can see from the route configuration, the two main pages in the app are l
 ```
 
 #### State management
+
 **TBD**
 
 #### The smart-dumb components design pattern for the components:
@@ -151,10 +155,13 @@ As you can see from the route configuration, the two main pages in the app are l
 There is a clear distinction in the codebase between the smart and dumb components. The main reason behind this decision is that I want most of my components to be reusable and easier to be tested. That means that they should not have dependencies and they just consume the data they get from the smart component. Also it makes clearer a compoenent's responsibility.
 
 #### Avoid using external dependencies
-As you can see in the package.json, we didn't include external libraries, like `angular-material`, libs for the ui components, state management,etc.  The reason is that it might be tempting to use a library like this in the short term to develop something fast, but in the long term they can introduce many problems:
-* opinionated styles
-* make the migration to newer versions of Angular more difficult
-* not full control on them
+
+As you can see in the package.json, we didn't include external libraries, like `angular-material`, libs for the ui components, state management,etc. The reason is that it might be tempting to use a library like this in the short term to develop something fast, but in the long term they can introduce many problems:
+
+- opinionated styles
+- make the migration to newer versions of Angular more difficult
+- not full control on them
 
 #### Testing
+
 **TBD**

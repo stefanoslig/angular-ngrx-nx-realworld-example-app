@@ -17,7 +17,7 @@
     }
   ],
   "compilerOptions": {
-    "types": ["node", "jest"],
+    "types": ["node", "jest"]
   },
   "angularCompilerOptions": {
     "_enabledBlockTypes": ["if", "for", "switch", "defer"]

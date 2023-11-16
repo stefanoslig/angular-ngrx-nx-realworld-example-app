@@ -1,4 +1,4 @@
-@if(!(isLoading$ | async)) {
+@if (!(isLoading$ | async)) {
   @for (article of articles$ | async; track article.slug) {
     <cdt-article-list-item
       data-e2e-id="article-list"

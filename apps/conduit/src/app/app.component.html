@@ -1,6 +1,6 @@
 <cdt-navbar [isLoggedIn]="isLoggedIn$ | async" [user]="user$ | async"></cdt-navbar>
 <router-outlet></router-outlet>
 
-@defer (on idle)  {
-    <cdt-footer></cdt-footer>
+@defer (on idle) {
+  <cdt-footer></cdt-footer>
 }
