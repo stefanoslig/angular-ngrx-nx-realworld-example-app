@@ -13,14 +13,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { debounceTime, map, tap, filter } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
 import { DynamicFieldDirective } from './dynamic-field.directive';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'cdt-dynamic-form',
   standalone: true,
   templateUrl: './dynamic-form.component.html',
-  imports: [CommonModule, ReactiveFormsModule, DynamicFieldDirective],
+  imports: [ReactiveFormsModule, DynamicFieldDirective, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit {

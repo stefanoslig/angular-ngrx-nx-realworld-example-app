@@ -7,7 +7,6 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { ngrxFormsQuery } from '../+state/forms.selectors';
 import { formsActions } from '../..';

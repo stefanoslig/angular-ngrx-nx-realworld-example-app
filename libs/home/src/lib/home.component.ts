@@ -13,7 +13,6 @@ import { ArticleListComponent } from '@realworld/articles/feature-articles-list/
 import { HomeStoreService } from './home.store';
 import { provideComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'cdt-home',

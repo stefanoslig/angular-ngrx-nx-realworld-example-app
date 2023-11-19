@@ -2,18 +2,18 @@ import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
 import { selectUser } from '@realworld/auth/data-access';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { profileActions, selectProfileState } from '@realworld/profile/data-access';
+import { AsyncPipe, NgClass } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'cdt-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule, NgClass, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent implements OnInit {

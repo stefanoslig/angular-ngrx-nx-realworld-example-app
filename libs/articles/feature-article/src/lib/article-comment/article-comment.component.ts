@@ -1,14 +1,14 @@
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { Article, User } from '@realworld/core/api-types';
 import { Comment } from '@realworld/articles/data-access';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'cdt-article-comment',
   standalone: true,
   templateUrl: './article-comment.component.html',
-  imports: [CommonModule, RouterModule],
+  imports: [DatePipe, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleCommentComponent {

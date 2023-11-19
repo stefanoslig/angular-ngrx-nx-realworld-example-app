@@ -1,12 +1,12 @@
+import { DatePipe, NgClass } from '@angular/common';
 import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'cdt-article-meta',
   standalone: true,
   templateUrl: './article-meta.component.html',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, NgClass, DatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleMetaComponent {

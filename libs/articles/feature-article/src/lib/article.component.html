@@ -1,66 +1,68 @@
-<div class="article-page" *ngIf="article$ | async as article">
-  <div class="banner">
-    <div class="container">
-      <h1 data-e2e-id="article-title">{{ article.title }}</h1>
-      <cdt-article-meta
-        [article]="article"
-        (follow)="follow($event)"
-        (unfollow)="unfollow($event)"
-        (favorite)="favorite($event)"
-        (unfavorite)="unfavorite($event)"
-        (delete)="delete($event)"
-        [canModify]="canModify"
-      >
-      </cdt-article-meta>
-    </div>
-  </div>
-
-  <div class="container page">
-    <div class="row article-content">
-      <div class="col-md-12">
-        <div [innerHTML]="article.body | markdown"></div>
+@if (article$ | async; as article) {
+  <div class="article-page">
+    <div class="banner">
+      <div class="container">
+        <h1 data-e2e-id="article-title">{{ article.title }}</h1>
+        <cdt-article-meta
+          [article]="article"
+          (follow)="follow($event)"
+          (unfollow)="unfollow($event)"
+          (favorite)="favorite($event)"
+          (unfavorite)="unfavorite($event)"
+          (delete)="delete($event)"
+          [canModify]="canModify"
+        >
+        </cdt-article-meta>
       </div>
     </div>
-    <hr />
-    <div class="article-actions">
-      <cdt-article-meta
-        [article]="article$ | async"
-        (follow)="follow($event)"
-        (unfollow)="unfollow($event)"
-        (favorite)="favorite($event)"
-        (unfavorite)="unfavorite($event)"
-        (delete)="delete($event)"
-        [canModify]="canModify"
-      ></cdt-article-meta>
-    </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-md-8 offset-md-2">
-        @if (isAuthenticated$ | async) {
-          <cdt-add-comment
-            [article]="article$ | async"
-            [data$]="data$"
-            [structure$]="structure$"
-            [currentUser]="currentUser$ | async"
-            [touchedForm$]="touchedForm$"
-            (submitComment)="submit($event)"
-            (updateForm)="updateForm($event)"
-          >
-          </cdt-add-comment>
-        } @else {
-          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
-          this article.
-        }
+    <div class="container page">
+      <div class="row article-content">
+        <div class="col-md-12">
+          <div [innerHTML]="article.body | markdown"></div>
+        </div>
+      </div>
+      <hr />
+      <div class="article-actions">
+        <cdt-article-meta
+          [article]="article"
+          (follow)="follow($event)"
+          (unfollow)="unfollow($event)"
+          (favorite)="favorite($event)"
+          (unfavorite)="unfavorite($event)"
+          (delete)="delete($event)"
+          [canModify]="canModify"
+        ></cdt-article-meta>
+      </div>
 
-        @for (comment of comments$ | async; track comment.id) {
-          <cdt-article-comment
-            [currentUser]="currentUser$ | async"
-            (delete)="deleteComment($event)"
-            [article]="article$ | async"
-            [comment]="comment"
-          ></cdt-article-comment>
-        }
+      <div class="row">
+        <div class="col-xs-12 col-md-8 offset-md-2">
+          @if (isAuthenticated$ | async) {
+            <cdt-add-comment
+              [article]="article"
+              [data$]="data$"
+              [structure$]="structure$"
+              [currentUser]="currentUser$ | async"
+              [touchedForm$]="touchedForm$"
+              (submitComment)="submit($event)"
+              (updateForm)="updateForm($event)"
+            >
+            </cdt-add-comment>
+          } @else {
+            <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
+            this article.
+          }
+
+          @for (comment of comments$ | async; track comment.id) {
+            <cdt-article-comment
+              [currentUser]="currentUser$ | async"
+              (delete)="deleteComment($event)"
+              [article]="article$ | async"
+              [comment]="comment"
+            ></cdt-article-comment>
+          }
+        </div>
       </div>
     </div>
   </div>
-</div>
+}

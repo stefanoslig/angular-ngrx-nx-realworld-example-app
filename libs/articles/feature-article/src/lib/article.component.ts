@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 import { articleActions, articleQuery, articlesActions } from '@realworld/articles/data-access';
 import { selectAuthState, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
@@ -29,7 +29,7 @@ const structure: Field[] = [
   standalone: true,
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
-  imports: [CommonModule, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent, RouterLink],
+  imports: [AsyncPipe, ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
