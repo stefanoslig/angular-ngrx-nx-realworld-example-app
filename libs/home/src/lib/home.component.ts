@@ -7,20 +7,19 @@ import {
   ListType,
 } from '@realworld/articles/data-access';
 import { selectLoggedIn } from '@realworld/auth/data-access';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgClass} from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { HomeStoreService } from './home.store';
 import { provideComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'cdt-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CommonModule, TagsListComponent, ArticleListComponent],
+  imports: [AsyncPipe, NgClass, TagsListComponent, ArticleListComponent],
   providers: [provideComponentStore(HomeStoreService)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
