@@ -10,30 +10,32 @@
     <div class="row">
       <div class="col-md-9">
         <div class="feed-toggle">
-          <ul class="nav nav-pills outline-active" *ngIf="{ listConfig: listConfig$ | async } as model">
-            <li class="nav-item">
-              <a [ngClass]="{ active: model.listConfig?.type === 'FEED' }" class="nav-link" (click)="setListTo('FEED')"
-                >Your Feed</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                data-e2e-id="global-feed"
-                [ngClass]="{
-                  active: model.listConfig?.type === 'ALL' && !model.listConfig?.filters?.tag
-                }"
-                class="nav-link"
-                (click)="setListTo('ALL')"
-                >Global Feed</a
-              >
-            </li>
-            <li class="nav-item" [hidden]="!model.listConfig?.filters?.tag">
-              <a class="nav-link active">
-                <i class="ion-pound"></i>
-                {{ model.listConfig?.filters?.tag }}
-              </a>
-            </li>
-          </ul>
+          @if ({listConfig: listConfig$ | async}; as model) {
+            <ul class="nav nav-pills outline-active">
+              <li class="nav-item">
+                <a [ngClass]="{ active: model.listConfig?.type === 'FEED' }" class="nav-link" (click)="setListTo('FEED')"
+                  >Your Feed</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  data-e2e-id="global-feed"
+                  [ngClass]="{
+                    active: model.listConfig?.type === 'ALL' && !model.listConfig?.filters?.tag
+                  }"
+                  class="nav-link"
+                  (click)="setListTo('ALL')"
+                  >Global Feed</a
+                >
+              </li>
+              <li class="nav-item" [hidden]="!model.listConfig?.filters?.tag">
+                <a class="nav-link active">
+                  <i class="ion-pound"></i>
+                  {{ model.listConfig?.filters?.tag }}
+                </a>
+              </li>
+            </ul>
+          }
         </div>
 
         <cdt-article-list></cdt-article-list>
