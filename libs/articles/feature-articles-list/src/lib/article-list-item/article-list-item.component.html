@@ -20,7 +20,7 @@
       (click)="toggleFavorite(article)"
     >
       <i class="ion-heart"></i>
-      <div class="info">{{ article.favoritesCount }}</div>
+      {{ article.favoritesCount }}
     </button>
   </div>
   <a (click)="navigateToArticle.emit(article.slug)" class="preview-link">
