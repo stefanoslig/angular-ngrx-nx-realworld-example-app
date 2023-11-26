@@ -9,7 +9,7 @@ export function withCallState() {
     withComputed(({ callState }) => ({
       loading: computed(() => callState() === 'loading'),
       loaded: computed(() => callState() === 'loaded'),
-      error: computed(callState, (callState) => (typeof callState === 'object' ? callState.error : null)),
+      // error: computed(callState, (callState) => (typeof callState === 'object' ? callState.error : null)),
     })),
   );
 }

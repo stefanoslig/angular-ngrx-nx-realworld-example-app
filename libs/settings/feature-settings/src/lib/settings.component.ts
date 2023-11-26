@@ -1,8 +1,8 @@
 import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Validators } from '@angular/forms';
-import { authActions, selectUser } from '@realworld/auth/data-access';
+import { authActions, AuthStore, selectUser } from '@realworld/auth/data-access';
 import { SettingsStoreService } from './settings.store';
 import { Store } from '@ngrx/store';
 
@@ -53,14 +53,19 @@ const structure: Field[] = [
 })
 export class SettingsComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
   private readonly settingsStoreService = inject(SettingsStoreService);
   private readonly destroyRef = inject(DestroyRef);
 
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
 
+  readonly fillInForm = effect(() => {
+    this.store.dispatch(formsActions.setData({ data: this.authStore.user() }));
+  });
+
   ngOnInit() {
-    this.store.dispatch(authActions.getUser());
+    this.authStore.getUser();
     this.store.dispatch(formsActions.setStructure({ structure }));
     this.store
       .select(selectUser)
