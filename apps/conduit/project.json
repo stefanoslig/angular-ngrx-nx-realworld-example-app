@@ -18,7 +18,7 @@
         "main": "apps/conduit/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/conduit/tsconfig.app.json",
-        "assets": ["apps/conduit/src/favicon.ico", "apps/conduit/src/assets"],
+        "assets": ["apps/conduit/src/favicon.ico", "apps/conduit/src/assets", "apps/conduit/src/netlify.toml"],
         "styles": ["apps/conduit/src/styles.scss"],
         "scripts": []
       },
@@ -93,35 +93,6 @@
         "passWithNoTests": true
       },
       "outputs": ["{workspaceRoot}/coverage/apps/conduit"]
-    },
-    "storybook": {
-      "executor": "@storybook/angular:start-storybook",
-      "options": {
-        "port": 4400,
-        "configDir": "apps/conduit/.storybook",
-        "buildTarget": "conduit:build",
-        "compodoc": false
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "build-storybook": {
-      "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputDir": "dist/storybook/conduit",
-        "configDir": "apps/conduit/.storybook",
-        "buildTarget": "conduit:build",
-        "compodoc": false
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
     }
   }
 }

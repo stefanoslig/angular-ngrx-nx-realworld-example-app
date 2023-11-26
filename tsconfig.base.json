@@ -10,76 +10,32 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@default/*": [
-        "apps/conduit/src/app/*"
-      ],
-      "@env/*": [
-        "apps/conduit/src/environments/*"
-      ],
-      "@realworld/*": [
-        "libs/*"
-      ],
-      "@realworld/articles/article": [
-        "libs/articles/feature-article/src/index.ts"
-      ],
-      "@realworld/articles/article-edit": [
-        "libs/articles/feature-article-edit/src/index.ts"
-      ],
-      "@realworld/articles/articles-list": [
-        "libs/articles/feature-articles-list/src/index.ts"
-      ],
-      "@realworld/articles/data-access": [
-        "libs/articles/data-access/src/index.ts"
-      ],
-      "@realworld/auth/data-access": [
-        "libs/auth/data-access/src/index.ts"
-      ],
-      "@realworld/auth/feature-auth": [
-        "libs/auth/feature-auth/src/index.ts"
-      ],
-      "@realworld/core/api-types": [
-        "libs/core/api-types/src/index.ts"
-      ],
-      "@realworld/core/error-handler": [
-        "libs/core/error-handler/src/index.ts"
-      ],
-      "@realworld/core/forms": [
-        "libs/core/forms/src/index.ts"
-      ],
-      "@realworld/core/http-client": [
-        "libs/core/http-client/src/index.ts"
-      ],
-      "@realworld/profile/data-access": [
-        "libs/profile/data-access/src/index.ts"
-      ],
-      "@realworld/profile/feature-profile": [
-        "libs/profile/feature-profile/src/index.ts"
-      ],
-      "@realworld/settings/data-access": [
-        "libs/settings/data-access/src/index.ts"
-      ],
-      "@realworld/settings/feature-settings": [
-        "libs/settings/feature-settings/src/index.ts"
-      ],
-      "@realworld/ui/components": [
-        "libs/ui/components/src/index.ts"
-      ]
+      "@default/*": ["apps/conduit/src/app/*"],
+      "@env/*": ["apps/conduit/src/environments/*"],
+      "@realworld/*": ["libs/*"],
+      "@realworld/articles/article": ["libs/articles/feature-article/src/index.ts"],
+      "@realworld/articles/article-edit": ["libs/articles/feature-article-edit/src/index.ts"],
+      "@realworld/articles/articles-list": ["libs/articles/feature-articles-list/src/index.ts"],
+      "@realworld/articles/data-access": ["libs/articles/data-access/src/index.ts"],
+      "@realworld/auth/data-access": ["libs/auth/data-access/src/index.ts"],
+      "@realworld/auth/feature-auth": ["libs/auth/feature-auth/src/index.ts"],
+      "@realworld/core/api-types": ["libs/core/api-types/src/index.ts"],
+      "@realworld/core/error-handler": ["libs/core/error-handler/src/index.ts"],
+      "@realworld/core/forms": ["libs/core/forms/src/index.ts"],
+      "@realworld/core/http-client": ["libs/core/http-client/src/index.ts"],
+      "@realworld/profile/data-access": ["libs/profile/data-access/src/index.ts"],
+      "@realworld/profile/feature-profile": ["libs/profile/feature-profile/src/index.ts"],
+      "@realworld/settings/data-access": ["libs/settings/data-access/src/index.ts"],
+      "@realworld/settings/feature-settings": ["libs/settings/feature-settings/src/index.ts"],
+      "@realworld/ui/components": ["libs/ui/components/src/index.ts"]
     },
     "strict": true
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }
