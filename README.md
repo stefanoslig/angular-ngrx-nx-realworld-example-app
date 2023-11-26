@@ -2,8 +2,6 @@
 
 ### This project is already migrated to Angular v17 and to the new Control Flow and Deferred Loading.
 
-#### Run `npm i --legacy-peer-deps` to install the dependencies until Angular 17 is released.
-
 <!-- [![pipeline status](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/badges/master/pipeline.svg)](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/commits/master) -->
 
 > ### Angular, ngrx/platform, nrwl/nx codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
