@@ -56,6 +56,27 @@ export const AuthStore = signalStore(
           ),
         ),
       ),
+      register: rxMethod<void>(
+        pipe(
+          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
+          exhaustMap(([, data]) =>
+            authService.register(data).pipe(
+              tapResponse({
+                next: ({ user }) => {
+                  patchState(store, { user, loggedIn: true });
+                  localStorageService.setItem(user.token);
+                  router.navigateByUrl('/');
+                },
+                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+              }),
+            ),
+          ),
+        ),
+      ),
+      logout: () => {
+        localStorageService.removeItem();
+        router.navigateByUrl('login');
+      },
     }),
   ),
   withCallState(),

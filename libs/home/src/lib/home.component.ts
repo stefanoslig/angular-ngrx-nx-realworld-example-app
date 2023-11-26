@@ -1,18 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, ChangeDetectionStrategy, inject, effect } from '@angular/core';
 import {
   articleListInitialState,
   articleListQuery,
   articleListActions,
   ListType,
 } from '@realworld/articles/data-access';
-import { selectLoggedIn } from '@realworld/auth/data-access';
-import { AsyncPipe, NgClass} from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { HomeStoreService } from './home.store';
 import { provideComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
+import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
   selector: 'cdt-home',
@@ -23,20 +22,20 @@ import { Store } from '@ngrx/store';
   providers: [provideComponentStore(HomeStoreService)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
   private readonly homeStore = inject(HomeStoreService);
-  private readonly destroyRef = inject(DestroyRef);
 
   listConfig$ = this.store.select(articleListQuery.selectListConfig);
   tags$ = this.homeStore.tags$;
 
-  ngOnInit() {
-    this.store
-      .select(selectLoggedIn)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((isLoggedIn) => this.getArticles(isLoggedIn));
-  }
+  readonly loadArticlesOnLogin = effect(
+    () => {
+      this.getArticles(this.authStore.loggedIn());
+    },
+    { allowSignalWrites: true },
+  );
 
   setListTo(type: ListType = 'ALL') {
     this.store.dispatch(articleListActions.setListConfig({ config: { ...articleListInitialState.listConfig, type } }));

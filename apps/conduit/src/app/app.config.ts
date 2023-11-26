@@ -2,7 +2,7 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideRouterStore } from '@ngrx/router-store';
 import { ngrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
-import { authFeature, authGuard, tokenInterceptor, authFunctionalEffects } from '@realworld/auth/data-access';
+import { authGuard, tokenInterceptor } from '@realworld/auth/data-access';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { errorHandlerEffects, errorHandlerFeature, errorHandlingInterceptor } from '@realworld/core/error-handler';
@@ -54,11 +54,10 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
     ),
     provideStore({
-      auth: authFeature.reducer,
       errorHandler: errorHandlerFeature.reducer,
       ngrxForms: ngrxFormsFeature.reducer,
     }),
-    provideEffects(errorHandlerEffects, ngrxFormsEffects, authFunctionalEffects),
+    provideEffects(errorHandlerEffects, ngrxFormsEffects),
     provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
     !environment.production ? provideStoreDevtools() : [],

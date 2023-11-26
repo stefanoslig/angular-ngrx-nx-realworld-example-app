@@ -10,7 +10,7 @@
           (favorite)="favorite($event)"
           (unfavorite)="unfavorite($event)"
           (delete)="delete($event)"
-          [canModify]="canModify"
+          [canModify]="$canModify()"
         >
         </cdt-article-meta>
       </div>
@@ -31,18 +31,18 @@
           (favorite)="favorite($event)"
           (unfavorite)="unfavorite($event)"
           (delete)="delete($event)"
-          [canModify]="canModify"
+          [canModify]="$canModify()"
         ></cdt-article-meta>
       </div>
 
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
-          @if (isAuthenticated$ | async) {
+          @if ($isAuthenticated()) {
             <cdt-add-comment
               [article]="article"
               [data$]="data$"
               [structure$]="structure$"
-              [currentUser]="currentUser$ | async"
+              [currentUser]="$currentUser()"
               [touchedForm$]="touchedForm$"
               (submitComment)="submit($event)"
               (updateForm)="updateForm($event)"
@@ -55,7 +55,7 @@
 
           @for (comment of comments$ | async; track comment.id) {
             <cdt-article-comment
-              [currentUser]="currentUser$ | async"
+              [currentUser]="$currentUser()"
               (delete)="deleteComment($event)"
               [article]="article$ | async"
               [comment]="comment"

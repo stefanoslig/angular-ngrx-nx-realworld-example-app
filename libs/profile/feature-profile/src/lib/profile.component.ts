@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { Subject, combineLatest } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { selectUser } from '@realworld/auth/data-access';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { profileActions, selectProfileState } from '@realworld/profile/data-access';
 import { AsyncPipe, NgClass } from '@angular/common';
+import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
   standalone: true,
@@ -18,16 +18,18 @@ import { AsyncPipe, NgClass } from '@angular/common';
 })
 export class ProfileComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
   private readonly destroyRef = inject(DestroyRef);
 
   profile$ = this.store.select(selectProfileState);
-  currentUser$ = this.store.select(selectUser);
   isUser$: Subject<boolean> = new Subject();
   following!: boolean;
   username!: string;
 
+  $currentUser = this.authStore.user;
+
   ngOnInit() {
-    combineLatest([this.profile$, this.currentUser$])
+    combineLatest([this.profile$, toObservable(this.$currentUser)])
       .pipe(
         tap(([p]) => {
           this.username = p.username;
