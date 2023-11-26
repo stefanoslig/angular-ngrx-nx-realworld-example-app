@@ -2,7 +2,7 @@
 
 ### This project is already migrated to Angular v17 and to the new Control Flow and Deferred Loading.
 
-<!-- [![pipeline status](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/badges/master/pipeline.svg)](https://gitlab.com/stefanoslig/angular-ngrx-nx-realworld-example-app/commits/master) -->
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b9997c1f-ca8f-456e-aaf6-016ce13c353e/deploy-status)](https://app.netlify.com/sites/angular-ngrx-nx/deploys)
 
 > ### Angular, ngrx/platform, nrwl/nx codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
