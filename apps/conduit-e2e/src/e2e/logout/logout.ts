@@ -1,4 +1,4 @@
-import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { generateRandomString } from '../../support/generate-random-string';
 
 let userId = '';
@@ -7,11 +7,11 @@ beforeEach(() => {
   userId = generateRandomString();
 });
 
-Given('I am logged in to the system', () => {
+Given('I am logged in to the system so I can test the logout functionality', () => {
   cy.loginApi(userId);
 });
 
-And('I open Settings page', () => {
+When('I open Settings page where the logout button is located', () => {
   cy.visit('/settings');
 });
 
@@ -20,5 +20,5 @@ When('I press on Logout button', () => {
 });
 
 Then('my credentials are not displayed in the header anymore', () => {
-  cy.getByE2eId('logedin-user').should('not.exist');
+  cy.getByE2eId('loggedin-user').should('not.exist');
 });

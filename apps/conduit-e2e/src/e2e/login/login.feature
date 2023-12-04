@@ -7,12 +7,12 @@ Feature: Login
     Background: 
         Given I am registered user
         And I open Login page
-        When I input a correct username
+        When I input a correct email
 
     Scenario: Valid login    
         And I input a correct password
         And I click Login button
-        Then my information is displayed in the header
+        Then my information is displayed in the header after a successful login
 
     Scenario: Invalid login
         And I input incorrect password

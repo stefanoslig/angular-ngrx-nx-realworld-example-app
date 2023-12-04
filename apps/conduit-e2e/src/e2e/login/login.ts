@@ -1,4 +1,4 @@
-import { Given, When, And, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { generateRandomString } from '../../support/generate-random-string';
 
 let userId = '';
@@ -11,31 +11,27 @@ Given('I am registered user', () => {
   cy.registerUserApi(userId);
 });
 
-And('I open Login page', () => {
+When('I open Login page', () => {
   cy.visit('/login');
 });
 
-When('I input a correct username', () => {
-  cy.get("[placeholder='Username']").clear().type(`${userId}@example.com`);
+When('I input a correct email', () => {
+  cy.get("[placeholder='Email']").clear().type(`${userId}@example.com`);
 });
 
-And('I input a correct password', () => {
+When('I input a correct password', () => {
   cy.get("[placeholder='Password']").clear().type(userId).blur();
 });
 
-And('I click Login button', () => {
-  cy.getByE2eId('sign-in').click();
+Then('my information is displayed in the header after a successful login', () => {
+  cy.getByE2eId('loggedin-user').should('contain', userId);
 });
 
-Then('my information is displayed in the header', () => {
-  cy.getByE2eId('logedin-user').should('contain', userId);
-});
-
-And('I input incorrect password', () => {
+When('I input incorrect password', () => {
   cy.get("[placeholder='Password']").clear().type('111111111').blur();
 });
 
-And('I click Login button', () => {
+When('I click Login button', () => {
   cy.getByE2eId('sign-in').click();
 });
 
