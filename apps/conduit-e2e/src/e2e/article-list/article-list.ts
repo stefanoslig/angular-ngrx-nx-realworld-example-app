@@ -1,4 +1,4 @@
-import { Given, When, And, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { generateRandomString } from '../../support/generate-random-string';
 
 let userId = '';
@@ -7,15 +7,15 @@ beforeEach(() => {
   userId = generateRandomString();
 });
 
-Given('I am logged in to the system', () => {
+Given('I am logged in to the system so I can test the articles list page', () => {
   cy.loginApi(userId);
 });
 
-And('I am on Home page', () => {
+When('I am on Home page', () => {
   cy.visit('/');
 });
 
-And('I select the Global feed', () => {
+When('I select the Global feed', () => {
   cy.getByE2eId('global-feed').click();
 });
 

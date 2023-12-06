@@ -1,10 +1,6 @@
 import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnDestroy, OnInit, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject } from '@angular/core';
 import { articleActions, articleQuery, articlesActions } from '@realworld/articles/data-access';
-import { selectAuthState, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { AsyncPipe } from '@angular/common';
 import { MarkdownPipe } from './pipes/markdown.pipe';
@@ -12,6 +8,7 @@ import { ArticleCommentComponent } from './article-comment/article-comment.compo
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
+import { AuthStore } from '@realworld/auth/data-access';
 
 const structure: Field[] = [
   {
@@ -34,30 +31,22 @@ const structure: Field[] = [
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly authStore = inject(AuthStore);
 
   article$ = this.store.select(articleQuery.selectData);
   comments$ = this.store.select(articleQuery.selectComments);
-  canModify = false;
-  isAuthenticated$ = this.store.select(selectLoggedIn);
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
-  currentUser$ = this.store.select(selectUser);
   touchedForm$ = this.store.select(ngrxFormsQuery.selectTouched);
+
+  $authorUsername = this.store.selectSignal(articleQuery.getAuthorUsername);
+  $isAuthenticated = this.authStore.loggedIn;
+  $currentUser = this.authStore.user;
+  $canModify = computed(() => this.authStore.user.username() === this.$authorUsername());
 
   ngOnInit() {
     this.store.dispatch(formsActions.setStructure({ structure }));
     this.store.dispatch(formsActions.setData({ data: '' }));
-    this.store
-      .select(selectAuthState)
-      .pipe(
-        filter((auth) => auth.loggedIn),
-        (auth$) => combineLatest([auth$, this.store.select(articleQuery.getAuthorUsername)]),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(([auth, username]) => {
-        this.canModify = auth.user.username === username;
-      });
   }
 
   follow(username: string) {

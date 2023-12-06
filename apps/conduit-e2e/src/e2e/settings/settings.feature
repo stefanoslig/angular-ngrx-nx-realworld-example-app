@@ -4,7 +4,7 @@ Feature: Settings
     I want to be able to update my account settings.
 
     Background:
-        Given I am logged in to the system
+        Given I am logged in to the system so I can test the settings functionality
         And I open Settings page
         And I wait for current username to appear
 

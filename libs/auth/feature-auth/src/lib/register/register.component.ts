@@ -2,7 +2,7 @@ import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFor
 import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { authActions } from '@realworld/auth/data-access';
+import { AuthStore } from '@realworld/auth/data-access';
 import { Store } from '@ngrx/store';
 
 const structure: Field[] = [
@@ -39,6 +39,7 @@ const structure: Field[] = [
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
 
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
@@ -52,7 +53,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.store.dispatch(authActions.register());
+    this.authStore.register();
   }
 
   ngOnDestroy() {

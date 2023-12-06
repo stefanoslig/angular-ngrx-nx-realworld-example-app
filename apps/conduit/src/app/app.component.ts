@@ -1,8 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { authActions, LocalStorageJwtService, selectLoggedIn, selectUser } from '@realworld/auth/data-access';
+import { AuthStore, LocalStorageJwtService } from '@realworld/auth/data-access';
 import { filter, take } from 'rxjs/operators';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -16,11 +15,11 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  private readonly store = inject(Store);
   private readonly localStorageJwtService = inject(LocalStorageJwtService);
+  private readonly authStore = inject(AuthStore);
 
-  user$ = this.store.select(selectUser);
-  isLoggedIn$ = this.store.select(selectLoggedIn);
+  $user = this.authStore.user;
+  $isLoggedIn = this.authStore.loggedIn;
 
   ngOnInit() {
     this.localStorageJwtService
@@ -29,6 +28,6 @@ export class AppComponent implements OnInit {
         take(1),
         filter((token) => !!token),
       )
-      .subscribe(() => this.store.dispatch(authActions.getUser()));
+      .subscribe(() => this.authStore.getUser());
   }
 }

@@ -5,7 +5,7 @@ Feature: Article List
   so that I can click on them and navigate to a specific article.
 
   Background:
-    Given I am logged in to the system
+    Given I am logged in to the system so I can test the articles list page
     And I am on Home page
     And I select the Global feed
 

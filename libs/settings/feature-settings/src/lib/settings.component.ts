@@ -1,8 +1,7 @@
 import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, untracked } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { authActions, selectUser } from '@realworld/auth/data-access';
+import { AuthStore } from '@realworld/auth/data-access';
 import { SettingsStoreService } from './settings.store';
 import { Store } from '@ngrx/store';
 
@@ -53,19 +52,22 @@ const structure: Field[] = [
 })
 export class SettingsComponent implements OnInit {
   private readonly store = inject(Store);
+  private readonly authStore = inject(AuthStore);
   private readonly settingsStoreService = inject(SettingsStoreService);
-  private readonly destroyRef = inject(DestroyRef);
 
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
 
+  readonly fillInForm = effect(() => {
+    const isLoggedIn = this.authStore.loggedIn();
+    if (isLoggedIn) {
+      untracked(() => this.store.dispatch(formsActions.setData({ data: this.authStore.user() })));
+    }
+  });
+
   ngOnInit() {
-    this.store.dispatch(authActions.getUser());
+    this.authStore.getUser();
     this.store.dispatch(formsActions.setStructure({ structure }));
-    this.store
-      .select(selectUser)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((user) => this.store.dispatch(formsActions.setData({ data: user })));
   }
 
   updateForm(changes: any) {
@@ -77,6 +79,6 @@ export class SettingsComponent implements OnInit {
   }
 
   logout() {
-    this.store.dispatch(authActions.logout());
+    this.authStore.logout();
   }
 }

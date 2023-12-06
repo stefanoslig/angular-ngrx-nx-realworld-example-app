@@ -7,9 +7,10 @@
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/conduit-e2e/cypress.json",
+        "cypressConfig": "apps/conduit-e2e/cypress.config.ts",
         "devServerTarget": "conduit:serve",
-        "tsConfig": "apps/conduit-e2e/tsconfig.e2e.json"
+        "tsConfig": "apps/conduit-e2e/tsconfig.e2e.json",
+        "testingType": "e2e"
       }
     },
     "configurations": {
