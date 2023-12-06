@@ -1,5 +1,5 @@
 import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, untracked } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AuthStore } from '@realworld/auth/data-access';
 import { SettingsStoreService } from './settings.store';
@@ -59,7 +59,10 @@ export class SettingsComponent implements OnInit {
   data$ = this.store.select(ngrxFormsQuery.selectData);
 
   readonly fillInForm = effect(() => {
-    this.store.dispatch(formsActions.setData({ data: this.authStore.user() }));
+    const isLoggedIn = this.authStore.loggedIn();
+    if (isLoggedIn) {
+      untracked(() => this.store.dispatch(formsActions.setData({ data: this.authStore.user() })));
+    }
   });
 
   ngOnInit() {

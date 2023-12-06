@@ -1,5 +1,5 @@
 import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnDestroy, OnInit, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject } from '@angular/core';
 import { articleActions, articleQuery, articlesActions } from '@realworld/articles/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { AsyncPipe } from '@angular/common';
@@ -32,7 +32,6 @@ const structure: Field[] = [
 export class ArticleComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
   private readonly authStore = inject(AuthStore);
-  private readonly destroyRef = inject(DestroyRef);
 
   article$ = this.store.select(articleQuery.selectData);
   comments$ = this.store.select(articleQuery.selectComments);
@@ -43,7 +42,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   $authorUsername = this.store.selectSignal(articleQuery.getAuthorUsername);
   $isAuthenticated = this.authStore.loggedIn;
   $currentUser = this.authStore.user;
-  $canModify = computed(() => this.authStore.user.email() === this.$authorUsername());
+  $canModify = computed(() => this.authStore.user.username() === this.$authorUsername());
 
   ngOnInit() {
     this.store.dispatch(formsActions.setStructure({ structure }));

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, effect } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, effect, untracked } from '@angular/core';
 import {
   articleListInitialState,
   articleListQuery,
@@ -30,12 +30,12 @@ export class HomeComponent {
   listConfig$ = this.store.select(articleListQuery.selectListConfig);
   tags$ = this.homeStore.tags$;
 
-  readonly loadArticlesOnLogin = effect(
-    () => {
-      this.getArticles(this.authStore.loggedIn());
-    },
-    { allowSignalWrites: true },
-  );
+  readonly loadArticlesOnLogin = effect(() => {
+    const isLoggedIn = this.authStore.loggedIn();
+    if (isLoggedIn) {
+      untracked(() => this.getArticles(isLoggedIn));
+    }
+  });
 
   setListTo(type: ListType = 'ALL') {
     this.store.dispatch(articleListActions.setListConfig({ config: { ...articleListInitialState.listConfig, type } }));
