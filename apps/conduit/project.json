@@ -81,9 +81,6 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["apps/conduit/src/**/*.ts", "apps/conduit/src/**/*.html"]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
