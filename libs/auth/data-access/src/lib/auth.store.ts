@@ -1,7 +1,6 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { AuthState, authInitialState, initialUserValue } from './auth.model';
-import { withCallState } from './call-state.feature';
 import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { exhaustMap, pipe, switchMap, tap } from 'rxjs';
@@ -69,5 +68,4 @@ export const AuthStore = signalStore(
       },
     }),
   ),
-  withCallState(),
 );
