@@ -5,6 +5,7 @@
   "defaultProject": "conduit",
   "generators": {
     "@nx/angular:application": {
+      "style": "css",
       "linter": "eslint",
       "unitTestRunner": "jest",
       "e2eTestRunner": "cypress"
@@ -13,7 +14,9 @@
       "linter": "eslint",
       "unitTestRunner": "jest"
     },
-    "@nx/angular:component": {}
+    "@nx/angular:component": {
+      "style": "css"
+    }
   },
   "targetDefaults": {
     "build": {

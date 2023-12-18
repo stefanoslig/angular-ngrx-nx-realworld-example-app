@@ -49,6 +49,10 @@ export function setLoading<Prop extends string>(prop: Prop): NamedCallState<Prop
   return { [`${prop}CallState`]: 'loading' } as NamedCallState<Prop>;
 }
 
+export function setLoaded<Prop extends string>(prop: Prop): NamedCallState<Prop> {
+  return { [`${prop}CallState`]: 'loaded' } as NamedCallState<Prop>;
+}
+
 function getCallStateKeys(config: { prop: string }) {
   return {
     callStateKey: `${config.prop}CallState`,
