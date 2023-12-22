@@ -32,9 +32,7 @@ export class HomeComponent {
 
   readonly loadArticlesOnLogin = effect(() => {
     const isLoggedIn = this.authStore.loggedIn();
-    if (isLoggedIn) {
-      untracked(() => this.getArticles(isLoggedIn));
-    }
+    untracked(() => this.getArticles(isLoggedIn));
   });
 
   setListTo(type: ListType = 'ALL') {
