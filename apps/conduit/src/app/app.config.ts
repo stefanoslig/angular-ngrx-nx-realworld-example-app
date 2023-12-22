@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 import { provideRouterStore } from '@ngrx/router-store';
 import { ngrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
 import { authGuard, tokenInterceptor } from '@realworld/auth/data-access';
@@ -52,6 +52,7 @@ export const appConfig: ApplicationConfig = {
         },
       ],
       withViewTransitions(),
+      withComponentInputBinding(),
     ),
     provideStore({
       errorHandler: errorHandlerFeature.reducer,

@@ -35,6 +35,7 @@ export const articleInitialState: ArticleState = {
 };
 
 export const ArticleStore = signalStore(
+  { providedIn: 'root' },
   withState<ArticleState>(articleInitialState),
   withMethods(
     (
@@ -51,12 +52,10 @@ export const ArticleStore = signalStore(
             articlesService.getArticle(slug).pipe(
               tapResponse({
                 next: ({ article }) => {
-                  patchState(store, { data: article });
-                  setLoaded('getArticle');
+                  patchState(store, { data: article, ...setLoaded('getArticle') });
                 },
                 error: () => {
-                  patchState(store, { data: articleInitialState.data });
-                  setLoaded('getArticle');
+                  patchState(store, { data: articleInitialState.data, ...setLoaded('getArticle') });
                 },
               }),
             ),
@@ -130,8 +129,11 @@ export const ArticleStore = signalStore(
           ),
         ),
       ),
+      initializeArticle: () => {
+        patchState(store, articleInitialState);
+      },
     }),
   ),
-  withCallState({ prop: 'getArticle' }),
-  withCallState({ prop: 'getComments' }),
+  withCallState({ collection: 'getArticle' }),
+  withCallState({ collection: 'getComments' }),
 );

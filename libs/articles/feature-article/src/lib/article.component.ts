@@ -1,6 +1,6 @@
 import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject } from '@angular/core';
-import { articleActions, articleQuery, articlesActions } from '@realworld/articles/data-access';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, computed, inject } from '@angular/core';
+import { ArticleStore, articlesActions } from '@realworld/articles/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { AsyncPipe } from '@angular/common';
 import { MarkdownPipe } from './pipes/markdown.pipe';
@@ -30,30 +30,35 @@ const structure: Field[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleComponent implements OnInit, OnDestroy {
+  @Input() slug = '';
+
   private readonly store = inject(Store);
   private readonly authStore = inject(AuthStore);
+  private readonly articleStore = inject(ArticleStore);
 
-  article$ = this.store.select(articleQuery.selectData);
-  comments$ = this.store.select(articleQuery.selectComments);
+  $article = this.articleStore.data;
+  $comments = this.articleStore.comments;
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
   touchedForm$ = this.store.select(ngrxFormsQuery.selectTouched);
 
-  $authorUsername = this.store.selectSignal(articleQuery.getAuthorUsername);
+  $authorUsername = this.articleStore.data.author.username;
   $isAuthenticated = this.authStore.loggedIn;
   $currentUser = this.authStore.user;
   $canModify = computed(() => this.authStore.user.username() === this.$authorUsername());
 
   ngOnInit() {
+    this.articleStore.getArticle(this.slug);
+    this.articleStore.getComments(this.slug);
     this.store.dispatch(formsActions.setStructure({ structure }));
     this.store.dispatch(formsActions.setData({ data: '' }));
   }
 
   follow(username: string) {
-    this.store.dispatch(articleActions.follow({ username }));
+    this.articleStore.followUser(username);
   }
   unfollow(username: string) {
-    this.store.dispatch(articleActions.unfollow({ username }));
+    this.articleStore.unfollowUser(username);
   }
   favorite(slug: string) {
     this.store.dispatch(articlesActions.favorite({ slug }));
@@ -62,19 +67,19 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.store.dispatch(articlesActions.unfavorite({ slug }));
   }
   delete(slug: string) {
-    this.store.dispatch(articleActions.deleteArticle({ slug }));
+    this.articleStore.deleteArticle(slug);
   }
   deleteComment(data: { commentId: number; slug: string }) {
-    this.store.dispatch(articleActions.deleteComment(data));
+    this.articleStore.deleteComment(data);
   }
   submit(slug: string) {
-    this.store.dispatch(articleActions.addComment({ slug }));
+    this.articleStore.addComment(slug);
   }
   updateForm(changes: any) {
     this.store.dispatch(formsActions.updateData({ data: changes }));
   }
 
   ngOnDestroy() {
-    this.store.dispatch(articleActions.initializeArticle());
+    this.articleStore.initializeArticle();
   }
 }
