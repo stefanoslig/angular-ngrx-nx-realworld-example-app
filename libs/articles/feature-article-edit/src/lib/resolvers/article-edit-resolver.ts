@@ -1,15 +1,14 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { articleActions } from '@realworld/articles/data-access';
+import { ArticleStore } from '@realworld/articles/data-access/src';
 import { of } from 'rxjs';
 
 export const articleEditResolver: ResolveFn<boolean> = (route: ActivatedRouteSnapshot) => {
   const slug = route.params['slug'];
-  const store = inject(Store);
+  const articleStore = inject(ArticleStore);
 
   if (slug) {
-    store.dispatch(articleActions.loadArticle({ slug }));
+    articleStore.getArticle(slug);
   }
 
   return of(true);

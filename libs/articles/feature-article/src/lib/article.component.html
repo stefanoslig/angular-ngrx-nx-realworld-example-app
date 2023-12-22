@@ -1,4 +1,4 @@
-@if (article$ | async; as article) {
+@if ($article(); as article) {
   <div class="article-page">
     <div class="banner">
       <div class="container">
@@ -53,11 +53,11 @@
             this article.
           }
 
-          @for (comment of comments$ | async; track comment.id) {
+          @for (comment of $comments(); track comment.id) {
             <cdt-article-comment
               [currentUser]="$currentUser()"
               (delete)="deleteComment($event)"
-              [article]="article$ | async"
+              [article]="article"
               [comment]="comment"
             ></cdt-article-comment>
           }
