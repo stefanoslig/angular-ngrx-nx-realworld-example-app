@@ -5,50 +5,6 @@ import { articlesActions } from '../articles.actions';
 
 export const articleListFeatureKey = 'articles-list';
 
-export interface ArticleListState {
-  listConfig: ArticleListConfig;
-  articles: Articles;
-}
-
-export interface ArticleListConfig {
-  type: ListType;
-  currentPage: number;
-  filters: Filters;
-}
-
-export interface Filters {
-  tag?: string;
-  author?: string;
-  favorited?: string;
-  limit?: number;
-  offset?: number;
-}
-
-export type ListType = 'ALL' | 'FEED';
-
-export interface Articles {
-  entities: Article[];
-  articlesCount: number;
-  loaded: boolean;
-  loading: boolean;
-}
-
-export const articleListInitialState: ArticleListState = {
-  listConfig: {
-    type: 'ALL',
-    currentPage: 1,
-    filters: {
-      limit: 10,
-    },
-  },
-  articles: {
-    entities: [],
-    articlesCount: 0,
-    loaded: false,
-    loading: false,
-  },
-};
-
 export const articleListFeature = createFeature({
   name: 'articlesList',
   reducer: createReducer(
@@ -69,30 +25,7 @@ export const articleListFeature = createFeature({
       ...state,
       listConfig: config,
     })),
-    on(articleListActions.loadArticles, (state) => {
-      const articles = { ...state.articles, loading: true };
-      return { ...state, articles };
-    }),
-    on(articleListActions.loadArticlesSuccess, (state, action) => {
-      const articles = {
-        ...state.articles,
-        entities: action.articles,
-        articlesCount: action.articlesCount,
-        loading: false,
-        loaded: true,
-      };
-      return { ...state, articles };
-    }),
-    on(articleListActions.loadArticlesFailure, (state, _) => {
-      const articles = {
-        ...state.articles,
-        entities: [],
-        articlesCount: 0,
-        loading: false,
-        loaded: true,
-      };
-      return { ...state, articles };
-    }),
+
     on(articlesActions.unfavoriteSuccess, articlesActions.favoriteSuccess, (state, { article }) => ({
       ...state,
       articles: replaceArticle(state.articles, article),
