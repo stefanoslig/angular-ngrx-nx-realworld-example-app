@@ -26,6 +26,7 @@
       "@realworld/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@realworld/auth/feature-auth": ["libs/auth/feature-auth/src/index.ts"],
       "@realworld/core/api-types": ["libs/core/api-types/src/index.ts"],
+      "@realworld/core/data-access": ["libs/core/data-access/src/index.ts"],
       "@realworld/core/error-handler": ["libs/core/error-handler/src/index.ts"],
       "@realworld/core/forms": ["libs/core/forms/src/index.ts"],
       "@realworld/core/http-client": ["libs/core/http-client/src/index.ts"],
@@ -33,8 +34,7 @@
       "@realworld/profile/feature-profile": ["libs/profile/feature-profile/src/index.ts"],
       "@realworld/settings/data-access": ["libs/settings/data-access/src/index.ts"],
       "@realworld/settings/feature-settings": ["libs/settings/feature-settings/src/index.ts"],
-      "@realworld/ui/components": ["libs/ui/components/src/index.ts"],
-      "@realworld/core/data-access": ["libs/core/data-access/src/index.ts"]
+      "@realworld/ui/components": ["libs/ui/components/src/index.ts"]
     },
     "strict": true
   },
