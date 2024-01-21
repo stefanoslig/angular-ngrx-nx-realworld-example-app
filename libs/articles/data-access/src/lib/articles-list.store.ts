@@ -1,25 +1,21 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
-import { ArticlesListState, articlesListInitialState } from './models/articles-list.model';
-import { inject } from '@angular/core';
+import { ArticlesListConfig, ArticlesListState, articlesListInitialState } from './models/articles-list.model';
+import { Signal, inject } from '@angular/core';
 import { ArticlesService } from './services/articles.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { concatMap, pipe, tap } from 'rxjs';
 import { setLoaded, setLoading, withCallState } from '@realworld/core/data-access';
 import { tapResponse } from '@ngrx/operators';
-import { concatLatestFrom } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { articleListQuery } from './+state/article-list/article-list.selectors';
 
 export const ArticlesListStore = signalStore(
   { providedIn: 'root' },
   withState<ArticlesListState>(articlesListInitialState),
-  withMethods((store, articlesService = inject(ArticlesService), reduxStore = inject(Store)) => ({
-    loadArticles: rxMethod<string>(
+  withMethods((store, articlesService = inject(ArticlesService)) => ({
+    loadArticles: rxMethod<Signal<ArticlesListConfig>>(
       pipe(
-        concatLatestFrom(() => reduxStore.select(articleListQuery.selectListConfig)),
         tap(() => setLoading('getArticles')),
-        concatMap(([, config]) =>
-          articlesService.query(config).pipe(
+        concatMap((listConfig) =>
+          articlesService.query(listConfig).pipe(
             tapResponse({
               next: ({ articles }) => {
                 patchState(store, {
@@ -35,6 +31,21 @@ export const ArticlesListStore = signalStore(
         ),
       ),
     ),
+    setListTag: (listConfig: ArticlesListConfig) => {
+      patchState(store, { listConfig });
+    },
+    setListPage: (page: number) => {
+      const filters = {
+        ...store.listConfig.filters(),
+        offset: (store.listConfig().filters.limit ?? 10) * (page - 1),
+      };
+      const listConfig: ArticlesListConfig = {
+        ...store.listConfig(),
+        currentPage: page,
+        filters,
+      };
+      patchState(store, { listConfig });
+    },
   })),
   withCallState({ collection: 'getArticles' }),
 );
