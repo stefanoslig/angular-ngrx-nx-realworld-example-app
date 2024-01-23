@@ -107,6 +107,19 @@ export const ArticleStore = signalStore(
           ),
         ),
       ),
+      publishArticle: rxMethod<string>(
+        pipe(
+          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
+          switchMap(([_, data]) =>
+            articlesService.publishArticle(data).pipe(
+              tapResponse({
+                next: ({ article }) => router.navigate(['article', article.slug]),
+                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+              }),
+            ),
+          ),
+        ),
+      ),
       initializeArticle: () => {
         patchState(store, articleInitialState);
       },
