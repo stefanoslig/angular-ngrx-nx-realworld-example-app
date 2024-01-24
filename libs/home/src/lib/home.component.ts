@@ -1,10 +1,5 @@
 import { Component, ChangeDetectionStrategy, inject, effect, untracked } from '@angular/core';
-import {
-  articleListInitialState,
-  articleListQuery,
-  articleListActions,
-  ListType,
-} from '@realworld/articles/data-access';
+import { ListType } from '@realworld/articles/data-access';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';

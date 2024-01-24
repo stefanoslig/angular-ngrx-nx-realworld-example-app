@@ -82,7 +82,7 @@ export const ArticlesListStore = signalStore(
         ),
       ),
     ),
-    setListTag: (listConfig: ArticlesListConfig) => {
+    setListConfig: (listConfig: ArticlesListConfig) => {
       patchState(store, { listConfig });
     },
     setListPage: (page: number) => {
