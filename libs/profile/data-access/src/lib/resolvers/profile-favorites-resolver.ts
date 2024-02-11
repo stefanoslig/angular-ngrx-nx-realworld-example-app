@@ -7,13 +7,16 @@ export const profileFavoritesResolver: ResolveFn<boolean> = (route: ActivatedRou
   const username = route?.parent?.params['username'];
   const articlesListStore = inject(ArticlesListStore);
 
-  articlesListStore.setListConfig({
+  const config = {
     ...articlesListInitialState.listConfig,
     filters: {
       ...articlesListInitialState.listConfig.filters,
       favorited: username,
     },
-  });
+  };
+
+  articlesListStore.setListConfig(config);
+  articlesListStore.loadArticles(config);
 
   return of(true);
 };
