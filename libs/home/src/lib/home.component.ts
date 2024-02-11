@@ -30,7 +30,9 @@ export class HomeComponent {
   });
 
   setListTo(type: ListType = 'ALL') {
-    this.articlesListStore.setListConfig({ ...articlesListInitialState.listConfig, type });
+    const config = { ...articlesListInitialState.listConfig, type };
+    this.articlesListStore.setListConfig(config);
+    this.articlesListStore.loadArticles(config);
   }
 
   getArticles(isLoggedIn: boolean) {

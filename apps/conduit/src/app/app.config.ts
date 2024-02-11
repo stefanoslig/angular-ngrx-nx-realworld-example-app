@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
         },
         {
           path: 'home',
-          loadChildren: () => import('@realworld/home/src/lib/home.component').then((m) => m.HomeComponent),
+          loadComponent: () => import('@realworld/home/src/lib/home.component').then((m) => m.HomeComponent),
         },
         {
           path: 'login',

@@ -18,12 +18,15 @@ export const ArticlesListStore = signalStore(
   { providedIn: 'root' },
   withState<ArticlesListState>(articlesListInitialState),
   withComputed(({ listConfig, articles }) => ({
-    totalPages: computed(() =>
-      Array.from(
+    totalPages: computed(() => {
+      console.log(articles().articlesCount);
+      console.log(listConfig()?.filters?.limit);
+
+      return Array.from(
         new Array(Math.ceil(articles().articlesCount / (listConfig()?.filters?.limit ?? 1))),
         (_, index) => index + 1,
-      ),
-    ),
+      );
+    }),
   })),
   withMethods((store, articlesService = inject(ArticlesService), actionsService = inject(ActionsService)) => ({
     loadArticles: rxMethod<ArticlesListConfig>(
@@ -32,9 +35,9 @@ export const ArticlesListStore = signalStore(
         concatMap((listConfig) =>
           articlesService.query(listConfig).pipe(
             tapResponse({
-              next: ({ articles }) => {
+              next: ({ articles, articlesCount }) => {
                 patchState(store, {
-                  articles: { articlesCount: articles.length, entities: articles },
+                  articles: { articlesCount: articlesCount, entities: articles },
                   ...setLoaded('getArticles'),
                 });
               },
