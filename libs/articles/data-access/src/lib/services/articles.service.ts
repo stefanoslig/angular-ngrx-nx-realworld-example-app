@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '@realworld/core/http-client';
 import { Article, ArticleResponse, MultipleCommentsResponse, SingleCommentResponse } from '@realworld/core/api-types';
-import { ArticleListConfig } from '../+state/article-list/article-list.reducer';
 import { HttpParams } from '@angular/common/http';
+import { ArticlesListConfig } from '../models/articles-list.model';
 
 @Injectable({ providedIn: 'root' })
 export class ArticlesService {
@@ -31,7 +31,7 @@ export class ArticlesService {
     });
   }
 
-  query(config: ArticleListConfig): Observable<{ articles: Article[]; articlesCount: number }> {
+  query(config: ArticlesListConfig): Observable<{ articles: Article[]; articlesCount: number }> {
     return this.apiService.get(
       '/articles' + (config.type === 'FEED' ? '/feed' : ''),
       this.toHttpParams(config.filters),

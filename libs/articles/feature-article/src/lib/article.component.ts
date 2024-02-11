@@ -1,6 +1,6 @@
 import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, computed, inject } from '@angular/core';
-import { ArticleStore, articlesActions } from '@realworld/articles/data-access';
+import { ArticleStore, ArticlesListStore } from '@realworld/articles/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { AsyncPipe } from '@angular/common';
 import { MarkdownPipe } from './pipes/markdown.pipe';
@@ -35,6 +35,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
   private readonly authStore = inject(AuthStore);
   private readonly articleStore = inject(ArticleStore);
+  private readonly articlesListStore = inject(ArticlesListStore);
 
   $article = this.articleStore.data;
   $comments = this.articleStore.comments;
@@ -61,10 +62,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.articleStore.unfollowUser(username);
   }
   favorite(slug: string) {
-    this.store.dispatch(articlesActions.favorite({ slug }));
+    this.articlesListStore.favouriteArticle(slug);
   }
   unfavorite(slug: string) {
-    this.store.dispatch(articlesActions.unfavorite({ slug }));
+    this.articlesListStore.unFavouriteArticle(slug);
   }
   delete(slug: string) {
     this.articleStore.deleteArticle(slug);

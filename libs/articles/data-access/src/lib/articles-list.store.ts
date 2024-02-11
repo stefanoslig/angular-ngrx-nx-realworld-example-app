@@ -21,12 +21,12 @@ export const ArticlesListStore = signalStore(
     totalPages: computed(() =>
       Array.from(
         new Array(Math.ceil(articles().articlesCount / (listConfig()?.filters?.limit ?? 1))),
-        (val, index) => index + 1,
+        (_, index) => index + 1,
       ),
     ),
   })),
   withMethods((store, articlesService = inject(ArticlesService), actionsService = inject(ActionsService)) => ({
-    loadArticles: rxMethod<Signal<ArticlesListConfig>>(
+    loadArticles: rxMethod<ArticlesListConfig>(
       pipe(
         tap(() => setLoading('getArticles')),
         concatMap((listConfig) =>

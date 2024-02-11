@@ -1,11 +1,10 @@
 import { Component, ChangeDetectionStrategy, inject, effect, untracked } from '@angular/core';
-import { ListType } from '@realworld/articles/data-access';
+import { ArticlesListStore, ListType, articlesListInitialState } from '@realworld/articles/data-access';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { HomeStoreService } from './home.store';
 import { provideComponentStore } from '@ngrx/component-store';
-import { Store } from '@ngrx/store';
 import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
@@ -18,11 +17,11 @@ import { AuthStore } from '@realworld/auth/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  private readonly store = inject(Store);
+  private readonly articlesListStore = inject(ArticlesListStore);
   private readonly authStore = inject(AuthStore);
   private readonly homeStore = inject(HomeStoreService);
 
-  listConfig$ = this.store.select(articleListQuery.selectListConfig);
+  $listConfig = this.articlesListStore.listConfig;
   tags$ = this.homeStore.tags$;
 
   readonly loadArticlesOnLogin = effect(() => {
@@ -31,7 +30,7 @@ export class HomeComponent {
   });
 
   setListTo(type: ListType = 'ALL') {
-    this.store.dispatch(articleListActions.setListConfig({ config: { ...articleListInitialState.listConfig, type } }));
+    this.articlesListStore.setListConfig({ ...articlesListInitialState.listConfig, type });
   }
 
   getArticles(isLoggedIn: boolean) {
@@ -43,16 +42,12 @@ export class HomeComponent {
   }
 
   setListTag(tag: string) {
-    this.store.dispatch(
-      articleListActions.setListConfig({
-        config: {
-          ...articleListInitialState.listConfig,
-          filters: {
-            ...articleListInitialState.listConfig.filters,
-            tag,
-          },
-        },
-      }),
-    );
+    this.articlesListStore.setListConfig({
+      ...articlesListInitialState.listConfig,
+      filters: {
+        ...articlesListInitialState.listConfig.filters,
+        tag,
+      },
+    });
   }
 }

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, OnInit,
 import { OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { articleEditActions, ArticleStore } from '@realworld/articles/data-access';
+import { ArticleStore } from '@realworld/articles/data-access';
 
 const structure: Field[] = [
   {
@@ -43,7 +43,6 @@ const structure: Field[] = [
 export class ArticleEditComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
   private readonly articleStore = inject(ArticleStore);
-  private readonly destroyRef = inject(DestroyRef);
 
   structure$ = this.store.select(ngrxFormsQuery.selectStructure);
   data$ = this.store.select(ngrxFormsQuery.selectData);
@@ -64,7 +63,7 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.store.dispatch(articleEditActions.publishArticle());
+    this.articleStore.publishArticle();
   }
 
   ngOnDestroy() {

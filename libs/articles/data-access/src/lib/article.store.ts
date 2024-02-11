@@ -107,7 +107,7 @@ export const ArticleStore = signalStore(
           ),
         ),
       ),
-      publishArticle: rxMethod<string>(
+      publishArticle: rxMethod<void>(
         pipe(
           concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
           switchMap(([_, data]) =>

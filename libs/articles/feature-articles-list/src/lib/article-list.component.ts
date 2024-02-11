@@ -1,10 +1,9 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { articleListActions, articleListQuery, articlesActions } from '@realworld/articles/data-access';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 import { PagerComponent } from '@realworld/ui/components';
+import { ArticlesListStore } from '@realworld/articles/data-access';
 
 @Component({
   selector: 'cdt-article-list',
@@ -14,20 +13,20 @@ import { PagerComponent } from '@realworld/ui/components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {
-  private readonly store = inject(Store);
+  private readonly articlesListStore = inject(ArticlesListStore);
   private readonly router = inject(Router);
 
-  totalPages$ = this.store.select(articleListQuery.selectTotalPages);
-  articles$ = this.store.select(articleListQuery.selectArticleEntities);
-  listConfig$ = this.store.select(articleListQuery.selectListConfig);
-  isLoading$ = this.store.select(articleListQuery.isLoading);
+  $totalPages = this.articlesListStore.totalPages;
+  $articles = this.articlesListStore.articles.entities;
+  $listConfig = this.articlesListStore.listConfig;
+  $isLoading = this.articlesListStore.getArticlesLoading;
 
   favorite(slug: string) {
-    this.store.dispatch(articlesActions.favorite({ slug }));
+    this.articlesListStore.favouriteArticle(slug);
   }
 
   unFavorite(slug: string) {
-    this.store.dispatch(articlesActions.unfavorite({ slug }));
+    this.articlesListStore.unFavouriteArticle(slug);
   }
 
   navigateToArticle(slug: string) {
@@ -35,6 +34,6 @@ export class ArticleListComponent {
   }
 
   setPage(page: number) {
-    this.store.dispatch(articleListActions.setListPage({ page }));
+    this.articlesListStore.setListPage(page);
   }
 }

@@ -1,5 +1,5 @@
-@if (!(isLoading$ | async)) {
-  @for (article of articles$ | async; track article.slug) {
+@if (!$isLoading()) {
+  @for (article of $articles(); track article.slug) {
     <cdt-article-list-item
       data-e2e-id="article-list"
       (navigateToArticle)="navigateToArticle($event)"
@@ -14,8 +14,8 @@
 
   <cdt-pager
     (setPage)="setPage($event)"
-    [currentPage]="(listConfig$ | async)?.currentPage"
-    [totalPages]="totalPages$ | async"
+    [currentPage]="$listConfig.currentPage()"
+    [totalPages]="$totalPages()"
   ></cdt-pager>
 } @else {
   <div>Loading articles...</div>
