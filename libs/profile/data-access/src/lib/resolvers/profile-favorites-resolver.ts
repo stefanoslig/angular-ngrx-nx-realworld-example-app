@@ -1,24 +1,22 @@
-import { articleListActions, articleListInitialState } from '@realworld/articles/data-access';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
+import { ArticlesListStore, articlesListInitialState } from '@realworld/articles/data-access';
 
 export const profileFavoritesResolver: ResolveFn<boolean> = (route: ActivatedRouteSnapshot) => {
   const username = route?.parent?.params['username'];
-  const store = inject(Store);
+  const articlesListStore = inject(ArticlesListStore);
 
-  store.dispatch(
-    articleListActions.setListConfig({
-      config: {
-        ...articleListInitialState.listConfig,
-        filters: {
-          ...articleListInitialState.listConfig.filters,
-          favorited: username,
-        },
-      },
-    }),
-  );
+  const config = {
+    ...articlesListInitialState.listConfig,
+    filters: {
+      ...articlesListInitialState.listConfig.filters,
+      favorited: username,
+    },
+  };
+
+  articlesListStore.setListConfig(config);
+  articlesListStore.loadArticles(config);
 
   return of(true);
 };

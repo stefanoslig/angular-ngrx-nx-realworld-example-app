@@ -10,10 +10,10 @@
     <div class="row">
       <div class="col-md-9">
         <div class="feed-toggle">
-          @if ({listConfig: listConfig$ | async}; as model) {
+          @if ({ listConfig: $listConfig() }; as model) {
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
-                <a [ngClass]="{ active: model.listConfig?.type === 'FEED' }" class="nav-link" (click)="setListTo('FEED')"
+                <a [ngClass]="{ active: model.listConfig.type === 'FEED' }" class="nav-link" (click)="setListTo('FEED')"
                   >Your Feed</a
                 >
               </li>
@@ -21,17 +21,17 @@
                 <a
                   data-e2e-id="global-feed"
                   [ngClass]="{
-                    active: model.listConfig?.type === 'ALL' && !model.listConfig?.filters?.tag
+                    active: model.listConfig.type === 'ALL' && !model.listConfig.filters.tag
                   }"
                   class="nav-link"
                   (click)="setListTo('ALL')"
                   >Global Feed</a
                 >
               </li>
-              <li class="nav-item" [hidden]="!model.listConfig?.filters?.tag">
+              <li class="nav-item" [hidden]="!model.listConfig.filters.tag">
                 <a class="nav-link active">
                   <i class="ion-pound"></i>
-                  {{ model.listConfig?.filters?.tag }}
+                  {{ model.listConfig.filters.tag }}
                 </a>
               </li>
             </ul>
@@ -43,8 +43,8 @@
 
       <div class="col-md-3">
         <div class="sidebar">
-          @defer (when (tags$ | async).length>0) {
-            <cdt-tags-list (setListTag)="setListTag($event)" [tags]="tags$ | async"></cdt-tags-list>
+          @defer (when !!(tags$ | async)?.length) {
+            <cdt-tags-list (setListTag)="setListTag($event)" [tags]="(tags$ | async) ?? []"></cdt-tags-list>
           } @placeholder {
             loading...
           }

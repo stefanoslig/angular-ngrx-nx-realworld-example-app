@@ -1,5 +1,5 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
-import { ArticleState } from './models/article.model';
+import { ArticleState, articleInitialState } from './models/article.model';
 import { inject } from '@angular/core';
 import { ArticlesService } from './services/articles.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -11,28 +11,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-
-export const articleInitialState: ArticleState = {
-  data: {
-    slug: '',
-    title: '',
-    description: '',
-    body: '',
-    tagList: [],
-    createdAt: '',
-    updatedAt: '',
-    favorited: false,
-    favoritesCount: 0,
-    author: {
-      username: '',
-      bio: '',
-      image: '',
-      following: false,
-      loading: false,
-    },
-  },
-  comments: [],
-};
 
 export const ArticleStore = signalStore(
   { providedIn: 'root' },
@@ -123,6 +101,19 @@ export const ArticleStore = signalStore(
             articlesService.addComment(slug, data.comment).pipe(
               tapResponse({
                 next: () => patchState(store, { comments: [data.comment, ...store.comments()] }),
+                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+              }),
+            ),
+          ),
+        ),
+      ),
+      publishArticle: rxMethod<void>(
+        pipe(
+          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
+          switchMap(([_, data]) =>
+            articlesService.publishArticle(data).pipe(
+              tapResponse({
+                next: ({ article }) => router.navigate(['article', article.slug]),
                 error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
               }),
             ),
