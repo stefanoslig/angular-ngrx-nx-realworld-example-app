@@ -3,27 +3,27 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="(profile$ | async)?.image" class="user-img" />
-          <h4 data-e2e-id="article-author-profile" [hidden]="(profile$ | async)?.loading">
-            {{ (profile$ | async)?.username }}
+          <img [src]="$image()" class="user-img" />
+          <h4 data-e2e-id="article-author-profile" [hidden]="$profileLoading()">
+            {{ $username() }}
           </h4>
-          <p>{{ (profile$ | async)?.bio }}</p>
+          <p>{{ $bio() }}</p>
           <button
-            [hidden]="isUser$ | async"
+            [hidden]="$isUser()"
             class="btn btn-sm action-btn"
             [ngClass]="{
-              'btn-outline-secondary': !(profile$ | async)?.following,
-              'btn-secondary': (profile$ | async)?.following
+              'btn-outline-secondary': !$following(),
+              'btn-secondary': $following()
             }"
             (click)="toggleFollowing()"
           >
             <i class="ion-plus-round"></i>
-            &nbsp; {{ (profile$ | async)?.following ? 'Unfollow' : 'Follow' }}
-            {{ (profile$ | async)?.username }}
+            &nbsp; {{ $following() ? 'Unfollow' : 'Follow' }}
+            {{ $username() }}
           </button>
           <a
             [routerLink]="['/settings']"
-            [hidden]="(isUser$ | async) === false"
+            [hidden]="$isUser() === false"
             class="btn btn-sm btn-outline-secondary action-btn"
           >
             <i class="ion-gear-a"></i> Edit Profile Settings
@@ -41,7 +41,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                [routerLink]="['/profile', (profile$ | async)?.username]"
+                [routerLink]="['/profile', $username()]"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 >My Articles</a
@@ -50,7 +50,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                [routerLink]="['/profile', (profile$ | async)?.username, 'favorites']"
+                [routerLink]="['/profile', $username(), 'favorites']"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
                 >Favorited Articles</a

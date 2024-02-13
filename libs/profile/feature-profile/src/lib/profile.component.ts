@@ -1,12 +1,8 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, Injector, OnInit, inject } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { Subject, combineLatest } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { profileActions, selectProfileState } from '@realworld/profile/data-access';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { AuthStore } from '@realworld/auth/data-access';
+import { ProfileStore } from '@realworld/profile/data-access';
 
 @Component({
   standalone: true,
@@ -16,37 +12,24 @@ import { AuthStore } from '@realworld/auth/data-access';
   imports: [RouterModule, NgClass, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent implements OnInit {
-  private readonly store = inject(Store);
+export class ProfileComponent {
+  private readonly profileStore = inject(ProfileStore);
   private readonly authStore = inject(AuthStore);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly injector = inject(Injector);
 
-  profile$ = this.store.select(selectProfileState);
-  isUser$: Subject<boolean> = new Subject();
-  following!: boolean;
-  username!: string;
+  $profileLoading = this.profileStore.getProfileLoading;
+  $username = this.profileStore.username;
+  $image = this.profileStore.image;
+  $bio = this.profileStore.bio;
+  $following = this.profileStore.following;
+  $currentUser = this.authStore.user.username;
 
-  $currentUser = this.authStore.user;
-
-  ngOnInit() {
-    combineLatest([this.profile$, toObservable(this.$currentUser, { injector: this.injector })])
-      .pipe(
-        tap(([p]) => {
-          this.username = p.username;
-          this.following = p.following;
-        }),
-        map(([p, u]) => p.username === u.username),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe((isUser) => this.isUser$.next(isUser));
-  }
+  $isUser = computed(() => this.$currentUser() === this.$username());
 
   toggleFollowing() {
-    if (this.following) {
-      this.store.dispatch(profileActions.unfollow({ id: this.username }));
+    if (this.$following()) {
+      this.profileStore.unfollowUser(this.$username);
     } else {
-      this.store.dispatch(profileActions.follow({ id: this.username }));
+      this.profileStore.followUser(this.$username);
     }
   }
 }
