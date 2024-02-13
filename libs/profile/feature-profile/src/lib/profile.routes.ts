@@ -1,22 +1,13 @@
 import { Routes } from '@angular/router';
-import { provideEffects } from '@ngrx/effects';
-import { provideState } from '@ngrx/store';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { authGuard } from '@realworld/auth/data-access';
-import {
-  profileArticlesResolver,
-  profileEffects,
-  profileFavoritesResolver,
-  profileFeature,
-  profileResolver,
-} from '@realworld/profile/data-access';
+import { profileArticlesResolver, profileFavoritesResolver, profileResolver } from '@realworld/profile/data-access';
 import { ProfileComponent } from './profile.component';
 
 export const PROFILE_ROUTES: Routes = [
   {
     path: ':username',
     component: ProfileComponent,
-    providers: [provideState(profileFeature), provideEffects(profileEffects)],
     resolve: { profileResolver },
     canActivate: [authGuard],
     children: [

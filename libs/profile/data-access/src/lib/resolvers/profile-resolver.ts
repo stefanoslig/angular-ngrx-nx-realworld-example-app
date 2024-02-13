@@ -1,15 +1,13 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-
-import { profileActions } from '../+state/profile.actions';
+import { ProfileStore } from '../profile.store';
 
 export const profileResolver: ResolveFn<boolean> = (route: ActivatedRouteSnapshot) => {
   const username = route.params['username'];
-  const store = inject(Store);
+  const profileStore = inject(ProfileStore);
 
-  store.dispatch(profileActions.loadProfile({ id: username }));
+  profileStore.getProfile(username);
 
   return of(true);
 };
