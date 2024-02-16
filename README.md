@@ -1,6 +1,6 @@
 # ![RealWorld Example App](logo.png)
 
-### This project is already migrated to Angular v17 and to the new Control Flow and Deferred Loading. I'm also migrating it from NgRx Store to NgRx Signal Store. The [Auth library](https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app/blob/main/libs/auth/data-access/src/lib/auth.store.ts) and the [Article library](https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app/blob/main/libs/articles/data-access/src/lib/article.store.ts) have already migrated. You can already have a look. 
+### This project is already migrated to Angular v17 and to the new Control Flow and Deferred Loading. I'm also migrating it from NgRx Store to NgRx Signal Store. The [Auth library](https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app/blob/main/libs/auth/data-access/src/lib/auth.store.ts), the [Article library](https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app/blob/main/libs/articles/data-access/src/lib/article.store.ts) and the [Profile library](https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app/blob/main/libs/profile/data-access/src/lib/profile.store.ts) have already migrated. You can already have a look. 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b9997c1f-ca8f-456e-aaf6-016ce13c353e/deploy-status)](https://app.netlify.com/sites/angular-ngrx-nx/deploys)
 

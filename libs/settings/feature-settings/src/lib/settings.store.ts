@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ComponentStore } from '@ngrx/component-store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { AuthStore, LocalStorageJwtService } from '@realworld/auth/data-access';
 import { ngrxFormsQuery } from '@realworld/core/forms';

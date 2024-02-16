@@ -9,7 +9,7 @@ import { tapResponse } from '@ngrx/operators';
 import { ActionsService } from './services/actions.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
 
 export const ArticleStore = signalStore(
