@@ -75,7 +75,7 @@
     "cypress": "^13.6.0",
     "@badeball/cypress-cucumber-preprocessor": "^19.2.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
-    "dotenv": "10.0.0",
+    "dotenv": "16.4.5",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-cypress": "2.14.0",
