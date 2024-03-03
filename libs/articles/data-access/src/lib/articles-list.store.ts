@@ -5,7 +5,7 @@ import {
   ArticlesListState,
   articlesListInitialState,
 } from './models/articles-list.model';
-import { Signal, computed, inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { ArticlesService } from './services/articles.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { concatMap, pipe, tap } from 'rxjs';
@@ -18,15 +18,12 @@ export const ArticlesListStore = signalStore(
   { providedIn: 'root' },
   withState<ArticlesListState>(articlesListInitialState),
   withComputed(({ listConfig, articles }) => ({
-    totalPages: computed(() => {
-      console.log(articles().articlesCount);
-      console.log(listConfig()?.filters?.limit);
-
-      return Array.from(
+    totalPages: computed(() =>
+      Array.from(
         new Array(Math.ceil(articles().articlesCount / (listConfig()?.filters?.limit ?? 1))),
         (_, index) => index + 1,
-      );
-    }),
+      ),
+    ),
   })),
   withMethods((store, articlesService = inject(ArticlesService), actionsService = inject(ActionsService)) => ({
     loadArticles: rxMethod<ArticlesListConfig>(
