@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { User } from '@realworld/core/api-types';
 
@@ -10,6 +10,6 @@ import { User } from '@realworld/core/api-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  @Input() user!: User;
-  @Input() isLoggedIn!: boolean;
+  user = input.required<User>();
+  isLoggedIn = input.required<boolean>();
 }

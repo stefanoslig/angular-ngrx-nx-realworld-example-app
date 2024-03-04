@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand" routerLink="/">conduit</a>
 
-    @if (!isLoggedIn) {
+    @if (!isLoggedIn()) {
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
@@ -40,10 +40,10 @@
           <a
             data-e2e-id="loggedin-user"
             class="nav-link"
-            [routerLink]="['/profile', user.username]"
+            [routerLink]="['/profile', user().username]"
             routerLinkActive="active"
           >
-            {{ user.username }}
+            {{ user().username }}
           </a>
         </li>
       </ul>
