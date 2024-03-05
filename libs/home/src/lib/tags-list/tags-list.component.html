@@ -1,7 +1,7 @@
 <p>Popular Tags</p>
 
 <div class="tag-list">
-  @for (tag of tags; track tag) {
+  @for (tag of tags(); track tag) {
     <a (click)="setListTag.emit(tag)" class="tag-pill tag-default">{{ tag }}</a>
   }
 </div>
