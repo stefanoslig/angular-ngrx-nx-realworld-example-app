@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgClass, DatePipe } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
@@ -10,7 +10,7 @@ import { Article } from '@realworld/core/api-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {
-  @Input() article!: Article;
+  article = input.required<Article>();
   @Output() favorite: EventEmitter<string> = new EventEmitter();
   @Output() unFavorite: EventEmitter<string> = new EventEmitter();
   @Output() navigateToArticle: EventEmitter<string> = new EventEmitter();
