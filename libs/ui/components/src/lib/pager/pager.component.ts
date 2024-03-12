@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -10,7 +10,7 @@ import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from 
   imports: [NgClass],
 })
 export class PagerComponent {
-  @Input() currentPage: number | undefined | null;
-  @Input() totalPages: number[] | undefined | null;
+  currentPage = input.required<number | null>();
+  totalPages = input.required<number[] | null>();
   @Output() setPage: EventEmitter<number> = new EventEmitter();
 }

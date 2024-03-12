@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, input } from '@angular/core';
 import { Field } from '../../+state/forms.interfaces';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,6 +11,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent {
-  @Input() field!: Field;
-  @Input() group!: FormGroup;
+  field = input.required<Field>();
+  group = input.required<FormGroup>();
 }
