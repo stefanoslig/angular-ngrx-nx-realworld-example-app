@@ -1,5 +1,5 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Article } from '@realworld/core/api-types';
 @Component({
@@ -10,32 +10,31 @@ import { Article } from '@realworld/core/api-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleMetaComponent {
-  @Input() article!: Article;
-  @Input() isAuthenticated!: boolean;
-  @Input() canModify!: boolean;
-  @Output() follow: EventEmitter<string> = new EventEmitter<string>();
-  @Output() unfollow: EventEmitter<string> = new EventEmitter<string>();
-  @Output() unfavorite: EventEmitter<string> = new EventEmitter();
-  @Output() favorite: EventEmitter<string> = new EventEmitter();
-  @Output() delete: EventEmitter<string> = new EventEmitter();
+  article = input.required<Article>();
+  canModify = input.required<boolean>();
+  follow = output<string>();
+  unfollow = output<string>();
+  unfavorite = output<string>();
+  favorite = output<string>();
+  delete = output<string>();
 
   toggleFavorite() {
-    if (this.article.favorited) {
-      this.unfavorite.emit(this.article.slug);
+    if (this.article().favorited) {
+      this.unfavorite.emit(this.article().slug);
     } else {
-      this.favorite.emit(this.article.slug);
+      this.favorite.emit(this.article().slug);
     }
   }
 
   toggleFollow() {
-    if (this.article.author.following) {
-      this.unfollow.emit(this.article.author.username);
+    if (this.article().author.following) {
+      this.unfollow.emit(this.article().author.username);
     } else {
-      this.follow.emit(this.article.author.username);
+      this.follow.emit(this.article().author.username);
     }
   }
 
   deleteArticle() {
-    this.delete.emit(this.article.slug);
+    this.delete.emit(this.article().slug);
   }
 }

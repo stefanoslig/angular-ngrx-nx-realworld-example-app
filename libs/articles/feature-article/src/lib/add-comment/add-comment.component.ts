@@ -1,6 +1,6 @@
 import { Article, User } from '@realworld/core/api-types';
 import { DynamicFormComponent, Field, ListErrorsComponent } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, input, output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,11 +11,11 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddCommentComponent {
-  @Input() article!: Article;
-  @Input() currentUser!: User;
+  article = input.required<Article>();
+  currentUser = input.required<User>();
   @Input() data$!: Observable<any>;
   @Input() structure$!: Observable<Field[]>;
   @Input() touchedForm$!: Observable<boolean>;
-  @Output() submitComment: EventEmitter<string> = new EventEmitter();
-  @Output() updateForm: EventEmitter<any> = new EventEmitter();
+  submitComment = output<string>();
+  updateForm = output<string>();
 }

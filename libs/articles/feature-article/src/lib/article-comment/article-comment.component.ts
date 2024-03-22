@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { Article, User } from '@realworld/core/api-types';
 import { Comment } from '@realworld/articles/data-access';
 import { RouterModule } from '@angular/router';
@@ -12,11 +12,11 @@ import { DatePipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleCommentComponent {
-  @Input() currentUser!: User;
-  @Input() comment!: Comment;
-  @Input() article!: Article;
-  @Output() delete: EventEmitter<{
+  currentUser = input.required<User>();
+  comment = input.required<Comment>();
+  article = input.required<Article>();
+  delete = output<{
     commentId: number;
     slug: string;
-  }> = new EventEmitter();
+  }>();
 }

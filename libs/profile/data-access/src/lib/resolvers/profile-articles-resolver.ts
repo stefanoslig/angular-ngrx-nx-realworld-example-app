@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { ArticleStore, ArticlesListStore, articlesListInitialState } from '@realworld/articles/data-access';
+import { ArticlesListStore, articlesListInitialState } from '@realworld/articles/data-access';
 import { of } from 'rxjs';
 
 export const profileArticlesResolver: ResolveFn<boolean> = (route: ActivatedRouteSnapshot) => {

@@ -24,6 +24,10 @@ export class HomeComponent {
   $listConfig = this.articlesListStore.listConfig;
   tags$ = this.homeStore.tags$;
 
+  constructor() {
+    this.articlesListStore.loadArticles(this.$listConfig);
+  }
+
   readonly loadArticlesOnLogin = effect(() => {
     const isLoggedIn = this.authStore.loggedIn();
     untracked(() => this.getArticles(isLoggedIn));
@@ -32,7 +36,6 @@ export class HomeComponent {
   setListTo(type: ListType = 'ALL') {
     const config = { ...articlesListInitialState.listConfig, type };
     this.articlesListStore.setListConfig(config);
-    this.articlesListStore.loadArticles(config);
   }
 
   getArticles(isLoggedIn: boolean) {
