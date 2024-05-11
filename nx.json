@@ -1,7 +1,4 @@
 {
-  "affected": {
-    "defaultBase": "master"
-  },
   "defaultProject": "conduit",
   "generators": {
     "@nx/angular:application": {
@@ -49,5 +46,6 @@
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
   },
-  "parallel": 3
+  "parallel": 3,
+  "defaultBase": "main"
 }
