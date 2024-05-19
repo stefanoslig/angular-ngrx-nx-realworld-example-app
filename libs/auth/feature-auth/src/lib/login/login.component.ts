@@ -1,56 +1,30 @@
-import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ListErrorsComponent } from '@realworld/core/forms';
+import { ChangeDetectionStrategy, Component, inject, viewChild } from '@angular/core';
+import { FormBuilder, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { AuthStore } from '@realworld/auth/data-access';
-import { Store } from '@ngrx/store';
-
-const structure: Field[] = [
-  {
-    type: 'INPUT',
-    name: 'email',
-    placeholder: 'Email',
-    validator: [Validators.required],
-  },
-  {
-    type: 'INPUT',
-    name: 'password',
-    placeholder: 'Password',
-    validator: [Validators.required],
-    attrs: {
-      type: 'password',
-    },
-  },
-];
 
 @Component({
   selector: 'cdt-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [ListErrorsComponent, DynamicFormComponent, RouterModule],
+  imports: [ListErrorsComponent, RouterLink, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  private readonly store = inject(Store);
+export class LoginComponent {
   private readonly authStore = inject(AuthStore);
+  private readonly fb = inject(FormBuilder);
 
-  structure$ = this.store.select(ngrxFormsQuery.selectStructure);
-  data$ = this.store.select(ngrxFormsQuery.selectData);
+  $formDir = viewChild(FormGroupDirective);
 
-  ngOnInit() {
-    this.store.dispatch(formsActions.setStructure({ structure }));
-  }
+  form = this.fb.group({
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+  });
 
-  updateForm(changes: any) {
-    this.store.dispatch(formsActions.updateData({ data: changes }));
-  }
-
-  submit() {
+  onSubmit(event: Event) {
+    this.$formDir()?.resetForm(this.form.value);
     this.authStore.login();
-  }
-
-  ngOnDestroy() {
-    this.store.dispatch(formsActions.initializeForm());
   }
 }

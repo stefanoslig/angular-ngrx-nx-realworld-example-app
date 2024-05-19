@@ -9,11 +9,17 @@
 
         <cdt-list-errors></cdt-list-errors>
 
-        <cdt-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
-        </cdt-dynamic-form>
-        <button data-e2e-id="sign-in" (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">
-          Sign in
-        </button>
+        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+          <div class="form-field">
+            <label for="email">First Name</label>
+            <input formControlName="email" type="text" id="email" placeholder="Email" />
+          </div>
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input formControlName="password" type="password" id="password" placeholder="Password" />
+          </div>
+          <button data-e2e-id="sign-in" class="btn btn-lg btn-primary pull-xs-right" type="submit">Sign in</button>
+        </form>
       </div>
     </div>
   </div>
