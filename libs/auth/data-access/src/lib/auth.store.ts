@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
 import { LocalStorageJwtService } from './services/local-storage-jwt.service';
 import { Router } from '@angular/router';
-import { LoginUser } from '@realworld/core/api-types';
+import { LoginUser, NewUser } from '@realworld/core/api-types';
 
 export const AuthStore = signalStore(
   { providedIn: 'root' },
@@ -44,11 +44,10 @@ export const AuthStore = signalStore(
           ),
         ),
       ),
-      register: rxMethod<void>(
+      register: rxMethod<NewUser>(
         pipe(
-          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
-          exhaustMap(([, data]) =>
-            authService.register(data).pipe(
+          exhaustMap((newUserData) =>
+            authService.register(newUserData).pipe(
               tapResponse({
                 next: ({ user }) => {
                   patchState(store, { user, loggedIn: true });
