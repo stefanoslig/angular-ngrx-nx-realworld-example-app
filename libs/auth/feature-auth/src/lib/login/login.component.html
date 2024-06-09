@@ -9,16 +9,27 @@
 
         <cdt-list-errors></cdt-list-errors>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-          <div class="form-field">
-            <label for="email">First Name</label>
-            <input formControlName="email" type="text" id="email" placeholder="Email" />
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <cdt-input-exp formControlName="email" />
+          <cdt-input-errors [control]="form.controls.email"></cdt-input-errors>
+          <div class="form-group">
+            <input
+              formControlName="password"
+              type="password"
+              id="password"
+              placeholder="Password"
+              class="form-control form-control-lg"
+            />
+            <cdt-input-errors [control]="form.controls.password"></cdt-input-errors>
           </div>
-          <div class="form-field">
-            <label for="password">Password</label>
-            <input formControlName="password" type="password" id="password" placeholder="Password" />
-          </div>
-          <button data-e2e-id="sign-in" class="btn btn-lg btn-primary pull-xs-right" type="submit">Sign in</button>
+          <button
+            data-e2e-id="sign-in"
+            class="btn btn-lg btn-primary pull-xs-right"
+            [disabled]="form.invalid || form.pending"
+            type="submit"
+          >
+            Sign in
+          </button>
         </form>
       </div>
     </div>

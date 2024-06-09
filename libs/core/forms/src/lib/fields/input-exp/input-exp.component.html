@@ -1,0 +1,11 @@
+<div class="form-group">
+  <input
+    [(ngModel)]="value"
+    (valueChange)="onChange(value())"
+    type="text"
+    id="email"
+    placeholder="Email"
+    class="form-control form-control-lg"
+  />
+  <!-- <cdt-input-errors [errors]="form.controls.email.errors"></cdt-input-errors> -->
+</div>
