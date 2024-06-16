@@ -1,62 +1,29 @@
-import { DynamicFormComponent, Field, formsActions, ListErrorsComponent, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { InputErrorsComponent, ListErrorsComponent } from '@realworld/core/forms';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from '@realworld/auth/data-access';
-import { Store } from '@ngrx/store';
-
-const structure: Field[] = [
-  {
-    type: 'INPUT',
-    name: 'username',
-    placeholder: 'Username',
-    validator: [Validators.required],
-  },
-  {
-    type: 'INPUT',
-    name: 'email',
-    placeholder: 'Email',
-    validator: [Validators.required],
-  },
-  {
-    type: 'INPUT',
-    name: 'password',
-    placeholder: 'Password',
-    validator: [Validators.required],
-    attrs: {
-      type: 'password',
-    },
-  },
-];
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'cdt-register',
   standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [ListErrorsComponent, DynamicFormComponent, RouterModule],
+  imports: [ListErrorsComponent, RouterModule, ReactiveFormsModule, InputErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent implements OnInit, OnDestroy {
-  private readonly store = inject(Store);
+export class RegisterComponent {
   private readonly authStore = inject(AuthStore);
+  private readonly fb = inject(FormBuilder);
 
-  structure$ = this.store.select(ngrxFormsQuery.selectStructure);
-  data$ = this.store.select(ngrxFormsQuery.selectData);
+  form = this.fb.nonNullable.group({
+    username: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+  });
 
-  ngOnInit() {
-    this.store.dispatch(formsActions.setStructure({ structure }));
-  }
-
-  updateForm(changes: any) {
-    this.store.dispatch(formsActions.updateData({ data: changes }));
-  }
-
-  submit() {
-    this.authStore.register();
-  }
-
-  ngOnDestroy() {
-    this.store.dispatch(formsActions.initializeForm());
+  onSubmit() {
+    this.authStore.register(this.form.getRawValue());
+    this.form.reset();
   }
 }

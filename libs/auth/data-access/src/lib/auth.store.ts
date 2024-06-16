@@ -4,11 +4,12 @@ import { AuthState, authInitialState, initialUserValue } from './auth.model';
 import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { exhaustMap, pipe, switchMap, tap } from 'rxjs';
-import { concatLatestFrom, tapResponse } from '@ngrx/operators';
+import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
+import { formsActions } from '@realworld/core/forms';
 import { LocalStorageJwtService } from './services/local-storage-jwt.service';
 import { Router } from '@angular/router';
+import { LoginUser, NewUser } from '@realworld/core/api-types';
 
 export const AuthStore = signalStore(
   { providedIn: 'root' },
@@ -27,11 +28,10 @@ export const AuthStore = signalStore(
           tap(({ user }) => patchState(store, { user, loggedIn: true })),
         ),
       ),
-      login: rxMethod<void>(
+      login: rxMethod<LoginUser>(
         pipe(
-          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
-          exhaustMap(([, data]) =>
-            authService.login(data).pipe(
+          exhaustMap((credentials) =>
+            authService.login(credentials).pipe(
               tapResponse({
                 next: ({ user }) => {
                   patchState(store, { user, loggedIn: true });
@@ -44,11 +44,10 @@ export const AuthStore = signalStore(
           ),
         ),
       ),
-      register: rxMethod<void>(
+      register: rxMethod<NewUser>(
         pipe(
-          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
-          exhaustMap(([, data]) =>
-            authService.register(data).pipe(
+          exhaustMap((newUserData) =>
+            authService.register(newUserData).pipe(
               tapResponse({
                 next: ({ user }) => {
                   patchState(store, { user, loggedIn: true });

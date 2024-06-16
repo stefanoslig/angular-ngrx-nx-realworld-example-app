@@ -6,7 +6,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   selector: 'cdt-input',
   standalone: true,
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css'],
   imports: [ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
