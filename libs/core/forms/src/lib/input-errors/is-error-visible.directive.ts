@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Directive,
-  TemplateRef,
-  ViewContainerRef,
-  inject,
-  input,
-  DestroyRef,
-} from '@angular/core';
+import { AfterViewInit, Directive, TemplateRef, ViewContainerRef, inject, input, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
 

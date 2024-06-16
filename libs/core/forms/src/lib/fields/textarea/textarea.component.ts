@@ -6,7 +6,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   selector: 'cdt-textarea',
   standalone: true,
   templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.css'],
   imports: [ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
