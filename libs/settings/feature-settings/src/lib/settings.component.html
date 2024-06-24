@@ -4,13 +4,67 @@
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Your Settings</h1>
 
-        <cdt-list-errors></cdt-list-errors>
+        <cdt-list-errors />
 
-        <cdt-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
-        </cdt-dynamic-form>
-        <div class="edit-button-container">
-          <button (click)="submit()" class="btn btn-lg btn-primary pull-xs-right" type="submit">Update Settings</button>
-        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input
+              formControlName="image"
+              type="text"
+              id="image"
+              placeholder="URL of profile picture"
+              class="form-control form-control-lg"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              formControlName="username"
+              type="text"
+              id="username"
+              placeholder="Your Name"
+              class="form-control form-control-lg"
+            />
+            <cdt-input-errors [control]="form.controls.username" />
+          </div>
+          <div class="form-group">
+            <textarea
+              class="form-control form-control-lg"
+              rows="5"
+              id="bio"
+              formControlName="bio"
+              placeholder="Short bio about you"
+            >
+            </textarea>
+          </div>
+          <div class="form-group">
+            <input
+              formControlName="email"
+              type="email"
+              id="email"
+              placeholder="Email"
+              class="form-control form-control-lg"
+            />
+            <cdt-input-errors [control]="form.controls.email" />
+          </div>
+          <div class="form-group">
+            <input
+              formControlName="password"
+              type="text"
+              id="password"
+              placeholder="New Password"
+              class="form-control form-control-lg"
+            />
+            <cdt-input-errors [control]="form.controls.password" />
+          </div>
+          <button
+            data-e2e-id="edit-button-container"
+            class="btn btn-lg btn-primary pull-xs-right"
+            [disabled]="form.invalid || form.pending"
+            type="submit"
+          >
+            Update Settings
+          </button>
+        </form>
 
         <hr />
 
