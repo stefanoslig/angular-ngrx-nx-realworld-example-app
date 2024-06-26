@@ -51,10 +51,10 @@
     "zone.js": "0.14.5"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1800.1",
-    "@angular-devkit/build-angular": "18.0.1",
-    "@angular-devkit/core": "18.0.1",
-    "@angular-devkit/schematics": "18.0.1",
+    "@angular-devkit/architect": "0.1800.6",
+    "@angular-devkit/build-angular": "18.0.6",
+    "@angular-devkit/core": "18.0.6",
+    "@angular-devkit/schematics": "18.0.6",
     "@angular-eslint/eslint-plugin": "18.0.1",
     "@angular-eslint/eslint-plugin-template": "18.0.1",
     "@angular-eslint/template-parser": "18.0.1",
@@ -69,7 +69,7 @@
     "@nx/eslint-plugin": "19.3.1",
     "@nx/jest": "19.3.1",
     "@nx/workspace": "19.3.1",
-    "@schematics/angular": "18.0.1",
+    "@schematics/angular": "18.0.6",
     "@types/jest": "29.5.4",
     "@types/marked": "4.3.1",
     "@types/node": "18.19.21",
