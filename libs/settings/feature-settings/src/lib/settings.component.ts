@@ -1,4 +1,4 @@
-import { DynamicFormComponent, InputErrorsComponent, ListErrorsComponent } from '@realworld/core/forms';
+import { InputErrorsComponent, ListErrorsComponent } from '@realworld/core/forms';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { AuthStore } from '@realworld/auth/data-access';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,7 +8,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   selector: 'cdt-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
-  imports: [DynamicFormComponent, ListErrorsComponent, ReactiveFormsModule, InputErrorsComponent],
+  imports: [ListErrorsComponent, ReactiveFormsModule, InputErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent implements OnInit {
@@ -27,7 +27,9 @@ export class SettingsComponent implements OnInit {
     this.authStore.getUser();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.authStore.updateUser(this.form.getRawValue());
+  }
 
   logout() {
     this.authStore.logout();

@@ -1,5 +1,5 @@
 import { ApiService } from '@realworld/core/http-client';
-import { UserResponse } from '@realworld/core/api-types';
+import { User, UserResponse } from '@realworld/core/api-types';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginUser, LoginUserRequest, NewUserRequest, NewUser } from '@realworld/core/api-types';
@@ -10,6 +10,10 @@ export class AuthService {
 
   user(): Observable<UserResponse> {
     return this.apiService.get<UserResponse>('/user');
+  }
+
+  update(user: User): Observable<UserResponse> {
+    return this.apiService.put('/user', { user });
   }
 
   login(credentials: LoginUser): Observable<UserResponse> {
