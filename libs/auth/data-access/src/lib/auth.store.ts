@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { formsActions } from '@realworld/core/forms';
 import { LocalStorageJwtService } from './services/local-storage-jwt.service';
 import { Router } from '@angular/router';
-import { LoginUser, NewUser } from '@realworld/core/api-types';
+import { LoginUser, NewUser, User } from '@realworld/core/api-types';
 
 export const AuthStore = signalStore(
   { providedIn: 'root' },
@@ -53,6 +53,22 @@ export const AuthStore = signalStore(
                   patchState(store, { user, loggedIn: true });
                   localStorageService.setItem(user.token);
                   router.navigateByUrl('/');
+                },
+                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+              }),
+            ),
+          ),
+        ),
+      ),
+      updateUser: rxMethod<User>(
+        pipe(
+          exhaustMap((user) =>
+            authService.update(user).pipe(
+              tapResponse({
+                next: ({ user }) => {
+                  patchState(store, { user });
+                  localStorageService.setItem(user.token);
+                  router.navigate(['profile', user.username]);
                 },
                 error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
               }),

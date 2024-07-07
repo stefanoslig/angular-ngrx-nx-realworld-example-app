@@ -1,11 +1,11 @@
 export interface User {
   email: string;
-  token: string;
+  password: string;
   username: string;
   bio: string;
   image: string;
 }
 
 export interface UserResponse {
-  user: User;
+  user: User & { token: string };
 }

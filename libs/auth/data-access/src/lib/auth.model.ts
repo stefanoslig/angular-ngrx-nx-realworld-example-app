@@ -1,16 +1,19 @@
 import { User } from '@realworld/core/api-types';
 
+type UserState = User & { token: string };
+
 export type AuthState = {
   loggedIn: boolean;
-  user: User;
+  user: UserState;
 };
 
-export const initialUserValue: User = {
+export const initialUserValue: UserState = {
   email: '',
-  token: '',
   username: '',
+  password: '',
   bio: '',
   image: '',
+  token: '',
 };
 
 export const authInitialState: AuthState = {
