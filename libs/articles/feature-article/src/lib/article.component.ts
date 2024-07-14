@@ -1,5 +1,5 @@
-import { Field, formsActions, ngrxFormsQuery } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, computed, inject, input } from '@angular/core';
+import { formsActions } from '@realworld/core/forms';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject, input } from '@angular/core';
 import { ArticleStore, ArticlesListStore } from '@realworld/articles/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { AsyncPipe } from '@angular/common';
@@ -9,17 +9,6 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
 import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
 import { AuthStore } from '@realworld/auth/data-access';
-
-const structure: Field[] = [
-  {
-    type: 'TEXTAREA',
-    name: 'comment',
-    placeholder: 'Write a comment...',
-    attrs: {
-      rows: 3,
-    },
-  },
-];
 
 @Component({
   selector: 'cdt-article',
@@ -39,9 +28,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   $article = this.articleStore.data;
   $comments = this.articleStore.comments;
-  structure$ = this.store.select(ngrxFormsQuery.selectStructure);
-  data$ = this.store.select(ngrxFormsQuery.selectData);
-  touchedForm$ = this.store.select(ngrxFormsQuery.selectTouched);
 
   $authorUsername = this.articleStore.data.author.username;
   $isAuthenticated = this.authStore.loggedIn;
@@ -51,8 +37,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.articleStore.getArticle(this.slug());
     this.articleStore.getComments(this.slug());
-    this.store.dispatch(formsActions.setStructure({ structure }));
-    this.store.dispatch(formsActions.setData({ data: '' }));
   }
 
   follow(username: string) {
@@ -73,13 +57,12 @@ export class ArticleComponent implements OnInit, OnDestroy {
   deleteComment(data: { commentId: number; slug: string }) {
     this.articleStore.deleteComment(data);
   }
-  submit(slug: string) {
-    this.articleStore.addComment(slug);
+  submit(comment: string) {
+    this.articleStore.addComment(comment);
   }
   updateForm(changes: any) {
     this.store.dispatch(formsActions.updateData({ data: changes }));
   }
-
   ngOnDestroy() {
     this.articleStore.initializeArticle();
   }

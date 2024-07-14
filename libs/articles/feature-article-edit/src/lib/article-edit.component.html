@@ -3,11 +3,53 @@
     <div class="row">
       <div class="col-md-10 offset-md-1 col-xs-12">
         <cdt-list-errors></cdt-list-errors>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <fieldset class="form-group">
+            <input
+              formControlName="title"
+              type="text"
+              placeholder="Article Title"
+              class="form-control form-control-lg"
+            />
+            <cdt-input-errors [control]="form.controls.title" />
+          </fieldset>
+          <fieldset class="form-group">
+            <input
+              formControlName="description"
+              type="text"
+              placeholder="What's this article about?"
+              class="form-control form-control-lg"
+            />
+            <cdt-input-errors [control]="form.controls.description" />
+          </fieldset>
+          <fieldset class="form-group">
+            <textarea
+              formControlName="body"
+              rows="5"
+              type="text"
+              placeholder="Write your article (in markdown)"
+              class="form-control form-control-lg"
+            ></textarea>
+            <cdt-input-errors [control]="form.controls.body" />
+          </fieldset>
+          <fieldset class="form-group">
+            <input
+              formControlName="tagList"
+              type="text"
+              placeholder="Enter Tags"
+              class="form-control form-control-lg"
+            />
+          </fieldset>
 
-        <cdt-dynamic-form (updateForm)="updateForm($event)" [data$]="data$" [structure$]="structure$">
-        </cdt-dynamic-form>
-
-        <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submit()">Publish Article</button>
+          <button
+            data-e2e-id="edit-button-container"
+            class="btn btn-lg btn-primary"
+            [disabled]="form.invalid || form.pending"
+            type="submit"
+          >
+            Publish Article
+          </button>
+        </form>
       </div>
     </div>
   </div>

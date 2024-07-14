@@ -1,5 +1,5 @@
 import { InputErrorsComponent, ListErrorsComponent } from '@realworld/core/forms';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
 import { AuthStore } from '@realworld/auth/data-access';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -26,6 +26,13 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.authStore.getUser();
   }
+
+  readonly setUserDataToForm = effect(() => {
+    const userLoaded = this.authStore.getUserLoaded();
+    if (userLoaded) {
+      this.form.patchValue(this.authStore.user());
+    }
+  });
 
   onSubmit() {
     this.authStore.updateUser(this.form.getRawValue());

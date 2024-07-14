@@ -9,8 +9,8 @@ import { tapResponse } from '@ngrx/operators';
 import { ActionsService } from './services/actions.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { concatLatestFrom } from '@ngrx/operators';
-import { formsActions, ngrxFormsQuery } from '@realworld/core/forms';
+import { formsActions } from '@realworld/core/forms';
+import { NewArticle } from '@realworld/core/api-types';
 
 export const ArticleStore = signalStore(
   { providedIn: 'root' },
@@ -96,22 +96,32 @@ export const ArticleStore = signalStore(
       ),
       addComment: rxMethod<string>(
         pipe(
-          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
-          switchMap(([slug, data]) =>
-            articlesService.addComment(slug, data.comment).pipe(
+          switchMap((addedComment) =>
+            articlesService.addComment(store.data.slug(), addedComment).pipe(
               tapResponse({
-                next: () => patchState(store, { comments: [data.comment, ...store.comments()] }),
+                next: ({ comment }) => patchState(store, { comments: [comment, ...store.comments()] }),
                 error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
               }),
             ),
           ),
         ),
       ),
-      publishArticle: rxMethod<void>(
+      publishArticle: rxMethod<NewArticle>(
         pipe(
-          concatLatestFrom(() => reduxStore.select(ngrxFormsQuery.selectData)),
-          switchMap(([_, data]) =>
-            articlesService.publishArticle(data).pipe(
+          switchMap((article) =>
+            articlesService.publishArticle(article).pipe(
+              tapResponse({
+                next: ({ article }) => router.navigate(['article', article.slug]),
+                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+              }),
+            ),
+          ),
+        ),
+      ),
+      editArticle: rxMethod<any>(
+        pipe(
+          switchMap((article) =>
+            articlesService.editArticle(article).pipe(
               tapResponse({
                 next: ({ article }) => router.navigate(['article', article.slug]),
                 error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),

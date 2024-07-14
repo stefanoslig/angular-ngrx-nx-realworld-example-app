@@ -1,0 +1,10 @@
+.form-group.required {
+  position: relative;
+}
+.form-group.required::after {
+  content: '*';
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  color: #f00;
+}

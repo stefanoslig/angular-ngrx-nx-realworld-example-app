@@ -10,6 +10,7 @@ import { formsActions } from '@realworld/core/forms';
 import { LocalStorageJwtService } from './services/local-storage-jwt.service';
 import { Router } from '@angular/router';
 import { LoginUser, NewUser, User } from '@realworld/core/api-types';
+import { setLoaded, withCallState } from '@realworld/core/data-access';
 
 export const AuthStore = signalStore(
   { providedIn: 'root' },
@@ -25,7 +26,7 @@ export const AuthStore = signalStore(
       getUser: rxMethod<void>(
         pipe(
           switchMap(() => authService.user()),
-          tap(({ user }) => patchState(store, { user, loggedIn: true })),
+          tap(({ user }) => patchState(store, { user, loggedIn: true, ...setLoaded('getUser') })),
         ),
       ),
       login: rxMethod<LoginUser>(
@@ -83,4 +84,5 @@ export const AuthStore = signalStore(
       },
     }),
   ),
+  withCallState({ collection: 'getUser' }),
 );

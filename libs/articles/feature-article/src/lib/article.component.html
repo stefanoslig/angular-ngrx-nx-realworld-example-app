@@ -38,16 +38,7 @@
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
           @if ($isAuthenticated()) {
-            <cdt-add-comment
-              [article]="article"
-              [data$]="data$"
-              [structure$]="structure$"
-              [currentUser]="$currentUser()"
-              [touchedForm$]="touchedForm$"
-              (submitComment)="submit($event)"
-              (updateForm)="updateForm($event)"
-            >
-            </cdt-add-comment>
+            <cdt-add-comment [article]="article" [currentUser]="$currentUser()" (submitComment)="submit($event)" />
           } @else {
             <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
             this article.

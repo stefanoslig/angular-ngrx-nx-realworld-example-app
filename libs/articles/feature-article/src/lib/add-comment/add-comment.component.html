@@ -1,18 +1,23 @@
 <cdt-list-errors> </cdt-list-errors>
 
 <div class="card comment-form">
-  <cdt-dynamic-form
-    class="card-block"
-    (updateForm)="updateForm.emit($event)"
-    [data$]="data$"
-    [structure$]="structure$"
-    [touchedForm$]="touchedForm$"
-  >
-  </cdt-dynamic-form>
-  <div class="card-footer">
-    <img [src]="currentUser().image" class="comment-author-img" />
-    <button (click)="submitComment.emit(article().slug)" class="btn btn-sm btn-primary" type="submit">
-      Post Comment
-    </button>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="submitComment.emit(form.controls.comment.value)">
+    <fieldset class="form-group required">
+      <textarea
+        formControlName="comment"
+        rows="5"
+        type="text"
+        placeholder="Write a comment..."
+        class="form-control form-control-lg"
+      >
+      </textarea>
+      <cdt-input-errors [control]="form.controls.comment" />
+    </fieldset>
+    <div class="card-footer">
+      <img [src]="currentUser().image" class="comment-author-img" />
+      <button (click)="submitComment.emit(form.controls.comment.value)" class="btn btn-sm btn-primary" type="submit">
+        Post Comment
+      </button>
+    </div>
+  </form>
 </div>

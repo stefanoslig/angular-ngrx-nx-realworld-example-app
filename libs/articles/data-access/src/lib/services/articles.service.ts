@@ -1,7 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '@realworld/core/http-client';
-import { Article, ArticleResponse, MultipleCommentsResponse, SingleCommentResponse } from '@realworld/core/api-types';
+import {
+  Article,
+  ArticleResponse,
+  MultipleCommentsResponse,
+  NewArticle,
+  SingleCommentResponse,
+} from '@realworld/core/api-types';
 import { HttpParams } from '@angular/common/http';
 import { ArticlesListConfig } from '../models/articles-list.model';
 
@@ -25,9 +31,9 @@ export class ArticlesService {
     return this.apiService.delete<void>(`/articles/${slug}/comments/${commentId}`);
   }
 
-  addComment(slug: string, payload = ''): Observable<SingleCommentResponse> {
+  addComment(slug: string, comment: string): Observable<SingleCommentResponse> {
     return this.apiService.post<SingleCommentResponse, { comment: { body: string } }>(`/articles/${slug}/comments`, {
-      comment: { body: payload },
+      comment: { body: comment },
     });
   }
 
@@ -38,13 +44,14 @@ export class ArticlesService {
     );
   }
 
-  publishArticle(article: Article): Observable<ArticleResponse> {
-    if (article.slug) {
-      return this.apiService.put<ArticleResponse, ArticleResponse>('/articles/' + article.slug, {
-        article: article,
-      });
-    }
-    return this.apiService.post<ArticleResponse, ArticleResponse>('/articles/', { article: article });
+  publishArticle(article: NewArticle): Observable<ArticleResponse> {
+    return this.apiService.post<ArticleResponse, NewArticle>('/articles/', article);
+  }
+
+  editArticle(article: Article): Observable<ArticleResponse> {
+    return this.apiService.put<ArticleResponse, ArticleResponse>('/articles/' + article.slug, {
+      article: article,
+    });
   }
 
   // TODO: remove any
