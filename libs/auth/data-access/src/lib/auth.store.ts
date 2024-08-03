@@ -5,12 +5,11 @@ import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { exhaustMap, pipe, switchMap, tap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-import { Store } from '@ngrx/store';
-import { formsActions } from '@realworld/core/forms';
 import { LocalStorageJwtService } from './services/local-storage-jwt.service';
 import { Router } from '@angular/router';
 import { LoginUser, NewUser, User } from '@realworld/core/api-types';
 import { setLoaded, withCallState } from '@realworld/core/data-access';
+import { FormErrorsStore } from '@realworld/core/forms';
 
 export const AuthStore = signalStore(
   { providedIn: 'root' },
@@ -18,7 +17,7 @@ export const AuthStore = signalStore(
   withMethods(
     (
       store,
-      reduxStore = inject(Store),
+      formErrorsStore = inject(FormErrorsStore),
       authService = inject(AuthService),
       localStorageService = inject(LocalStorageJwtService),
       router = inject(Router),
@@ -39,7 +38,7 @@ export const AuthStore = signalStore(
                   localStorageService.setItem(user.token);
                   router.navigateByUrl('/');
                 },
-                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+                error: ({ error }) => formErrorsStore.setErrors( error.errors),
               }),
             ),
           ),
@@ -55,7 +54,7 @@ export const AuthStore = signalStore(
                   localStorageService.setItem(user.token);
                   router.navigateByUrl('/');
                 },
-                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+                error: ({ error }) => formErrorsStore.setErrors( error.errors),
               }),
             ),
           ),
@@ -71,7 +70,7 @@ export const AuthStore = signalStore(
                   localStorageService.setItem(user.token);
                   router.navigate(['profile', user.username]);
                 },
-                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+                error: ({ error }) => formErrorsStore.setErrors( error.errors),
               }),
             ),
           ),

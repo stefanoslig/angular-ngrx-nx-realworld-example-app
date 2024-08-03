@@ -1,5 +1,0 @@
-<form class="dynamic-form" [formGroup]="form" autocomplete="off">
-  @for (field of structure$ | async; track field.name) {
-    <ng-container appDynamicField [field]="field" [group]="form"> </ng-container>
-  }
-</form>

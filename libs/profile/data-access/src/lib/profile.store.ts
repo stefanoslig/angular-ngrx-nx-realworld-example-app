@@ -5,8 +5,8 @@ import { inject } from '@angular/core';
 import { ActionsService } from '@realworld/articles/data-access';
 import { pipe, switchMap, tap } from 'rxjs';
 import { ProfileService } from './services/profile.service';
-import { tapResponse } from '@ngrx/component-store';
 import { ProfileState, profileInitialState } from './models/profile-state.model';
+import { tapResponse } from '@ngrx/operators';
 
 export const ProfileStore = signalStore(
   { providedIn: 'root' },

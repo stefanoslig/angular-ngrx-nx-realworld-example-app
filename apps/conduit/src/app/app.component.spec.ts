@@ -4,9 +4,7 @@ import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
-import { StoreModule } from '@ngrx/store';
 import { LocalStorageJwtService } from '@realworld/auth/data-access';
-import { provideMockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -14,9 +12,9 @@ describe('AppComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, StoreModule.forRoot({})],
+      imports: [RouterTestingModule],
       declarations: [AppComponent, FooterComponent, NavbarComponent],
-      providers: [LocalStorageJwtService, provideMockStore({})],
+      providers: [LocalStorageJwtService],
     }).compileComponents();
   }));
 

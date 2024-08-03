@@ -1,12 +1,7 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
-import { provideRouterStore } from '@ngrx/router-store';
-import { ngrxFormsEffects, ngrxFormsFeature } from '@realworld/core/forms';
 import { authGuard, tokenInterceptor } from '@realworld/auth/data-access';
-import { provideStore } from '@ngrx/store';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { errorHandlingInterceptor } from '@realworld/core/error-handler';
-import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { API_URL } from '@realworld/core/http-client';
 import { environment } from '@env/environment';
@@ -54,13 +49,7 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
       withComponentInputBinding(),
     ),
-    provideStore({
-      ngrxForms: ngrxFormsFeature.reducer,
-    }),
-    provideEffects(ngrxFormsEffects),
-    provideRouterStore(),
     provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
-    !environment.production ? provideStoreDevtools() : [],
     { provide: API_URL, useValue: environment.api_url },
   ],
 };

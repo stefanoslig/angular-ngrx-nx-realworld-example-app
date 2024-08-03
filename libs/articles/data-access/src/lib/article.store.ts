@@ -8,9 +8,8 @@ import { setLoaded, setLoading, withCallState } from '@realworld/core/data-acces
 import { tapResponse } from '@ngrx/operators';
 import { ActionsService } from './services/actions.service';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { formsActions } from '@realworld/core/forms';
 import { NewArticle } from '@realworld/core/api-types';
+import { FormErrorsStore } from '../../../../core/forms/src/lib/forms-errors.store';
 
 export const ArticleStore = signalStore(
   { providedIn: 'root' },
@@ -21,7 +20,7 @@ export const ArticleStore = signalStore(
       articlesService = inject(ArticlesService),
       actionsService = inject(ActionsService),
       router = inject(Router),
-      reduxStore = inject(Store),
+      formErrorsStore = inject(FormErrorsStore),
     ) => ({
       getArticle: rxMethod<string>(
         pipe(
@@ -100,7 +99,7 @@ export const ArticleStore = signalStore(
             articlesService.addComment(store.data.slug(), addedComment).pipe(
               tapResponse({
                 next: ({ comment }) => patchState(store, { comments: [comment, ...store.comments()] }),
-                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+                error: ({ error }) => formErrorsStore.setErrors( error.errors),
               }),
             ),
           ),
@@ -112,7 +111,7 @@ export const ArticleStore = signalStore(
             articlesService.publishArticle(article).pipe(
               tapResponse({
                 next: ({ article }) => router.navigate(['article', article.slug]),
-                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+                error: ({ error }) => formErrorsStore.setErrors({ errors: error.errors }),
               }),
             ),
           ),
@@ -124,7 +123,7 @@ export const ArticleStore = signalStore(
             articlesService.editArticle(article).pipe(
               tapResponse({
                 next: ({ article }) => router.navigate(['article', article.slug]),
-                error: ({ error }) => reduxStore.dispatch(formsActions.setErrors({ errors: error.errors })),
+                error: ({ error }) => formErrorsStore.setErrors( error.errors),
               }),
             ),
           ),

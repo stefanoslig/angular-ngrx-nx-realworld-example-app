@@ -38,18 +38,18 @@ export function getCallStateKeys(config?: { collection?: string }) {
 export function withCallState<Collection extends string>(config: {
   collection: Collection;
 }): SignalStoreFeature<
-  { state: {}; signals: {}; methods: {} },
+  { state: {}; computed: {}; methods: {} },
   {
     state: NamedCallStateSlice<Collection>;
-    signals: NamedCallStateSignals<Collection>;
+    computed: NamedCallStateSignals<Collection>;
     methods: {};
   }
 >;
 export function withCallState(): SignalStoreFeature<
-  { state: {}; signals: {}; methods: {} },
+  { state: {}; computed: {}; methods: {} },
   {
     state: CallStateSlice;
-    signals: CallStateSignals;
+    computed: CallStateSignals;
     methods: {};
   }
 >;

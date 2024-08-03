@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, OnStateInit, tapResponse } from '@ngrx/component-store';
+import { ComponentStore, OnStateInit } from '@ngrx/component-store';
 import { pipe } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HomeService } from './home.service';
+import { tapResponse } from '@ngrx/operators';
 
 export interface HomeState {
   tags: string[];

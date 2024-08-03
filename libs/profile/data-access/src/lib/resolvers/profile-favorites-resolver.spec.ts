@@ -1,23 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { profileFavoritesResolver } from './profile-favorites-resolver';
 import { cold } from 'jasmine-marbles';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { articleListActions, articleListInitialState } from '@realworld/articles/data-access';
 
 const mockRoute: ActivatedRouteSnapshot = {
   parent: { params: { username: 'stef' } },
 } as unknown as ActivatedRouteSnapshot;
 
 describe('profileFavoritesResolver', () => {
-  let store: MockStore;
-
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [provideMockStore({})],
-    });
-
-    store = TestBed.inject(MockStore);
+    TestBed.configureTestingModule({});
   });
 
   it('should return `true` and dispatch articleListActions.setListConfig action', () => {
