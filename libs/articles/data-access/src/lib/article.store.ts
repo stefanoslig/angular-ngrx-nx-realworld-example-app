@@ -99,7 +99,7 @@ export const ArticleStore = signalStore(
             articlesService.addComment(store.data.slug(), addedComment).pipe(
               tapResponse({
                 next: ({ comment }) => patchState(store, { comments: [comment, ...store.comments()] }),
-                error: ({ error }) => formErrorsStore.setErrors( error.errors),
+                error: ({ error }) => formErrorsStore.setErrors(error.errors),
               }),
             ),
           ),
@@ -123,7 +123,7 @@ export const ArticleStore = signalStore(
             articlesService.editArticle(article).pipe(
               tapResponse({
                 next: ({ article }) => router.navigate(['article', article.slug]),
-                error: ({ error }) => formErrorsStore.setErrors( error.errors),
+                error: ({ error }) => formErrorsStore.setErrors(error.errors),
               }),
             ),
           ),

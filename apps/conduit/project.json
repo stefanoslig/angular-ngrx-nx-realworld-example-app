@@ -16,7 +16,6 @@
         "outputPath": "dist/apps/conduit",
         "index": "apps/conduit/src/index.html",
         "main": "apps/conduit/src/main.ts",
-        "polyfills": ["zone.js"],
         "tsConfig": "apps/conduit/tsconfig.app.json",
         "assets": ["apps/conduit/src/favicon.ico", "apps/conduit/src/assets", "apps/conduit/src/netlify.toml"],
         "styles": ["apps/conduit/src/styles.scss"],

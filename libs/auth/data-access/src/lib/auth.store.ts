@@ -38,7 +38,7 @@ export const AuthStore = signalStore(
                   localStorageService.setItem(user.token);
                   router.navigateByUrl('/');
                 },
-                error: ({ error }) => formErrorsStore.setErrors( error.errors),
+                error: ({ error }) => formErrorsStore.setErrors(error.errors),
               }),
             ),
           ),
@@ -54,7 +54,7 @@ export const AuthStore = signalStore(
                   localStorageService.setItem(user.token);
                   router.navigateByUrl('/');
                 },
-                error: ({ error }) => formErrorsStore.setErrors( error.errors),
+                error: ({ error }) => formErrorsStore.setErrors(error.errors),
               }),
             ),
           ),
@@ -70,7 +70,7 @@ export const AuthStore = signalStore(
                   localStorageService.setItem(user.token);
                   router.navigate(['profile', user.username]);
                 },
-                error: ({ error }) => formErrorsStore.setErrors( error.errors),
+                error: ({ error }) => formErrorsStore.setErrors(error.errors),
               }),
             ),
           ),

@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 import { authGuard, tokenInterceptor } from '@realworld/auth/data-access';
 import { errorHandlingInterceptor } from '@realworld/core/error-handler';
@@ -8,6 +8,7 @@ import { environment } from '@env/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideExperimentalZonelessChangeDetection(),
     provideRouter(
       [
         {
