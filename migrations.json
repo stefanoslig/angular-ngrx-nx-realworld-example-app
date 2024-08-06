@@ -1,0 +1,20 @@
+{
+  "migrations": [
+    {
+      "cli": "nx",
+      "version": "19.5.0-beta.1",
+      "requires": { "@angular/core": ">=18.1.0" },
+      "description": "Update the @angular/cli package version to ~18.1.0.",
+      "factory": "./src/migrations/update-19-5-0/update-angular-cli",
+      "package": "@nx/angular",
+      "name": "update-angular-cli-version-18-1-0"
+    },
+    {
+      "version": "18.1.0",
+      "description": "Updates calls to afterRender with an explicit phase to the new API",
+      "factory": "./migrations/after-render-phase/bundle",
+      "package": "@angular/core",
+      "name": "migration-after-render-phase"
+    }
+  ]
+}
