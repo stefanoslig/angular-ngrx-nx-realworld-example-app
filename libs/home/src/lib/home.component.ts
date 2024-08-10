@@ -3,8 +3,8 @@ import { ArticlesListStore, ListType, articlesListInitialState } from '@realworl
 import { AsyncPipe, NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
-import { HomeStoreService } from './home.store';
-import { provideComponentStore } from '@ngrx/component-store';
+import { HomeStore } from './home.store';
+
 import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
@@ -13,16 +13,16 @@ import { AuthStore } from '@realworld/auth/data-access';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   imports: [AsyncPipe, NgClass, TagsListComponent, ArticleListComponent],
-  providers: [provideComponentStore(HomeStoreService)],
+  providers: [HomeStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
   private readonly articlesListStore = inject(ArticlesListStore);
   private readonly authStore = inject(AuthStore);
-  private readonly homeStore = inject(HomeStoreService);
+  private readonly homeStore = inject(HomeStore);
 
   $listConfig = this.articlesListStore.listConfig;
-  tags$ = this.homeStore.tags$;
+  $tags = this.homeStore.tags;
 
   readonly loadArticlesOnLogin = effect(() => {
     const isLoggedIn = this.authStore.loggedIn();

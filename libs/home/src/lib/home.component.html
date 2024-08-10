@@ -43,8 +43,8 @@
 
       <div class="col-md-3">
         <div class="sidebar">
-          @defer (when !!(tags$ | async)?.length) {
-            <cdt-tags-list (setListTag)="setListTag($event)" [tags]="(tags$ | async) ?? []"></cdt-tags-list>
+          @defer (when !!$tags().length) {
+            <cdt-tags-list (setListTag)="setListTag($event)" [tags]="$tags()"></cdt-tags-list>
           } @placeholder {
             loading...
           }
