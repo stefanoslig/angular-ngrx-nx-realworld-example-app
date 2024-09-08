@@ -1,4 +1,4 @@
-<cdt-navbar [isLoggedIn]="$isLoggedIn()" [user]="$user()"></cdt-navbar>
+<cdt-navbar [isLoggedIn]="authStore.loggedIn()" [user]="authStore.user()"></cdt-navbar>
 <router-outlet></router-outlet>
 
 @defer (on idle) {

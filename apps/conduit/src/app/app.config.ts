@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
         },
         {
           path: 'home',
-          loadComponent: () => import('@realworld/home/src/lib/home.component').then((m) => m.HomeComponent),
+          loadComponent: () => import('@realworld/home/feature-home').then((m) => m.HomeComponent),
         },
         {
           path: 'login',

@@ -9,7 +9,7 @@ import { tapResponse } from '@ngrx/operators';
 import { ActionsService } from './services/actions.service';
 import { Router } from '@angular/router';
 import { NewArticle } from '@realworld/core/api-types';
-import { FormErrorsStore } from '../../../../core/forms/src/lib/forms-errors.store';
+import { FormErrorsStore } from '@realworld/core/forms';
 
 export const ArticleStore = signalStore(
   { providedIn: 'root' },

@@ -10,6 +10,6 @@ import { User } from '@realworld/core/api-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  user = input.required<User>();
-  isLoggedIn = input.required<boolean>();
+  protected readonly user = input.required<User>();
+  protected readonly isLoggedIn = input.required<boolean>();
 }

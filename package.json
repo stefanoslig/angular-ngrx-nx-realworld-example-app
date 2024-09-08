@@ -1,6 +1,6 @@
 {
   "name": "conduit",
-  "version": "17.2.2",
+  "version": "18.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "nx",

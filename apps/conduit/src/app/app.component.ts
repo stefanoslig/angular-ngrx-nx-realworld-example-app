@@ -10,16 +10,12 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   selector: 'cdt-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
   imports: [FooterComponent, NavbarComponent, RouterModule, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   private readonly localStorageJwtService = inject(LocalStorageJwtService);
-  private readonly authStore = inject(AuthStore);
-
-  $user = this.authStore.user;
-  $isLoggedIn = this.authStore.loggedIn;
+  protected readonly authStore = inject(AuthStore);
 
   ngOnInit() {
     this.localStorageJwtService

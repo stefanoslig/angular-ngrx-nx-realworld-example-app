@@ -1,2 +1,2 @@
-export * from './lib/login/login.component';
-export * from './lib/register/register.component';
+export * from './login/login.component';
+export * from './register/register.component';
