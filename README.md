@@ -1,3 +1,5 @@
+# Angular NgRx NX realworld example app
+
 # ![RealWorld Example App](logo.png)
 
 ### Modern Angular features:
