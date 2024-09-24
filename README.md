@@ -1,6 +1,8 @@
 # Angular NgRx NX realworld example app
 
-<img src="logo.png" alt="RealWorld Example App" width="150"/>
+<p align="center">
+  <img src="logo.png" alt="RealWorld Example App" width="200"/>
+</p>
 
 ### Modern Angular features:
 - New Control Flow
