@@ -6,25 +6,34 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   integrations: [
     starlight({
-      logo: {src: './src/assets/logo.png', replacesTitle: true},
+      logo: { src: './src/assets/logo.png', replacesTitle: true },
       title: 'Angular Realworld App',
       social: {
         github: 'https://github.com/stefanoslig/angular-ngrx-nx-realworld-example-app',
       },
       sidebar: [
         {
-          label: 'Angular Realworld App',
+          label: 'Introduction',
           items: [
-            // Each item here is one entry in the navigation menu.
             { label: 'Introduction', slug: 'introduction' },
-            { label: 'App explanation', slug: 'explanation' },
-            { label: 'Angular features', slug: 'features' },
-            { label: 'Architecture', slug: 'architecture' },
-            { label: 'How to contribute', slug: 'contributions' },
-            { label: 'How to run the app locally', slug: 'local-dev' },
+            { label: 'App explanation', slug: 'introduction/explanation' },
+            { label: 'Angular features', slug: 'introduction/features' },
+             { label: 'Run the app locally', slug: 'introduction/local-dev' }
           ],
         },
-        
+        {
+          label: 'Architecture',
+          items: [
+            { label: 'Folder structure', slug: 'architecture/structure' },
+            { label: 'State management', slug: 'architecture/state-management' }
+          ],
+        },
+        {
+          label: 'How to contribute',
+          items: [
+            { label: 'How to contribute', slug: 'how-to-contribute' }
+          ],
+        },
       ],
     }),
   ],
