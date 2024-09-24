@@ -1,6 +1,6 @@
-# Angular NgRx NX realworld example app
-
 <p align="center">
+  # Angular NgRx NX realworld example app
+  
   <img src="logo.png" alt="RealWorld Example App" width="200"/>
 </p>
 
