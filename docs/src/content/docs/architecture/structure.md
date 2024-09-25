@@ -1,6 +1,5 @@
 ---
-title: Architecture
-description: A guide in my new Starlight docs site.
+title: Folder structure
 ---
 
 ### Folders/Libs structure

@@ -1,10 +1,10 @@
 ---
-title: Introduction
-description: A guide in my new Starlight docs site.
+title: How to contribute on this project
 ---
 
-This codebase was created to demonstrate a fully fledged fullstack application built with Angular, ngrx/platform, nrwl/nx including CRUD operations, authentication, routing, pagination, and more.
+There are different ways to contribute on this project. Here are some of them:
 
-We've gone to great lengths to adhere to the Angular community styleguides & best practices.
-
-For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
+1. Open an issue for a bug you found
+2. Extend the documentation with more content
+3. Add unit tests or e2e tests
+4. Open a PR to suggest how the code can be improved
