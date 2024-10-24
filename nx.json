@@ -47,5 +47,6 @@
     ]
   },
   "parallel": 3,
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "useLegacyCache": true
 }
