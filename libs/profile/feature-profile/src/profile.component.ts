@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { AuthStore } from '@realworld/auth/data-access';
 import { ProfileStore } from '@realworld/profile/data-access';
 
@@ -9,7 +9,7 @@ import { ProfileStore } from '@realworld/profile/data-access';
   selector: 'cdt-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [RouterModule, NgClass, AsyncPipe],
+  imports: [RouterModule, NgClass],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {

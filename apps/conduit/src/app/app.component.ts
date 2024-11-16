@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthStore, LocalStorageJwtService } from '@realworld/auth/data-access';
@@ -10,7 +9,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   selector: 'cdt-root',
   standalone: true,
   templateUrl: './app.component.html',
-  imports: [FooterComponent, NavbarComponent, RouterModule, AsyncPipe],
+  imports: [FooterComponent, NavbarComponent, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {

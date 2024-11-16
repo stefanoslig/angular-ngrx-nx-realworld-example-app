@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, inject, effect, untracked } from '@angular/core';
 import { ArticlesListStore, ListType, articlesListInitialState } from '@realworld/articles/data-access';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { HomeStore } from './home.store';
@@ -12,7 +12,7 @@ import { AuthStore } from '@realworld/auth/data-access';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [AsyncPipe, NgClass, TagsListComponent, ArticleListComponent],
+  imports: [NgClass, TagsListComponent, ArticleListComponent],
   providers: [HomeStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
