@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
@@ -9,7 +8,7 @@ import { ArticlesListStore } from '@realworld/articles/data-access';
   selector: 'cdt-article-list',
   standalone: true,
   templateUrl: './article-list.component.html',
-  imports: [ArticleListItemComponent, PagerComponent, AsyncPipe],
+  imports: [ArticleListItemComponent, PagerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {
