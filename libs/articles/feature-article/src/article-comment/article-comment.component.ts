@@ -6,7 +6,6 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'cdt-article-comment',
-  standalone: true,
   templateUrl: './article-comment.component.html',
   imports: [DatePipe, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -4,7 +4,6 @@ import { AuthStore } from '@realworld/auth/data-access';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  standalone: true,
   selector: 'cdt-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],

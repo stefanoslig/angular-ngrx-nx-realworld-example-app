@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'cdt-article-meta',
-  standalone: true,
   templateUrl: './article-meta.component.html',
   imports: [RouterModule, NgClass, DatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,

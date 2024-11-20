@@ -3,7 +3,6 @@ import { FormErrorsStore } from '../forms-errors.store';
 
 @Component({
   selector: 'cdt-list-errors',
-  standalone: true,
   templateUrl: './list-errors.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

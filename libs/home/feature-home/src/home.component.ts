@@ -9,7 +9,6 @@ import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
   selector: 'cdt-home',
-  standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   imports: [NgClass, TagsListComponent, ArticleListComponent],

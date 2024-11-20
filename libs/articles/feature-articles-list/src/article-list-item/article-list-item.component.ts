@@ -4,7 +4,6 @@ import { NgClass, DatePipe } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
 @Component({
   selector: 'cdt-article-list-item',
-  standalone: true,
   templateUrl: './article-list-item.component.html',
   imports: [RouterModule, NgClass, DatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,

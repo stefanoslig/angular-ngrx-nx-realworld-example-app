@@ -7,7 +7,6 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @Component({
   selector: 'cdt-root',
-  standalone: true,
   templateUrl: './app.component.html',
   imports: [FooterComponent, NavbarComponent, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,

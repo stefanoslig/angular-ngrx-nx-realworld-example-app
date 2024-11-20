@@ -6,7 +6,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'cdt-register',
-  standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   imports: [ListErrorsComponent, RouterModule, ReactiveFormsModule, InputErrorsComponent],

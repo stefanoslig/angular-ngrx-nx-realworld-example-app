@@ -9,7 +9,6 @@ import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
   selector: 'cdt-article',
-  standalone: true,
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.css'],
   imports: [ArticleMetaComponent, ArticleCommentComponent, MarkdownPipe, AddCommentComponent, RouterLink],

@@ -6,7 +6,6 @@ import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
   selector: 'cdt-login',
-  standalone: true,
   templateUrl: './login.component.html',
   imports: [ListErrorsComponent, RouterLink, ReactiveFormsModule, InputErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -5,7 +5,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'cdt-add-comment',
-  standalone: true,
   templateUrl: './add-comment.component.html',
   imports: [ListErrorsComponent, ReactiveFormsModule, InputErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,

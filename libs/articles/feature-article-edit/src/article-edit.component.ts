@@ -6,7 +6,6 @@ import { ArticleStore } from '@realworld/articles/data-access';
 
 @Component({
   selector: 'cdt-article-edit',
-  standalone: true,
   templateUrl: './article-edit.component.html',
   styleUrls: ['./article-edit.component.css'],
   imports: [ListErrorsComponent, ReactiveFormsModule, InputErrorsComponent],
