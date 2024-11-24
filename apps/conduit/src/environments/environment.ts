@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://api.realworld.io/api',
+  api_url: 'https://real-world-app-39656dff2ddc.herokuapp.com/api',
 };

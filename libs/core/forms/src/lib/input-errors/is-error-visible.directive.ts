@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl } from '@angular/forms';
 
 @Directive({
-  selector: '[isErrorVisible]'
+  selector: '[isErrorVisible]',
 })
 export class IsErrorVisibleDirective implements AfterViewInit {
   private readonly templateRef = inject(TemplateRef<unknown>);
