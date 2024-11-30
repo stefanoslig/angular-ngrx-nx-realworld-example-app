@@ -42,13 +42,11 @@
       </div>
 
       <div class="col-md-3">
-        <div class="sidebar">
-          @defer (when !!$tags().length) {
+        @defer (when !!$tags().length) {
+          <div class="sidebar">
             <cdt-tags-list (setListTag)="setListTag($event)" [tags]="$tags()"></cdt-tags-list>
-          } @placeholder {
-            loading...
-          }
-        </div>
+          </div>
+        }
       </div>
     </div>
   </div>
