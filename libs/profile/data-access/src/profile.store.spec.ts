@@ -1,17 +1,17 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { ArticleStore } from './article.store';
+import { ProfileStore } from './profile.store';
 
-describe('ArticleStore', () => {
+describe('ProfileStore', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ArticleStore],
+      providers: [ProfileStore],
     });
   });
 
-  it('should be created', inject([ArticleStore], (service: typeof ArticleStore) => {
+  it('should be created', inject([ProfileStore], (service: typeof ProfileStore) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -1,1 +1,1 @@
-export * from './lib/pager/pager.component';
+export * from './pager/pager.component';
