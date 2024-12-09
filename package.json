@@ -65,7 +65,7 @@
     "@nx/jest": "20.2.0-beta.4",
     "@nx/workspace": "20.2.0-beta.4",
     "@schematics/angular": "18.2.1",
-    "@types/jest": "29.5.12",
+    "@types/jest": "29.5.14",
     "@types/marked": "4.3.1",
     "@types/node": "18.19.21",
     "@typescript-eslint/eslint-plugin": "7.18.0",
