@@ -4,13 +4,12 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 import { LocalStorageJwtService } from './local-storage-jwt.service';
-import { MockProvider } from 'ng-mocks';
 
 describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthService, LocalStorageJwtService, MockProvider(ApiService)],
+      providers: [AuthService, LocalStorageJwtService, ApiService],
     });
   });
 
