@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
-import { authGuard, tokenInterceptor } from '@realworld/auth/data-access';
+import { authGuard } from '@realworld/auth/data-access';
 import { errorHandlingInterceptor } from '@realworld/core/error-handler';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { API_URL } from '@realworld/core/http-client';
@@ -50,7 +50,7 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
       withComponentInputBinding(),
     ),
-    provideHttpClient(withInterceptors([errorHandlingInterceptor, tokenInterceptor])),
+    provideHttpClient(withInterceptors([errorHandlingInterceptor])),
     { provide: API_URL, useValue: environment.api_url },
   ],
 };

@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AuthStore, LocalStorageJwtService } from '@realworld/auth/data-access';
-import { filter, take } from 'rxjs/operators';
+import { AuthStore } from '@realworld/auth/data-access';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
@@ -11,17 +10,10 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   imports: [FooterComponent, NavbarComponent, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
-  private readonly localStorageJwtService = inject(LocalStorageJwtService);
+export class AppComponent {
   protected readonly authStore = inject(AuthStore);
 
-  ngOnInit() {
-    this.localStorageJwtService
-      .getItem()
-      .pipe(
-        take(1),
-        filter((token) => !!token),
-      )
-      .subscribe(() => this.authStore.getUser());
+  constructor() {
+    this.authStore.getUser();
   }
 }

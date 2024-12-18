@@ -41,7 +41,7 @@ describe('authGuard', () => {
   });
 
   it('should return login urlTree if the user is not logged in', () => {
-    jest.spyOn(storage, 'getItem').mockImplementationOnce(() => of(null));
+    jest.spyOn(storage, 'getItem').mockImplementationOnce(() => null);
 
     const result = TestBed.runInInjectionContext(() => authGuard());
 

@@ -5,7 +5,6 @@ import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { exhaustMap, pipe, switchMap, tap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-import { LocalStorageJwtService } from './services/local-storage-jwt.service';
 import { Router } from '@angular/router';
 import { LoginUser, NewUser, User } from '@realworld/core/api-types';
 import { setLoaded, withCallState } from '@realworld/core/data-access';
@@ -15,13 +14,7 @@ export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState<AuthState>(authInitialState),
   withMethods(
-    (
-      store,
-      formErrorsStore = inject(FormErrorsStore),
-      authService = inject(AuthService),
-      localStorageService = inject(LocalStorageJwtService),
-      router = inject(Router),
-    ) => ({
+    (store, formErrorsStore = inject(FormErrorsStore), authService = inject(AuthService), router = inject(Router)) => ({
       getUser: rxMethod<void>(
         pipe(
           switchMap(() => authService.user()),
@@ -35,7 +28,6 @@ export const AuthStore = signalStore(
               tapResponse({
                 next: ({ user }) => {
                   patchState(store, { user, loggedIn: true });
-                  localStorageService.setItem(user.token);
                   router.navigateByUrl('/');
                 },
                 error: ({ error }) => formErrorsStore.setErrors(error.errors),
@@ -51,7 +43,6 @@ export const AuthStore = signalStore(
               tapResponse({
                 next: ({ user }) => {
                   patchState(store, { user, loggedIn: true });
-                  localStorageService.setItem(user.token);
                   router.navigateByUrl('/');
                 },
                 error: ({ error }) => formErrorsStore.setErrors(error.errors),
@@ -67,7 +58,6 @@ export const AuthStore = signalStore(
               tapResponse({
                 next: ({ user }) => {
                   patchState(store, { user });
-                  localStorageService.setItem(user.token);
                   router.navigate(['profile', user.username]);
                 },
                 error: ({ error }) => formErrorsStore.setErrors(error.errors),
@@ -76,11 +66,21 @@ export const AuthStore = signalStore(
           ),
         ),
       ),
-      logout: () => {
-        patchState(store, { user: initialUserValue, loggedIn: false });
-        localStorageService.removeItem();
-        router.navigateByUrl('login');
-      },
+      logout: rxMethod<void>(
+        pipe(
+          exhaustMap(() =>
+            authService.logout().pipe(
+              tapResponse({
+                next: () => {
+                  patchState(store, { user: initialUserValue, loggedIn: false });
+                  router.navigateByUrl('login');
+                },
+                error: ({ error }) => formErrorsStore.setErrors(error.errors),
+              }),
+            ),
+          ),
+        ),
+      ),
     }),
   ),
   withCallState({ collection: 'getUser' }),

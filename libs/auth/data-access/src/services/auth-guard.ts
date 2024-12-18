@@ -1,20 +1,14 @@
 import { inject } from '@angular/core';
-import { map, Observable, take } from 'rxjs';
 import { Router, UrlTree } from '@angular/router';
+import { AuthStore } from '../auth.store';
 
-import { LocalStorageJwtService } from './local-storage-jwt.service';
-
-export const authGuard = (): Observable<boolean | UrlTree> => {
-  const storage = inject(LocalStorageJwtService);
+export const authGuard = (): boolean | UrlTree => {
   const router = inject(Router);
+  const authStore = inject(AuthStore);
 
-  return storage.getItem().pipe(
-    map((token) => {
-      if (!token) {
-        return router.parseUrl('/login');
-      }
-      return true;
-    }),
-    take(1),
-  );
+  if (!authStore.loggedIn()) {
+    return router.parseUrl('/login');
+  }
+
+  return true;
 };
