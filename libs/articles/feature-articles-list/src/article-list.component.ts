@@ -33,5 +33,6 @@ export class ArticleListComponent {
 
   setPage(page: number) {
     this.articlesListStore.setListPage(page);
+    this.articlesListStore.loadArticles(this.$listConfig());
   }
 }
