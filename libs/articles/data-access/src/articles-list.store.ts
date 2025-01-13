@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withComputed, withProps } from '@ngrx/signals';
 import {
   Articles,
   ArticlesListConfig,
@@ -17,6 +17,10 @@ import { Article } from '@realworld/core/api-types';
 export const ArticlesListStore = signalStore(
   { providedIn: 'root' },
   withState<ArticlesListState>(articlesListInitialState),
+  withProps(() => ({
+    _articlesService: inject(ArticlesService),
+    _actionsService: inject(ActionsService),
+  })),
   withComputed(({ listConfig, articles }) => ({
     totalPages: computed(() =>
       Array.from(
@@ -25,12 +29,12 @@ export const ArticlesListStore = signalStore(
       ),
     ),
   })),
-  withMethods((store, articlesService = inject(ArticlesService), actionsService = inject(ActionsService)) => ({
+  withMethods((store) => ({
     loadArticles: rxMethod<ArticlesListConfig>(
       pipe(
         tap(() => setLoading('getArticles')),
         concatMap((listConfig) =>
-          articlesService.query(listConfig).pipe(
+          store._articlesService.query(listConfig).pipe(
             tapResponse({
               next: ({ articles, articlesCount }) => {
                 patchState(store, {
@@ -49,7 +53,7 @@ export const ArticlesListStore = signalStore(
     favouriteArticle: rxMethod<string>(
       pipe(
         concatMap((slug) =>
-          actionsService.favorite(slug).pipe(
+          store._actionsService.favorite(slug).pipe(
             tapResponse({
               next: ({ article }) => {
                 patchState(store, {
@@ -67,7 +71,7 @@ export const ArticlesListStore = signalStore(
     unFavouriteArticle: rxMethod<string>(
       pipe(
         concatMap((slug) =>
-          actionsService.unfavorite(slug).pipe(
+          store._actionsService.unfavorite(slug).pipe(
             tapResponse({
               next: ({ article }) => {
                 patchState(store, {

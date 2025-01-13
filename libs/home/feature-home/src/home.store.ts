@@ -1,4 +1,4 @@
-import { signalStore, withState, withMethods, patchState, withHooks } from '@ngrx/signals';
+import { signalStore, withState, withMethods, patchState, withHooks, withProps } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { inject } from '@angular/core';
 import { pipe, switchMap } from 'rxjs';
@@ -12,11 +12,14 @@ export interface HomeState {
 export const HomeStore = signalStore(
   { providedIn: 'root' },
   withState<HomeState>({ tags: [] }),
-  withMethods((store, homeService = inject(HomeService)) => ({
+  withProps(() => ({
+    _homeService: inject(HomeService),
+  })),
+  withMethods((store) => ({
     getTags: rxMethod<void>(
       pipe(
         switchMap(() =>
-          homeService.getTags().pipe(
+          store._homeService.getTags().pipe(
             tapResponse(
               (response) => {
                 patchState(store, { tags: response.tags });
