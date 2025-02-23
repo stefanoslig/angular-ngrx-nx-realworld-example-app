@@ -43,7 +43,7 @@
     "core-js": "3.31.0",
     "eslint-plugin-ngrx": "2.1.4",
     "marked": "5.0.1",
-    "rxjs": "7.8.1"
+    "rxjs": "7.8.2"
   },
   "devDependencies": {
     "@angular-devkit/architect": "0.1901.8",
