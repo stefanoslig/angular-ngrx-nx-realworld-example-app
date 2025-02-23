@@ -3,19 +3,5 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/ui/components/src",
-  "prefix": "cdt",
-  "targets": {
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/ui/components"],
-      "options": {
-        "jestConfig": "libs/ui/components/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    }
-  },
-  "tags": []
+  "prefix": "cdt"
 }

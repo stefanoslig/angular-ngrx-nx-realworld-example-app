@@ -3,19 +3,5 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/auth/feature-auth/src",
-  "prefix": "cdt",
-  "targets": {
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/auth/feature-auth"],
-      "options": {
-        "jestConfig": "libs/auth/feature-auth/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    }
-  },
-  "tags": []
+  "prefix": "cdt"
 }

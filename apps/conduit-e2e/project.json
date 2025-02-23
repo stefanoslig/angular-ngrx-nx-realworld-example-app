@@ -3,25 +3,18 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/conduit-e2e/src",
   "projectType": "application",
+  "prefix": "app",
   "targets": {
     "e2e": {
-      "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/conduit-e2e/cypress.config.ts",
-        "devServerTarget": "conduit:serve",
         "tsConfig": "apps/conduit-e2e/tsconfig.e2e.json",
-        "testingType": "e2e"
+        "config-file": "./cypress.config.ts"
       }
     },
     "configurations": {
       "production": {
         "devServerTarget": "conduit:serve:production"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
     }
-  },
-  "prefix": "app"
+  }
 }

@@ -3,19 +3,5 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/articles/feature-article-edit/src",
-  "prefix": "cdt",
-  "targets": {
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/articles/feature-article-edit"],
-      "options": {
-        "jestConfig": "libs/articles/feature-article-edit/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    }
-  },
-  "tags": []
+  "prefix": "cdt"
 }

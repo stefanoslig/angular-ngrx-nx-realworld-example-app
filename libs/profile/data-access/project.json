@@ -3,19 +3,5 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/profile/data-access/src",
-  "prefix": "cdt",
-  "targets": {
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/profile/data-access"],
-      "options": {
-        "jestConfig": "libs/profile/data-access/jest.config.ts",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    }
-  },
-  "tags": []
+  "prefix": "cdt"
 }
