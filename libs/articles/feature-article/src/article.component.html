@@ -2,7 +2,7 @@
   <div class="article-page">
     <div class="banner">
       <div class="container">
-        <h1 data-e2e-id="article-title">{{ article.title }}</h1>
+        <h1 data-testid="article-title">{{ article.title }}</h1>
         <cdt-article-meta
           [article]="article"
           (follow)="follow($event)"

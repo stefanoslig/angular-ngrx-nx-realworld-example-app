@@ -1,7 +1,7 @@
 @if (formErrorsStore.errors().length > 0) {
   <ul class="error-messages">
     @for (error of formErrorsStore.errors(); track error) {
-      <li data-e2e-id="error">
+      <li data-testid="error">
         {{ error }}
       </li>
     }

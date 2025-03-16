@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
           <img [src]="$image()" class="user-img" />
-          <h4 data-e2e-id="article-author-profile" [hidden]="$profileLoading()">
+          <h4 data-testid="article-author-profile" [hidden]="$profileLoading()">
             {{ $username() }}
           </h4>
           <p>{{ $bio() }}</p>
