@@ -3,17 +3,14 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/conduit-e2e/src",
   "projectType": "application",
-  "prefix": "app",
+  "tags": [],
+  "implicitDependencies": ["conduit"],
   "targets": {
     "e2e": {
+      "executor": "@nx/playwright:playwright",
+      "outputs": ["{workspaceRoot}/dist/.playwright/apps/conduit-e2e"],
       "options": {
-        "tsConfig": "apps/conduit-e2e/tsconfig.e2e.json",
-        "config-file": "./cypress.config.ts"
-      }
-    },
-    "configurations": {
-      "production": {
-        "devServerTarget": "conduit:serve:production"
+        "config": "apps/conduit-e2e/playwright.config.ts"
       }
     }
   }

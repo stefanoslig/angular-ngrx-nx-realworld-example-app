@@ -1,7 +1,7 @@
 @if (!$isLoading()) {
   @for (article of $articles(); track article.slug) {
     <cdt-article-list-item
-      data-e2e-id="article-list"
+      data-testid="article-list"
       (navigateToArticle)="navigateToArticle($event)"
       (unFavorite)="unFavorite($event)"
       (favorite)="favorite($event)"
