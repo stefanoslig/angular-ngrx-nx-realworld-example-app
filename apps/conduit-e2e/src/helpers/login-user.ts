@@ -1,5 +1,3 @@
-
-
 import { request } from '@playwright/test';
 
 export async function loginUserApi(userId: string) {
