@@ -1,10 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({page}) => {
-  await page.goto('/home');  
+test.beforeEach(async ({ page }) => {
+  await page.goto('/home');
   await page.getByTestId('global-feed').click();
 });
-
 
 test('Navigate to a specific article', async ({ page }) => {
   const firstArticle = page.getByTestId('article-list-title').first();
@@ -17,7 +16,7 @@ test('Navigate to a specific article', async ({ page }) => {
   await expect(articleTitleElement).toBeVisible();
 });
 
-test('View article\'s author', async ({ page }) => {
+test("View article's author", async ({ page }) => {
   const firstArticle = page.getByTestId('article-list-title').first();
   await firstArticle.click();
 
