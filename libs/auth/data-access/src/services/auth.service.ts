@@ -24,7 +24,7 @@ export class AuthService {
     return this.apiService.post<{ message: string }, void>('/users/logout');
   }
 
-  register(credentials: NewUser): Observable<UserResponse> {
-    return this.apiService.post<UserResponse, NewUserRequest>('/users', { user: credentials });
+  register(credentials: NewUser): Observable<User> {
+    return this.apiService.post<User, NewUserRequest>('/users', { user: credentials });
   }
 }

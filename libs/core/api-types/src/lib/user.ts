@@ -7,5 +7,5 @@ export interface User {
 }
 
 export interface UserResponse {
-  user: User & { token: string };
+  user: User;
 }

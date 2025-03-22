@@ -41,7 +41,7 @@ export const AuthStore = signalStore(
           exhaustMap((newUserData) =>
             authService.register(newUserData).pipe(
               tapResponse({
-                next: ({ user }) => {
+                next: (user) => {
                   patchState(store, { user, loggedIn: true });
                   router.navigateByUrl('/');
                 },
