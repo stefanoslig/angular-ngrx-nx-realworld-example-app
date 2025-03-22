@@ -1,7 +1,6 @@
-import { request } from '@playwright/test';
+import { APIRequestContext } from '@playwright/test';
 
-export async function registerUserApi(userId: string) {
-  const requestContext = await request.newContext();
+export async function registerUserApi(userId: string, requestContext: APIRequestContext) {
   const response = await requestContext.post('https://real-world-app-39656dff2ddc.herokuapp.com/api/users', {
     data: {
       user: {
