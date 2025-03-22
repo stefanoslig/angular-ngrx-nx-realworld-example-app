@@ -1,4 +1,15 @@
 {
-  "cookies": [],
+  "cookies": [
+    {
+      "name": "jwt",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InV5enhiaG9iZnhyanVxbWFAZXhhbXBsZS5jb20iLCJleHAiOjE3NDc4MjcyMzYuNDI0LCJpZCI6Mzc1LCJ1c2VybmFtZSI6InV5enhiaG9iZnhyanVxbWEiLCJpYXQiOjE3NDI2NDMyMzZ9.EekVOra5kav1lhYHOviljY6_a74c2LtOTiS6pouGzYc",
+      "domain": "real-world-app-39656dff2ddc.herokuapp.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
   "origins": []
 }

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, request } from '@playwright/test';
 import { generateRandomString } from '../helpers/generate-random-string';
 import { registerUserApi } from '../helpers/register-user';
 
@@ -6,7 +6,8 @@ test.use({ storageState: { cookies: [], origins: [] } });
 const userId = generateRandomString();
 
 test.beforeEach(async () => {
-  await registerUserApi(userId);
+  const requestContext = await request.newContext();
+  await registerUserApi(userId, requestContext);
 });
 
 test('Successful login', async ({ page }) => {
