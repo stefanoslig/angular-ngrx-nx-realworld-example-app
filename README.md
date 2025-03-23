@@ -69,14 +69,36 @@ Run all the tests: `nx run-many -t test`
 
 `nx run-many -t lint`
 
-### Architecture
+## Architecture
 
-#### Folders/Libs structure
+The project utilizes a cutting-edge Angular architecture with Nx monorepo workspace and NgRx Signal Store for state management. Here's a comprehensive overview of the key architectural concepts:
 
-For this project I created a monorepo. There is one app for the moment (conduit) which consumes the libraries under the libs folder.
+### Monorepo Structure with Nx
 
-The folder structure is:
+This project is organized as a monorepo using Nx, which enables a modular, scalable architecture with clear boundaries between different parts of the application. The main benefits include:
 
+- **Scalability**: The codebase can easily grow while maintaining clear separation of concerns
+- **Dependency Graph Management**: Nx automatically tracks dependencies between libraries
+- **Improved Build Performance**: Nx's powerful caching and affected commands allow for faster builds and tests
+
+### Library Organization
+
+Libraries are classified using two dimensions:
+
+1. **Scope (Domain)**: Defines which section of the app can use the library
+   - `auth`: Authentication-related features
+   - `articles`: Article-related features
+   - `profile`: User profile features
+   - `core` (to be renamed to `shared`): Common utilities and components that can be used across the application
+
+2. **Type**: Defines the purpose of the library
+   - `feature-*`: Contains smart components that communicate with data sources
+   - `data-access`: Contains services and state management for interacting with the server
+   - `ui`: Contains presentational (dumb) components that are reusable within their scope
+   - `api-types`: Contains TypeScript interfaces for API models
+   - `forms`: Contains form-related components and utilities
+
+The folder structure follows this pattern:
 ```
 ├── libs
 │   ├── articles
@@ -99,26 +121,81 @@ The folder structure is:
 │   │   ├── components
 ```
 
-I used two classifiers to name my libraries. The first classifier is the `scope` and the second the `type`. The main reason is that I want every developer when he looks a library to understand where this library can be used and which kind of services/components/etc contains.
+### State Management with NgRx Signal Store
 
-The `scope` is the section (domain) of the app the library can be used. It gives a clear indication that a feature belongs to a specific domain. For example the libraries under `users` scope, are used in the users and favourite users pages. The ibraries under the `core` scope can be reused between all the sections of the app. **_The `core` scope will be rename soon to `shared`_**.
+The application uses NgRx Signal Store, a modern state management approach based on Angular's Signals, providing:
 
-The `type` indicates the purpose of a library. I have used a number of different types (feature, data-access, ui, api-types) The `feature-...` type contains smart components. These are components which enable the communication with the data-sources (most likely they inject api services). The `data-access` type contains code for interacting with the server. The `ui` type contains dumb (presentational) components. These components are reusable in the scope of this library
+- **Reactivity**: Based on Angular's Signal API for efficient change detection
+- **TypeScript Integration**: Strong typing throughout the state management system
+- **Simplified API**: More concise and intuitive compared to traditional NgRx with reducers and effects
+- **Immutability**: Enforces immutable state updates
 
-#### Standalone components
+Here's how the store pattern is implemented:
 
-I have used only standalone components. You won't see any modules in the app.
+```typescript
+export const AuthStore = signalStore(
+  { providedIn: 'root' },
+  withState<AuthState>(authInitialState),
+  withMethods(
+    (store, formErrorsStore = inject(FormErrorsStore), authService = inject(AuthService), router = inject(Router)) => ({
+      getUser: rxMethod<void>(
+        pipe(
+          switchMap(() => authService.user()),
+          tap(({ user }) => patchState(store, { user, loggedIn: true, ...setLoaded('getUser') })),
+        ),
+      ),
+      // Additional methods for login, register, updateUser, logout, etc.
+    }),
+  ),
+  withCallState({ collection: 'getUser' }),
+);
+```
 
-#### Lazy loaded components
+The store uses:
+- `withState`: To define the initial state
+- `withMethods`: To define methods that can modify the state
+- `rxMethod`: To handle asynchronous operations using RxJS
+- `patchState`: To update the state immutably
+- `withCallState`: To track loading, error and success states
 
-As you can see from the route configuration, the two main pages in the app are loaded lazily. This will make the initial loading time of the app faster.
+### Standalone Components
 
-```ts
- {
-  path: '',
-  redirectTo: 'home',
-  pathMatch: 'full',
-},
+The application exclusively uses standalone components, eliminating the need for NgModules. This results in:
+
+- **Simplified Architecture**: No need for complex module hierarchy
+- **Improved Tree-Shaking**: Better optimization of the final bundle
+- **Explicit Dependencies**: Each component declares its own dependencies
+
+Example of a standalone component:
+
+```typescript
+@Component({
+  selector: 'cdt-login',
+  templateUrl: './login.component.html',
+  imports: [ListErrorsComponent, RouterLink, ReactiveFormsModule, InputErrorsComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class LoginComponent {
+  private readonly authStore = inject(AuthStore);
+  private readonly fb = inject(FormBuilder);
+  
+  // Component implementation
+}
+```
+
+### Dependency Injection with inject()
+
+The application uses the modern `inject()` function instead of constructor-based dependency injection:
+
+- **Cleaner Code**: Reduces boilerplate compared to constructor injection
+- **Better TypeScript Inference**: TypeScript can better infer types with inject
+- **More Flexible**: Can be used within functions, not just classes
+
+### Lazy Loading
+
+The application implements lazy loading for all major routes to improve initial load time:
+
+```typescript
 {
   path: 'home',
   loadChildren: () => import('@realworld/home/src/lib/home.routes').then((home) => home.HOME_ROUTES),
@@ -127,46 +204,58 @@ As you can see from the route configuration, the two main pages in the app are l
   path: 'login',
   loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.LoginComponent),
 },
-{
-  path: 'register',
-  loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.RegisterComponent),
-},
-{
-  path: 'article',
-  loadChildren: () => import('@realworld/articles/article').then((m) => m.ARTICLE_ROUTES),
-},
-{
-  path: 'settings',
-  loadComponent: () =>
-    import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
-},
-{
-  path: 'editor',
-  loadChildren: () => import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),
-  canActivate: [authGuard],
-},
-{
-  path: 'profile',
-  loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
-},
+// Additional routes...
 ```
 
-#### State management
+This implementation uses:
+- `loadComponent`: For lazy loading standalone components
+- `loadChildren`: For lazy loading entire route trees
 
-**TBD**
+### Smart vs Dumb Components Pattern
 
-#### The smart-dumb components design pattern for the components:
+The application follows the smart/dumb component pattern:
 
-There is a clear distinction in the codebase between the smart and dumb components. The main reason behind this decision is that I want most of my components to be reusable and easier to be tested. That means that they should not have dependencies and they just consume the data they get from the smart component. Also it makes clearer a compoenent's responsibility.
+- **Smart Components**: 
+  - Handle data fetching and state management
+  - Located in `feature-*` libraries
+  - Inject services and stores
+  - Pass data to dumb components
 
-#### Avoid using external dependencies
+- **Dumb Components**:
+  - Are purely presentational
+  - Located in `ui` libraries
+  - Receive data via inputs and emit events via outputs
+  - Have no dependencies on services or stores
+  - Easily testable and reusable
 
-As you can see in the package.json, we didn't include external libraries, like `angular-material`, libs for the ui components, state management,etc. The reason is that it might be tempting to use a library like this in the short term to develop something fast, but in the long term they can introduce many problems:
+### Minimal External Dependencies
 
-- opinionated styles
-- make the migration to newer versions of Angular more difficult
-- not full control on them
+The project avoids external UI libraries and frameworks to:
+- Maintain full control over the codebase
+- Avoid opinionated styles
+- Simplify migration to newer Angular versions
+- Reduce bundle size
 
-#### Testing
+### Testing Strategy
 
-**TBD**
+The application uses Jest for unit testing and Playwright for end-to-end testing:
+- Unit tests focus on testing individual components, services, and stores in isolation
+- Integration tests verify that different parts of the application work together correctly
+- E2E tests validate the full user experience
+
+### Modern Angular Features
+
+The application leverages the latest Angular features:
+
+- **New Control Flow**: Uses the new `@if`, `@for`, and `@switch` syntax for clearer templates
+- **Deferred Loading**: Implements content deferral for better initial load performance
+- **Zoneless**: Uses zoneless change detection for improved performance
+- **Signal Inputs and Outputs**: Uses the new signals-based inputs/outputs for better reactivity
+- **Functional Resolvers and Guards**: Replaces class-based guards and resolvers with more concise functions
+
+### Build and Deployment
+
+The application uses Nx's build system for:
+- Fast builds with caching
+- Affected-only testing and building
+- Consistent environment configurations
