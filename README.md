@@ -153,7 +153,95 @@ As you can see from the route configuration, the two main pages in the app are l
 
 #### State management
 
-**TBD**
+This application uses the NgRx Signals Store (v19.0.0-rc.0) for state management, a modern approach that leverages Angular's signals for reactive, efficient state handling. The implementation follows a domain-driven design pattern where each feature module has its own store to manage state relevant to that specific domain.
+
+##### Key NgRx Signals Store Concepts
+
+1. **Signal Store**: Each domain has a dedicated store created with `signalStore()`, providing a reactive and type-safe state container.
+
+2. **Feature Organization**: State management is structured according to domains (auth, articles, profile, etc.) with separate store implementations for each.
+
+3. **Store Composition Patterns**:
+   - `withState`: Defines the initial state structure with TypeScript interfaces
+   - `withMethods`: Implements actions and operations that can modify the state
+   - `withCallState`: Tracks API call states (loading, loaded, error) for async operations
+   - `withComputed`: Creates derived state based on the existing state
+
+4. **RxJS Integration**:
+   - Uses `rxMethod` for handling asynchronous operations
+   - Leverages `tapResponse` for handling API responses in a clean way
+   - Combines RxJS operators like `switchMap`, `exhaustMap`, and `pipe` for complex data flows
+
+##### Example Store Structure (Auth)
+
+```typescript
+export const AuthStore = signalStore(
+  { providedIn: 'root' },
+  withState<AuthState>(authInitialState),
+  withMethods(
+    (store, formErrorsStore = inject(FormErrorsStore), authService = inject(AuthService), router = inject(Router)) => ({
+      getUser: rxMethod<void>(
+        pipe(
+          switchMap(() => authService.user()),
+          tap(({ user }) => patchState(store, { user, loggedIn: true, ...setLoaded('getUser') })),
+        ),
+      ),
+      login: rxMethod<LoginUser>(/* ... */),
+      register: rxMethod<NewUser>(/* ... */),
+      updateUser: rxMethod<User>(/* ... */),
+      logout: rxMethod<void>(/* ... */),
+    }),
+  ),
+  withCallState({ collection: 'getUser' }),
+);
+```
+
+##### Call State Management
+
+The application implements a sophisticated call state tracking system to handle API request states, allowing for:
+
+- Tracking loading states (`loading`, `loaded`, `error`)
+- Generic error handling across all API requests
+- Providing UI feedback based on request status
+
+```typescript 
+export type CallState = 'init' | 'loading' | 'loaded' | { error: string };
+```
+
+##### State Interaction in Components
+
+Smart components interact with stores using dependency injection, providing a clean interface between UI and state:
+
+```typescript
+// Example component
+@Component({
+  selector: 'app-login',
+  template: `
+    <!-- Template binds to store signals -->
+    <app-login-form 
+      [isPending]="authStore.getUser.loading()" 
+      (submitForm)="submit($event)">
+    </app-login-form>
+  `,
+})
+export class LoginComponent {
+  private readonly authStore = inject(AuthStore);
+  
+  submit(credentials: LoginUser): void {
+    this.authStore.login(credentials);
+  }
+}
+```
+
+##### Advantages of NgRx Signals Store
+
+1. **Performance**: Fine-grained reactivity with signals reduces unnecessary re-renders
+2. **Simplicity**: More straightforward API compared to traditional NgRx, with less boilerplate
+3. **Type Safety**: Comprehensive TypeScript support throughout the state management system
+4. **Locality**: State is encapsulated within domain boundaries, avoiding global state complexity
+5. **Testability**: Stores are easily testable through dependency injection
+
+This implementation demonstrates a modern, efficient approach to state management in Angular applications, taking full advantage of signals and the composition patterns provided by NgRx Signals Store.
 
 #### The smart-dumb components design pattern for the components:
 
