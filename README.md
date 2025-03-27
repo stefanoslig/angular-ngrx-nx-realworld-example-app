@@ -69,9 +69,13 @@ Run all the tests: `nx run-many -t test`
 
 `nx run-many -t lint`
 
-### Architecture
+## Architecture
 
-#### Folders/Libs structure
+### Overview
+
+This application is built as a monorepo using Nx tools, with a modern Angular architecture leveraging standalone components, zoneless change detection, and NgRx Signals for state management. The project structure follows domain-driven design principles with clear separation of concerns through feature libraries, data-access libraries, and UI component libraries.
+
+### Folders/Libs structure
 
 For this project I created a monorepo. There is one app for the moment (conduit) which consumes the libraries under the libs folder.
 
@@ -105,67 +109,207 @@ The `scope` is the section (domain) of the app the library can be used. It gives
 
 The `type` indicates the purpose of a library. I have used a number of different types (feature, data-access, ui, api-types) The `feature-...` type contains smart components. These are components which enable the communication with the data-sources (most likely they inject api services). The `data-access` type contains code for interacting with the server. The `ui` type contains dumb (presentational) components. These components are reusable in the scope of this library
 
-#### Standalone components
+### Detailed Architecture Explanation
 
-I have used only standalone components. You won't see any modules in the app.
+#### Application Structure
 
-#### Lazy loaded components
+The application follows a modern Angular application structure with clear separation between domains and technical concerns:
 
-As you can see from the route configuration, the two main pages in the app are loaded lazily. This will make the initial loading time of the app faster.
+1. **Domain-driven Structure**:
+   - Each domain (articles, auth, profile, etc.) has its own dedicated space in the libs folder
+   - Domain libraries encapsulate all related functionality, making navigation and maintenance easier
+   - This organization allows for better understanding of the business domains
 
-```ts
- {
-  path: '',
-  redirectTo: 'home',
-  pathMatch: 'full',
-},
-{
-  path: 'home',
-  loadChildren: () => import('@realworld/home/src/lib/home.routes').then((home) => home.HOME_ROUTES),
-},
-{
-  path: 'login',
-  loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.LoginComponent),
-},
-{
-  path: 'register',
-  loadComponent: () => import('@realworld/auth/feature-auth').then((m) => m.RegisterComponent),
-},
-{
-  path: 'article',
-  loadChildren: () => import('@realworld/articles/article').then((m) => m.ARTICLE_ROUTES),
-},
-{
-  path: 'settings',
-  loadComponent: () =>
-    import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
-},
-{
-  path: 'editor',
-  loadChildren: () => import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),
-  canActivate: [authGuard],
-},
-{
-  path: 'profile',
-  loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
-},
+2. **Library Types**:
+   - **data-access**: Contains services, interfaces and state management related to domain data
+   - **feature-***: Smart components that compose UI components and data-access elements
+   - **ui**: Presentational components that are reusable and focused on UI without business logic
+   - **api-types**: TypeScript interfaces for API models
+
+3. **Core Infrastructure**:
+   - Shared utilities, interceptors, and services live in the core libraries
+   - Error handling, HTTP client configuration, and form utilities are centralized
+
+#### Standalone Components
+
+The application exclusively uses standalone components, which offers several benefits:
+
+- No NgModules required for component declaration
+- Better code splitting and tree-shaking
+- Clearer component dependencies through imports
+- Simplified testing with fewer dependencies to mock
+
+#### State Management
+
+The application uses NgRx Signals Store for state management, which is a more modern approach compared to the classic NgRx/Redux pattern:
+
+```typescript
+export const AuthStore = signalStore(
+  { providedIn: 'root' },
+  withState<AuthState>(authInitialState),
+  withMethods(
+    (store, formErrorsStore = inject(FormErrorsStore), authService = inject(AuthService), router = inject(Router)) => ({
+      getUser: rxMethod<void>(
+        pipe(
+          switchMap(() => authService.user()),
+          tap(({ user }) => patchState(store, { user, loggedIn: true, ...setLoaded('getUser') })),
+        ),
+      ),
+      login: rxMethod<LoginUser>(/* implementation */),
+      register: rxMethod<NewUser>(/* implementation */),
+      updateUser: rxMethod<User>(/* implementation */),
+      logout: rxMethod<void>(/* implementation */),
+    }),
+  ),
+  withCallState({ collection: 'getUser' }),
+);
 ```
 
-#### State management
+Key aspects of this state management approach:
 
-**TBD**
+1. **Signal-based Reactivity**:
+   - Leverages Angular's new reactivity model with signals
+   - Provides better performance compared to traditional Observable-based state
+   - Smaller bundle size than classic NgRx solutions
 
-#### The smart-dumb components design pattern for the components:
+2. **Simplified State Operations**:
+   - Direct state manipulation with `patchState`
+   - No need for separate actions, reducers, selectors, and effects
+   - Clean integration with RxJS for handling async operations with `rxMethod`
 
-There is a clear distinction in the codebase between the smart and dumb components. The main reason behind this decision is that I want most of my components to be reusable and easier to be tested. That means that they should not have dependencies and they just consume the data they get from the smart component. Also it makes clearer a compoenent's responsibility.
+3. **Type Safety**:
+   - Full TypeScript support with strongly-typed state and operations
+   - Compile-time errors for state manipulation mistakes
 
-#### Avoid using external dependencies
+4. **Loading State Management**:
+   - Built-in call state tracking with `withCallState`
+   - Standardized loading, error, and success states
 
-As you can see in the package.json, we didn't include external libraries, like `angular-material`, libs for the ui components, state management,etc. The reason is that it might be tempting to use a library like this in the short term to develop something fast, but in the long term they can introduce many problems:
+#### Routing and Lazy Loading
 
-- opinionated styles
-- make the migration to newer versions of Angular more difficult
-- not full control on them
+The application employs modern Angular routing features for performance and scalability:
+
+```typescript
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideExperimentalZonelessChangeDetection(),
+    provideRouter(
+      [
+        {
+          path: '',
+          redirectTo: 'home',
+          pathMatch: 'full',
+        },
+        {
+          path: 'home',
+          loadComponent: () => import('@realworld/home/feature-home').then((m) => m.HomeComponent),
+        },
+        // Additional routes...
+      ],
+      withViewTransitions(),
+      withComponentInputBinding(),
+    ),
+    // Other providers...
+  ],
+};
+```
+
+The routing architecture includes:
+
+1. **Lazy Loading**:
+   - Components and routes are loaded on-demand using dynamic imports
+   - Smaller initial bundle size for faster startup
+   - Page-specific code is only loaded when required
+
+2. **View Transitions**:
+   - Modern transitions between route changes with `withViewTransitions`
+   - Smoother user experience during navigation
+
+3. **Input Binding**:
+   - Route parameters are automatically bound to component inputs with `withComponentInputBinding`
+   - Simplified data passing from routes to components
+
+4. **Functional Guards and Resolvers**:
+   - Modern functional approach for route guards and resolvers
+   - Lighter-weight compared to class-based implementations
+   - Directly injectable with dependency injection
+
+#### Smart-Dumb Component Pattern
+
+The application follows the smart-dumb component pattern (also known as container-presentation pattern):
+
+1. **Smart Components**:
+   - Located in feature libraries
+   - Connect to state management
+   - Handle data fetching and processing
+   - Coordinate user interactions
+   - Pass data to dumb components via inputs
+
+2. **Dumb Components**:
+   - Located in UI libraries
+   - Focused on rendering UI and capturing user events
+   - No direct dependencies on services, state, or data-access
+   - Emit events to smart components when interactions occur
+   - Highly reusable and easier to test
+
+This pattern provides several benefits:
+- Clear separation of concerns
+- Improved testability
+- Better reusability of UI components
+- Clear component responsibilities
+
+#### Modern Angular Features
+
+The application showcases modern Angular capabilities:
+
+1. **Zoneless Change Detection**:
+   - Performance improvements through signal-based change detection
+   - Reduced memory usage and fewer change detection cycles
+
+2. **Signal Inputs and Outputs**:
+   - Using signals for component communication
+   - More efficient than traditional @Input/@Output decorators
+
+3. **Dependency Injection with inject()**:
+   - Modern DI with the inject function
+   - Reduced boilerplate compared to constructor injection
+
+4. **Functional Approach**:
+   - Functional guards and resolvers
+   - Modern function-based APIs for routing and DI
+
+#### Testing Strategy
+
+The application includes comprehensive testing patterns for different architectural layers:
+
+1. **Unit Tests**:
+   - Testing individual components and services in isolation
+   - Using NgRx's MockStore for state testing
+   - Focused on business logic verification
+
+2. **Component Tests**:
+   - Testing components with their templates
+   - Verifying component interactions and rendering
+   - Using harnesses for component testing
+
+### Avoiding External Dependencies
+
+This project intentionally avoids external UI libraries and dependencies to:
+- Maintain full control over the code
+- Avoid compatibility issues with Angular updates
+- Eliminate opinionated styles
+- Provide a cleaner learning experience
+- Focus on Angular's built-in capabilities
+
+#### Advantages of this Architecture
+
+1. **Scalability**: The domain-driven approach with library scopes allows the application to grow without becoming unwieldy
+2. **Maintainability**: Clear boundaries between components, state, and UI make maintenance simpler
+3. **Performance**: Lazy loading, standalone components, and signal-based state improve runtime performance
+4. **Developer Experience**: Intuitive structure makes it easier for developers to locate code and understand relationships
+5. **Testing**: Clean separation makes unit testing and component testing more straightforward
+
+This architecture leverages the latest Angular features and best practices to create a robust, maintainable, and efficient application that demonstrates real-world patterns for enterprise Angular development.
 
 #### Testing
 
