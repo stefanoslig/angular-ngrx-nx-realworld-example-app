@@ -45,3 +45,5 @@ Thumbs.db
 .nx/workspace-data
 
 .npmrc
+
+playwright/.auth/
