@@ -24,9 +24,9 @@ export const ArticleStore = signalStore(
     ) => ({
       getArticle: rxMethod<string>(
         pipe(
-          tap(() => setLoading('getArticle')),
-          switchMap((slug) =>
-            articlesService.getArticle(slug).pipe(
+          switchMap((slug) => {
+            patchState(store, { data: articleInitialState.data, ...setLoading('getArticle') });
+            return articlesService.getArticle(slug).pipe(
               tapResponse({
                 next: ({ article }) => {
                   patchState(store, { data: article, ...setLoaded('getArticle') });
@@ -35,27 +35,25 @@ export const ArticleStore = signalStore(
                   patchState(store, { data: articleInitialState.data, ...setLoaded('getArticle') });
                 },
               }),
-            ),
-          ),
+            );
+          }),
         ),
       ),
       getComments: rxMethod<string>(
         pipe(
-          tap(() => setLoading('getComments')),
-          switchMap((slug) =>
-            articlesService.getComments(slug).pipe(
+          switchMap((slug) => {
+            patchState(store, { comments: articleInitialState.comments, ...setLoading('getComments') });
+            return articlesService.getComments(slug).pipe(
               tapResponse({
                 next: ({ comments }) => {
-                  patchState(store, { comments: comments });
-                  setLoaded('getComments');
+                  patchState(store, { comments: comments, ...setLoaded('getComments') });
                 },
                 error: () => {
-                  patchState(store, { comments: articleInitialState.comments });
-                  setLoaded('getComments');
+                  patchState(store, { comments: articleInitialState.comments, ...setLoaded('getComments') });
                 },
               }),
-            ),
-          ),
+            );
+          }),
         ),
       ),
       followUser: rxMethod<string>(
