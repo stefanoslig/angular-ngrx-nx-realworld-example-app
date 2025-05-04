@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject, input } from '@angular/core';
-import { ArticleStore, ArticlesListStore } from '@realworld/articles/data-access';
+import { ArticleStore } from '@realworld/articles/data-access';
 import { ArticleMetaComponent } from './article-meta/article-meta.component';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { ArticleCommentComponent } from './article-comment/article-comment.component';
@@ -19,7 +19,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   private readonly authStore = inject(AuthStore);
   private readonly articleStore = inject(ArticleStore);
-  private readonly articlesListStore = inject(ArticlesListStore);
 
   $article = this.articleStore.data;
   $comments = this.articleStore.comments;
@@ -41,10 +40,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.articleStore.unfollowUser(username);
   }
   favorite(slug: string) {
-    this.articlesListStore.favouriteArticle(slug);
+    this.articleStore.favouriteArticle(slug);
   }
   unfavorite(slug: string) {
-    this.articlesListStore.unFavouriteArticle(slug);
+    this.articleStore.unFavouriteArticle(slug);
   }
   delete(slug: string) {
     this.articleStore.deleteArticle(slug);

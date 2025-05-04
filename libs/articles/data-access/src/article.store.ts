@@ -3,7 +3,7 @@ import { ArticleState, articleInitialState } from './models/article.model';
 import { inject } from '@angular/core';
 import { ArticlesService } from './services/articles.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap, tap } from 'rxjs';
+import { concatMap, pipe, switchMap, tap } from 'rxjs';
 import { setLoaded, setLoading, withCallState } from '@realworld/core/data-access';
 import { tapResponse } from '@ngrx/operators';
 import { ActionsService } from './services/actions.service';
@@ -66,6 +66,38 @@ export const ArticleStore = signalStore(
         pipe(
           switchMap((username) => actionsService.unfollowUser(username)),
           tap(({ profile }) => patchState(store, { data: { ...store.data(), author: profile } })),
+        ),
+      ),
+      favouriteArticle: rxMethod<string>(
+        pipe(
+          concatMap((slug) =>
+            actionsService.favorite(slug).pipe(
+              tapResponse({
+                next: ({ article }) => {
+                  patchState(store, { data: article });
+                },
+                error: () => {
+                  patchState(store, articleInitialState);
+                },
+              }),
+            ),
+          ),
+        ),
+      ),
+      unFavouriteArticle: rxMethod<string>(
+        pipe(
+          concatMap((slug) =>
+            actionsService.unfavorite(slug).pipe(
+              tapResponse({
+                next: ({ article }) => {
+                  patchState(store, { data: article });
+                },
+                error: () => {
+                  patchState(store, articleInitialState);
+                },
+              }),
+            ),
+          ),
         ),
       ),
       deleteComment: rxMethod<{ commentId: number; slug: string }>(
