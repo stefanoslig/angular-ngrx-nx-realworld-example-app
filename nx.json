@@ -59,7 +59,6 @@
   },
   "parallel": 3,
   "defaultBase": "main",
-  "useLegacyCache": true,
   "plugins": [
     {
       "plugin": "@nx/eslint/plugin",
