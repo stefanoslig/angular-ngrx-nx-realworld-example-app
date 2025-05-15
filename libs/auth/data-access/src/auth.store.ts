@@ -7,7 +7,7 @@ import { exhaustMap, pipe, switchMap, tap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import { Router } from '@angular/router';
 import { LoginUser, NewUser, User } from '@realworld/core/api-types';
-import { setLoaded, withCallState } from '@realworld/core/data-access';
+import { setLoaded, setLoading, withCallState } from '@realworld/core/data-access';
 import { FormErrorsStore } from '@realworld/core/forms';
 
 export const AuthStore = signalStore(
@@ -17,8 +17,15 @@ export const AuthStore = signalStore(
     (store, formErrorsStore = inject(FormErrorsStore), authService = inject(AuthService), router = inject(Router)) => ({
       getUser: rxMethod<void>(
         pipe(
-          switchMap(() => authService.user()),
-          tap(({ user }) => patchState(store, { user, loggedIn: true, ...setLoaded('getUser') })),
+          tap(() => patchState(store, { loggedIn: false, ...setLoading('getUser') })),
+          switchMap(() =>
+            authService.user().pipe(
+              tapResponse({
+                next: ({ user }) => patchState(store, { user, loggedIn: true, ...setLoaded('getUser') }),
+                error: () => patchState(store, { loggedIn: false, ...setLoaded('getUser') }),
+              }),
+            ),
+          ),
         ),
       ),
       login: rxMethod<LoginUser>(
