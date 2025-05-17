@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
-import { authGuard } from '@realworld/auth/data-access';
+import { AuthGuard } from '@realworld/auth/data-access';
 import { errorHandlingInterceptor } from '@realworld/core/error-handler';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { API_URL } from '@realworld/core/http-client';
@@ -40,7 +40,7 @@ export const appConfig: ApplicationConfig = {
         {
           path: 'editor',
           loadChildren: () => import('@realworld/articles/article-edit').then((article) => article.ARTICLE_EDIT_ROUTES),
-          canActivate: [authGuard],
+          canActivate: [AuthGuard],
         },
         {
           path: 'profile',

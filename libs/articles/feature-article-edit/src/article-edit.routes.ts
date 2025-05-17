@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@realworld/auth/data-access';
+import { AuthGuard } from '@realworld/auth/data-access';
 import { ArticleEditComponent } from './article-edit.component';
 import { articleEditResolver } from './resolvers/article-edit-resolver';
 
@@ -12,7 +12,7 @@ export const ARTICLE_EDIT_ROUTES: Routes = [
         path: '',
         pathMatch: 'full',
         component: ArticleEditComponent,
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: ':slug',
