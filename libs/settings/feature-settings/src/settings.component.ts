@@ -10,7 +10,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   imports: [ListErrorsComponent, ReactiveFormsModule, InputErrorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
   private readonly authStore = inject(AuthStore);
   private readonly fb = inject(FormBuilder);
 
@@ -21,10 +21,6 @@ export class SettingsComponent implements OnInit {
     email: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
-
-  ngOnInit() {
-    this.authStore.getUser();
-  }
 
   readonly setUserDataToForm = effect(() => {
     const userLoaded = this.authStore.getUserLoaded();
