@@ -46,10 +46,10 @@
     "rxjs": "7.8.1"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1902.1",
-    "@angular-devkit/build-angular": "19.2.1",
-    "@angular-devkit/core": "19.2.1",
-    "@angular-devkit/schematics": "19.2.1",
+    "@angular-devkit/architect": "0.2000.2",
+    "@angular-devkit/build-angular": "19.2.15",
+    "@angular-devkit/core": "19.2.15",
+    "@angular-devkit/schematics": "19.2.15",
     "@angular-eslint/eslint-plugin": "19.2.0",
     "@angular-eslint/eslint-plugin-template": "19.2.0",
     "@angular-eslint/template-parser": "19.2.0",
@@ -65,7 +65,7 @@
     "@nx/web": "21.1.2",
     "@nx/workspace": "21.1.2",
     "@playwright/test": "^1.36.0",
-    "@schematics/angular": "19.2.1",
+    "@schematics/angular": "19.2.15",
     "@swc-node/register": "~1.9.1",
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
