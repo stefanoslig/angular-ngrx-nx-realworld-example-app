@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 import { AuthGuard } from '@realworld/auth/data-access';
 import { errorHandlingInterceptor } from '@realworld/core/error-handler';
@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
+    provideZonelessChangeDetection(),
     provideRouter(
       [
         {
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
           path: 'settings',
           loadComponent: () =>
             import('@realworld/settings/feature-settings').then((settings) => settings.SettingsComponent),
-           canActivate: [AuthGuard],
+          canActivate: [AuthGuard],
         },
         {
           path: 'editor',
