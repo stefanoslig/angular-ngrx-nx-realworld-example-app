@@ -90,7 +90,7 @@
     "react": "^18.2.6",
     "react-dom": "^18.2.6",
     "swc-loader": "0.1.15",
-    "ts-jest": "29.1.1",
+    "ts-jest": "29.4.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
     "typescript": "5.8.3"
