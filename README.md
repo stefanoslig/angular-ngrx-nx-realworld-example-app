@@ -16,6 +16,8 @@
 
 ### [Demo](https://angular-ngrx-nx-realworld-example-app-lyart.vercel.app)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
+#### [NgRx Signal Store Article](https://www.stefanos-lignos.dev/posts/ngrx-signals-store)
+
 This codebase was created to demonstrate a fully fledged fullstack application built with Angular, ngrx/platform, nrwl/nx including CRUD operations, authentication, routing, pagination, and more.
 
 We've gone to great lengths to adhere to the Angular community styleguides & best practices.
