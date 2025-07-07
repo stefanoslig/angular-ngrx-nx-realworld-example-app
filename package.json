@@ -40,7 +40,7 @@
     "@ngrx/operators": "20.0.0-beta.0",
     "@ngrx/signals": "20.0.0-beta.0",
     "@nx/angular": "21.2.0",
-    "core-js": "3.31.0",
+    "core-js": "3.44.0",
     "eslint-plugin-ngrx": "2.1.4",
     "marked": "5.0.1",
     "rxjs": "7.8.1"
