@@ -13,7 +13,7 @@ export interface Article {
   author: Profile;
 }
 
-export interface NewArticle {
+export interface CreateArticle {
   article: {
     title: string;
     description: string;
@@ -21,6 +21,8 @@ export interface NewArticle {
     tagList: string[];
   };
 }
+
+export type EditArticle = CreateArticle;
 
 export interface ArticleResponse {
   article: Article;

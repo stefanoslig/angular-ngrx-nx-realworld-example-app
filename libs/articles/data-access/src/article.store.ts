@@ -8,7 +8,7 @@ import { setLoaded, setLoading, withCallState } from '@realworld/core/data-acces
 import { tapResponse } from '@ngrx/operators';
 import { ActionsService } from './services/actions.service';
 import { Router } from '@angular/router';
-import { NewArticle } from '@realworld/core/api-types';
+import { CreateArticle, EditArticle } from '@realworld/core/api-types';
 import { FormErrorsStore } from '@realworld/core/forms';
 
 export const ArticleStore = signalStore(
@@ -135,7 +135,7 @@ export const ArticleStore = signalStore(
           ),
         ),
       ),
-      publishArticle: rxMethod<NewArticle>(
+      publishArticle: rxMethod<CreateArticle>(
         pipe(
           switchMap((article) =>
             articlesService.publishArticle(article).pipe(
@@ -147,10 +147,10 @@ export const ArticleStore = signalStore(
           ),
         ),
       ),
-      editArticle: rxMethod<any>(
+      editArticle: rxMethod<{ editArticle: EditArticle; slug: string }>(
         pipe(
-          switchMap((article) =>
-            articlesService.editArticle(article).pipe(
+          switchMap(({ editArticle, slug }) =>
+            articlesService.editArticle(editArticle, slug).pipe(
               tapResponse({
                 next: ({ article }) => router.navigate(['article', article.slug]),
                 error: ({ error }) => formErrorsStore.setErrors(error.errors),

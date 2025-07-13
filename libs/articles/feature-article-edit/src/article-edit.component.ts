@@ -35,12 +35,13 @@ export class ArticleEditComponent implements OnDestroy {
   });
 
   onSubmit() {
+    const article = {
+      article: { ...this.form.getRawValue(), tagList: this.form.controls.tagList.value.split(',') },
+    };
     if (this.articleStore.data.slug()) {
-      this.articleStore.editArticle(this.form.getRawValue());
+      this.articleStore.editArticle({ editArticle: article, slug: this.articleStore.data.slug() });
     } else {
-      this.articleStore.publishArticle({
-        article: { ...this.form.getRawValue(), tagList: this.form.controls.tagList.value.split(',') },
-      });
+      this.articleStore.publishArticle(article);
     }
   }
 

@@ -4,8 +4,9 @@ import { ApiService } from '@realworld/core/http-client';
 import {
   Article,
   ArticleResponse,
+  CreateArticle,
+  EditArticle,
   MultipleCommentsResponse,
-  NewArticle,
   SingleCommentResponse,
 } from '@realworld/core/api-types';
 import { HttpParams } from '@angular/common/http';
@@ -44,14 +45,12 @@ export class ArticlesService {
     );
   }
 
-  publishArticle(article: NewArticle): Observable<ArticleResponse> {
-    return this.apiService.post<ArticleResponse, NewArticle>('/articles/', article);
+  publishArticle(article: CreateArticle): Observable<ArticleResponse> {
+    return this.apiService.post<ArticleResponse, CreateArticle>('/articles/', article);
   }
 
-  editArticle(article: Article): Observable<ArticleResponse> {
-    return this.apiService.put<ArticleResponse, ArticleResponse>('/articles/' + article.slug, {
-      article: article,
-    });
+  editArticle(article: EditArticle, slug: string): Observable<ArticleResponse> {
+    return this.apiService.put<ArticleResponse, EditArticle>('/articles/' + slug, article);
   }
 
   // TODO: remove any
