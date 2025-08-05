@@ -97,6 +97,48 @@ export const ArticlesListStore = signalStore(
       };
       patchState(store, { listConfig });
     },
+    searchArticles: rxMethod<string>(
+      pipe(
+        tap(() => setLoading('getArticles')),
+        concatMap((searchTerm) => {
+          const searchConfig: ArticlesListConfig = {
+            ...store.listConfig(),
+            currentPage: 1,
+            filters: {
+              ...store.listConfig().filters,
+              search: searchTerm,
+              offset: 0,
+            },
+          };
+          return articlesService.query(searchConfig).pipe(
+            tapResponse({
+              next: ({ articles, articlesCount }) => {
+                patchState(store, {
+                  listConfig: searchConfig,
+                  articles: { articlesCount: articlesCount, entities: articles },
+                  ...setLoaded('getArticles'),
+                });
+              },
+              error: () => {
+                patchState(store, { ...articlesListInitialState, ...setLoaded('getArticles') });
+              },
+            }),
+          );
+        }),
+      ),
+    ),
+    clearSearch: () => {
+      const clearedConfig: ArticlesListConfig = {
+        ...store.listConfig(),
+        currentPage: 1,
+        filters: {
+          ...store.listConfig().filters,
+          search: undefined,
+          offset: 0,
+        },
+      };
+      patchState(store, { listConfig: clearedConfig });
+    },
   })),
   withCallState({ collection: 'getArticles' }),
 );

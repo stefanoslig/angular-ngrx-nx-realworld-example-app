@@ -39,10 +39,21 @@ export class ArticlesService {
   }
 
   query(config: ArticlesListConfig): Observable<{ articles: Article[]; articlesCount: number }> {
+    const params = this.toHttpParams(config.filters);
     return this.apiService.get(
       '/articles' + (config.type === 'FEED' ? '/feed' : ''),
-      this.toHttpParams(config.filters),
+      params,
     );
+  }
+
+  searchArticles(searchTerm: string, config: ArticlesListConfig): Observable<{ articles: Article[]; articlesCount: number }> {
+    return this.query({
+      ...config,
+      filters: {
+        ...config.filters,
+        search: searchTerm
+      }
+    });
   }
 
   publishArticle(article: CreateArticle): Observable<ArticleResponse> {

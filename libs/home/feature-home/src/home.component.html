@@ -9,6 +9,12 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-9">
+        <cdt-search 
+          [currentSearch]="$listConfig().filters.search"
+          (searchChange)="onSearch($event)"
+          (clearSearchEmitter)="onClearSearch()"
+        ></cdt-search>
+        
         <div class="feed-toggle">
           @if ({ listConfig: $listConfig() }; as model) {
             <ul class="nav nav-pills outline-active">
@@ -21,7 +27,7 @@
                 <a
                   data-testid="global-feed"
                   [ngClass]="{
-                    active: model.listConfig.type === 'ALL' && !model.listConfig.filters.tag
+                    active: model.listConfig.type === 'ALL' && !model.listConfig.filters.tag && !model.listConfig.filters.search
                   }"
                   class="nav-link"
                   (click)="setListTo('ALL')"
@@ -32,6 +38,12 @@
                 <a class="nav-link active">
                   <i class="ion-pound"></i>
                   {{ model.listConfig.filters.tag }}
+                </a>
+              </li>
+              <li class="nav-item" [hidden]="!model.listConfig.filters.search">
+                <a class="nav-link active">
+                  <i class="ion-search"></i>
+                  Search Results
                 </a>
               </li>
             </ul>

@@ -4,6 +4,7 @@ import { NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { HomeStore } from './home.store';
+import { SearchComponent } from '@realworld/ui/components';
 
 import { AuthStore } from '@realworld/auth/data-access';
 
@@ -11,7 +12,7 @@ import { AuthStore } from '@realworld/auth/data-access';
   selector: 'cdt-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [NgClass, TagsListComponent, ArticleListComponent],
+  imports: [NgClass, TagsListComponent, ArticleListComponent, SearchComponent],
   providers: [HomeStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -50,6 +51,15 @@ export class HomeComponent {
         tag,
       },
     });
+    this.articlesListStore.loadArticles(this.$listConfig());
+  }
+
+  onSearch(searchTerm: string) {
+    this.articlesListStore.searchArticles(searchTerm);
+  }
+
+  onClearSearch() {
+    this.articlesListStore.clearSearch();
     this.articlesListStore.loadArticles(this.$listConfig());
   }
 }

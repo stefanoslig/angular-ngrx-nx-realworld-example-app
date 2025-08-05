@@ -17,6 +17,7 @@ export interface Filters {
   favorited?: string;
   limit?: number;
   offset?: number;
+  search?: string;
 }
 
 export type ListType = 'ALL' | 'FEED';
