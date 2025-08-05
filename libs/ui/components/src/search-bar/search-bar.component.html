@@ -1,0 +1,21 @@
+<div class="search-container">
+  <form [formGroup]="searchForm" class="search-form">
+    <div class="input-group">
+      <input
+        type="text"
+        formControlName="search"
+        class="form-control"
+        placeholder="Search articles..."
+        aria-label="Search articles"
+      />
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="clearSearch()"
+        aria-label="Clear search"
+      >
+        <i class="ion-close"></i>
+      </button>
+    </div>
+  </form>
+</div> 

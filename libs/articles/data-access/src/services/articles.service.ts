@@ -55,6 +55,13 @@ export class ArticlesService {
 
   // TODO: remove any
   private toHttpParams(params: any) {
-    return Object.getOwnPropertyNames(params).reduce((p, key) => p.set(key, params[key]), new HttpParams());
+    let httpParams = new HttpParams();
+    Object.getOwnPropertyNames(params).forEach(key => {
+      const value = params[key];
+      if (value !== undefined && value !== null && value !== '') {
+        httpParams = httpParams.set(key, value);
+      }
+    });
+    return httpParams;
   }
 }

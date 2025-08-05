@@ -15,6 +15,7 @@ export interface Filters {
   tag?: string;
   author?: string;
   favorited?: string;
+  search?: string;
   limit?: number;
   offset?: number;
 }

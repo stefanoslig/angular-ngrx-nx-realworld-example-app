@@ -1,0 +1,43 @@
+.search-container {
+  margin-bottom: 1rem;
+}
+
+.search-form {
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.form-control {
+  flex: 1;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.btn {
+  border: none;
+  background: #f8f9fa;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background: #e9ecef;
+}
+
+.btn i {
+  font-size: 0.875rem;
+} 

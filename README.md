@@ -11,6 +11,7 @@
 - State management using NgRx Signals Store
 - DI using the inject function
 - Functional resolvers and guards
+- **Article Search Functionality** - Search articles by body text with debounced input
 
 > ### Angular, ngrx/platform, nrwl/nx codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
@@ -35,6 +36,7 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
 - CRUD Articles
 - CR\*D Comments on articles (no updating required)
 - GET and display paginated lists of articles
+- **Search articles by body text** - New search functionality with debounced input
 - Favorite articles
 - Follow other users
 
@@ -42,6 +44,7 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
 
 - Home page (URL: /#/ )
   - List of tags
+  - **Search bar for articles** - Search articles by body text
   - List of articles pulled from either Feed, Global, or by Tag
   - Pagination for list of articles
 - Sign in/Sign up pages (URL: /#/login, /#/register )
@@ -57,6 +60,24 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
 - Profile page (URL: /#/profile/:username, /#/profile/:username/favorites )
   - Show basic user info
   - List of articles populated from author's created articles or author's favorited articles
+
+## Search Functionality
+
+The application now includes a search feature that allows users to search articles by their body text. The search functionality includes:
+
+- **Debounced Input**: Search is triggered 300ms after the user stops typing to avoid excessive API calls
+- **Real-time Results**: Search results update automatically as you type
+- **Clear Search**: Users can clear the search with a dedicated clear button
+- **Server-side Search**: The search parameter is passed to the backend API for server-side filtering
+- **Responsive Design**: The search bar is fully responsive and matches the application's design
+
+### How to Use Search
+
+1. Navigate to the home page
+2. Look for the search bar below the feed toggle tabs
+3. Type your search term in the input field
+4. Results will update automatically after you stop typing
+5. Use the clear button (X) to reset the search
 
 ## Commands
 

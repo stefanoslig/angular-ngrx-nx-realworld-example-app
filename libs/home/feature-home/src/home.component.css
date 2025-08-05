@@ -5,3 +5,127 @@
 .tag-pill {
   cursor: pointer;
 }
+
+.home-page .banner {
+  background: #5cb85c;
+  box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
+}
+
+.home-page .banner h1 {
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 700 !important;
+  text-align: center;
+  font-size: 3.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.home-page .banner p {
+  font-size: 1.5rem;
+  font-weight: 300 !important;
+  text-align: center;
+  margin-bottom: 0px;
+  color: white;
+}
+
+.home-page .feed-toggle {
+  margin-bottom: -1px;
+}
+
+.home-page .feed-toggle .nav-pills > li > a {
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+
+.home-page .feed-toggle .nav-pills > li > a:hover {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #5cb85c;
+}
+
+.home-page .feed-toggle .nav-pills > li.active > a {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #5cb85c;
+}
+
+.home-page .feed-toggle .nav-pills > li > a {
+  color: #818a91;
+}
+
+.home-page .feed-toggle .nav-pills > li.active > a {
+  color: #5cb85c;
+}
+
+.home-page .feed-toggle .nav-pills > li > a {
+  margin-right: 0px;
+}
+
+.home-page .feed-toggle .nav-pills > li > a {
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+
+.home-page .feed-toggle .nav-pills > li > a:hover {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #5cb85c;
+}
+
+.home-page .feed-toggle .nav-pills > li.active > a {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #5cb85c;
+}
+
+.home-page .feed-toggle .nav-pills > li > a {
+  color: #818a91;
+}
+
+.home-page .feed-toggle .nav-pills > li.active > a {
+  color: #5cb85c;
+}
+
+.home-page .feed-toggle .nav-pills > li > a {
+  margin-right: 0px;
+}
+
+/* Search bar styles */
+.home-page .search-container {
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+
+.home-page .search-form {
+  max-width: 100%;
+}
+
+.home-page .input-group {
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.home-page .form-control {
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+}
+
+.home-page .form-control:focus {
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 0.2rem rgba(92, 184, 92, 0.25);
+}
+
+.home-page .btn {
+  border: 1px solid #ddd;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+.home-page .btn:hover {
+  background: #e9ecef;
+  color: #495057;
+}

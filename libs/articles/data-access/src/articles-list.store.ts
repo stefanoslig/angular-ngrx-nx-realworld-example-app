@@ -97,6 +97,19 @@ export const ArticlesListStore = signalStore(
       };
       patchState(store, { listConfig });
     },
+    setSearchTerm: (searchTerm: string) => {
+      const filters = {
+        ...store.listConfig.filters(),
+        search: searchTerm || undefined,
+        offset: 0, // Reset to first page when searching
+      };
+      const listConfig: ArticlesListConfig = {
+        ...store.listConfig(),
+        currentPage: 1, // Reset to first page when searching
+        filters,
+      };
+      patchState(store, { listConfig });
+    },
   })),
   withCallState({ collection: 'getArticles' }),
 );
