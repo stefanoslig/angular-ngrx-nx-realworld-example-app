@@ -1,9 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(nx test:*)",
-      "Bash(git add:*)"
-    ],
+    "allow": ["Bash(nx test:*)", "Bash(git add:*)"],
     "deny": []
   }
 }

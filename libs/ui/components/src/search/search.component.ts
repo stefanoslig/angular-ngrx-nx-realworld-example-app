@@ -29,33 +29,36 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
       </div>
       @if (currentSearch()) {
         <p class="text-muted small">
-          Searching for: "<strong>{{ currentSearch() }}</strong>"
+          Searching for: "<strong>{{ currentSearch() }}</strong
+          >"
         </p>
       }
     </div>
   `,
-  styles: [`
-    .search-container {
-      margin-bottom: 1rem;
-    }
-    
-    .form-control {
-      border-radius: 0.3rem;
-    }
-    
-    .search-container .btn {
-      font-size: 0.875rem;
-    }
-    
-    .search-container .text-muted {
-      margin-top: 0.5rem;
-      margin-bottom: 0;
-    }
-  `]
+  styles: [
+    `
+      .search-container {
+        margin-bottom: 1rem;
+      }
+
+      .form-control {
+        border-radius: 0.3rem;
+      }
+
+      .search-container .btn {
+        font-size: 0.875rem;
+      }
+
+      .search-container .text-muted {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+    `,
+  ],
 })
 export class SearchComponent {
   currentSearch = input<string>();
-  
+
   @Output() searchChange = new EventEmitter<string>();
   @Output() clearSearchEmitter = new EventEmitter<void>();
 
@@ -63,19 +66,14 @@ export class SearchComponent {
 
   constructor() {
     // Set up search with debouncing
-    this.searchControl.valueChanges
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged()
-      )
-      .subscribe(value => {
-        const searchTerm = value?.trim();
-        if (searchTerm && searchTerm.length >= 2) {
-          this.searchChange.emit(searchTerm);
-        } else if (!searchTerm) {
-          this.clearSearchEmitter.emit();
-        }
-      });
+    this.searchControl.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((value) => {
+      const searchTerm = value?.trim();
+      if (searchTerm && searchTerm.length >= 2) {
+        this.searchChange.emit(searchTerm);
+      } else if (!searchTerm) {
+        this.clearSearchEmitter.emit();
+      }
+    });
 
     // Sync input value with form control
     effect(() => {
