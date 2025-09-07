@@ -1,0 +1,29 @@
+{
+  "migrations": [
+    {
+      "version": "21.3.0-beta.3",
+      "requires": { "jest": ">=30.0.0" },
+      "description": "Rename the CLI option `testPathPattern` to `testPathPatterns`.",
+      "implementation": "./src/migrations/update-21-3-0/rename-test-path-pattern",
+      "package": "@nx/jest",
+      "name": "rename-test-path-pattern"
+    },
+    {
+      "version": "21.3.0-beta.3",
+      "requires": { "jest": ">=30.0.0" },
+      "description": "Replace removed matcher aliases in Jest v30 with their corresponding matcher",
+      "implementation": "./src/migrations/update-21-3-0/replace-removed-matcher-aliases",
+      "package": "@nx/jest",
+      "name": "replace-removed-matcher-aliases"
+    },
+    {
+      "cli": "nx",
+      "version": "21.3.0-beta.4",
+      "requires": { "@angular/core": ">=20.1.0" },
+      "description": "Update the @angular/cli package version to ~20.1.0.",
+      "factory": "./src/migrations/update-21-3-0/update-angular-cli",
+      "package": "@nx/angular",
+      "name": "update-angular-cli-version-20-1-0"
+    }
+  ]
+}
