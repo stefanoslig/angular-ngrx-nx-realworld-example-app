@@ -19,7 +19,7 @@
     <div class="container page">
       <div class="row article-content">
         <div class="col-md-12">
-          <div [innerHTML]="article.body | markdown"></div>
+          <div data-testid="article-body" [innerHTML]="article.body | markdown"></div>
         </div>
       </div>
       <hr />

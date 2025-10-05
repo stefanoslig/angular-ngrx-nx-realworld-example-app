@@ -14,5 +14,5 @@ export async function loginUserApi(userId: string, requestContext: APIRequestCon
     throw new Error(`Failed to login user: ${await response.text()}`);
   }
 
-  return response.json(); // Return response data if needed
+  return response.json();
 }

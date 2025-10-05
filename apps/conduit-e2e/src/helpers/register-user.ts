@@ -15,5 +15,5 @@ export async function registerUserApi(userId: string, requestContext: APIRequest
     throw new Error(`Failed to register user: ${await response.text()}`);
   }
 
-  return response.json(); // Return response data if needed
+  return response.json();
 }
