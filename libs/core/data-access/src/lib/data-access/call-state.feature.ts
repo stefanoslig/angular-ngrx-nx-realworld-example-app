@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Signal, computed } from '@angular/core';
 import { SignalStoreFeature, signalStoreFeature, withComputed, withState } from '@ngrx/signals';
 

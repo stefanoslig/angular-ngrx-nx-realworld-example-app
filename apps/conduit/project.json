@@ -78,6 +78,13 @@
       "options": {
         "buildTarget": "conduit:build"
       }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../coverage/apps/conduit"
+      }
     }
   }
 }

@@ -8,7 +8,6 @@
     "dbaeumer.vscode-eslint",
     "nrwl.angular-console",
     "stylelint.vscode-stylelint",
-    "firsttris.vscode-jest-runner",
     "ms-playwright.playwright"
   ],
   "unwantedRecommendations": []

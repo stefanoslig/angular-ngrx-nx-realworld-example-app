@@ -8,13 +8,10 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./tsconfig.editor.json"
     }
   ],
   "compilerOptions": {
-    "types": ["node", "jest"]
+    "types": ["node"]
   },
   "angularCompilerOptions": {
     "_enabledBlockTypes": ["if", "for", "switch", "defer"]
