@@ -31,7 +31,7 @@
     "@analogjs/vite-plugin-angular": "2.1.3",
     "@analogjs/vitest-angular": "2.1.3",
     "@angular-devkit/architect": "0.2100.4",
-    "@angular-devkit/build-angular": "21.0.4",
+    "@angular-devkit/build-angular": "21.1.3",
     "@angular-devkit/core": "21.0.4",
     "@angular-devkit/schematics": "21.0.4",
     "@angular-eslint/eslint-plugin": "21.1.0",
