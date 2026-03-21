@@ -9,7 +9,7 @@
       "executor": "@nx/vitest:test",
       "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "reportsDirectory": "../../../coverage/libs/articles/data-access"
+        "reportsDirectory": "{projectRoot}/../../../coverage/libs/articles/data-access"
       }
     }
   }

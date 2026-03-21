@@ -83,7 +83,7 @@
       "executor": "@nx/vitest:test",
       "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "reportsDirectory": "../../coverage/apps/conduit"
+        "reportsDirectory": "{projectRoot}/../../coverage/apps/conduit"
       }
     }
   }

@@ -52,3 +52,5 @@ playwright/.auth/
 
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+.claude/worktrees
+.claude/settings.local.json
