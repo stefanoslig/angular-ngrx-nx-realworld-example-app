@@ -3,12 +3,13 @@ import { RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { AuthStore } from '@realworld/auth/data-access';
 import { ProfileStore } from '@realworld/profile/data-access';
+import { AvatarComponent } from '@realworld/ui/components';
 
 @Component({
   selector: 'cdt-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [RouterModule, NgClass],
+  imports: [RouterModule, NgClass, AvatarComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {

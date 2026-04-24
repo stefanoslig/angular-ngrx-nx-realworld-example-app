@@ -1,0 +1,5 @@
+@if (showImage()) {
+  <img [src]="src()" [alt]="username()" (load)="onLoad()" (error)="onError()" [class]="'avatar avatar-' + size()" />
+} @else {
+  <span [class]="'avatar fallback avatar-' + size()" [attr.aria-hidden]="true">{{ initials() }}</span>
+}

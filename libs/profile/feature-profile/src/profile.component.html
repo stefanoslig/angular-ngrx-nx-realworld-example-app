@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="$image()" class="user-img" />
+          <cdt-avatar [src]="$image()" [username]="$username()" size="xl" />
           <h4 data-testid="article-author-profile" [hidden]="$profileLoading()">
             {{ $username() }}
           </h4>
