@@ -4,7 +4,12 @@
   </div>
   <div class="card-footer">
     <a class="comment-author" [routerLink]="['/profile', comment().author.username]">
-      <img [src]="comment().author.image" class="comment-author-img" />
+      <cdt-avatar
+        class="comment-author-img"
+        [src]="comment().author.image"
+        [username]="comment().author.username"
+        size="sm"
+      ></cdt-avatar>
     </a>
     &nbsp;
     <a class="comment-author" [routerLink]="['/profile', comment().author.username]">
@@ -14,7 +19,14 @@
       {{ comment().createdAt | date: 'longDate' }}
     </span>
     <span class="mod-options" [hidden]="currentUser().username !== comment().author.username">
-      <i class="ion-trash-a" (click)="delete.emit({ commentId: comment().id, slug: article().slug })"></i>
+      <button
+        type="button"
+        class="comment-delete-btn"
+        (click)="delete.emit({ commentId: comment().id, slug: article().slug })"
+        aria-label="Delete comment"
+      >
+        <cdt-icon name="trash-2" [size]="14"></cdt-icon>
+      </button>
     </span>
   </div>
 </div>

@@ -1,55 +1,59 @@
 <div class="auth-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">Sign in</h1>
-        <p class="text-xs-center">
-          <a [routerLink]="['/login']">Have an account?</a>
-        </p>
+  <div class="auth-card">
+    <aside class="auth-art">
+      <h2>Join<br />Conduit</h2>
+      <p>Create an account to publish your own articles and follow the writers whose work you love.</p>
+      <div class="auth-quote">"Writing is thinking made visible."</div>
+    </aside>
 
-        <cdt-list-errors></cdt-list-errors>
+    <section class="auth-form">
+      <h1>Create your account</h1>
+      <div class="auth-sub">Takes about thirty seconds.</div>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <input
-              formControlName="username"
-              type="text"
-              id="username"
-              placeholder="Username"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.username" />
-          </div>
-          <div class="form-group">
-            <input
-              formControlName="email"
-              type="email"
-              id="email"
-              placeholder="Email"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.email" />
-          </div>
-          <div class="form-group">
-            <input
-              formControlName="password"
-              type="password"
-              id="password"
-              placeholder="Password"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.password" />
-          </div>
-          <button
-            data-testid="sign-up"
-            class="btn btn-lg btn-primary pull-xs-right"
-            [disabled]="form.invalid || form.pending"
-            type="submit"
-          >
-            Sign up
-          </button>
-        </form>
-      </div>
-    </div>
+      <cdt-list-errors></cdt-list-errors>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input
+            formControlName="username"
+            type="text"
+            id="username"
+            placeholder="Username"
+            class="form-control form-control-lg"
+          />
+          <cdt-input-errors [control]="form.controls.username" />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="email"
+            type="email"
+            id="email"
+            placeholder="Email"
+            class="form-control form-control-lg"
+          />
+          <cdt-input-errors [control]="form.controls.email" />
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="password"
+            type="password"
+            id="password"
+            placeholder="Password"
+            class="form-control form-control-lg"
+          />
+          <cdt-input-errors [control]="form.controls.password" />
+        </div>
+        <button
+          data-testid="sign-up"
+          class="btn btn-lg btn-primary"
+          [disabled]="form.invalid || form.pending"
+          type="submit"
+        >
+          Sign up
+        </button>
+      </form>
+
+      <div class="auth-foot">Have an account? <a [routerLink]="['/login']">Sign in</a></div>
+    </section>
   </div>
 </div>

@@ -1,45 +1,49 @@
 <div class="auth-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">Sign in</h1>
-        <p class="text-xs-center">
-          <a [routerLink]="['/register']">Need an account?</a>
-        </p>
+  <div class="auth-card">
+    <aside class="auth-art">
+      <h2>Write, read,<br />connect</h2>
+      <p>A place for your best thinking. Sign in to keep up with the writers you care about.</p>
+      <div class="auth-quote">"Most of what I know I learned by reading."</div>
+    </aside>
 
-        <cdt-list-errors></cdt-list-errors>
+    <section class="auth-form">
+      <h1>Welcome back</h1>
+      <div class="auth-sub">Sign in to your account to continue.</div>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <input
-              formControlName="email"
-              type="email"
-              id="email"
-              placeholder="Email"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.email"></cdt-input-errors>
-          </div>
-          <div class="form-group">
-            <input
-              formControlName="password"
-              type="password"
-              id="password"
-              placeholder="Password"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.password"></cdt-input-errors>
-          </div>
-          <button
-            data-testid="sign-in"
-            class="btn btn-lg btn-primary pull-xs-right"
-            [disabled]="form.invalid || form.pending"
-            type="submit"
-          >
-            Sign in
-          </button>
-        </form>
-      </div>
-    </div>
+      <cdt-list-errors></cdt-list-errors>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input
+            formControlName="email"
+            type="email"
+            id="email"
+            placeholder="Email"
+            class="form-control form-control-lg"
+          />
+          <cdt-input-errors [control]="form.controls.email"></cdt-input-errors>
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="password"
+            type="password"
+            id="password"
+            placeholder="Password"
+            class="form-control form-control-lg"
+          />
+          <cdt-input-errors [control]="form.controls.password"></cdt-input-errors>
+        </div>
+        <button
+          data-testid="sign-in"
+          class="btn btn-lg btn-primary"
+          [disabled]="form.invalid || form.pending"
+          type="submit"
+        >
+          Sign in
+        </button>
+      </form>
+
+      <div class="auth-foot">New here? <a [routerLink]="['/register']">Create an account</a></div>
+    </section>
   </div>
 </div>

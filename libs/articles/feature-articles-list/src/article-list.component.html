@@ -9,7 +9,7 @@
     >
     </cdt-article-list-item>
   } @empty {
-    <div>No articles are here... yet.</div>
+    <div class="empty-feed-message">No articles are here... yet.</div>
   }
 
   <cdt-pager
@@ -18,5 +18,7 @@
     [totalPages]="$totalPages()"
   ></cdt-pager>
 } @else {
-  <div>Loading articles...</div>
+  @for (_ of [1, 2, 3]; track $index) {
+    <cdt-article-card-skeleton></cdt-article-card-skeleton>
+  }
 }

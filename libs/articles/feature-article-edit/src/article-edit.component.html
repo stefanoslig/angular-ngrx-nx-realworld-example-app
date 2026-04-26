@@ -1,61 +1,79 @@
-<div class="editor-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-10 offset-md-1 col-xs-12">
-        <cdt-list-errors></cdt-list-errors>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <fieldset class="form-group">
-            <input
-              formControlName="title"
-              type="text"
-              placeholder="Article Title"
-              class="form-control form-control-lg"
-              data-testid="title-input"
-            />
-            <cdt-input-errors data-testid="title-input-error" [control]="form.controls.title" />
-          </fieldset>
-          <fieldset class="form-group">
-            <input
-              formControlName="description"
-              type="text"
-              placeholder="What's this article about?"
-              class="form-control form-control-lg"
-              data-testid="description-input"
-            />
-            <cdt-input-errors data-testid="description-input-error" [control]="form.controls.description" />
-          </fieldset>
-          <fieldset class="form-group">
-            <textarea
-              formControlName="body"
-              rows="5"
-              type="text"
-              placeholder="Write your article (in markdown)"
-              class="form-control form-control-lg"
-              data-testid="body-textarea"
-            ></textarea>
-            <cdt-input-errors data-testid="body-textarea-error" [control]="form.controls.body" />
-          </fieldset>
-          <fieldset class="form-group">
-            <input
-              formControlName="tagList"
-              type="text"
-              placeholder="Enter Tags"
-              class="form-control form-control-lg"
-              data-testid="tags-textarea"
-            />
-          </fieldset>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="editor-page">
+  <div class="editor-layout">
+    <div class="editor-write">
+      <cdt-list-errors></cdt-list-errors>
 
-          <button
-            data-testid="edit-button-container"
-            class="btn btn-lg btn-primary"
-            [disabled]="form.invalid || form.pending"
-            type="submit"
-            data-testid="publish-article-button"
-          >
-            Publish Article
-          </button>
-        </form>
+      <input
+        formControlName="title"
+        type="text"
+        placeholder="Article title..."
+        class="editor-title-input"
+        data-testid="title-input"
+      />
+      <cdt-input-errors data-testid="title-input-error" [control]="form.controls.title" />
+
+      <input
+        formControlName="description"
+        type="text"
+        placeholder="What's this article about?"
+        class="editor-subtitle-input"
+        data-testid="description-input"
+      />
+      <cdt-input-errors data-testid="description-input-error" [control]="form.controls.description" />
+
+      <textarea
+        formControlName="body"
+        rows="12"
+        placeholder="Write your article (in markdown)..."
+        class="editor-body-input"
+        data-testid="body-textarea"
+      ></textarea>
+      <cdt-input-errors data-testid="body-textarea-error" [control]="form.controls.body" />
+
+      <div class="chip-input-wrapper" data-testid="tags-textarea-wrapper">
+        @for (tag of tags(); track tag; let i = $index) {
+          <cdt-tag-chip [tag]="tag" variant="default">
+            <button type="button" class="chip-remove" aria-label="Remove tag" (click)="removeTag(i)">×</button>
+          </cdt-tag-chip>
+        }
+        <input
+          [formControl]="tagInput"
+          type="text"
+          placeholder="Add a tag — press Enter"
+          class="chip-text-input"
+          data-testid="tags-textarea"
+          (keydown)="onTagKey($event)"
+        />
       </div>
     </div>
+
+    <aside class="editor-preview" aria-label="Live preview">
+      <div class="preview-label">Live preview</div>
+      @if ($previewTitle(); as title) {
+        <div class="preview-title">{{ title }}</div>
+      }
+      @if ($previewSubtitle(); as subtitle) {
+        <div class="preview-subtitle">{{ subtitle }}</div>
+      }
+      @if ($previewBody(); as body) {
+        <div class="preview-body" [innerHTML]="body | markdown"></div>
+      } @else if (!$previewHasContent()) {
+        <div class="preview-body" style="color: var(--ink-400); font-style: italic">
+          Start writing — your preview will appear here.
+        </div>
+      }
+    </aside>
   </div>
-</div>
+
+  <div class="editor-footer">
+    <a class="btn btn-outline-secondary" routerLink="/">Cancel</a>
+    <button
+      data-testid="publish-article-button"
+      class="btn btn-primary"
+      [disabled]="form.invalid || form.pending"
+      type="submit"
+    >
+      Publish Article
+    </button>
+  </div>
+</form>

@@ -1,0 +1,6 @@
+:host {
+  display: block;
+  width: var(--cdt-skeleton-width, 100%);
+  height: var(--cdt-skeleton-height, 1em);
+  border-radius: var(--cdt-skeleton-radius, 6px);
+}

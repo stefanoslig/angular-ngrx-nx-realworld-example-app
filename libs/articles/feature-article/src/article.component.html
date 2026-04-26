@@ -1,59 +1,98 @@
 @if ($article(); as article) {
   <div class="article-page">
-    <div class="banner">
-      <div class="container">
-        <h1 data-testid="article-title">{{ article.title }}</h1>
-        <cdt-article-meta
-          [article]="article"
-          (follow)="follow($event)"
-          (unfollow)="unfollow($event)"
-          (favorite)="favorite($event)"
-          (unfavorite)="unfavorite($event)"
-          (delete)="delete($event)"
-          [canModify]="$canModify()"
+    <div class="article-layout">
+      <aside class="article-rail" aria-label="Article actions">
+        <button
+          type="button"
+          class="rail-btn"
+          [class.active]="article.favorited"
+          (click)="onRailFavorite()"
+          [attr.aria-pressed]="article.favorited"
+          aria-label="Favorite article"
         >
-        </cdt-article-meta>
-      </div>
-    </div>
+          <cdt-icon name="heart" [size]="18"></cdt-icon>
+        </button>
+        <div class="rail-count">{{ article.favoritesCount }}</div>
 
-    <div class="container page">
-      <div class="row article-content">
-        <div class="col-md-12">
-          <div data-testid="article-body" [innerHTML]="article.body | markdown"></div>
+        <button type="button" class="rail-btn" (click)="onRailComment()" aria-label="Jump to comments">
+          <cdt-icon name="message-circle" [size]="18"></cdt-icon>
+        </button>
+        <div class="rail-count">{{ $comments().length }}</div>
+
+        <button type="button" class="rail-btn" (click)="onRailShare()" aria-label="Share article">
+          <cdt-icon name="share-2" [size]="18"></cdt-icon>
+        </button>
+        @if (shareTooltip(); as msg) {
+          <div class="rail-count" role="status" aria-live="polite">{{ msg }}</div>
+        }
+      </aside>
+
+      <article class="article-content">
+        <div class="article-kicker">
+          {{ $readingTime() }} min read
+          @if (article.tagList.length) {
+            · {{ article.tagList[0] }}
+          }
         </div>
-      </div>
-      <hr />
-      <div class="article-actions">
-        <cdt-article-meta
-          [article]="article"
-          (follow)="follow($event)"
-          (unfollow)="unfollow($event)"
-          (favorite)="favorite($event)"
-          (unfavorite)="unfavorite($event)"
-          (delete)="delete($event)"
-          [canModify]="$canModify()"
-        ></cdt-article-meta>
-      </div>
+        <h1 data-testid="article-title">{{ article.title }}</h1>
 
-      <div class="row">
-        <div class="col-xs-12 col-md-8 offset-md-2">
+        <div class="article-author-row">
+          <cdt-article-meta
+            [article]="article"
+            (follow)="follow($event)"
+            (unfollow)="unfollow($event)"
+            (favorite)="favorite($event)"
+            (unfavorite)="unfavorite($event)"
+            (delete)="delete($event)"
+            [canModify]="$canModify()"
+          >
+          </cdt-article-meta>
+        </div>
+
+        <div class="article-body" data-testid="article-body" [innerHTML]="article.body | markdown"></div>
+
+        <hr />
+
+        <div class="article-actions">
+          <cdt-article-meta
+            [article]="article"
+            (follow)="follow($event)"
+            (unfollow)="unfollow($event)"
+            (favorite)="favorite($event)"
+            (unfavorite)="unfavorite($event)"
+            (delete)="delete($event)"
+            [canModify]="$canModify()"
+          ></cdt-article-meta>
+        </div>
+
+        <section id="comments-section" class="comments-section">
+          <h2 class="comments-heading">Comments</h2>
+
           @if ($isAuthenticated()) {
             <cdt-add-comment [article]="article" [currentUser]="$currentUser()" (submitComment)="submit($event)" />
           } @else {
-            <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
-            this article.
+            <div class="comment-signin-hint">
+              <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on
+              this article.
+            </div>
           }
 
-          @for (comment of $comments(); track comment.id) {
-            <cdt-article-comment
-              [currentUser]="$currentUser()"
-              (delete)="deleteComment($event)"
-              [article]="article"
-              [comment]="comment"
-            ></cdt-article-comment>
+          @if ($commentsLoading()) {
+            @for (_ of [1, 2]; track $index) {
+              <cdt-comment-skeleton></cdt-comment-skeleton>
+            }
+          } @else {
+            @for (comment of $comments(); track comment.id) {
+              <cdt-article-comment
+                [currentUser]="$currentUser()"
+                (delete)="deleteComment($event)"
+                [article]="article"
+                [comment]="comment"
+              ></cdt-article-comment>
+            }
           }
-        </div>
-      </div>
+        </section>
+      </article>
     </div>
   </div>
 }

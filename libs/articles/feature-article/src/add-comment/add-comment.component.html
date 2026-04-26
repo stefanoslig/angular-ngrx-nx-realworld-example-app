@@ -14,7 +14,12 @@
       <cdt-input-errors [control]="form.controls.comment" />
     </fieldset>
     <div class="card-footer">
-      <img [src]="currentUser().image" class="comment-author-img" />
+      <cdt-avatar
+        class="comment-author-img"
+        [src]="currentUser().image"
+        [username]="currentUser().username"
+        size="sm"
+      ></cdt-avatar>
       <button (click)="submitComment.emit(form.controls.comment.value)" class="btn btn-sm btn-primary" type="submit">
         Post Comment
       </button>

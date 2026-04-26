@@ -3,11 +3,12 @@ import { Article, User } from '@realworld/core/api-types';
 import { Comment } from '@realworld/articles/data-access';
 import { RouterModule } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { AvatarComponent, IconComponent } from '@realworld/ui/components';
 
 @Component({
   selector: 'cdt-article-comment',
   templateUrl: './article-comment.component.html',
-  imports: [DatePipe, RouterModule],
+  imports: [DatePipe, RouterModule, AvatarComponent, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleCommentComponent {

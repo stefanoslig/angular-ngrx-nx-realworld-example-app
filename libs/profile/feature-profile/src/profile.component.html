@@ -1,66 +1,66 @@
 <div class="profile-page">
-  <div class="user-info">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="$image()" class="user-img" />
-          <h4 data-testid="article-author-profile" [hidden]="$profileLoading()">
-            {{ $username() }}
-          </h4>
-          <p>{{ $bio() }}</p>
-          <button
-            [hidden]="$isUser()"
-            class="btn btn-sm action-btn"
-            [ngClass]="{
-              'btn-outline-secondary': !$following(),
-              'btn-secondary': $following()
-            }"
-            (click)="toggleFollowing()"
-          >
-            <i class="ion-plus-round"></i>
-            &nbsp; {{ $following() ? 'Unfollow' : 'Follow' }}
-            {{ $username() }}
-          </button>
-          <a
-            [routerLink]="['/settings']"
-            [hidden]="$isUser() === false"
-            class="btn btn-sm btn-outline-secondary action-btn"
-          >
-            <i class="ion-gear-a"></i> Edit Profile Settings
-          </a>
+  <header class="profile-hero">
+    <div class="profile-hero-inner">
+      <cdt-avatar class="user-img" [src]="$image()" [username]="$username()" size="xl"></cdt-avatar>
+      <div class="profile-bio">
+        <h1 data-testid="article-author-profile" [hidden]="$profileLoading()">
+          {{ $username() }}
+        </h1>
+        <div class="handle">{{ '@' + $username() }}</div>
+        <p>{{ $bio() }}</p>
+      </div>
+      <div class="profile-stats" aria-label="Profile stats">
+        <div class="stat-row">
+          <span class="stat-label">Articles</span>
+          <span class="stat-count">{{ $articlesCount() }}</span>
         </div>
       </div>
     </div>
+  </header>
+
+  <div class="profile-actions">
+    <button
+      [hidden]="$isUser()"
+      class="btn btn-sm"
+      [ngClass]="{
+        'btn-outline-secondary': !$following(),
+        'btn-secondary': $following()
+      }"
+      (click)="toggleFollowing()"
+    >
+      <cdt-icon name="plus" [size]="14"></cdt-icon>
+      &nbsp; {{ $following() ? 'Unfollow' : 'Follow' }}
+      {{ $username() }}
+    </button>
+    <a [routerLink]="['/settings']" [hidden]="$isUser() === false" class="btn btn-sm btn-outline-secondary">
+      <cdt-icon name="settings" [size]="14"></cdt-icon> Edit Profile Settings
+    </a>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-md-10 offset-md-1">
-        <div class="articles-toggle">
-          <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                [routerLink]="['/profile', $username()]"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                >My Articles</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                [routerLink]="['/profile', $username(), 'favorites']"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                >Favorited Articles</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <router-outlet></router-outlet>
-      </div>
+  <div class="profile-container">
+    <div class="articles-toggle">
+      <ul class="nav nav-pills outline-active">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/profile', $username()]"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >My Articles</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/profile', $username(), 'favorites']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Favorited Articles</a
+          >
+        </li>
+      </ul>
     </div>
+
+    <router-outlet></router-outlet>
   </div>
 </div>

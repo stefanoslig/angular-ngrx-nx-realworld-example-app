@@ -1,71 +1,68 @@
 <div class="settings-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">Your Settings</h1>
-        <cdt-list-errors />
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <fieldset class="form-group">
-            <input
-              formControlName="image"
-              type="text"
-              id="image"
-              placeholder="URL of profile picture"
-              class="form-control form-control-lg"
-            />
-          </fieldset>
-          <fieldset class="form-group required">
-            <input
-              formControlName="username"
-              type="text"
-              id="username"
-              placeholder="Your Name"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.username" />
-          </fieldset>
-          <fieldset class="form-group">
-            <textarea
-              class="form-control form-control-lg"
-              rows="5"
-              id="bio"
-              formControlName="bio"
-              placeholder="Short bio about you"
-            >
-            </textarea>
-          </fieldset>
-          <fieldset class="form-group required">
-            <input
-              formControlName="email"
-              type="email"
-              id="email"
-              placeholder="Email"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.email" />
-          </fieldset>
-          <fieldset class="form-group required">
-            <input
-              formControlName="password"
-              type="password"
-              id="password"
-              placeholder="New Password"
-              class="form-control form-control-lg"
-            />
-            <cdt-input-errors [control]="form.controls.password" />
-          </fieldset>
-          <button
-            data-testid="edit-button-container"
-            class="btn btn-lg btn-primary"
-            [disabled]="form.invalid || form.pending"
-            type="submit"
-          >
-            Update Settings
-          </button>
-        </form>
-        <hr />
-        <button class="btn btn-outline-danger" (click)="logout()">Or click here to logout.</button>
-      </div>
+  <h1>Settings</h1>
+  <div class="settings-sub">Manage your profile, account, and preferences.</div>
+
+  <cdt-list-errors />
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <section class="settings-section">
+      <h2>Profile</h2>
+      <div class="settings-section-desc">This is how others will see you on Conduit.</div>
+
+      <fieldset class="form-group">
+        <input
+          formControlName="image"
+          type="text"
+          id="image"
+          placeholder="URL of profile picture"
+          class="form-control"
+        />
+      </fieldset>
+      <fieldset class="form-group required">
+        <input formControlName="username" type="text" id="username" placeholder="Your username" class="form-control" />
+        <cdt-input-errors [control]="form.controls.username" />
+      </fieldset>
+      <fieldset class="form-group">
+        <textarea
+          class="form-control"
+          rows="5"
+          id="bio"
+          formControlName="bio"
+          placeholder="Short bio about you"
+        ></textarea>
+      </fieldset>
+    </section>
+
+    <section class="settings-section">
+      <h2>Account</h2>
+      <div class="settings-section-desc">Private — only you can see these.</div>
+
+      <fieldset class="form-group required">
+        <input formControlName="email" type="email" id="email" placeholder="Email" class="form-control" />
+        <cdt-input-errors [control]="form.controls.email" />
+      </fieldset>
+      <fieldset class="form-group required">
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          placeholder="New password (leave blank to keep current)"
+          class="form-control"
+        />
+        <cdt-input-errors [control]="form.controls.password" />
+      </fieldset>
+    </section>
+
+    <div class="settings-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="logout()">Log out</button>
+      <button
+        data-testid="edit-button-container"
+        class="btn btn-primary"
+        [disabled]="form.invalid || form.pending"
+        type="submit"
+      >
+        Save changes
+      </button>
     </div>
-  </div>
+  </form>
 </div>

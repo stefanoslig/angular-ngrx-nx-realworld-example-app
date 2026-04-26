@@ -1,0 +1,86 @@
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-16);
+  line-height: var(--lh-standard);
+  color: var(--ink-700);
+  background-color: var(--paper);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  margin-bottom: var(--sp-8);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  color: var(--ink-900);
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--fs-44);
+  font-weight: 700;
+}
+h2 {
+  font-size: var(--fs-32);
+}
+h3 {
+  font-size: var(--fs-24);
+}
+h4 {
+  font-size: var(--fs-20);
+}
+h5 {
+  font-size: var(--fs-18);
+}
+h6 {
+  font-size: var(--fs-16);
+}
+
+p {
+  margin-bottom: var(--sp-16);
+  color: var(--ink-700);
+}
+
+a {
+  color: var(--brand-500);
+  text-decoration: none;
+  background-color: transparent;
+  transition: color 150ms ease;
+  cursor: pointer;
+}
+
+a:focus,
+a:hover {
+  color: var(--brand-600);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--brand-400);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:not([href]):focus,
+a:not([href]):hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:not([href]):focus {
+  outline: none;
+}
+
+.logo-font {
+  font-family: var(--font-display);
+  font-weight: 600;
+}

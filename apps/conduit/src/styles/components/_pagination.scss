@@ -1,0 +1,65 @@
+.pagination {
+  display: inline-flex;
+  padding-left: 0;
+  margin-top: var(--sp-16);
+  margin-bottom: var(--sp-16);
+  gap: 0;
+  border-radius: var(--radius-md);
+}
+
+.page-item {
+  display: inline;
+}
+
+.page-item:first-child .page-link {
+  margin-left: 0;
+  border-bottom-left-radius: var(--radius-md);
+  border-top-left-radius: var(--radius-md);
+}
+
+.page-item:last-child .page-link {
+  border-bottom-right-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+.page-item.active .page-link,
+.page-item.active .page-link:focus,
+.page-item.active .page-link:hover {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+
+.page-item.disabled .page-link,
+.page-item.disabled .page-link:focus,
+.page-item.disabled .page-link:hover {
+  color: var(--ink-300);
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: var(--paper-raised);
+  border-color: var(--border);
+}
+
+.page-link {
+  position: relative;
+  float: left;
+  padding: var(--sp-8) var(--sp-12);
+  margin-left: -1px;
+  color: var(--brand-500);
+  text-decoration: none;
+  background-color: var(--paper-raised);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+}
+
+.page-link:focus,
+.page-link:hover {
+  color: var(--brand-600);
+  background-color: var(--paper-sunken);
+  border-color: var(--border-strong);
+}

@@ -1,0 +1,151 @@
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: var(--sp-8) var(--sp-16);
+  font-size: var(--fs-14);
+  border-radius: var(--radius-pill);
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--brand-400);
+  outline-offset: 2px;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:focus,
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn.disabled,
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+a.btn.disabled,
+fieldset[disabled] a.btn {
+  pointer-events: none;
+}
+
+// Primary
+.btn-primary {
+  color: #fff;
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active {
+  color: #fff;
+  background-color: var(--brand-600);
+  border-color: var(--brand-600);
+}
+
+.btn-primary.disabled:hover,
+.btn-primary:disabled:hover {
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+
+// Outline (also used for the legacy .btn-outline-primary class)
+.btn-outline-primary {
+  color: var(--brand-500);
+  background-color: transparent;
+  border-color: var(--brand-500);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary.focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active {
+  color: #fff;
+  background-color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+
+.btn-outline-primary.disabled:hover,
+.btn-outline-primary:disabled:hover {
+  border-color: var(--brand-400);
+}
+
+// Outline secondary (low-emphasis — used by Edit Profile / Follow)
+.btn-secondary,
+.btn-outline-secondary {
+  color: var(--ink-500);
+  background-color: transparent;
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  color: var(--ink-900);
+  background-color: var(--paper-sunken);
+  border-color: var(--ink-400);
+}
+
+.btn-secondary.disabled:hover,
+.btn-secondary:disabled:hover,
+.btn-outline-secondary.disabled:hover,
+.btn-outline-secondary:disabled:hover {
+  color: var(--ink-500);
+  background-color: transparent;
+  border-color: var(--border-strong);
+}
+
+// Danger (delete actions)
+.btn-outline-danger {
+  color: var(--danger);
+  background-color: transparent;
+  border-color: var(--danger);
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus,
+.btn-outline-danger.focus,
+.btn-outline-danger:active,
+.btn-outline-danger.active {
+  color: #fff;
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn-outline-danger.disabled:hover,
+.btn-outline-danger:disabled:hover {
+  color: var(--danger);
+  background-color: transparent;
+  border-color: var(--danger);
+}
+
+// Sizes
+.btn-sm {
+  padding: var(--sp-4) var(--sp-12);
+  font-size: var(--fs-12);
+}
+
+.btn-lg {
+  padding: var(--sp-12) var(--sp-24);
+  font-size: var(--fs-16);
+}

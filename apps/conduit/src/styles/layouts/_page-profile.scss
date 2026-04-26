@@ -1,0 +1,102 @@
+.profile-page {
+  display: block;
+}
+
+.profile-page .profile-hero {
+  background: var(--paper-sunken);
+  padding: var(--sp-32) var(--sp-16);
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-page .profile-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: var(--sp-24);
+  align-items: center;
+}
+
+.profile-page .profile-bio {
+  min-width: 0;
+}
+
+.profile-page .profile-bio h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-32);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-4);
+  letter-spacing: -0.01em;
+}
+
+.profile-page .profile-bio .handle {
+  font-size: var(--fs-14);
+  color: var(--ink-400);
+  margin-bottom: var(--sp-8);
+}
+
+.profile-page .profile-bio p {
+  font-size: var(--fs-14);
+  color: var(--ink-500);
+  line-height: 1.5;
+  max-width: 480px;
+  margin-bottom: 0;
+}
+
+.profile-page .profile-stats {
+  background: var(--paper-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-16);
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.profile-page .profile-stats .stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-14);
+}
+
+.profile-page .profile-stats .stat-label {
+  color: var(--ink-500);
+}
+
+.profile-page .profile-stats .stat-count {
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.profile-page .profile-actions {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--sp-16) var(--sp-16);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: var(--sp-8);
+}
+
+.profile-page .profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--sp-16);
+}
+
+.profile-page .articles-toggle {
+  padding: var(--sp-16) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 720px) {
+  .profile-page .profile-hero-inner {
+    grid-template-columns: 88px 1fr;
+  }
+  .profile-page .profile-stats {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

@@ -1,0 +1,30 @@
+footer {
+  background: var(--paper);
+  border-top: 1px solid var(--border);
+  margin-top: var(--sp-48);
+  padding: var(--sp-16) 0;
+  width: 100%;
+}
+
+footer .logo-font {
+  color: var(--ink-900);
+}
+
+footer a {
+  color: var(--ink-900);
+}
+
+footer .attribution {
+  margin-left: var(--sp-8);
+  font-size: var(--fs-12);
+  color: var(--ink-400);
+  font-weight: 300;
+}
+
+footer > .container {
+  display: flex;
+  align-items: center;
+  max-width: var(--content-width);
+  margin-left: auto;
+  margin-right: auto;
+}

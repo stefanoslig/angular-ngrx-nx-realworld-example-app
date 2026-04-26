@@ -1,0 +1,277 @@
+.article-page {
+  display: block;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 var(--sp-16);
+}
+
+.article-page .article-layout {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: var(--sp-24);
+  padding: var(--sp-32) 0;
+}
+
+.article-page .article-rail {
+  position: sticky;
+  top: 96px; // clears the sticky navbar
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  align-items: center;
+}
+
+.article-page .rail-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--paper-raised);
+  color: var(--ink-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+.article-page .rail-btn:hover {
+  color: var(--brand-500);
+  border-color: var(--brand-500);
+}
+
+.article-page .rail-btn.active {
+  background-color: var(--brand-500);
+  color: #fff;
+  border-color: var(--brand-500);
+}
+
+.article-page .rail-count {
+  font-size: var(--fs-12);
+  color: var(--ink-400);
+  margin-top: calc(-1 * var(--sp-8));
+}
+
+.article-page .article-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--fs-12);
+  color: var(--brand-500);
+  font-weight: 700;
+  margin-bottom: var(--sp-12);
+}
+
+.article-page .article-content {
+  min-width: 0;
+}
+
+.article-page h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-44);
+  line-height: var(--lh-tight);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-16);
+  letter-spacing: -0.02em;
+}
+
+.article-page .article-author-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-12);
+  padding-bottom: var(--sp-16);
+  margin-bottom: var(--sp-24);
+  border-bottom: 1px solid var(--border);
+}
+
+.article-page .article-body {
+  font-family: var(--font-display);
+  font-size: var(--fs-18);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-700);
+}
+
+.article-page .article-body p {
+  margin-bottom: var(--sp-24);
+}
+
+.article-page .article-body h1,
+.article-page .article-body h2,
+.article-page .article-body h3,
+.article-page .article-body h4,
+.article-page .article-body h5,
+.article-page .article-body h6 {
+  font-family: var(--font-display);
+  color: var(--ink-900);
+  font-weight: 600;
+  margin: var(--sp-32) 0 var(--sp-16) 0;
+}
+
+.article-page .article-body ul,
+.article-page .article-body ol {
+  margin-bottom: var(--sp-24);
+  padding-left: var(--sp-32);
+}
+
+.article-page .article-body ul {
+  list-style: disc;
+}
+
+.article-page .article-body ol {
+  list-style: decimal;
+}
+
+.article-page .article-body pre,
+.article-page .article-body code {
+  font-family: var(--font-mono);
+  background-color: var(--paper-sunken);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+}
+
+.article-page .article-body pre {
+  padding: var(--sp-16);
+  overflow-x: auto;
+}
+
+.article-page .article-body pre code {
+  background: none;
+  padding: 0;
+}
+
+.article-page .article-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-12);
+  margin-top: var(--sp-32);
+  padding-top: var(--sp-24);
+  border-top: 1px solid var(--border);
+}
+
+.article-page .comments-section {
+  margin-top: var(--sp-48);
+}
+
+.article-page .comments-heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-24);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-16);
+}
+
+.article-page .comment-signin-hint {
+  padding: var(--sp-16) 0;
+  color: var(--ink-500);
+  font-size: var(--fs-14);
+}
+
+.article-page .comment-form .card-footer {
+  background: transparent;
+}
+
+@media (max-width: 720px) {
+  .article-page .article-layout {
+    grid-template-columns: 1fr;
+  }
+  .article-page .article-rail {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    order: 99;
+    gap: var(--sp-24);
+    border-top: 1px solid var(--border);
+    padding-top: var(--sp-16);
+    margin-top: var(--sp-24);
+  }
+  .article-page .rail-count {
+    margin-top: 0;
+  }
+}
+
+// Comment card detail styles (ported from _pages-legacy.scss).
+.article-page .card {
+  border: 1px solid var(--border);
+}
+
+.article-page .card .card-footer {
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-12);
+  font-weight: 400;
+}
+
+.article-page .card .comment-author-img {
+  display: inline-block;
+  vertical-align: middle;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.article-page .card .comment-author {
+  display: inline-block;
+  vertical-align: middle;
+  color: var(--ink-900);
+}
+
+.article-page .card .date-posted {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: var(--sp-4);
+  color: var(--ink-400);
+}
+
+.article-page .card .mod-options {
+  float: right;
+  color: var(--ink-700);
+  font-size: var(--fs-16);
+}
+
+.article-page .card .mod-options .comment-delete-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 0;
+  margin-left: var(--sp-4);
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 150ms ease;
+}
+
+.article-page .card .mod-options .comment-delete-btn:hover {
+  opacity: 1;
+}
+
+.article-page .card .mod-options .comment-delete-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+  opacity: 1;
+}
+
+// Add-comment form textarea resets (ported from _pages-legacy.scss).
+.article-page .comment-form .card-block {
+  padding: 0;
+}
+
+.article-page .comment-form .card-block textarea {
+  border: 0;
+  padding: var(--sp-24);
+  background-color: var(--paper-raised);
+}
+
+.article-page .comment-form .card-footer .btn {
+  font-weight: 700;
+  float: right;
+}
+
+.article-page .comment-form .card-footer .comment-author-img {
+  height: 30px;
+  width: 30px;
+}

@@ -1,0 +1,52 @@
+.settings-page {
+  display: block;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--sp-32) var(--sp-16);
+}
+
+.settings-page h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-32);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-4);
+  letter-spacing: -0.01em;
+}
+
+.settings-page .settings-sub {
+  font-size: var(--fs-14);
+  color: var(--ink-500);
+  margin-bottom: var(--sp-24);
+}
+
+.settings-page .settings-section {
+  background: var(--paper-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-24);
+  margin-bottom: var(--sp-16);
+}
+
+.settings-page .settings-section h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-18);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-4);
+}
+
+.settings-page .settings-section-desc {
+  font-size: var(--fs-12);
+  color: var(--ink-400);
+  margin-bottom: var(--sp-16);
+}
+
+.settings-page .settings-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--sp-24);
+  padding-top: var(--sp-16);
+  border-top: 1px solid var(--border);
+}

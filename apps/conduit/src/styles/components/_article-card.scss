@@ -1,0 +1,105 @@
+// Shared article-card styles — used on the home feed, profile feed, and anywhere
+// <cdt-article-list-item> renders.
+
+.article-preview {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: var(--sp-16);
+  align-items: flex-start;
+  border-top: 1px solid var(--border);
+  padding: var(--sp-24) 0;
+  transition: background-color 200ms ease;
+}
+
+.article-preview:hover {
+  background-color: var(--paper-sunken);
+}
+
+cdt-article-list-item:first-of-type .article-preview {
+  border-top: none;
+}
+
+.article-preview .article-card-main {
+  min-width: 0;
+}
+
+.article-preview .article-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  margin-bottom: var(--sp-12);
+}
+
+.article-preview .article-meta .info {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.article-preview .article-meta .author {
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.article-preview .article-meta .date {
+  color: var(--ink-400);
+  font-size: var(--fs-12);
+}
+
+.article-preview .preview-link {
+  display: block;
+  color: inherit;
+}
+
+.article-preview .preview-link h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-20);
+  line-height: var(--lh-tight);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-4);
+}
+
+.article-preview .preview-link p {
+  font-size: var(--fs-14);
+  color: var(--ink-500);
+  line-height: 1.5;
+  margin-bottom: var(--sp-12);
+}
+
+.article-preview .tag-list {
+  display: inline-block;
+  margin: 0;
+}
+
+.article-preview .tag-list li {
+  display: inline-block;
+  margin-right: var(--sp-4);
+}
+
+// Favorite button floats right in the article meta row.
+.article-preview .article-meta .btn {
+  margin-left: auto;
+}
+
+// Thumbnail square — gradient derived from the article slug.
+.article-preview .article-thumb {
+  width: 100px;
+  height: 80px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--brand-100), var(--brand-500));
+}
+
+@media (max-width: 540px) {
+  .article-preview {
+    grid-template-columns: 1fr;
+  }
+  .article-preview .article-thumb {
+    display: none;
+  }
+}
+
+.empty-feed-message {
+  padding: var(--sp-32) 0;
+  color: var(--ink-400);
+  text-align: center;
+}

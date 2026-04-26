@@ -1,0 +1,19 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+app-root > *:not(cdt-footer) {
+  flex-shrink: 0;
+}
+
+app-root > cdt-footer {
+  margin-top: auto;
+}

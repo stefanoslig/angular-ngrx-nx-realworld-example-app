@@ -47,6 +47,10 @@ export const appConfig: ApplicationConfig = {
           path: 'profile',
           loadChildren: () => import('@realworld/profile/feature-profile').then((profile) => profile.PROFILE_ROUTES),
         },
+        {
+          path: '**',
+          loadComponent: () => import('./layout/not-found/not-found.component').then((m) => m.NotFoundComponent),
+        },
       ],
       withViewTransitions(),
       withComponentInputBinding(),

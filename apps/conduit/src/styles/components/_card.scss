@@ -1,0 +1,46 @@
+.card {
+  position: relative;
+  display: block;
+  margin-bottom: var(--sp-12);
+  background-color: var(--paper-raised);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition:
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.card-block {
+  padding: var(--sp-24);
+}
+
+.card-block::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-footer {
+  padding: var(--sp-12) var(--sp-24);
+  background-color: var(--paper-sunken);
+  border-top: 1px solid var(--border);
+}
+
+.card-footer::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}

@@ -11,39 +11,35 @@
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
+          <a class="nav-link nav-signup" routerLink="/register" routerLinkActive="active">Sign up</a>
         </li>
       </ul>
     } @else {
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
-          <!-- Add "active" class when you're on that page" -->
-          <a
-            class="nav-link active"
-            [routerLink]="['/']"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
+          <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
             >Home</a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/editor" routerLinkActive="active">
-            <i class="ion-compose"></i>&nbsp;New Post
+            <cdt-icon name="pen-line"></cdt-icon>&nbsp;New Post
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/settings" routerLinkActive="active">
-            <i class="ion-gear-a"></i>&nbsp;Settings
+            <cdt-icon name="settings"></cdt-icon>&nbsp;Settings
           </a>
         </li>
         <li class="nav-item">
           <a
             data-testid="loggedin-user"
-            class="nav-link"
+            class="nav-link nav-user"
             [routerLink]="['/profile', user().username]"
             routerLinkActive="active"
           >
-            {{ user().username }}
+            <cdt-avatar [src]="user().image" [username]="user().username" size="sm"></cdt-avatar>
+            <span>{{ user().username }}</span>
           </a>
         </li>
       </ul>

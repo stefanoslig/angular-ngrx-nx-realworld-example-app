@@ -1,0 +1,181 @@
+.nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: inline-block;
+  color: var(--ink-500);
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  text-decoration: none;
+  color: var(--ink-900);
+}
+
+.nav-link.disabled,
+.nav-link.disabled:focus,
+.nav-link.disabled:hover {
+  color: var(--ink-300);
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-pills .nav-item + .nav-item {
+  margin-left: var(--sp-4);
+}
+
+.nav-pills .nav-link {
+  display: block;
+  padding: var(--sp-8) var(--sp-16);
+  border-radius: var(--radius-pill);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.active:focus,
+.nav-pills .nav-link.active:hover {
+  color: #fff;
+  cursor: default;
+  background-color: var(--brand-500);
+}
+
+// Tab-style nav (used by feed toggle, profile tabs)
+.nav-pills.outline-active .nav-link {
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--ink-400);
+  padding: var(--sp-8) var(--sp-12);
+}
+
+.nav-pills.outline-active .nav-link:hover {
+  color: var(--ink-700);
+  background: transparent;
+}
+
+.nav-pills.outline-active .nav-link.active {
+  background: transparent;
+  border-bottom: 2px solid var(--brand-500);
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+// Navbar — sticky, blurred, modest shadow as you scroll.
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: var(--sp-12) var(--sp-16);
+  background-color: var(--paper-translucent);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar > .container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  padding-top: 0;
+  padding-bottom: var(--sp-4);
+  margin-right: var(--sp-32);
+  font-family: var(--font-display);
+  font-size: var(--fs-24);
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.navbar-brand:focus,
+.navbar-brand:hover {
+  text-decoration: none;
+  color: var(--ink-900);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.navbar-nav .nav-link {
+  display: block;
+  padding-top: var(--sp-8);
+  padding-bottom: var(--sp-8);
+}
+
+.navbar-nav .nav-link + .nav-link,
+.navbar-nav .nav-item + .nav-item {
+  margin-left: var(--sp-16);
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover {
+  color: var(--ink-900);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: var(--ink-500);
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: var(--ink-900);
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link:focus,
+.navbar-light .navbar-nav .active > .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.active:focus,
+.navbar-light .navbar-nav .nav-link.active:hover {
+  color: var(--ink-900);
+  font-weight: 600;
+}
+
+.nav-link .user-pic {
+  height: 26px;
+  border-radius: var(--radius-pill);
+  float: left;
+  margin-right: var(--sp-4);
+}
+
+.nav-signup {
+  color: #fff !important;
+  background: var(--brand-500);
+  border: 1px solid var(--brand-500);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-4) var(--sp-12) !important;
+  font-size: var(--fs-14);
+  line-height: 1.25rem;
+  font-weight: 600;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+}
+
+.nav-signup:hover,
+.nav-signup:focus {
+  color: #fff !important;
+  background: var(--brand-600);
+  border-color: var(--brand-600);
+}
+
+.nav-user {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+}

@@ -1,1 +1,10 @@
 export * from './pager/pager.component';
+export * from './icon/icon.component';
+export * from './avatar/avatar.component';
+export { getInitials, getAvatarColor, AVATAR_PALETTE } from './avatar/avatar.utils';
+export * from './skeleton/skeleton.component';
+export * from './skeleton/article-meta-skeleton.component';
+export * from './skeleton/article-card-skeleton.component';
+export * from './skeleton/comment-skeleton.component';
+export * from './tag-chip/tag-chip.component';
+export * from './reading-time/reading-time';

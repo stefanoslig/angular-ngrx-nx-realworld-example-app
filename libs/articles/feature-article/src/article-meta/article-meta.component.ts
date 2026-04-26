@@ -2,10 +2,11 @@ import { DatePipe, NgClass } from '@angular/common';
 import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Article } from '@realworld/core/api-types';
+import { AvatarComponent, IconComponent } from '@realworld/ui/components';
 @Component({
   selector: 'cdt-article-meta',
   templateUrl: './article-meta.component.html',
-  imports: [RouterModule, NgClass, DatePipe],
+  imports: [RouterModule, NgClass, DatePipe, AvatarComponent, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleMetaComponent {

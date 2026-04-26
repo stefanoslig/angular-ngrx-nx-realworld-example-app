@@ -1,53 +1,44 @@
 <div class="home-page">
-  <div class="banner">
-    <div class="container">
-      <h1 class="logo-font">conduit</h1>
-      <p>A place to share your knowledge.</p>
-    </div>
+  <div class="home-banner">
+    <h1 class="logo-font">conduit</h1>
+    <p>A place to share what you've been thinking about.</p>
   </div>
 
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="feed-toggle">
-          @if ({ listConfig: $listConfig() }; as model) {
-            <ul class="nav nav-pills outline-active">
-              <li class="nav-item">
-                <a [ngClass]="{ active: model.listConfig.type === 'FEED' }" class="nav-link" (click)="setListTo('FEED')"
-                  >Your Feed</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  data-testid="global-feed"
-                  [ngClass]="{
-                    active: model.listConfig.type === 'ALL' && !model.listConfig.filters.tag
-                  }"
-                  class="nav-link"
-                  (click)="setListTo('ALL')"
-                  >Global Feed</a
-                >
-              </li>
-              <li class="nav-item" [hidden]="!model.listConfig.filters.tag">
-                <a class="nav-link active">
-                  <i class="ion-pound"></i>
-                  {{ model.listConfig.filters.tag }}
-                </a>
-              </li>
-            </ul>
-          }
-        </div>
+  <div class="home-container">
+    @if ({ listConfig: $listConfig() }; as model) {
+      <ul class="nav nav-pills outline-active feed-toggle">
+        <li class="nav-item">
+          <a [ngClass]="{ active: model.listConfig.type === 'FEED' }" class="nav-link" (click)="setListTo('FEED')"
+            >Your Feed</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            data-testid="global-feed"
+            [ngClass]="{
+              active: model.listConfig.type === 'ALL' && !model.listConfig.filters.tag
+            }"
+            class="nav-link"
+            (click)="setListTo('ALL')"
+            >Global Feed</a
+          >
+        </li>
+        <li class="nav-item" [hidden]="!model.listConfig.filters.tag">
+          <a class="nav-link active">
+            <cdt-icon name="hash"></cdt-icon>
+            {{ model.listConfig.filters.tag }}
+          </a>
+        </li>
+      </ul>
+    }
 
-        <cdt-article-list></cdt-article-list>
+    @defer (when !!$tags().length) {
+      <div class="tag-chip-rail">
+        <div class="tag-chip-rail-label">Browse by tag</div>
+        <cdt-tags-list (setListTag)="setListTag($event)" [tags]="$tags()"></cdt-tags-list>
       </div>
+    }
 
-      <div class="col-md-3">
-        @defer (when !!$tags().length) {
-          <div class="sidebar">
-            <cdt-tags-list (setListTag)="setListTag($event)" [tags]="$tags()"></cdt-tags-list>
-          </div>
-        }
-      </div>
-    </div>
+    <cdt-article-list></cdt-article-list>
   </div>
 </div>

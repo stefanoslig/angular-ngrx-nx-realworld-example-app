@@ -1,0 +1,52 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  font-family: inherit;
+  font-weight: 700;
+  color: #fff;
+  user-select: none;
+}
+
+:host(.size-sm) {
+  width: 24px;
+  height: 24px;
+  font-size: 0.65rem;
+}
+
+:host(.size-md) {
+  width: 32px;
+  height: 32px;
+  font-size: 0.75rem;
+}
+
+:host(.size-lg) {
+  width: 44px;
+  height: 44px;
+  font-size: 0.95rem;
+}
+
+:host(.size-xl) {
+  width: 88px;
+  height: 88px;
+  font-size: 1.7rem;
+}
+
+img.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.02em;
+}

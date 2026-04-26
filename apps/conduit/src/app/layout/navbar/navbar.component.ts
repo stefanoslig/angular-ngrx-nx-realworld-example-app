@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { User } from '@realworld/core/api-types';
+import { AvatarComponent, IconComponent } from '@realworld/ui/components';
 
 @Component({
   selector: 'cdt-navbar',
   templateUrl: './navbar.component.html',
-  imports: [RouterModule],
+  imports: [RouterModule, AvatarComponent, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {

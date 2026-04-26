@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
-import { PagerComponent } from '@realworld/ui/components';
+import { PagerComponent, ArticleCardSkeletonComponent } from '@realworld/ui/components';
 import { ArticlesListStore } from '@realworld/articles/data-access';
 
 @Component({
   selector: 'cdt-article-list',
   templateUrl: './article-list.component.html',
-  imports: [ArticleListItemComponent, PagerComponent],
+  imports: [ArticleListItemComponent, PagerComponent, ArticleCardSkeletonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListComponent {

@@ -1,0 +1,54 @@
+.home-page {
+  display: block;
+}
+
+.home-page .home-banner {
+  background: var(--paper-sunken);
+  padding: var(--sp-32) var(--sp-16);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.home-page .home-banner h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-32);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-4);
+  letter-spacing: -0.01em;
+}
+
+.home-page .home-banner p {
+  font-style: italic;
+  color: var(--ink-500);
+  margin-bottom: 0;
+}
+
+.home-page .home-container {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--sp-16);
+}
+
+.home-page .feed-toggle {
+  display: flex;
+  gap: var(--sp-16);
+  padding: var(--sp-12) 0;
+  border-bottom: 1px solid var(--border);
+  margin-top: var(--sp-24);
+}
+
+.home-page .tag-chip-rail {
+  padding: var(--sp-12) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-page .tag-chip-rail-label {
+  font-size: var(--fs-12);
+  color: var(--ink-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: var(--sp-8);
+}

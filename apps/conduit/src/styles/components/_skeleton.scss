@@ -1,0 +1,24 @@
+@keyframes cdt-skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  display: block;
+  background-color: var(--paper-sunken);
+  background-image: linear-gradient(90deg, var(--paper-sunken) 0%, var(--paper-raised) 50%, var(--paper-sunken) 100%);
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: cdt-skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

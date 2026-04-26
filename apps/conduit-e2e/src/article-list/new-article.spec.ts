@@ -9,7 +9,14 @@ test('Create a new article', async ({ page }) => {
     await page.getByTestId('title-input').fill('E2E Test Article');
     await page.getByTestId('description-input').fill('This is a test article created during E2E testing.');
     await page.getByTestId('body-textarea').fill('This article is created to test the article creation functionality.');
-    await page.getByTestId('tags-textarea').fill('e2e, testing, playwright');
+    const tagsInput = page.getByTestId('tags-textarea');
+    await tagsInput.click();
+    await tagsInput.pressSequentially('e2e');
+    await tagsInput.press('Enter');
+    await tagsInput.pressSequentially('testing');
+    await tagsInput.press('Enter');
+    await tagsInput.pressSequentially('playwright');
+    await tagsInput.press('Enter');
     await page.getByTestId('publish-article-button').click();
   });
 

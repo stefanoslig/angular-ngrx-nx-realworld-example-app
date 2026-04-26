@@ -1,0 +1,103 @@
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 160px);
+  padding: var(--sp-32) var(--sp-16);
+  background-color: var(--paper);
+}
+
+.auth-page .auth-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 900px;
+  min-height: 480px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  background: var(--paper-raised);
+}
+
+.auth-page .auth-art {
+  background: var(--paper-sunken);
+  padding: var(--sp-32);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-page .auth-art h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-32);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-12);
+  letter-spacing: -0.02em;
+}
+
+.auth-page .auth-art p {
+  font-size: var(--fs-14);
+  color: var(--ink-500);
+  line-height: 1.5;
+  max-width: 280px;
+  margin-bottom: var(--sp-24);
+}
+
+.auth-page .auth-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-16);
+  color: var(--ink-700);
+  padding-top: var(--sp-16);
+  border-top: 1px solid var(--border);
+  max-width: 300px;
+}
+
+.auth-page .auth-form {
+  padding: var(--sp-32);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-page .auth-form h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-24);
+  color: var(--ink-900);
+  margin-bottom: var(--sp-4);
+}
+
+.auth-page .auth-sub {
+  font-size: var(--fs-14);
+  color: var(--ink-500);
+  margin-bottom: var(--sp-24);
+}
+
+.auth-page .auth-form form .form-group {
+  margin-bottom: var(--sp-12);
+}
+
+.auth-page .auth-form .btn-lg {
+  width: 100%;
+  margin-top: var(--sp-8);
+}
+
+.auth-page .auth-foot {
+  margin-top: var(--sp-16);
+  text-align: center;
+  font-size: var(--fs-14);
+  color: var(--ink-500);
+}
+
+@media (max-width: 720px) {
+  .auth-page .auth-card {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .auth-page .auth-art {
+    padding: var(--sp-24);
+  }
+}
