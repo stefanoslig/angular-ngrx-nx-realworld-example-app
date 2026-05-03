@@ -1,11 +1,9 @@
-import { Component, ChangeDetectionStrategy, inject, effect, untracked } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { ArticlesListStore, ListType, articlesListInitialState } from '@realworld/articles/data-access';
 import { NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
 import { HomeStore } from './home.store';
-
-import { AuthStore } from '@realworld/auth/data-access';
 
 @Component({
   selector: 'cdt-home',
@@ -17,29 +15,19 @@ import { AuthStore } from '@realworld/auth/data-access';
 })
 export class HomeComponent {
   private readonly articlesListStore = inject(ArticlesListStore);
-  private readonly authStore = inject(AuthStore);
   private readonly homeStore = inject(HomeStore);
 
   $listConfig = this.articlesListStore.listConfig;
   $tags = this.homeStore.tags;
 
-  readonly loadArticlesOnLogin = effect(() => {
-    const isLoggedIn = this.authStore.loggedIn();
-    untracked(() => this.getArticles(isLoggedIn));
-  });
+  constructor() {
+    this.setListTo('ALL');
+  }
 
   setListTo(type: ListType = 'ALL') {
     const config = { ...articlesListInitialState.listConfig, type };
     this.articlesListStore.setListConfig(config);
     this.articlesListStore.loadArticles(this.$listConfig());
-  }
-
-  getArticles(isLoggedIn: boolean) {
-    if (isLoggedIn) {
-      this.setListTo('FEED');
-    } else {
-      this.setListTo('ALL');
-    }
   }
 
   setListTag(tag: string) {
