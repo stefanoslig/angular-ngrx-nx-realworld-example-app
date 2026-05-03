@@ -39,11 +39,12 @@
         <li class="nav-item">
           <a
             data-testid="loggedin-user"
-            class="nav-link"
+            class="nav-link nav-link-user"
             [routerLink]="['/profile', user().username]"
             routerLinkActive="active"
           >
-            {{ user().username }}
+            <cdt-avatar [src]="user().image" [username]="user().username" size="sm" />
+            <span class="nav-link-user-name">{{ user().username }}</span>
           </a>
         </li>
       </ul>

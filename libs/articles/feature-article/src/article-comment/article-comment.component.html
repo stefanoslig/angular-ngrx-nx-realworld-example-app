@@ -4,7 +4,7 @@
   </div>
   <div class="card-footer">
     <a class="comment-author" [routerLink]="['/profile', comment().author.username]">
-      <img [src]="comment().author.image" class="comment-author-img" />
+      <cdt-avatar [src]="comment().author.image" [username]="comment().author.username" size="sm" />
     </a>
     &nbsp;
     <a class="comment-author" [routerLink]="['/profile', comment().author.username]">

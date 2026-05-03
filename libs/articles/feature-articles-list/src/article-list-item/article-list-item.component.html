@@ -1,7 +1,7 @@
 <div class="article-preview">
   <div class="article-meta">
-    <a>
-      <img [src]="article().author.image" />
+    <a [routerLink]="['/profile', article().author.username]">
+      <cdt-avatar [src]="article().author.image" [username]="article().author.username" size="md" />
     </a>
     <div class="info">
       <span class="date">

@@ -1,6 +1,6 @@
 <div class="article-meta">
   <a data-testid="article-author" [routerLink]="['/profile', article().author.username]">
-    <img [src]="article().author.image" />
+    <cdt-avatar [src]="article().author.image" [username]="article().author.username" size="md" />
   </a>
   <div class="info">
     <a class="author" [routerLink]="['/profile', article().author.username]">

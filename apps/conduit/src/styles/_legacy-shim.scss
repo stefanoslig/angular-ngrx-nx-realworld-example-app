@@ -1,0 +1,24 @@
+:root {
+  --brand: var(--ink-900);
+  --brand-hover: var(--accent-hover);
+  --brand-active: #18181b;
+  --brand-dark: var(--ink-900);
+  --brand-light: var(--ink-300);
+
+  --secondary: var(--ink-200);
+  --secondary-hover: var(--ink-300);
+  --secondary-border: var(--ink-300);
+
+  --text: var(--ink-700);
+  --text-muted: var(--ink-400);
+  --text-light: var(--ink-400);
+  --text-lighter: var(--ink-300);
+  --text-disabled: var(--ink-300);
+
+  --border: #e4e4e7;
+
+  --input-focus: var(--ink-900);
+
+  --danger: #dc2626;
+  --danger-light: #fecaca;
+}
