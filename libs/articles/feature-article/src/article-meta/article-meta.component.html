@@ -11,11 +11,11 @@
 
   <span [hidden]="!canModify()">
     <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', article().slug]">
-      <i class="ion-edit"></i> Edit Article
+      <cdt-icon [name]="Icon.Pencil" /> Edit Article
     </a>
 
     <button class="btn btn-sm btn-outline-danger" (click)="deleteArticle()">
-      <i class="ion-trash-a"></i> Delete Article
+      <cdt-icon [name]="Icon.Trash2" /> Delete Article
     </button>
   </span>
 
@@ -28,7 +28,7 @@
       }"
       (click)="toggleFollow()"
     >
-      <i class="ion-plus-round"></i>
+      <cdt-icon [name]="Icon.CirclePlus" />
       &nbsp; {{ article().author.following ? 'Unfollow' : 'Follow' }}
       {{ article().author.username }}
     </button>
@@ -41,7 +41,7 @@
       }"
       (click)="toggleFavorite()"
     >
-      <i class="ion-heart"></i>
+      <cdt-icon [name]="Icon.Heart" />
       &nbsp; {{ article().favorited ? 'Unfavorite' : 'Favorite' }} Post
       <span class="counter">({{ article().favoritesCount }})</span>
     </button>

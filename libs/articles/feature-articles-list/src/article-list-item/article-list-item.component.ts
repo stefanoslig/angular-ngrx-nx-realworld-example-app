@@ -2,14 +2,15 @@ import { Component, ChangeDetectionStrategy, output, input } from '@angular/core
 import { RouterModule } from '@angular/router';
 import { NgClass, DatePipe } from '@angular/common';
 import { Article } from '@realworld/core/api-types';
-import { AvatarComponent } from '@realworld/ui/components';
+import { AvatarComponent, Icon, IconComponent } from '@realworld/ui/components';
 @Component({
   selector: 'cdt-article-list-item',
   templateUrl: './article-list-item.component.html',
-  imports: [RouterModule, NgClass, DatePipe, AvatarComponent],
+  imports: [RouterModule, NgClass, DatePipe, AvatarComponent, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArticleListItemComponent {
+  protected readonly Icon = Icon;
   article = input.required<Article>();
   favorite = output<string>();
   unFavorite = output<string>();

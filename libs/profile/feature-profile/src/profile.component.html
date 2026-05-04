@@ -17,7 +17,7 @@
             }"
             (click)="toggleFollowing()"
           >
-            <i class="ion-plus-round"></i>
+            <cdt-icon [name]="Icon.CirclePlus" />
             &nbsp; {{ $following() ? 'Unfollow' : 'Follow' }}
             {{ $username() }}
           </button>
@@ -26,7 +26,7 @@
             [hidden]="$isUser() === false"
             class="btn btn-sm btn-outline-secondary action-btn"
           >
-            <i class="ion-gear-a"></i> Edit Profile Settings
+            <cdt-icon [name]="Icon.Settings" /> Edit Profile Settings
           </a>
         </div>
       </div>

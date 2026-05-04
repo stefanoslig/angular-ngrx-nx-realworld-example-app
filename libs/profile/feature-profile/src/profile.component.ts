@@ -3,13 +3,13 @@ import { RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { AuthStore } from '@realworld/auth/data-access';
 import { ProfileStore } from '@realworld/profile/data-access';
-import { AvatarComponent } from '@realworld/ui/components';
+import { AvatarComponent, Icon, IconComponent } from '@realworld/ui/components';
 
 @Component({
   selector: 'cdt-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  imports: [RouterModule, NgClass, AvatarComponent],
+  imports: [RouterModule, NgClass, AvatarComponent, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {
@@ -24,6 +24,8 @@ export class ProfileComponent {
   $currentUser = this.authStore.user.username;
 
   $isUser = computed(() => this.$currentUser() === this.$username());
+
+  protected readonly Icon = Icon;
 
   toggleFollowing() {
     if (this.$following()) {

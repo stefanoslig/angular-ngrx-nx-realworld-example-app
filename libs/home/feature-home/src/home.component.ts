@@ -3,13 +3,14 @@ import { ArticlesListStore, ListType, articlesListInitialState } from '@realworl
 import { NgClass } from '@angular/common';
 import { TagsListComponent } from './tags-list/tags-list.component';
 import { ArticleListComponent } from '@realworld/articles/feature-articles-list/src';
+import { Icon, IconComponent } from '@realworld/ui/components';
 import { HomeStore } from './home.store';
 
 @Component({
   selector: 'cdt-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [NgClass, TagsListComponent, ArticleListComponent],
+  imports: [NgClass, TagsListComponent, ArticleListComponent, IconComponent],
   providers: [HomeStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -19,6 +20,8 @@ export class HomeComponent {
 
   $listConfig = this.articlesListStore.listConfig;
   $tags = this.homeStore.tags;
+
+  protected readonly Icon = Icon;
 
   constructor() {
     this.setListTo('ALL');

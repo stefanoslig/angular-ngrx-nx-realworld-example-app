@@ -16,7 +16,7 @@
       class="btn btn-sm pull-xs-right"
       (click)="toggleFavorite(article())"
     >
-      <i class="ion-heart"></i>
+      <cdt-icon [name]="Icon.Heart" />
       {{ article().favoritesCount }}
     </button>
   </div>

@@ -14,7 +14,7 @@
       {{ comment().createdAt | date: 'longDate' }}
     </span>
     <span class="mod-options" [hidden]="currentUser().username !== comment().author.username">
-      <i class="ion-trash-a" (click)="delete.emit({ commentId: comment().id, slug: article().slug })"></i>
+      <cdt-icon [name]="Icon.Trash2" (click)="delete.emit({ commentId: comment().id, slug: article().slug })" />
     </span>
   </div>
 </div>
